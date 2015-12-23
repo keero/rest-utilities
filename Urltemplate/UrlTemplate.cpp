@@ -172,9 +172,9 @@ string UrlTemplate::encodeValue(char op, const string& value, const string& key)
     string v(op == '+' || op == '#' ? encodeReserved(value) : encodeURI(value, true));
 
     if (key.length()) {
-        result << encodeURI(key, true) << '=' << value;
+        result << encodeURI(key, true) << '=' << v;
     } else {
-        result << value;
+        result << v;
     }
     return result.str();
 }
