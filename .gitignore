@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# IDE Stuff
+/.vscode
+
+# Binary output
+/bin
