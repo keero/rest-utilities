@@ -32,3 +32,6 @@
 
 # Binary output
 /bin
+
+# OSX Stuff
+.DS_Store
