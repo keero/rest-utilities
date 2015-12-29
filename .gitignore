@@ -26,3 +26,13 @@
 *.exe
 *.out
 *.app
+
+# IDE Stuff
+/.vscode
+/.idea
+
+# Binary output
+/bin
+
+# OSX Stuff
+.DS_Store
