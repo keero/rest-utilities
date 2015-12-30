@@ -1,8 +1,5 @@
 #include "Form.h"
 
-Form::Form() { }
-Form::~Form() { }
-
 bool Form::CreateFromJsonString(const string& json, Form& form)
 {
     rapidjson::Document d;

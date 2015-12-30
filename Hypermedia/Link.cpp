@@ -1,8 +1,5 @@
 #include "Link.h"
 
-Link::Link() { }
-Link::~Link() { }
-
 bool Link::CreateFromJsonString(const string& json, Link& link)
 {
     rapidjson::Document d;

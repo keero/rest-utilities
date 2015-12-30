@@ -1,5 +1,5 @@
-#ifndef _FORM_H_
-#define _FORM_H_
+#ifndef REST_UTILITIES_HYPERMEDIA_FORM_H
+#define REST_UTILITIES_HYPERMEDIA_FORM_H
 
 #include <string>
 #include "rapidjson/document.h"
@@ -10,25 +10,52 @@ class Form
 {
 public:
 
-    Form();
-    virtual ~Form();
-    
-    void SetAction(const Link& value) { m_oAction = value; }
-    const Link& GetAction() const { return m_oAction; }
-    
-    void SetMethod(const string& value) { m_oMethod = value; }
-    const string& GetMethod() const { return m_oMethod; }
-    
-    void SetBody(const Link& value) { m_oBody = value; }
-    const Link& GetBody() const { return m_oBody; }
-    
-    static bool CreateFromJsonString(const string& json, Form& form); // @TODO: Add ref obj for parse errors
-    static bool CreateFromJson(const rapidjson::Value& value, Form& form); // @TODO: Add ref obj for parse errors
-    
+    Form()
+    {
+    }
+
+    virtual ~Form()
+    {
+    }
+
+
+    const Link &GetAction() const
+    {
+        return mAction;
+    }
+
+    void SetAction(const Link &action)
+    {
+        mAction = action;
+    }
+
+    const string &GetMethod() const
+    {
+        return mMethod;
+    }
+
+    void SetMethod(const string &method)
+    {
+        mMethod = method;
+    }
+
+    const Link &GetBody() const
+    {
+        return mBody;
+    }
+
+    void SetBody(const Link &body)
+    {
+        mBody = body;
+    }
+
+    static bool CreateFromJsonString(const string &json, Form &form); // @TODO: Add ref obj for parse errors
+    static bool CreateFromJson(const rapidjson::Value &value, Form &form); // @TODO: Add ref obj for parse errors
+
 private:
-    Link            m_oAction;
-    string          m_oMethod;
-    Link            m_oBody;
+    Link mAction;
+    string mMethod;
+    Link mBody;
 };
 
-#endif /* _FORM_H_ */
+#endif //REST_UTILITIES_HYPERMEDIA_FORM_H
