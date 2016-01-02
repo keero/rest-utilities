@@ -9,16 +9,13 @@
 
 const char operators[7] = {'+', '#', '.', '/', ';', '?', '&'};
 
-UrlTemplate::UrlTemplate() { }
-UrlTemplate::~UrlTemplate() { }
-
 string UrlTemplate::Expand()
 {
     ostringstream expanded;
     
     regex expr_regex("\\{([^\\{\\}]+)\\}|([^\\{\\}]+)");
     
-    sregex_iterator exprs_begin = sregex_iterator(m_sUrl.begin(), m_sUrl.end(), expr_regex);
+    sregex_iterator exprs_begin = sregex_iterator(mUrl.begin(), mUrl.end(), expr_regex);
     sregex_iterator exprs_end = sregex_iterator();
     
     for (sregex_iterator i = exprs_begin; i != exprs_end; ++i)
@@ -96,9 +93,9 @@ string UrlTemplate::getValues(char op, const string& key, const string& modifier
     if (modifier.length()) throw "Support for modifier syntax is not yet supported";
     
     ostringstream result;
-    UrlContext::const_iterator search = m_oUrlContext.find(key);
+    UrlContext::const_iterator search = mUrlContext.find(key);
     
-    if (search != m_oUrlContext.end() && isDefined(search->second))
+    if (search != mUrlContext.end() && isDefined(search->second))
     {
         result << encodeValue(op, search->second, isKeyOperator(op) ? key : "");
     }
@@ -108,7 +105,7 @@ string UrlTemplate::getValues(char op, const string& key, const string& modifier
         {
             result << encodeURI(key, true);
         }
-        else if (search != m_oUrlContext.end() && search->second.length() == 0)
+        else if (search != mUrlContext.end() && search->second.length() == 0)
         {
             if (op == '&' || op == '?')
                 result << encodeURI(key, true) << '=';
