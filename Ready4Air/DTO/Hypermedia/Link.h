@@ -2,11 +2,12 @@
 #define REST_UTILITIES_HYPERMEDIA_LINK_H
 
 #include <string>
-#include "rapidjson/document.h"
+#include <include/rapidjson/document.h>
+#include <Ready4Air/DTO/Abstract/JsonDeserializable.h>
 
 #include "UrlTemplate/UrlTemplate.h"
 
-class Link
+class Link : public JsonDeserializable
 {
 public:
 
@@ -73,8 +74,7 @@ public:
         return mUrlTemplate.Expand();
     }
 
-    static bool CreateFromJsonString(const string &json, Link &link); // @TODO: Add ref obj for parse errors
-    static bool CreateFromJson(const rapidjson::Value &value, Link &link); // @TODO: Add ref obj for parse errors
+    virtual bool InitFromJsonValue(const rapidjson::Value &value);
 
 private:
     bool mTemplated;

@@ -4,7 +4,7 @@
 #include "Link.h"
 #include "Form.h"
 
-class Crud
+class Crud : public JsonDeserializable
 {
 
 public:
@@ -36,15 +36,17 @@ public:
         mRead = read;
     }
 
-    const Form &GetADelete() const
+    const Form &GetDelete() const
     {
         return mDelete;
     }
 
-    void SetADelete(const Form &aDelete)
+    void SetDelete(const Form &aDelete)
     {
         mDelete = aDelete;
     }
+
+    virtual bool InitFromJsonValue(const rapidjson::Value &value);
 
 private:
     Form mCreateOrUpdate;

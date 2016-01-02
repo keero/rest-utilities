@@ -6,7 +6,7 @@
 
 #include "Link.h"
 
-class Form
+class Form : public JsonDeserializable
 {
 public:
 
@@ -49,8 +49,7 @@ public:
         mBody = body;
     }
 
-    static bool CreateFromJsonString(const string &json, Form &form); // @TODO: Add ref obj for parse errors
-    static bool CreateFromJson(const rapidjson::Value &value, Form &form); // @TODO: Add ref obj for parse errors
+    virtual bool InitFromJsonValue(const rapidjson::Value &value);
 
 private:
     Link mAction;
