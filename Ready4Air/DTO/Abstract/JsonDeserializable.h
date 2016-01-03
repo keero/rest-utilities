@@ -1,33 +1,28 @@
-//
-// Created by Martin Kero on 02/01/16.
-//
+#ifndef READY4AIR_JSONSERIALIZABLE_H
+#define READY4AIR_JSONSERIALIZABLE_H
 
-#ifndef REST_UTILITIES_JSONSERIALIZABLE_H
-#define REST_UTILITIES_JSONSERIALIZABLE_H
+#include <rapidjson/document.h>
 
-#include <string>
-#include <include/rapidjson/document.h>
-
-using namespace std;
-
-class JsonDeserializable
+namespace ready4air
 {
-public:
-    bool InitFromJsonString(const string &json)
+    class JsonDeserializable
     {
-        rapidjson::Document d;
+    public:
+        bool InitFromJsonString(const std::string &json)
+        {
+            rapidjson::Document d;
 
-        if (d.Parse(json.c_str()).HasParseError() || !d.IsObject()) return false;
+            if (d.Parse(json.c_str()).HasParseError() || !d.IsObject()) return false;
 
-        return InitFromJsonValue(d);
-    }
+            return InitFromJsonValue(d);
+        }
 
-    virtual bool InitFromJsonValue(const rapidjson::Value &value)
-    {
-        return false;
-    }
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
 
-};
+    };
+}
 
-
-#endif //REST_UTILITIES_JSONSERIALIZABLE_H
+#endif //READY4AIR_JSONSERIALIZABLE_H

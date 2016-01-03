@@ -1,60 +1,81 @@
-#ifndef REST_UTILITIES_HYPERMEDIA_FORM_H
-#define REST_UTILITIES_HYPERMEDIA_FORM_H
+#ifndef READY4AIR_HYPERMEDIA_FORM_H
+#define READY4AIR_HYPERMEDIA_FORM_H
 
-#include <string>
-#include "rapidjson/document.h"
-
+#include "../abstract/JsonDeserializable.h"
 #include "Link.h"
 
-class Form : public JsonDeserializable
+namespace ready4air
 {
-public:
-
-    Form()
+    class Form : public JsonDeserializable
     {
-    }
+    public:
+        Form()
+        {
+        }
 
-    virtual ~Form()
-    {
-    }
+        virtual ~Form()
+        {
+        }
 
+        const Link &GetAction() const
+        {
+            return mAction;
+        }
 
-    const Link &GetAction() const
-    {
-        return mAction;
-    }
+        void SetAction(const Link &action)
+        {
+            mAction = action;
+        }
 
-    void SetAction(const Link &action)
-    {
-        mAction = action;
-    }
+        const std::string &GetMethod() const
+        {
+            return mMethod;
+        }
 
-    const string &GetMethod() const
-    {
-        return mMethod;
-    }
+        void SetMethod(const std::string &method)
+        {
+            mMethod = method;
+        }
 
-    void SetMethod(const string &method)
-    {
-        mMethod = method;
-    }
+        const Link &GetBody() const
+        {
+            return mBody;
+        }
 
-    const Link &GetBody() const
-    {
-        return mBody;
-    }
+        void SetBody(const Link &body)
+        {
+            mBody = body;
+        }
 
-    void SetBody(const Link &body)
-    {
-        mBody = body;
-    }
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            // Mandatory property
+            Link actionLink;
+            if (!value.HasMember("Action") || !value["Action"].IsObject()) return false;
+            if (!actionLink.InitFromJsonValue(value["Action"])) return false;
+            SetAction(actionLink);
 
-    virtual bool InitFromJsonValue(const rapidjson::Value &value);
+            // Mandatory property
+            if (!value.HasMember("Method") || !value["Method"].IsString()) return false;
+            SetMethod(value["Method"].GetString());
 
-private:
-    Link mAction;
-    string mMethod;
-    Link mBody;
-};
+            // Non-mandatory property
+            if (value.HasMember("Body"))
+            {
+                Link bodyLink;
+                if (!value["Body"].IsObject()) return false;
+                if (!bodyLink.InitFromJsonValue(value["Action"])) return false;
+                SetBody(bodyLink);
+            }
 
-#endif //REST_UTILITIES_HYPERMEDIA_FORM_H
+            return true;
+        }
+
+    private:
+        Link mAction;
+        std::string mMethod;
+        Link mBody;
+    };
+}
+
+#endif //READY4AIR_HYPERMEDIA_FORM_H

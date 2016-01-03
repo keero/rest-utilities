@@ -1,5 +1,5 @@
 #include <iostream>
-#include "UrlTemplate.h"
+#include "../urltemplate/UrlTemplate.h"
 
 int main()
 {
@@ -10,5 +10,5 @@ int main()
     urlTemplate.SetParam("bepa", "b");
     urlTemplate.SetParam("cepa", "c");
     
-    cout << urlTemplate.Expand() << '\n';
+    std::cout << urlTemplate.Expand() << std::endl;
 }

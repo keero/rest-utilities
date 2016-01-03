@@ -1,85 +1,102 @@
-#ifndef REST_UTILITIES_HYPERMEDIA_LINK_H
-#define REST_UTILITIES_HYPERMEDIA_LINK_H
+#ifndef READY4AIR_HYPERMEDIA_LINK_H
+#define READY4AIR_HYPERMEDIA_LINK_H
 
-#include <string>
-#include <include/rapidjson/document.h>
-#include <Ready4Air/DTO/Abstract/JsonDeserializable.h>
+#include "../abstract/JsonDeserializable.h"
+#include "../../urltemplate/UrlTemplate.h"
 
-#include "UrlTemplate/UrlTemplate.h"
-
-class Link : public JsonDeserializable
+namespace ready4air
 {
-public:
-
-    Link()
+    class Link : public JsonDeserializable
     {
-    }
+    public:
+        Link()
+        {
+        }
 
-    virtual ~Link()
-    {
-    }
+        virtual ~Link()
+        {
+        }
 
-    void SetHref(const string &value)
-    {
-        mUrlTemplate.SetUrl(value);
-    }
+        void SetHref(const std::string &value)
+        {
+            mUrlTemplate.SetUrl(value);
+        }
 
-    const string &GetHref() const
-    {
-        return mUrlTemplate.GetUrl();
-    }
+        const std::string &GetHref() const
+        {
+            return mUrlTemplate.GetUrl();
+        }
 
-    void SetTemplated(bool value)
-    {
-        mTemplated = value;
-    }
+        void SetTemplated(bool value)
+        {
+            mTemplated = value;
+        }
 
-    bool GetTemplated() const
-    {
-        return mTemplated;
-    }
+        bool GetTemplated() const
+        {
+            return mTemplated;
+        }
 
-    void SetWithCredentials(bool value)
-    {
-        mWithCredentials = value;
-    }
+        void SetWithCredentials(bool value)
+        {
+            mWithCredentials = value;
+        }
 
-    bool GetWithCredentials() const
-    {
-        return mWithCredentials;
-    }
+        bool GetWithCredentials() const
+        {
+            return mWithCredentials;
+        }
 
-    void SetParam(const string &key, const string &value)
-    {
-        mUrlTemplate.SetParam(key, value);
-    }
+        void SetParam(const std::string &key, const std::string &value)
+        {
+            mUrlTemplate.SetParam(key, value);
+        }
 
-    const string &GetParam(const string &key) const
-    {
-        return mUrlTemplate.GetParam(key);
-    }
+        const std::string &GetParam(const std::string &key) const
+        {
+            return mUrlTemplate.GetParam(key);
+        }
 
-    void UnsetParam(const string &key)
-    {
-        mUrlTemplate.UnsetParam(key);
-    }
+        void UnsetParam(const std::string &key)
+        {
+            mUrlTemplate.UnsetParam(key);
+        }
 
-    void ClearParams()
-    {
-        mUrlTemplate.ClearParams();
-    }
+        void ClearParams()
+        {
+            mUrlTemplate.ClearParams();
+        }
 
-    const string GetExpandedUrl()
-    {
-        return mUrlTemplate.Expand();
-    }
+        const std::string GetExpandedUrl()
+        {
+            return mUrlTemplate.Expand();
+        }
 
-    virtual bool InitFromJsonValue(const rapidjson::Value &value);
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            // Mandatory property
+            if (!value.HasMember("Href") || !value["Href"].IsString()) return false;
+            SetHref(value["Href"].GetString());
 
-private:
-    bool mTemplated;
-    bool mWithCredentials;
-    UrlTemplate mUrlTemplate;
-};
+            // Non-mandatory property
+            if (value.HasMember("Templated") && !value["Templated"].IsBool()) return false;
+            if (value.HasMember("Templated")) SetTemplated(value["Templated"].GetBool());
 
-#endif //REST_UTILITIES_HYPERMEDIA_LINK_H
+            // Non-mandatory property
+            if (value.HasMember("WithCredentials"))
+            {
+                if (!value["WithCredentials"].IsBool()) return false;
+                SetWithCredentials(value["WithCredentials"].GetBool());
+            }
+
+            return true;
+        }
+
+    private:
+        bool mTemplated;
+        bool mWithCredentials;
+        UrlTemplate mUrlTemplate;
+    };
+}
+
+#endif //READY4AIR_HYPERMEDIA_LINK_H
