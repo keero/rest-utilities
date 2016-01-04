@@ -48,6 +48,33 @@ namespace ready4air
             mAll = all;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Non-mandatory property
+                if (value.HasMember("Now"))
+                {
+                    Event now;
+                    if (!value["Now"].IsObject() || !now.InitFromJsonValue(value["Now"])) return false;
+                    SetNow(now);
+                }
+            }
+            {
+                // Mandatory property
+                Event next;
+                if (!value.HasMember("Next") || !value["Next"].IsObject() || !next.InitFromJsonValue(value["Next"])) return false;
+                SetNext(next);
+            }
+            {
+                // Mandatory property
+                Link all;
+                if (!value.HasMember("All") || !value["All"].IsObject() || !all.InitFromJsonValue(value["All"])) return false;
+                SetAll(all);
+            }
+
+            return true;
+        }
+
     private:
         Event mNow;
         Event mNext;
