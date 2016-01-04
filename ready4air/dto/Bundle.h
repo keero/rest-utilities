@@ -133,9 +133,109 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            return JsonDeserializable::InitFromJsonValue(value);
-        }
+            // Mandatory property
+            if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
+            SetId(value["Id"].GetString());
 
+            // Mandatory property
+            if (!value.HasMember("ExternalId") || !value["ExternalId"].IsString()) return false;
+            SetExternalId(value["ExternalId"].GetString());
+
+            // Non-mandatory property
+            if (value.HasMember("OriginalTitle"))
+            {
+                if (!value["OriginalTitle"].IsString()) return false;
+                SetOriginalTitle(value["OriginalTitle"].GetString());
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("OriginalSummary"))
+            {
+                if (!value["OriginalSummary"].IsString()) return false;
+                SetOriginalSummary(value["OriginalSummary"].GetString());
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("LocalTitle"))
+            {
+                if (!value["LocalTitle"].IsString()) return false;
+                SetLocalTitle(value["LocalTitle"].GetString());
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("LocalSummary"))
+            {
+                if (!value["LocalSummary"].IsString()) return false;
+                SetLocalSummary(value["LocalSummary"].GetString());
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("Images"))
+            {
+                if (!value["Images"].IsArray()) return false;
+                std::vector<Image> images;
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                {
+                    Image image;
+                    image.InitFromJsonValue(value["Images"][i]);
+                    images.push_back(image);
+                }
+                SetImages(images);
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("MediaProductLinks"))
+            {
+                if (!value["MediaProductLinks"].IsArray()) return false;
+                std::vector<Link> mediaProductLinks;
+                for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
+                {
+                    Link mediaProductLink;
+                    mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i]);
+                    mediaProductLinks.push_back(mediaProductLink);
+                }
+                SetMediaProductLinks(mediaProductLinks);
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("WmvFiles"))
+            {
+                if (!value["WmvFiles"].IsArray()) return false;
+                std::vector<WmvFile> wmvFiles;
+                for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
+                {
+                    WmvFile wmvFile;
+                    wmvFile.InitFromJsonValue(value["WmvFiles"][i]);
+                    wmvFiles.push_back(wmvFile);
+                }
+                SetWmvFiles(wmvFiles);
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("SmoothManifests"))
+            {
+                if (!value["SmoothManifests"].IsArray()) return false;
+                std::vector<SmoothManifest> smoothManifests;
+                for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
+                {
+                    SmoothManifest smoothManifest;
+                    smoothManifest.InitFromJsonValue(value["SmoothManifests"][i]);
+                    smoothManifests.push_back(smoothManifest);
+                }
+                SetSmoothManifests(smoothManifests);
+            }
+
+            // Non-mandatory property
+            if (value.HasMember("Self"))
+            {
+                if (!value["Self"].IsObject()) return false;
+                Link self;
+                self.InitFromJsonValue(value["Self"]);
+                SetSelf(self);
+            }
+
+            return true;
+        }
 
     private:
         std::string mId;
