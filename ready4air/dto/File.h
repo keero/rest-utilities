@@ -78,6 +78,47 @@ namespace ready4air
             mProtectionData = protectionData;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                if (!value.HasMember("FileTypeId") || !value["FileTypeId"].IsInt()) return false;
+                SetFileTypeId(value["FileTypeId"].GetInt());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("FileTypeName") || !value["FileTypeName"].GetString()) return false;
+                SetFileTypeName(value["FileTypeName"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Language") || !value["Language"].GetString()) return false;
+                SetLanguage(value["Language"].GetString());
+            }
+            {
+                // Mandatory property
+                Link link;
+                if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
+                SetLink(link);
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Bitrate") || !value["Bitrate"].IsInt()) return false;
+                SetBitrate(value["Bitrate"].GetInt());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ProtectionData"))
+                {
+                    ProtectionData protectionData;
+                    if (!value["ProtectionData"].IsObject() || !protectionData.InitFromJsonValue(value["ProtectionData"])) return false;
+                    SetProtectionData(protectionData);
+                }
+            }
+
+            return true;
+        }
+
     private:
         int mFileTypeId;
         std::string mFileTypeName;
