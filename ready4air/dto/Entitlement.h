@@ -77,6 +77,55 @@ namespace ready4air
             mIdentifier = identifier;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                if (!value.HasMember("Type") || !value["Type"].IsString()) return false;
+                SetType(value["Type"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("EntitledTo") || !value["EntitledTo"].IsString()) return false;
+                SetEntitledTo(value["EntitledTo"].GetString());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("StartTime"))
+                {
+                    if (!value["StartTime"].IsString()) return false;
+                    SetStartTime(value["StartTime"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("EndTime"))
+                {
+                    if (!value["EndTime"].IsString()) return false;
+                    SetEndTime(value["EndTime"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("DRM"))
+                {
+                    DRM drm;
+                    if (!value["DRM"].IsObject() || !drm.InitFromJsonValue(value["DRM"])) return false;
+                    SetDRM(drm);
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Identifier"))
+                {
+                    if (!value["Identifier"].IsString()) return false;
+                    SetIdentifier(value["Identifier"].GetString());
+                }
+            }
+
+            return true;
+        }
+
     private:
         std::string mType;
         std::string mEntitledTo;
