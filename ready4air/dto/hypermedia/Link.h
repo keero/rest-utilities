@@ -79,8 +79,11 @@ namespace ready4air
             SetHref(value["Href"].GetString());
 
             // Non-mandatory property
-            if (value.HasMember("Templated") && !value["Templated"].IsBool()) return false;
-            if (value.HasMember("Templated")) SetTemplated(value["Templated"].GetBool());
+            if (value.HasMember("Templated"))
+            {
+                if (!value["Templated"].IsBool()) return false;
+                SetTemplated(value["Templated"].GetBool());
+            }
 
             // Non-mandatory property
             if (value.HasMember("WithCredentials"))
