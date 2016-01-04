@@ -70,41 +70,47 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Non-mandatory property
-            if (value.HasMember("Text"))
             {
-                if (!value["Text"].IsString()) return false;
-                SetText(value["Text"].GetString());
+                // Non-mandatory property
+                if (value.HasMember("Text"))
+                {
+                    if (!value["Text"].IsString()) return false;
+                    SetText(value["Text"].GetString());
+                }
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Source"))
             {
-                if (!value["Source"].IsString()) return false;
-                SetSource(value["Source"].GetString());
+                // Non-mandatory property
+                if (value.HasMember("Source"))
+                {
+                    if (!value["Source"].IsString()) return false;
+                    SetSource(value["Source"].GetString());
+                }
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Score"))
             {
-                if (!value["Score"].IsString()) return false;
-                SetScore(value["Score"].GetString());
+                // Non-mandatory property
+                if (value.HasMember("Score"))
+                {
+                    if (!value["Score"].IsString()) return false;
+                    SetScore(value["Score"].GetString());
+                }
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Link"))
             {
-                Link link;
-                if (!value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                SetLink(link);
+                // Non-mandatory property
+                if (value.HasMember("Link"))
+                {
+                    Link link;
+                    if (!value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
+                    SetLink(link);
+                }
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Images"))
             {
-                QuoteImages images;
-                if (!value["Images"].IsObject() || !images.InitFromJsonValue(value["Images"])) return false;
-                SetImages(images);
+                // Non-mandatory property
+                if (value.HasMember("Images"))
+                {
+                    QuoteImages images;
+                    if (!value["Images"].IsObject() || !images.InitFromJsonValue(value["Images"])) return false;
+                    SetImages(images);
+                }
             }
 
             return true;

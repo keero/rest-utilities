@@ -89,42 +89,50 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Mandatory property
-            if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-            SetId(value["Id"].GetString());
-
-            // Mandatory property
-            if (!value.HasMember("CategoryId") || !value["CategoryId"].IsInt()) return false;
-            SetCategoryId((short) value["CategoryId"].GetInt());
-
-            // Mandatory property
-            if (!value.HasMember("CategoryName") || !value["CategoryName"].GetString()) return false;
-            SetCategoryName(value["CategoryName"].GetString());
-
-            // Non-mandatory property
-            if (value.HasMember("FirstName"))
             {
-                if (!value["FirstName"].IsString()) return false;
-                SetFirstName(value["FirstName"].GetString());
+                // Mandatory property
+                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
+                SetId(value["Id"].GetString());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("LastName"))
             {
-                if (!value["LastName"].IsString()) return false;
-                SetLastName(value["LastName"].GetString());
+                // Mandatory property
+                if (!value.HasMember("CategoryId") || !value["CategoryId"].IsInt()) return false;
+                SetCategoryId((short) value["CategoryId"].GetInt());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("MiddleName"))
             {
-                if (!value["MiddleName"].IsString()) return false;
-                SetMiddleName(value["MiddleName"].GetString());
+                // Mandatory property
+                if (!value.HasMember("CategoryName") || !value["CategoryName"].GetString()) return false;
+                SetCategoryName(value["CategoryName"].GetString());
             }
-
-            // Mandatory property
-            if (!value.HasMember("FullName") || !value["FullName"].GetString()) return false;
-            SetFullName(value["FullName"].GetString());
+            {
+                // Non-mandatory property
+                if (value.HasMember("FirstName"))
+                {
+                    if (!value["FirstName"].IsString()) return false;
+                    SetFirstName(value["FirstName"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("LastName"))
+                {
+                    if (!value["LastName"].IsString()) return false;
+                    SetLastName(value["LastName"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("MiddleName"))
+                {
+                    if (!value["MiddleName"].IsString()) return false;
+                    SetMiddleName(value["MiddleName"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("FullName") || !value["FullName"].GetString()) return false;
+                SetFullName(value["FullName"].GetString());
+            }
 
             return true;
         }

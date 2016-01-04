@@ -131,84 +131,96 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Mandatory property
-            if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-            SetId(value["Id"].GetString());
-
-            // Non-mandatory property
-            if (value.HasMember("OriginalTitle"))
             {
-                if (!value["OriginalTitle"].IsString()) return false;
-                SetOriginalTitle(value["OriginalTitle"].GetString());
+                // Mandatory property
+                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
+                SetId(value["Id"].GetString());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Description"))
             {
-                if (!value["Description"].IsString()) return false;
-                SetDescription(value["Description"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("LocalTitle"))
-            {
-                if (!value["LocalTitle"].IsString()) return false;
-                SetLocalTitle(value["LocalTitle"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("ShortTitle"))
-            {
-                if (!value["ShortTitle"].IsString()) return false;
-                SetShortTitle(value["ShortTitle"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("LongSummary"))
-            {
-                if (!value["LongSummary"].IsString()) return false;
-                SetLongSummary(value["LongSummary"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("ShortSummary"))
-            {
-                if (!value["ShortSummary"].IsString()) return false;
-                SetShortSummary(value["ShortSummary"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("SortTitle"))
-            {
-                if (!value["SortTitle"].IsString()) return false;
-                SetSortTitle(value["SortTitle"].GetString());
-            }
-
-            // Non-mandatory property
-            if (value.HasMember("Images"))
-            {
-                if (!value["Images"].IsArray()) return false;
-                std::vector<Image> images;
-                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                // Non-mandatory property
+                if (value.HasMember("OriginalTitle"))
                 {
-                    Image image;
-                    if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i])) return false;
-                    images.push_back(image);
+                    if (!value["OriginalTitle"].IsString()) return false;
+                    SetOriginalTitle(value["OriginalTitle"].GetString());
                 }
-                SetImages(images);
             }
-
-            // Mandatory property
-            EpgInfo epgInfo;
-            if (!value.HasMember("EpgInfo") || !value["EpgInfo"].IsObject() || !epgInfo.InitFromJsonValue(value["EpgInfo"])) return false;
-            SetEpgInfo(epgInfo);
-
-            // Non-mandatory property
-            if (value.HasMember("Self"))
             {
-                Link self;
-                if (!value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
-                SetSelf(self);
+                // Non-mandatory property
+                if (value.HasMember("Description"))
+                {
+                    if (!value["Description"].IsString()) return false;
+                    SetDescription(value["Description"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("LocalTitle"))
+                {
+                    if (!value["LocalTitle"].IsString()) return false;
+                    SetLocalTitle(value["LocalTitle"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ShortTitle"))
+                {
+                    if (!value["ShortTitle"].IsString()) return false;
+                    SetShortTitle(value["ShortTitle"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("LongSummary"))
+                {
+                    if (!value["LongSummary"].IsString()) return false;
+                    SetLongSummary(value["LongSummary"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ShortSummary"))
+                {
+                    if (!value["ShortSummary"].IsString()) return false;
+                    SetShortSummary(value["ShortSummary"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("SortTitle"))
+                {
+                    if (!value["SortTitle"].IsString()) return false;
+                    SetSortTitle(value["SortTitle"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Images"))
+                {
+                    if (!value["Images"].IsArray()) return false;
+                    std::vector<Image> images;
+                    for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                    {
+                        Image image;
+                        if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i])) return false;
+                        images.push_back(image);
+                    }
+                    SetImages(images);
+                }
+            }
+            {
+                // Mandatory property
+                EpgInfo epgInfo;
+                if (!value.HasMember("EpgInfo") || !value["EpgInfo"].IsObject() || !epgInfo.InitFromJsonValue(value["EpgInfo"])) return false;
+                SetEpgInfo(epgInfo);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Self"))
+                {
+                    Link self;
+                    if (!value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
+                    SetSelf(self);
+                }
             }
 
             return true;

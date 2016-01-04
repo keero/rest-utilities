@@ -81,36 +81,43 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Non-mandatory property
-            if (value.HasMember("AgeLimit"))
             {
-                if (!value["AgeLimit"].IsInt()) return false;
-                SetAgeLimit(value["AgeLimit"].GetInt());
+                // Non-mandatory property
+                if (value.HasMember("AgeLimit"))
+                {
+                    if (!value["AgeLimit"].IsInt()) return false;
+                    SetAgeLimit(value["AgeLimit"].GetInt());
+                }
             }
-
-            // Non-mandatory property
-            if (value.HasMember("ButtonImage"))
             {
-                if (!value["ButtonImage"].IsString()) return false;
-                SetButtonImage(value["ButtonImage"].GetString());
+                // Non-mandatory property
+                if (value.HasMember("ButtonImage"))
+                {
+                    if (!value["ButtonImage"].IsString()) return false;
+                    SetButtonImage(value["ButtonImage"].GetString());
+                }
             }
-
-            // Mandatory property
-            if (!value.HasMember("Position") || !value["Position"].IsInt()) return false;
-            SetPosition(value["Position"].GetInt());
-
-            // Mandatory property
-            if (!value.HasMember("Title") || !value["Title"].IsString()) return false;
-            SetTitle(value["Title"].GetString());
-
-            // Mandatory property
-            if (!value.HasMember("Type") || !value["Type"].IsString()) return false;
-            SetType(value["Type"].GetString());
-
-            // Mandatory property
-            Link link;
-            if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-            SetLink(link);
+            {
+                // Mandatory property
+                if (!value.HasMember("Position") || !value["Position"].IsInt()) return false;
+                SetPosition(value["Position"].GetInt());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Title") || !value["Title"].IsString()) return false;
+                SetTitle(value["Title"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Type") || !value["Type"].IsString()) return false;
+                SetType(value["Type"].GetString());
+            }
+            {
+                // Mandatory property
+                Link link;
+                if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
+                SetLink(link);
+            }
 
             return true;
         }

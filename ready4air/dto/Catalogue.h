@@ -50,20 +50,24 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Mandatory property
-            Link allMovies;
-            if (!value.HasMember("AllMovies") || !value["AllMovies"].IsObject() || !allMovies.InitFromJsonValue(value["AllMovies"])) return false;
-            SetAllMovies(allMovies);
-
-            // Mandatory property
-            Link allSeries;
-            if (!value.HasMember("AllSeries") || !value["AllSeries"].IsObject() || !allSeries.InitFromJsonValue(value["AllSeries"])) return false;
-            SetAllSeries(allSeries);
-
-            // Mandatory property
-            Link allBundles;
-            if (!value.HasMember("AllBundles") || !value["AllBundles"].IsObject() || !allBundles.InitFromJsonValue(value["AllBundles"])) return false;
-            SetAllBundles(allBundles);
+            {
+                // Mandatory property
+                Link allMovies;
+                if (!value.HasMember("AllMovies") || !value["AllMovies"].IsObject() || !allMovies.InitFromJsonValue(value["AllMovies"])) return false;
+                SetAllMovies(allMovies);
+            }
+            {
+                // Mandatory property
+                Link allSeries;
+                if (!value.HasMember("AllSeries") || !value["AllSeries"].IsObject() || !allSeries.InitFromJsonValue(value["AllSeries"])) return false;
+                SetAllSeries(allSeries);
+            }
+            {
+                // Mandatory property
+                Link allBundles;
+                if (!value.HasMember("AllBundles") || !value["AllBundles"].IsObject() || !allBundles.InitFromJsonValue(value["AllBundles"])) return false;
+                SetAllBundles(allBundles);
+            }
 
             return true;
         }

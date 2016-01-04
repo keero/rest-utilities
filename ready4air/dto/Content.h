@@ -96,91 +96,99 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Non-mandatory property
-            if (value.HasMember("Buttons"))
             {
-                if (!value["Buttons"].IsArray()) return false;
-                std::vector<Button> buttons;
-                for (rapidjson::SizeType i = 0; i < value["Buttons"].Size(); i += 1)
+                // Non-mandatory property
+                if (value.HasMember("Buttons"))
                 {
-                    Button button;
-                    if (!value["Buttons"][i].IsObject() || !button.InitFromJsonValue(value["Buttons"][i])) return false;
-                    buttons.push_back(button);
+                    if (!value["Buttons"].IsArray()) return false;
+                    std::vector<Button> buttons;
+                    for (rapidjson::SizeType i = 0; i < value["Buttons"].Size(); i += 1)
+                    {
+                        Button button;
+                        if (!value["Buttons"][i].IsObject() || !button.InitFromJsonValue(value["Buttons"][i])) return false;
+                        buttons.push_back(button);
+                    }
+                    SetButtons(buttons);
                 }
-                SetButtons(buttons);
             }
-
-            // Mandatory property
-            if (!value.HasMember("MenuItems") || !value["MenuItems"].IsArray()) return false;
-            std::vector<MenuItem> menuItems;
-            for (rapidjson::SizeType i = 0; i < value["MenuItems"].Size(); i += 1)
             {
-                MenuItem menuItem;
-                if (!value["MenuItems"][i].IsObject() || !menuItem.InitFromJsonValue(value["MenuItems"][i])) return false;
-                menuItems.push_back(menuItem);
-            }
-            SetMenuItems(menuItems);
-
-            // Non-mandatory property
-            if (value.HasMember("Sections"))
-            {
-                if (!value["Sections"].IsArray()) return false;
-                std::vector<Section> sections;
-                for (rapidjson::SizeType i = 0; i < value["Sections"].Size(); i += 1)
+                // Mandatory property
+                if (!value.HasMember("MenuItems") || !value["MenuItems"].IsArray()) return false;
+                std::vector<MenuItem> menuItems;
+                for (rapidjson::SizeType i = 0; i < value["MenuItems"].Size(); i += 1)
                 {
-                    Section section;
-                    if (!value["Sections"][i].IsObject() || !section.InitFromJsonValue(value["Sections"][i])) return false;
-                    sections.push_back(section);
+                    MenuItem menuItem;
+                    if (!value["MenuItems"][i].IsObject() || !menuItem.InitFromJsonValue(value["MenuItems"][i])) return false;
+                    menuItems.push_back(menuItem);
                 }
-                SetSections(sections);
+                SetMenuItems(menuItems);
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Teasers"))
             {
-                if (!value["Teasers"].IsArray()) return false;
-                std::vector<Teaser> teasers;
-                for (rapidjson::SizeType i = 0; i < value["Teasers"].Size(); i += 1)
+                // Non-mandatory property
+                if (value.HasMember("Sections"))
                 {
-                    Teaser teaser;
-                    if (!value["Teasers"][i].IsObject() || !teaser.InitFromJsonValue(value["Teasers"][i])) return false;
-                    teasers.push_back(teaser);
+                    if (!value["Sections"].IsArray()) return false;
+                    std::vector<Section> sections;
+                    for (rapidjson::SizeType i = 0; i < value["Sections"].Size(); i += 1)
+                    {
+                        Section section;
+                        if (!value["Sections"][i].IsObject() || !section.InitFromJsonValue(value["Sections"][i])) return false;
+                        sections.push_back(section);
+                    }
+                    SetSections(sections);
                 }
-                SetTeasers(teasers);
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Promotions"))
             {
-                if (!value["Promotions"].IsArray()) return false;
-                std::vector<Promotion> promotions;
-                for (rapidjson::SizeType i = 0; i < value["Promotions"].Size(); i += 1)
+                // Non-mandatory property
+                if (value.HasMember("Teasers"))
                 {
-                    Promotion promotion;
-                    if (!value["Promotions"][i].IsObject() || !promotion.InitFromJsonValue(value["Promotions"][i])) return false;
-                    promotions.push_back(promotion);
+                    if (!value["Teasers"].IsArray()) return false;
+                    std::vector<Teaser> teasers;
+                    for (rapidjson::SizeType i = 0; i < value["Teasers"].Size(); i += 1)
+                    {
+                        Teaser teaser;
+                        if (!value["Teasers"][i].IsObject() || !teaser.InitFromJsonValue(value["Teasers"][i])) return false;
+                        teasers.push_back(teaser);
+                    }
+                    SetTeasers(teasers);
                 }
-                SetPromotions(promotions);
             }
-
-            // Non-mandatory property
-            if (value.HasMember("LiveSections"))
             {
-                if (!value["LiveSections"].IsArray()) return false;
-                std::vector<LiveSection> liveSections;
-                for (rapidjson::SizeType i = 0; i < value["LiveSections"].Size(); i += 1)
+                // Non-mandatory property
+                if (value.HasMember("Promotions"))
                 {
-                    LiveSection liveSection;
-                    if (!value["LiveSections"][i].IsObject() || !liveSection.InitFromJsonValue(value["LiveSections"][i])) return false;
-                    liveSections.push_back(liveSection);
+                    if (!value["Promotions"].IsArray()) return false;
+                    std::vector<Promotion> promotions;
+                    for (rapidjson::SizeType i = 0; i < value["Promotions"].Size(); i += 1)
+                    {
+                        Promotion promotion;
+                        if (!value["Promotions"][i].IsObject() || !promotion.InitFromJsonValue(value["Promotions"][i])) return false;
+                        promotions.push_back(promotion);
+                    }
+                    SetPromotions(promotions);
                 }
-                SetLiveSections(liveSections);
             }
-
-            // Mandatory property
-            Catalogue catalogue;
-            if (!value.HasMember("Catalogue") || !value["Catalogue"].IsObject() || !catalogue.InitFromJsonValue(value["Catalogue"])) return false;
-            SetCatalogue(catalogue);
+            {
+                // Non-mandatory property
+                if (value.HasMember("LiveSections"))
+                {
+                    if (!value["LiveSections"].IsArray()) return false;
+                    std::vector<LiveSection> liveSections;
+                    for (rapidjson::SizeType i = 0; i < value["LiveSections"].Size(); i += 1)
+                    {
+                        LiveSection liveSection;
+                        if (!value["LiveSections"][i].IsObject() || !liveSection.InitFromJsonValue(value["LiveSections"][i])) return false;
+                        liveSections.push_back(liveSection);
+                    }
+                    SetLiveSections(liveSections);
+                }
+            }
+            {
+                // Mandatory property
+                Catalogue catalogue;
+                if (!value.HasMember("Catalogue") || !value["Catalogue"].IsObject() || !catalogue.InitFromJsonValue(value["Catalogue"])) return false;
+                SetCatalogue(catalogue);
+            }
 
             return true;
         }

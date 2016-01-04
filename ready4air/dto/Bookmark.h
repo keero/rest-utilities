@@ -88,41 +88,49 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Mandatory property
-            if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-            SetId(value["Id"].GetString());
-
-            // Mandatory property
-            if (!value.HasMember("Value") || !value["Value"].IsString()) return false;
-            SetValue(value["Value"].GetString());
-
-            // Mandatory property
-            if (!value.HasMember("Created") || !value["Created"].IsString()) return false;
-            SetCreated(value["Created"].GetString());
-
-            // Mandatory property
-            if (!value.HasMember("ContentId") || !value["ContentId"].IsString()) return false;
-            SetContentId(value["ContentId"].GetString());
-
-            // Non-mandatory property
-            if (value.HasMember("DeviceId"))
             {
-                if (!value["DeviceId"].IsString()) return false;
-                SetDeviceId(value["DeviceId"].GetString());
+                // Mandatory property
+                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
+                SetId(value["Id"].GetString());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("UserId"))
             {
-                if (!value["UserId"].IsString()) return false;
-                SetUserId(value["UserId"].GetString());
+                // Mandatory property
+                if (!value.HasMember("Value") || !value["Value"].IsString()) return false;
+                SetValue(value["Value"].GetString());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("Modified"))
             {
-                if (!value["Modified"].IsString()) return false;
-                SetModified(value["Modified"].GetString());
+                // Mandatory property
+                if (!value.HasMember("Created") || !value["Created"].IsString()) return false;
+                SetCreated(value["Created"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("ContentId") || !value["ContentId"].IsString()) return false;
+                SetContentId(value["ContentId"].GetString());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("DeviceId"))
+                {
+                    if (!value["DeviceId"].IsString()) return false;
+                    SetDeviceId(value["DeviceId"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("UserId"))
+                {
+                    if (!value["UserId"].IsString()) return false;
+                    SetUserId(value["UserId"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Modified"))
+                {
+                    if (!value["Modified"].IsString()) return false;
+                    SetModified(value["Modified"].GetString());
+                }
             }
 
             return true;
