@@ -115,7 +115,6 @@ namespace ready4air
             return true;
         }
 
-
     private:
         int mAgeLimit;
         std::string mButtonImage;
