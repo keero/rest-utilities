@@ -37,6 +37,27 @@ namespace ready4air
             mMessage = message;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                Form form;
+                if (!value.HasMember("Form") || !value["Form"].IsObject() || !form.InitFromJsonValue(value["Form"])) return false;
+                SetForm(form);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Message"))
+                {
+                    if (!value["Message"].IsString()) return false;
+                    SetMessage(value["Message"].GetString());
+                }
+            }
+
+            return true;
+        }
+
+
     private:
         Form mForm;
         std::string mMessage;
