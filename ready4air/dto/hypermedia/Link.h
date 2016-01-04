@@ -74,22 +74,26 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            // Mandatory property
-            if (!value.HasMember("Href") || !value["Href"].IsString()) return false;
-            SetHref(value["Href"].GetString());
-
-            // Non-mandatory property
-            if (value.HasMember("Templated"))
             {
-                if (!value["Templated"].IsBool()) return false;
-                SetTemplated(value["Templated"].GetBool());
+                // Mandatory property
+                if (!value.HasMember("Href") || !value["Href"].IsString()) return false;
+                SetHref(value["Href"].GetString());
             }
-
-            // Non-mandatory property
-            if (value.HasMember("WithCredentials"))
             {
-                if (!value["WithCredentials"].IsBool()) return false;
-                SetWithCredentials(value["WithCredentials"].GetBool());
+                // Non-mandatory property
+                if (value.HasMember("Templated"))
+                {
+                    if (!value["Templated"].IsBool()) return false;
+                    SetTemplated(value["Templated"].GetBool());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("WithCredentials"))
+                {
+                    if (!value["WithCredentials"].IsBool()) return false;
+                    SetWithCredentials(value["WithCredentials"].GetBool());
+                }
             }
 
             return true;
