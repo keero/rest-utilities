@@ -52,7 +52,6 @@ namespace ready4air
             return true;
         }
 
-
     private:
         std::string mTitle;
         std::string mMessage;

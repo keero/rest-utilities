@@ -67,6 +67,38 @@ namespace ready4air
             mContentId = contentId;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                Link cookie;
+                if (!value.HasMember("Cookie") || !value["Cookie"].IsObject() || !cookie.InitFromJsonValue(value["Cookie"])) return false;
+                SetCookie(cookie);
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("CustomData") || !value["CustomData"].IsString()) return false;
+                SetCustomData(value["CustomData"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("CustomerToken") || !value["CustomerToken"].IsString()) return false;
+                SetCustomerToken(value["CustomerToken"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("DeviceToken") || !value["DeviceToken"].IsString()) return false;
+                SetDeviceToken(value["DeviceToken"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("ContentId") || !value["ContentId"].IsString()) return false;
+                SetContentId(value["ContentId"].GetString());
+            }
+
+            return true;
+        }
+
     private:
         Link mCookie;
         std::string mCustomData;
