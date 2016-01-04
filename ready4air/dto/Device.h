@@ -140,12 +140,12 @@ namespace ready4air
             mLogin = login;
         }
 
-        const Form &GetARegister() const
+        const Form &GetRegister() const
         {
             return mRegister;
         }
 
-        void SetARegister(const Form &aRegister)
+        void SetRegister(const Form &aRegister)
         {
             mRegister = aRegister;
         }
@@ -338,6 +338,241 @@ namespace ready4air
         void SetAllLists(const Link &allLists)
         {
             mAllLists = allLists;
+        }
+
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
+                SetId(value["Id"].GetString());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Manufacturer"))
+                {
+                    if (!value["Manufacturer"].IsString()) return false;
+                    SetManufacturer(value["Manufacturer"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Model"))
+                {
+                    if (!value["Model"].IsString()) return false;
+                    SetModel(value["Model"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("UdId") || !value["UdId"].IsString()) return false;
+                SetUdId(value["UdId"].GetString());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("DeviceInfo"))
+                {
+                    if (!value["DeviceInfo"].IsString()) return false;
+                    SetDeviceInfo(value["DeviceInfo"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("LastUsedDate") || !value["LastUsedDate"].IsString()) return false;
+                SetLastUsedDate(value["LastUsedDate"].GetString());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("LastUsedIP"))
+                {
+                    if (!value["LastUsedIP"].IsString()) return false;
+                    SetLastUsedIP(value["LastUsedIP"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("RegistrationDate") || !value["RegistrationDate"].IsString()) return false;
+                SetRegistrationDate(value["RegistrationDate"].GetString());
+            }
+            {
+                // Mandatory property
+                Link home;
+                if (!value.HasMember("Home") || !value["Home"].IsObject() || !home.InitFromJsonValue(value["Home"])) return false;
+                SetHome(home);
+            }
+            {
+                // Mandatory property
+                Link helps;
+                if (!value.HasMember("Helps") || !value["Helps"].IsObject() || !helps.InitFromJsonValue(value["Helps"])) return false;
+                SetHelps(helps);
+            }
+            {
+                // Mandatory property
+                Link literals;
+                if (!value.HasMember("Literals") || !value["Literals"].IsObject() || !literals.InitFromJsonValue(value["Literals"])) return false;
+                SetLiterals(literals);
+            }
+            {
+                // Mandatory property
+                Link login;
+                if (!value.HasMember("Login") || !value["Login"].IsObject() || !login.InitFromJsonValue(value["Login"])) return false;
+                SetLogin(login);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Register"))
+                {
+                    Form aRegister;
+                    if (!value["Register"].IsObject() || !aRegister.InitFromJsonValue(value["Register"])) return false;
+                    SetRegister(aRegister);
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ForgotPassword"))
+                {
+                    Form forgotPassword;
+                    if (!value["ForgotPassword"].IsObject() || !forgotPassword.InitFromJsonValue(value["ForgotPassword"])) return false;
+                    SetForgotPassword(forgotPassword);
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("AvailablePaymentMethods") || !value["AvailablePaymentMethods"].IsArray()) return false;
+                std::vector<std::string> availablePaymentMethods;
+                for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
+                {
+                    if (!value["AvailablePaymentMethods"][i].IsString()) return false;
+                    availablePaymentMethods.push_back(value["AvailablePaymentMethods"][i].GetString());
+                }
+                SetAvailablePaymentMethods(availablePaymentMethods);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Self"))
+                {
+                    Link self;
+                    if (!value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
+                    SetSelf(self);
+                }
+            }
+            {
+                // Mandatory property
+                Link search;
+                if (!value.HasMember("Search") || !value["Search"].IsObject() || !search.InitFromJsonValue(value["Search"])) return false;
+                SetSearch(search);
+            }
+            {
+                // Mandatory property
+                Link searchAsYouType;
+                if (!value.HasMember("SearchAsYouType") || !value["SearchAsYouType"].IsObject() || !searchAsYouType.InitFromJsonValue(value["SearchAsYouType"])) return false;
+                SetSearchAsYouType(searchAsYouType);
+            }
+            {
+                // Mandatory property
+                Link searchMovies;
+                if (!value.HasMember("SearchMovies") || !value["SearchMovies"].IsObject() || !searchMovies.InitFromJsonValue(value["SearchMovies"])) return false;
+                SetSearchMovies(searchMovies);
+            }
+            {
+                // Mandatory property
+                Link filterMoviesByAgeGroups;
+                if (!value.HasMember("FilterMoviesByAgeGroups") || !value["FilterMoviesByAgeGroups"].IsObject() || !filterMoviesByAgeGroups.InitFromJsonValue(value["FilterMoviesByAgeGroups"])) return false;
+                SetFilterMoviesByAgeGroups(filterMoviesByAgeGroups);
+            }
+            {
+                // Mandatory property
+                Link searchSeries;
+                if (!value.HasMember("SearchSeries") || !value["SearchSeries"].IsObject() || !searchSeries.InitFromJsonValue(value["SearchSeries"])) return false;
+                SetSearchSeries(searchSeries);
+            }
+            {
+                // Mandatory property
+                Link filterSeriesByAgeGroups;
+                if (!value.HasMember("FilterSeriesByAgeGroups") || !value["FilterSeriesByAgeGroups"].IsObject() || !filterSeriesByAgeGroups.InitFromJsonValue(value["FilterSeriesByAgeGroups"])) return false;
+                SetFilterSeriesByAgeGroups(filterSeriesByAgeGroups);
+            }
+            {
+                // Mandatory property
+                Link searchBundles;
+                if (!value.HasMember("SearchBundles") || !value["SearchBundles"].IsObject() || !searchBundles.InitFromJsonValue(value["SearchBundles"])) return false;
+                SetSearchBundles(searchBundles);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("AllPublicUserLists"))
+                {
+                    Link allPublicUserLists;
+                    if (!value["AllPublicUserLists"].IsObject() || !allPublicUserLists.InitFromJsonValue(value["AllPublicUserLists"])) return false;
+                    SetAllPublicUserLists(allPublicUserLists);
+                }
+            }
+            {
+                // Mandatory property
+                DeviceAuthData deviceAuthData;
+                if (!value.HasMember("DeviceAuthData") || !value["DeviceAuthData"].IsObject() || !deviceAuthData.InitFromJsonValue(value["DeviceAuthData"])) return false;
+                SetDeviceAuthData(deviceAuthData);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ApiVersion"))
+                {
+                    if (!value["ApiVersion"].IsString()) return false;
+                    SetApiVersion(value["ApiVersion"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ApiDocumentationLink"))
+                {
+                    if (!value["ApiDocumentationLink"].IsString()) return false;
+                    SetApiDocumentationLink(value["ApiDocumentationLink"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ManageFreePages"))
+                {
+                    Crud manageFreePages;
+                    if (!value["ManageFreePages"].IsObject() || !manageFreePages.InitFromJsonValue(value["ManageFreePages"])) return false;
+                    SetManageFreePages(manageFreePages);
+                }
+            }
+            {
+                // Mandatory property
+                Link searchMoviesByPerson;
+                if (!value.HasMember("SearchMoviesByPerson") || !value["SearchMoviesByPerson"].IsObject() || !searchMoviesByPerson.InitFromJsonValue(value["SearchMoviesByPerson"])) return false;
+                SetSearchMoviesByPerson(searchMoviesByPerson);
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("CreateMppSession"))
+                {
+                    Link createMppSession;
+                    if (!value["CreateMppSession"].IsObject() || !createMppSession.InitFromJsonValue(value["CreateMppSession"])) return false;
+                    SetCreateMppSession(createMppSession);
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("MppUserExists"))
+                {
+                    Link mppUserExists;
+                    if (!value["MppUserExists"].IsObject() || !mppUserExists.InitFromJsonValue(value["MppUserExists"])) return false;
+                    SetMppUserExists(mppUserExists);
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("AllLists"))
+                {
+                    Link allLists;
+                    if (!value["AllLists"].IsObject() || !allLists.InitFromJsonValue(value["AllLists"])) return false;
+                    SetAllLists(allLists);
+                }
+            }
+
+            return true;
         }
 
     private:
