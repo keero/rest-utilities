@@ -342,6 +342,11 @@ namespace ready4air
             mCancelSubscription = cancelSubscription;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mID;
         std::string mAddress;

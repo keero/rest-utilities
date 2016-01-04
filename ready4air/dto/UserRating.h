@@ -46,6 +46,11 @@ namespace ready4air
             mAverageValue = averageValue;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mNumberOfVotes;
         int mValue;

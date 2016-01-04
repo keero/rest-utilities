@@ -48,6 +48,11 @@ namespace ready4air
             mCriticsQuotes = criticsQuotes;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         UserRating mUserRating;
         std::string mFormattedAverageCriticsScore;

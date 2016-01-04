@@ -48,6 +48,11 @@ namespace ready4air
             mAll = all;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mTitle;
         std::vector<Channel> mChannels;

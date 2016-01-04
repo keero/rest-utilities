@@ -68,6 +68,11 @@ namespace ready4air
             mExposedItems = exposedItems;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         Form mAddLists;
         Form mListPosition;

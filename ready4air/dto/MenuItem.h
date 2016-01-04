@@ -47,6 +47,11 @@ namespace ready4air
             mMenuItems = menuItems;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mText;
         Link mLink;

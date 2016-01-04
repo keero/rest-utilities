@@ -46,6 +46,11 @@ namespace ready4air
             mLocation = location;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mManifestTypeId;
         std::string mManifestTypeName;

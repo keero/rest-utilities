@@ -415,6 +415,11 @@ namespace ready4air
             mGenres = genres;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mProductId;
         std::string mTitleId;

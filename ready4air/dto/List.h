@@ -120,6 +120,11 @@ namespace ready4air
             mItems = items;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mListId;
         int mListType;

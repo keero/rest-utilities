@@ -88,6 +88,11 @@ namespace ready4air
             mSelf = self;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mID;
         std::string mTitle;

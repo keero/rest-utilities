@@ -80,6 +80,11 @@ namespace ready4air
             mThumbnails = thumbnails;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::vector<Manifest> mSmooth;
         std::vector<Manifest> mDash;

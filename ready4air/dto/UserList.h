@@ -149,6 +149,11 @@ namespace ready4air
             mDeviceId = deviceId;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mId;
         std::string mName;

@@ -48,6 +48,11 @@ namespace ready4air
             mMedias = medias;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mTitle;
         Link mAll;

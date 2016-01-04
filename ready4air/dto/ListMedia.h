@@ -86,6 +86,11 @@ namespace ready4air
             mListOrder = listOrder;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mDeviceVersion;
         std::string mCountryCode;

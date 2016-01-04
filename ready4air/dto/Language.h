@@ -56,6 +56,11 @@ namespace ready4air
             mEnglishName = englishName;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mCode;
         std::string mISO6391Code;

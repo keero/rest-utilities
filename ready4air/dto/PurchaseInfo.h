@@ -57,6 +57,11 @@ namespace ready4air
             mPaymentData = paymentData;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         Purchase mPurchase;
         PurchaseType mPurchaseType;

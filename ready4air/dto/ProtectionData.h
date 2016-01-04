@@ -57,6 +57,11 @@ namespace ready4air
             mWidevinePSSH = widevinePSSH;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mKeyId;
         Link mPlayReadyLicenser;

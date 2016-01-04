@@ -110,6 +110,11 @@ namespace ready4air
             mPurchase = purchase;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mProductId;
         ProductType mProductType;

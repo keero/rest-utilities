@@ -67,6 +67,11 @@ namespace ready4air
             mForm = form;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mBusinessType;
         float mPrice;

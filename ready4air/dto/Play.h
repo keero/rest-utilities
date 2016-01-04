@@ -47,6 +47,11 @@ namespace ready4air
             mFeatures = features;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mProductId;
         Manifests mTrailers;

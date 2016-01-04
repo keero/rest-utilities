@@ -57,6 +57,11 @@ namespace ready4air
             mListId = listId;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::string mName;
         Link mLink;

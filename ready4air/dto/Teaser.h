@@ -27,6 +27,11 @@ namespace ready4air
             mMedias = medias;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         std::vector<MediaProduct> mMedias;
     };

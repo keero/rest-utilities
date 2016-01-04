@@ -57,6 +57,11 @@ namespace ready4air
             mSource = source;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         Link mImage;
         Link mImageLink;

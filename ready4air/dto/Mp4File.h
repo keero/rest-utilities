@@ -57,6 +57,11 @@ namespace ready4air
             mBandwidth = bandwidth;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         int mLocation;
         Link mMmsLink;

@@ -57,6 +57,11 @@ namespace ready4air
             mIsGenre = isGenre;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            return false;
+        }
+
     private:
         Language mLanguage;
         std::string mName;
