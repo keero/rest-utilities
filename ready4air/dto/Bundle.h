@@ -177,7 +177,7 @@ namespace ready4air
                 for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                 {
                     Image image;
-                    image.InitFromJsonValue(value["Images"][i]);
+                    if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i])) return false;
                     images.push_back(image);
                 }
                 SetImages(images);
@@ -191,7 +191,7 @@ namespace ready4air
                 for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
                 {
                     Link mediaProductLink;
-                    mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i]);
+                    if (!value["MediaProductLinks"][i].IsObject() || !mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i])) return false;
                     mediaProductLinks.push_back(mediaProductLink);
                 }
                 SetMediaProductLinks(mediaProductLinks);
@@ -205,7 +205,7 @@ namespace ready4air
                 for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
                 {
                     WmvFile wmvFile;
-                    wmvFile.InitFromJsonValue(value["WmvFiles"][i]);
+                    if (!value["WmvFiles"][i].IsObject() || !wmvFile.InitFromJsonValue(value["WmvFiles"][i])) return false;
                     wmvFiles.push_back(wmvFile);
                 }
                 SetWmvFiles(wmvFiles);
@@ -219,7 +219,7 @@ namespace ready4air
                 for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
                 {
                     SmoothManifest smoothManifest;
-                    smoothManifest.InitFromJsonValue(value["SmoothManifests"][i]);
+                    if (!value["SmoothManifests"][i].IsObject() || !smoothManifest.InitFromJsonValue(value["SmoothManifests"][i])) return false;
                     smoothManifests.push_back(smoothManifest);
                 }
                 SetSmoothManifests(smoothManifests);
@@ -228,9 +228,8 @@ namespace ready4air
             // Non-mandatory property
             if (value.HasMember("Self"))
             {
-                if (!value["Self"].IsObject()) return false;
                 Link self;
-                self.InitFromJsonValue(value["Self"]);
+                if (!value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
                 SetSelf(self);
             }
 
