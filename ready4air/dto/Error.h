@@ -47,6 +47,34 @@ namespace ready4air
             mDisplay = display;
         }
 
+        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        {
+            {
+                // Mandatory property
+                if (!value.HasMember("Code") || !value["Code"].IsInt()) return false;
+                SetCode(value["Code"].GetInt());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Message"))
+                {
+                    if (!value["Message"].IsString()) return false;
+                    SetMessage(value["Message"].GetString());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("Display"))
+                {
+                    Display display;
+                    if (!value["Display"].IsObject() || !display.InitFromJsonValue(value["Display"])) return false;
+                    SetDisplay(display);
+                }
+            }
+
+            return true;
+        }
+
     private:
         int mCode;
         std::string mMessage;
