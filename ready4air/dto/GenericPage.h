@@ -15,7 +15,7 @@ namespace ready4air
         {
             virtual const char* what() const throw()
             {
-                return "Template class T must inherit JsonDeserializable";
+                return "Template class T must inherit ready4air::JsonDeserializable";
             }
         } mBadType;
 
