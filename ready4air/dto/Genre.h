@@ -87,7 +87,7 @@ namespace ready4air
                 SetListId(value["ListId"].GetInt());
             }
 
-            return false;
+            return true;
         }
 
     private:
