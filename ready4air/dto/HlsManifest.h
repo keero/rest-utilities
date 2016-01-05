@@ -122,7 +122,7 @@ namespace ready4air
                 }
             }
 
-            return false;
+            return true;
         }
 
     private:

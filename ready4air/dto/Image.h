@@ -41,7 +41,7 @@ namespace ready4air
                     SetSecureLink(secureLink);
                 }
             }
-            return false;
+            return true;
         }
 
     private:
