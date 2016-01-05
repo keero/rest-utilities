@@ -75,6 +75,53 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
+            // Initialize parent properties
+            if (!FileBase::InitFromJsonValue(value)) return false;
+
+            {
+                // Non-mandatory property
+                if (value.HasMember("Language"))
+                {
+                    if (!value["Language"].IsString()) return false;
+                    SetLanguage(value["Language"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Bandwidth") || !value["Bandwidth"].IsInt()) return false;
+                SetBandwidth((short) value["Bandwidth"].GetInt());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ManifestTypeId"))
+                {
+                    if (!value["ManifestTypeId"].IsInt()) return false;
+                    SetManifestTypeId(value["ManifestTypeId"].GetInt());
+                }
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("ManifestTypeName"))
+                {
+                    if (!value["ManifestTypeName"].IsString()) return false;
+                    SetManifestTypeName(value["ManifestTypeName"].GetString());
+                }
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Location") || !value["Location"].IsInt()) return false;
+                SetLocation(value["Location"].GetInt());
+            }
+            {
+                // Non-mandatory property
+                if (value.HasMember("MmsLink"))
+                {
+                    Link mmsLink;
+                    if (!value["MmsLink"].IsObject() || !mmsLink.InitFromJsonValue(value["MmsLink"])) return false;
+                    SetMmsLink(mmsLink);
+                }
+            }
+
             return false;
         }
 
