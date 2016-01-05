@@ -19,6 +19,7 @@ set(HYPERMEDIA_SOURCE_FILES
 
 
 set(READY4AIR_DTO_SOURCE_FILES
+        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Bundle.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Button.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Image.h
@@ -99,3 +100,6 @@ add_executable(Ready4AirTester
         ${HYPERMEDIA_SOURCE_FILES}
         ${URLTEMPLATE_SOURCE_FILES})
 
+add_executable(MaybeTester
+        ${PROJECT_SOURCE_DIR}/tests/MaybeTester.cpp
+        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h)
