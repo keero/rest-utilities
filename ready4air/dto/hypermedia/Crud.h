@@ -1,7 +1,7 @@
 #ifndef READY4AIR_HYPERMEDIA_CRUD_H
 #define READY4AIR_HYPERMEDIA_CRUD_H
 
-#include <maybe/Maybe.h>
+#include "../../maybe/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "Form.h"
 #include "Link.h"

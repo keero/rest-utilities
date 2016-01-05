@@ -1,9 +1,9 @@
 #include <iostream>
-#include <maybe/Maybe.h>
+#include "../maybe/Maybe.h"
 
 int main()
 {
-    Maybe<std::string> maybeString;
+    ready4air::Maybe<std::string> maybeString;
     std::cout << "maybeString = " << (maybeString.Nothing() ? "Nothing" : maybeString.Just()) << std::endl;
     maybeString.Set("Apa");
     std::cout << "maybeString = " << (maybeString.Nothing() ? "Nothing" : maybeString.Just()) << std::endl;

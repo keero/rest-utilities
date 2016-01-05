@@ -3,7 +3,7 @@
 
 int main()
 {
-    UrlTemplate urlTemplate;
+    ready4air::UrlTemplate urlTemplate;
     
     urlTemplate.SetUrl("http://www.example.com/{apa}/somethingelse{?bepa,cepa}");
     urlTemplate.SetParam("apa", "a");

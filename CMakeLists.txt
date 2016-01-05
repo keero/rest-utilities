@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib/")
 
 set(URLTEMPLATE_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h
+        ${PROJECT_SOURCE_DIR}/ready4air/maybe/Maybe.h
         ${PROJECT_SOURCE_DIR}/ready4air/urltemplate/UrlTemplate.h
         )
 
@@ -101,5 +101,5 @@ add_executable(Ready4AirTester
         ${URLTEMPLATE_SOURCE_FILES})
 
 add_executable(MaybeTester
-        ${PROJECT_SOURCE_DIR}/tests/MaybeTester.cpp
-        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h)
+        ${PROJECT_SOURCE_DIR}/ready4air/tests/MaybeTester.cpp
+        ${PROJECT_SOURCE_DIR}/ready4air/maybe/Maybe.h)
