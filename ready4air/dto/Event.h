@@ -51,12 +51,12 @@ namespace ready4air
         {
             {
                 // Mandatory property
-                if (!value.HasMember("Start") || !value["Start"].GetString()) return false;
+                if (!value.HasMember("Start") || !value["Start"].IsString()) return false;
                 SetStart(value["Start"].GetString());
             }
             {
                 // Mandatory property
-                if (!value.HasMember("End") || !value["End"].GetString()) return false;
+                if (!value.HasMember("End") || !value["End"].IsString()) return false;
                 SetEnd(value["End"].GetString());
             }
             {

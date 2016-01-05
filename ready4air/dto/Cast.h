@@ -101,7 +101,7 @@ namespace ready4air
             }
             {
                 // Mandatory property
-                if (!value.HasMember("CategoryName") || !value["CategoryName"].GetString()) return false;
+                if (!value.HasMember("CategoryName") || !value["CategoryName"].IsString()) return false;
                 SetCategoryName(value["CategoryName"].GetString());
             }
             {
@@ -130,7 +130,7 @@ namespace ready4air
             }
             {
                 // Mandatory property
-                if (!value.HasMember("FullName") || !value["FullName"].GetString()) return false;
+                if (!value.HasMember("FullName") || !value["FullName"].IsString()) return false;
                 SetFullName(value["FullName"].GetString());
             }
 

@@ -87,12 +87,12 @@ namespace ready4air
             }
             {
                 // Mandatory property
-                if (!value.HasMember("FileTypeName") || !value["FileTypeName"].GetString()) return false;
+                if (!value.HasMember("FileTypeName") || !value["FileTypeName"].IsString()) return false;
                 SetFileTypeName(value["FileTypeName"].GetString());
             }
             {
                 // Mandatory property
-                if (!value.HasMember("Language") || !value["Language"].GetString()) return false;
+                if (!value.HasMember("Language") || !value["Language"].IsString()) return false;
                 SetLanguage(value["Language"].GetString());
             }
             {

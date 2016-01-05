@@ -56,7 +56,7 @@ namespace ready4air
             }
             {
                 // Mandatory property
-                if (!value.HasMember("TypeName") || !value["TypeName"].GetString()) return false;
+                if (!value.HasMember("TypeName") || !value["TypeName"].IsString()) return false;
                 SetTypeName(value["TypeName"].GetString());
             }
             {
