@@ -58,7 +58,28 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            return false;
+            {
+                // Mandatory property
+                if (!value.HasMember("Code") || !value["Code"].IsString()) return false;
+                SetCode(value["Code"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("ISO6391Code") || !value["ISO6391Code"].IsString()) return false;
+                SetISO6391Code(value["ISO6391Code"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("ISO6392Code") || !value["ISO6392Code"].IsString()) return false;
+                SetISO6392Code(value["ISO6392Code"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("EnglishName") || !value["EnglishName"].IsString()) return false;
+                SetEnglishName(value["EnglishName"].GetString());
+            }
+
+            return true;
         }
 
     private:
