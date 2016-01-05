@@ -30,12 +30,12 @@ public:
         mNothing = true;
     }
 
-    bool Nothing()
+    bool Nothing() const
     {
         return mNothing;
     }
 
-    T Just()
+    const T &Just() const
     {
         return mJust;
     }
