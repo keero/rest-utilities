@@ -25,12 +25,15 @@ void formTest()
     
     if (form.InitFromJsonString(json))
     {
-        ready4air::Link link = form.GetAction();
-        link.SetParam("apa", "a");
-        link.SetParam("bepa", "b");
-        link.SetParam("cepa", "c");
-        
-        std::cout << form.GetMethod() << " " << link.GetExpandedUrl() << '\n';
+        Maybe<ready4air::Link> link = form.GetAction();
+        if (!link.Nothing())
+        {
+            ready4air::Link l = link.Just();
+            l.SetParam("apa", "a");
+            l.SetParam("bepa", "b");
+            l.SetParam("cepa", "c");
+            std::cout << form.GetMethod().Just() << " " << l.GetExpandedUrl() << '\n';
+        }
     }
 
 }

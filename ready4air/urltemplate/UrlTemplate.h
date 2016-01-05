@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
+#include <maybe/Maybe.h>
 
 typedef std::map<std::string, std::string> UrlContext;
 
@@ -27,10 +28,10 @@ public:
 
     void SetUrl(const std::string &value)
     {
-        mUrl = value;
+        mUrl.Set(value);
     }
 
-    const std::string &GetUrl() const
+    const Maybe<std::string> &GetUrl() const
     {
         return mUrl;
     }
@@ -57,11 +58,14 @@ public:
 
     std::string Expand()
     {
+        if (mUrl.Nothing()) return "";
+        std::string url = mUrl.Just();
+
         std::ostringstream expanded;
 
         std::regex expr_regex("\\{([^\\{\\}]+)\\}|([^\\{\\}]+)");
 
-        std::sregex_iterator exprs_begin = std::sregex_iterator(mUrl.begin(), mUrl.end(), expr_regex);
+        std::sregex_iterator exprs_begin = std::sregex_iterator(url.begin(), url.end(), expr_regex);
         std::sregex_iterator exprs_end = std::sregex_iterator();
 
         for (std::sregex_iterator i = exprs_begin; i != exprs_end; ++i)
@@ -236,7 +240,7 @@ private:
     }
 
 private:
-    std::string mUrl;
+    Maybe<std::string> mUrl;
     UrlContext  mUrlContext;
 };
 

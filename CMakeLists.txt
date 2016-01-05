@@ -7,6 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib/")
 
 set(URLTEMPLATE_SOURCE_FILES
+        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h
         ${PROJECT_SOURCE_DIR}/ready4air/urltemplate/UrlTemplate.h
         )
 
@@ -19,7 +20,6 @@ set(HYPERMEDIA_SOURCE_FILES
 
 
 set(READY4AIR_DTO_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/include/maybe/Maybe.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Bundle.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Button.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Image.h

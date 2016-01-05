@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HYPERMEDIA_CRUD_H
 #define READY4AIR_HYPERMEDIA_CRUD_H
 
+#include <maybe/Maybe.h>
 #include "../abstract/JsonDeserializable.h"
 #include "Form.h"
 #include "Link.h"
@@ -18,34 +19,34 @@ namespace ready4air
         {
         }
 
-        const Form &GetCreateOrUpdate() const
+        const Maybe<Form> &GetCreateOrUpdate() const
         {
             return mCreateOrUpdate;
         }
 
         void SetCreateOrUpdate(const Form &createOrUpdate)
         {
-            mCreateOrUpdate = createOrUpdate;
+            mCreateOrUpdate.Set(createOrUpdate);
         }
 
-        const Link &GetRead() const
+        const Maybe<Link> &GetRead() const
         {
             return mRead;
         }
 
         void SetRead(const Link &read)
         {
-            mRead = read;
+            mRead.Set(read);
         }
 
-        const Form &GetDelete() const
+        const Maybe<Form> &GetDelete() const
         {
             return mDelete;
         }
 
         void SetDelete(const Form &aDelete)
         {
-            mDelete = aDelete;
+            mDelete.Set(aDelete);
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
@@ -82,9 +83,9 @@ namespace ready4air
         }
 
     private:
-        Form mCreateOrUpdate;
-        Link mRead;
-        Form mDelete;
+        Maybe<Form> mCreateOrUpdate;
+        Maybe<Link> mRead;
+        Maybe<Form> mDelete;
     };
 }
 

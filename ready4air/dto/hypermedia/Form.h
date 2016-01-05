@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HYPERMEDIA_FORM_H
 #define READY4AIR_HYPERMEDIA_FORM_H
 
+#include <maybe/Maybe.h>
 #include "../abstract/JsonDeserializable.h"
 #include "Link.h"
 
@@ -17,34 +18,34 @@ namespace ready4air
         {
         }
 
-        const Link &GetAction() const
+        const Maybe<Link> &GetAction() const
         {
             return mAction;
         }
 
         void SetAction(const Link &action)
         {
-            mAction = action;
+            mAction.Set(action);
         }
 
-        const std::string &GetMethod() const
+        const Maybe<std::string> &GetMethod() const
         {
             return mMethod;
         }
 
         void SetMethod(const std::string &method)
         {
-            mMethod = method;
+            mMethod.Set(method);
         }
 
-        const Link &GetBody() const
+        const Maybe<Link> &GetBody() const
         {
             return mBody;
         }
 
         void SetBody(const Link &body)
         {
-            mBody = body;
+            mBody.Set(body);
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
@@ -74,9 +75,9 @@ namespace ready4air
         }
 
     private:
-        Link mAction;
-        std::string mMethod;
-        Link mBody;
+        Maybe<Link> mAction;
+        Maybe<std::string> mMethod;
+        Maybe<Link> mBody;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HYPERMEDIA_LINK_H
 #define READY4AIR_HYPERMEDIA_LINK_H
 
+#include <maybe/Maybe.h>
 #include "../abstract/JsonDeserializable.h"
 #include "../../urltemplate/UrlTemplate.h"
 
@@ -22,27 +23,27 @@ namespace ready4air
             mUrlTemplate.SetUrl(value);
         }
 
-        const std::string &GetHref() const
+        const Maybe<std::string> &GetHref() const
         {
             return mUrlTemplate.GetUrl();
         }
 
         void SetTemplated(bool value)
         {
-            mTemplated = value;
+            mTemplated.Set(value);
         }
 
-        bool GetTemplated() const
+        Maybe<bool> GetTemplated() const
         {
             return mTemplated;
         }
 
         void SetWithCredentials(bool value)
         {
-            mWithCredentials = value;
+            mWithCredentials.Set(value);
         }
 
-        bool GetWithCredentials() const
+        Maybe<bool> GetWithCredentials() const
         {
             return mWithCredentials;
         }
@@ -100,8 +101,8 @@ namespace ready4air
         }
 
     private:
-        bool mTemplated;
-        bool mWithCredentials;
+        Maybe<bool> mTemplated;
+        Maybe<bool> mWithCredentials;
         UrlTemplate mUrlTemplate;
     };
 }
