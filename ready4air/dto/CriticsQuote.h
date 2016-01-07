@@ -1,6 +1,7 @@
 #ifndef READY4AIR_CRITICSQUOTE_H
 #define READY4AIR_CRITICSQUOTE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "QuoteImages.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetText() const
+        const Maybe <std::string> &GetText() const
         {
             return mText;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mText = text;
         }
 
-        const std::string &GetSource() const
+        const Maybe <std::string> &GetSource() const
         {
             return mSource;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mSource = source;
         }
 
-        const std::string &GetScore() const
+        const Maybe <std::string> &GetScore() const
         {
             return mScore;
         }
@@ -48,7 +49,7 @@ namespace ready4air
             mScore = score;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -58,7 +59,7 @@ namespace ready4air
             mLink = link;
         }
 
-        const QuoteImages &GetImages() const
+        const Maybe <QuoteImages> &GetImages() const
         {
             return mImages;
         }
@@ -117,11 +118,11 @@ namespace ready4air
         }
 
     private:
-        std::string mText;
-        std::string mSource;
-        std::string mScore;
-        Link mLink;
-        QuoteImages mImages;
+        Maybe <std::string> mText;
+        Maybe <std::string> mSource;
+        Maybe <std::string> mScore;
+        Maybe <Link> mLink;
+        Maybe <QuoteImages> mImages;
     };
 }
 
