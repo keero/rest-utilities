@@ -1,6 +1,7 @@
 #ifndef READY4AIR_DEVICE_H
 #define READY4AIR_DEVICE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "hypermedia/Form.h"
@@ -20,7 +21,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -30,7 +31,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetManufacturer() const
+        const Maybe <std::string> &GetManufacturer() const
         {
             return mManufacturer;
         }
@@ -40,7 +41,7 @@ namespace ready4air
             mManufacturer = manufacturer;
         }
 
-        const std::string &GetModel() const
+        const Maybe <std::string> &GetModel() const
         {
             return mModel;
         }
@@ -50,7 +51,7 @@ namespace ready4air
             mModel = model;
         }
 
-        const std::string &GetUdId() const
+        const Maybe <std::string> &GetUdId() const
         {
             return mUdId;
         }
@@ -60,7 +61,7 @@ namespace ready4air
             mUdId = udId;
         }
 
-        const std::string &GetDeviceInfo() const
+        const Maybe <std::string> &GetDeviceInfo() const
         {
             return mDeviceInfo;
         }
@@ -70,7 +71,7 @@ namespace ready4air
             mDeviceInfo = deviceInfo;
         }
 
-        const std::string &GetLastUsedDate() const
+        const Maybe <std::string> &GetLastUsedDate() const
         {
             return mLastUsedDate;
         }
@@ -80,7 +81,7 @@ namespace ready4air
             mLastUsedDate = lastUsedDate;
         }
 
-        const std::string &GetLastUsedIP() const
+        const Maybe <std::string> &GetLastUsedIP() const
         {
             return mLastUsedIP;
         }
@@ -90,7 +91,7 @@ namespace ready4air
             mLastUsedIP = lastUsedIP;
         }
 
-        const std::string &GetRegistrationDate() const
+        const Maybe <std::string> &GetRegistrationDate() const
         {
             return mRegistrationDate;
         }
@@ -100,7 +101,7 @@ namespace ready4air
             mRegistrationDate = registrationDate;
         }
 
-        const Link &GetHome() const
+        const Maybe <Link> &GetHome() const
         {
             return mHome;
         }
@@ -110,7 +111,7 @@ namespace ready4air
             mHome = home;
         }
 
-        const Link &GetHelps() const
+        const Maybe <Link> &GetHelps() const
         {
             return mHelps;
         }
@@ -120,7 +121,7 @@ namespace ready4air
             mHelps = helps;
         }
 
-        const Link &GetLiterals() const
+        const Maybe <Link> &GetLiterals() const
         {
             return mLiterals;
         }
@@ -130,7 +131,7 @@ namespace ready4air
             mLiterals = literals;
         }
 
-        const Link &GetLogin() const
+        const Maybe <Link> &GetLogin() const
         {
             return mLogin;
         }
@@ -140,7 +141,7 @@ namespace ready4air
             mLogin = login;
         }
 
-        const Form &GetRegister() const
+        const Maybe <Form> &GetRegister() const
         {
             return mRegister;
         }
@@ -150,7 +151,7 @@ namespace ready4air
             mRegister = aRegister;
         }
 
-        const Form &GetForgotPassword() const
+        const Maybe <Form> &GetForgotPassword() const
         {
             return mForgotPassword;
         }
@@ -160,7 +161,7 @@ namespace ready4air
             mForgotPassword = forgotPassword;
         }
 
-        const std::vector<std::string> &GetAvailablePaymentMethods() const
+        const Maybe <std::vector<std::string> > &GetAvailablePaymentMethods() const
         {
             return mAvailablePaymentMethods;
         }
@@ -170,7 +171,7 @@ namespace ready4air
             mAvailablePaymentMethods = availablePaymentMethods;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -180,7 +181,7 @@ namespace ready4air
             mSelf = self;
         }
 
-        const Link &GetSearch() const
+        const Maybe <Link> &GetSearch() const
         {
             return mSearch;
         }
@@ -190,7 +191,7 @@ namespace ready4air
             mSearch = search;
         }
 
-        const Link &GetSearchAsYouType() const
+        const Maybe <Link> &GetSearchAsYouType() const
         {
             return mSearchAsYouType;
         }
@@ -200,7 +201,7 @@ namespace ready4air
             mSearchAsYouType = searchAsYouType;
         }
 
-        const Link &GetSearchMovies() const
+        const Maybe <Link> &GetSearchMovies() const
         {
             return mSearchMovies;
         }
@@ -210,7 +211,7 @@ namespace ready4air
             mSearchMovies = searchMovies;
         }
 
-        const Link &GetFilterMoviesByAgeGroups() const
+        const Maybe <Link> &GetFilterMoviesByAgeGroups() const
         {
             return mFilterMoviesByAgeGroups;
         }
@@ -220,7 +221,7 @@ namespace ready4air
             mFilterMoviesByAgeGroups = filterMoviesByAgeGroups;
         }
 
-        const Link &GetSearchSeries() const
+        const Maybe <Link> &GetSearchSeries() const
         {
             return mSearchSeries;
         }
@@ -230,7 +231,7 @@ namespace ready4air
             mSearchSeries = searchSeries;
         }
 
-        const Link &GetFilterSeriesByAgeGroups() const
+        const Maybe <Link> &GetFilterSeriesByAgeGroups() const
         {
             return mFilterSeriesByAgeGroups;
         }
@@ -240,7 +241,7 @@ namespace ready4air
             mFilterSeriesByAgeGroups = filterSeriesByAgeGroups;
         }
 
-        const Link &GetSearchBundles() const
+        const Maybe <Link> &GetSearchBundles() const
         {
             return mSearchBundles;
         }
@@ -250,7 +251,7 @@ namespace ready4air
             mSearchBundles = searchBundles;
         }
 
-        const Link &GetAllPublicUserLists() const
+        const Maybe <Link> &GetAllPublicUserLists() const
         {
             return mAllPublicUserLists;
         }
@@ -260,7 +261,7 @@ namespace ready4air
             mAllPublicUserLists = allPublicUserLists;
         }
 
-        const DeviceAuthData &GetDeviceAuthData() const
+        const Maybe <DeviceAuthData> &GetDeviceAuthData() const
         {
             return mDeviceAuthData;
         }
@@ -270,7 +271,7 @@ namespace ready4air
             mDeviceAuthData = deviceAuthData;
         }
 
-        const std::string &GetApiVersion() const
+        const Maybe <std::string> &GetApiVersion() const
         {
             return mApiVersion;
         }
@@ -280,7 +281,7 @@ namespace ready4air
             mApiVersion = apiVersion;
         }
 
-        const std::string &GetApiDocumentationLink() const
+        const Maybe <std::string> &GetApiDocumentationLink() const
         {
             return mApiDocumentationLink;
         }
@@ -290,7 +291,7 @@ namespace ready4air
             mApiDocumentationLink = apiDocumentationLink;
         }
 
-        const Crud &GetManageFreePages() const
+        const Maybe <Crud> &GetManageFreePages() const
         {
             return mManageFreePages;
         }
@@ -300,7 +301,7 @@ namespace ready4air
             mManageFreePages = manageFreePages;
         }
 
-        const Link &GetSearchMoviesByPerson() const
+        const Maybe <Link> &GetSearchMoviesByPerson() const
         {
             return mSearchMoviesByPerson;
         }
@@ -310,7 +311,7 @@ namespace ready4air
             mSearchMoviesByPerson = searchMoviesByPerson;
         }
 
-        const Link &GetCreateMppSession() const
+        const Maybe <Link> &GetCreateMppSession() const
         {
             return mCreateMppSession;
         }
@@ -320,7 +321,7 @@ namespace ready4air
             mCreateMppSession = createMppSession;
         }
 
-        const Link &GetMppUserExists() const
+        const Maybe <Link> &GetMppUserExists() const
         {
             return mMppUserExists;
         }
@@ -330,7 +331,7 @@ namespace ready4air
             mMppUserExists = mppUserExists;
         }
 
-        const Link &GetAllLists() const
+        const Maybe <Link> &GetAllLists() const
         {
             return mAllLists;
         }
@@ -576,38 +577,38 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mManufacturer;
-        std::string mModel;
-        std::string mUdId;
-        std::string mDeviceInfo;
-        std::string mLastUsedDate;
-        std::string mLastUsedIP;
-        std::string mRegistrationDate;
-        Link mHome;
-        Link mHelps;
-        Link mLiterals;
-        Link mLogin;
-        Form mRegister;
-        Form mForgotPassword;
-        std::vector<std::string> mAvailablePaymentMethods;
-        Link mSelf;
-        Link mSearch;
-        Link mSearchAsYouType;
-        Link mSearchMovies;
-        Link mFilterMoviesByAgeGroups;
-        Link mSearchSeries;
-        Link mFilterSeriesByAgeGroups;
-        Link mSearchBundles;
-        Link mAllPublicUserLists;
-        DeviceAuthData mDeviceAuthData;
-        std::string mApiVersion;
-        std::string mApiDocumentationLink;
-        Crud mManageFreePages;
-        Link mSearchMoviesByPerson;
-        Link mCreateMppSession;
-        Link mMppUserExists;
-        Link mAllLists;
+        Maybe <std::string> mId;
+        Maybe <std::string> mManufacturer;
+        Maybe <std::string> mModel;
+        Maybe <std::string> mUdId;
+        Maybe <std::string> mDeviceInfo;
+        Maybe <std::string> mLastUsedDate;
+        Maybe <std::string> mLastUsedIP;
+        Maybe <std::string> mRegistrationDate;
+        Maybe <Link> mHome;
+        Maybe <Link> mHelps;
+        Maybe <Link> mLiterals;
+        Maybe <Link> mLogin;
+        Maybe <Form> mRegister;
+        Maybe <Form> mForgotPassword;
+        Maybe <std::vector<std::string> > mAvailablePaymentMethods;
+        Maybe <Link> mSelf;
+        Maybe <Link> mSearch;
+        Maybe <Link> mSearchAsYouType;
+        Maybe <Link> mSearchMovies;
+        Maybe <Link> mFilterMoviesByAgeGroups;
+        Maybe <Link> mSearchSeries;
+        Maybe <Link> mFilterSeriesByAgeGroups;
+        Maybe <Link> mSearchBundles;
+        Maybe <Link> mAllPublicUserLists;
+        Maybe <DeviceAuthData> mDeviceAuthData;
+        Maybe <std::string> mApiVersion;
+        Maybe <std::string> mApiDocumentationLink;
+        Maybe <Crud> mManageFreePages;
+        Maybe <Link> mSearchMoviesByPerson;
+        Maybe <Link> mCreateMppSession;
+        Maybe <Link> mMppUserExists;
+        Maybe <Link> mAllLists;
     };
 }
 
