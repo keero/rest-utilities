@@ -20,12 +20,6 @@ namespace ready4air
         {
         }
 
-        void Set(const T &value)
-        {
-            mJust = value;
-            mNothing = false;
-        }
-
         void Unset()
         {
             mNothing = true;
@@ -39,6 +33,13 @@ namespace ready4air
         const T &Just() const
         {
             return mJust;
+        }
+
+        inline Maybe <T> &operator=(const T &rhs)
+        {
+            mJust = rhs;
+            mNothing = false;
+            return *this;
         }
 
         inline friend bool operator==(const Maybe &lhs, const Maybe &rhs)
@@ -60,6 +61,14 @@ namespace ready4air
         inline friend bool operator!=(const Maybe &lhs, const Maybe &rhs)
         {
             return !(lhs == rhs);
+        }
+
+        inline friend std::ostream &operator<<(std::ostream &str, const Maybe &rhs)
+        {
+            if (rhs.Nothing())
+                return str;
+            else
+                return (str << rhs.Just());
         }
 
     private:
