@@ -1,6 +1,7 @@
 #ifndef READY4AIR_CAST_H
 #define READY4AIR_CAST_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mId = id;
         }
 
-        short GetCategoryId() const
+        const Maybe <short> &GetCategoryId() const
         {
             return mCategoryId;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mCategoryId = categoryId;
         }
 
-        const std::string &GetCategoryName() const
+        const Maybe <std::string> &GetCategoryName() const
         {
             return mCategoryName;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mCategoryName = categoryName;
         }
 
-        const std::string &GetFirstName() const
+        const Maybe <std::string> &GetFirstName() const
         {
             return mFirstName;
         }
@@ -57,7 +58,7 @@ namespace ready4air
             mFirstName = firstName;
         }
 
-        const std::string &GetLastName() const
+        const Maybe <std::string> &GetLastName() const
         {
             return mLastName;
         }
@@ -67,7 +68,7 @@ namespace ready4air
             mLastName = lastName;
         }
 
-        const std::string &GetMiddleName() const
+        const Maybe <std::string> &GetMiddleName() const
         {
             return mMiddleName;
         }
@@ -77,7 +78,7 @@ namespace ready4air
             mMiddleName = middleName;
         }
 
-        const std::string &GetFullName() const
+        const Maybe <std::string> &GetFullName() const
         {
             return mFullName;
         }
@@ -138,13 +139,13 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        short mCategoryId;
-        std::string mCategoryName;
-        std::string mFirstName;
-        std::string mLastName;
-        std::string mMiddleName;
-        std::string mFullName;
+        Maybe <std::string> mId;
+        Maybe <short> mCategoryId;
+        Maybe <std::string> mCategoryName;
+        Maybe <std::string> mFirstName;
+        Maybe <std::string> mLastName;
+        Maybe <std::string> mMiddleName;
+        Maybe <std::string> mFullName;
     };
 }
 
