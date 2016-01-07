@@ -1,6 +1,7 @@
 #ifndef READY4AIR_DEVICEAUTHDATA_H
 #define READY4AIR_DEVICEAUTHDATA_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -26,7 +27,7 @@ namespace ready4air
             mDeviceVersion = deviceVersion;
         }
 
-        const std::string &GetCountry() const
+        const Maybe <std::string> &GetCountry() const
         {
             return mCountry;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mCountry = country;
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -46,7 +47,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        const std::string &GetDeviceId() const
+        const Maybe <std::string> &GetDeviceId() const
         {
             return mDeviceId;
         }
@@ -56,7 +57,7 @@ namespace ready4air
             mDeviceId = deviceId;
         }
 
-        const std::string &GetToken() const
+        const Maybe <std::string> &GetToken() const
         {
             return mToken;
         }
@@ -66,7 +67,7 @@ namespace ready4air
             mToken = token;
         }
 
-        const std::string &GetExpirationDateTime() const
+        const Maybe <std::string> &GetExpirationDateTime() const
         {
             return mExpirationDateTime;
         }
@@ -76,7 +77,7 @@ namespace ready4air
             mExpirationDateTime = expirationDateTime;
         }
 
-        const std::string &GetIpAddress() const
+        const Maybe <std::string> &GetIpAddress() const
         {
             return mIpAddress;
         }
@@ -143,13 +144,13 @@ namespace ready4air
         }
 
     private:
-        int mDeviceVersion;
-        std::string mCountry;
-        std::string mLanguage;
-        std::string mDeviceId;
-        std::string mToken;
-        std::string mExpirationDateTime;
-        std::string mIpAddress;
+        Maybe <int> mDeviceVersion;
+        Maybe <std::string> mCountry;
+        Maybe <std::string> mLanguage;
+        Maybe <std::string> mDeviceId;
+        Maybe <std::string> mToken;
+        Maybe <std::string> mExpirationDateTime;
+        Maybe <std::string> mIpAddress;
     };
 }
 
