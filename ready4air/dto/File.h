@@ -1,6 +1,7 @@
 #ifndef READY4AIR_FILE_H
 #define READY4AIR_FILE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "ProtectionData.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        int GetFileTypeId() const
+        const Maybe <int> &GetFileTypeId() const
         {
             return mFileTypeId;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mFileTypeId = fileTypeId;
         }
 
-        const std::string &GetFileTypeName() const
+        const Maybe <std::string> &GetFileTypeName() const
         {
             return mFileTypeName;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mFileTypeName = fileTypeName;
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -48,7 +49,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -58,7 +59,7 @@ namespace ready4air
             mLink = link;
         }
 
-        int GetBitrate() const
+        const Maybe <int> &GetBitrate() const
         {
             return mBitrate;
         }
@@ -68,7 +69,7 @@ namespace ready4air
             mBitrate = bitrate;
         }
 
-        const ProtectionData &GetProtectionData() const
+        const Maybe <ProtectionData> &GetProtectionData() const
         {
             return mProtectionData;
         }
@@ -120,12 +121,12 @@ namespace ready4air
         }
 
     private:
-        int mFileTypeId;
-        std::string mFileTypeName;
-        std::string mLanguage;
-        Link mLink;
-        int mBitrate;
-        ProtectionData mProtectionData;
+        Maybe <int> mFileTypeId;
+        Maybe <std::string> mFileTypeName;
+        Maybe <std::string> mLanguage;
+        Maybe <Link> mLink;
+        Maybe <int> mBitrate;
+        Maybe <ProtectionData> mProtectionData;
     };
 }
 

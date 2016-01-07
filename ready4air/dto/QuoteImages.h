@@ -2,6 +2,7 @@
 #define READY4AIR_QUOTEIMAGES_H
 
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "QuoteImage.h"
 
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const QuoteImage &GetSmallLogo() const
+        const Maybe <QuoteImage> &GetSmallLogo() const
         {
             return mSmallLogo;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mSmallLogo = smallLogo;
         }
 
-        const QuoteImage &GetLargeLogo() const
+        const Maybe <QuoteImage> &GetLargeLogo() const
         {
             return mLargeLogo;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mLargeLogo = largeLogo;
         }
 
-        const QuoteImage &GetScore() const
+        const Maybe <QuoteImage> &GetScore() const
         {
             return mScore;
         }
@@ -54,9 +55,9 @@ namespace ready4air
         }
 
     private:
-        QuoteImage mSmallLogo;
-        QuoteImage mLargeLogo;
-        QuoteImage mScore;
+        Maybe <QuoteImage> mSmallLogo;
+        Maybe <QuoteImage> mLargeLogo;
+        Maybe <QuoteImage> mScore;
     };
 }
 

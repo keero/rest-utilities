@@ -1,6 +1,7 @@
 #ifndef READY4AIR_LIST_H
 #define READY4AIR_LIST_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Image.h"
 #include "LanguageList.h"
@@ -20,7 +21,7 @@ namespace ready4air
         {
         }
 
-        int GetListId() const
+        const Maybe <int> &GetListId() const
         {
             return mListId;
         }
@@ -30,7 +31,7 @@ namespace ready4air
             mListId = listId;
         }
 
-        int GetListType() const
+        const Maybe <int> &GetListType() const
         {
             return mListType;
         }
@@ -40,7 +41,7 @@ namespace ready4air
             mListType = listType;
         }
 
-        const std::string &GetName() const
+        const Maybe <std::string> &GetName() const
         {
             return mName;
         }
@@ -50,7 +51,7 @@ namespace ready4air
             mName = name;
         }
 
-        bool IsGenre() const
+        const Maybe <bool> &IsGenre() const
         {
             return mIsGenre;
         }
@@ -60,7 +61,7 @@ namespace ready4air
             mIsGenre = isGenre;
         }
 
-        const std::string &GetDescription() const
+        const Maybe <std::string> &GetDescription() const
         {
             return mDescription;
         }
@@ -70,7 +71,7 @@ namespace ready4air
             mDescription = description;
         }
 
-        const std::vector<Image> &GetImages() const
+        const Maybe <std::vector<Image> > &GetImages() const
         {
             return mImages;
         }
@@ -80,7 +81,7 @@ namespace ready4air
             mImages = images;
         }
 
-        const std::map<std::string, std::string> &GetCustom() const
+        const Maybe <std::map<std::string, std::string> > &GetCustom() const
         {
             return mCustom;
         }
@@ -90,7 +91,7 @@ namespace ready4air
             mCustom = custom;
         }
 
-        const std::vector<LanguageList> &GetLanguageLists() const
+        const Maybe <std::vector<LanguageList> > &GetLanguageLists() const
         {
             return mLanguageLists;
         }
@@ -100,7 +101,7 @@ namespace ready4air
             mLanguageLists = languageLists;
         }
 
-        const std::vector<ListMedia> &GetListMedias() const
+        const Maybe <std::vector<ListMedia> > &GetListMedias() const
         {
             return mListMedias;
         }
@@ -110,7 +111,7 @@ namespace ready4air
             mListMedias = listMedias;
         }
 
-        const Link &GetItems() const
+        const Maybe <Link> &GetItems() const
         {
             return mItems;
         }
@@ -220,16 +221,16 @@ namespace ready4air
         }
 
     private:
-        int mListId;
-        int mListType;
-        std::string mName;
-        bool mIsGenre;
-        std::string mDescription;
-        std::vector<Image> mImages;
-        std::map<std::string, std::string> mCustom;
-        std::vector<LanguageList> mLanguageLists;
-        std::vector<ListMedia> mListMedias;
-        Link mItems;
+        Maybe <int> mListId;
+        Maybe <int> mListType;
+        Maybe <std::string> mName;
+        Maybe <bool> mIsGenre;
+        Maybe <std::string> mDescription;
+        Maybe <std::vector<Image> > mImages;
+        Maybe <std::map<std::string, std::string> > mCustom;
+        Maybe <std::vector<LanguageList> > mLanguageLists;
+        Maybe <std::vector<ListMedia> > mListMedias;
+        Maybe <Link> mItems;
     };
 }
 

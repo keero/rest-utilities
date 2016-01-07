@@ -1,6 +1,7 @@
 #ifndef READY4AIR_LISTMEDIA_H
 #define READY4AIR_LISTMEDIA_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        int GetDeviceVersion() const
+        const Maybe <int> &GetDeviceVersion() const
         {
             return mDeviceVersion;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mDeviceVersion = deviceVersion;
         }
 
-        const std::string &GetCountryCode() const
+        const Maybe <std::string> &GetCountryCode() const
         {
             return mCountryCode;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mCountryCode = countryCode;
         }
 
-        int GetMediaId() const
+        const Maybe <int> &GetMediaId() const
         {
             return mMediaId;
         }
@@ -46,7 +47,7 @@ namespace ready4air
             mMediaId = mediaId;
         }
 
-        const std::string &GetCurrencyCode() const
+        const Maybe <std::string> &GetCurrencyCode() const
         {
             return mCurrencyCode;
         }
@@ -56,7 +57,7 @@ namespace ready4air
             mCurrencyCode = currencyCode;
         }
 
-        bool IsMainList() const
+        const Maybe <bool> &IsMainList() const
         {
             return mIsMainList;
         }
@@ -66,7 +67,7 @@ namespace ready4air
             mIsMainList = isMainList;
         }
 
-        float GetPrice() const
+        const Maybe <float> &GetPrice() const
         {
             return mPrice;
         }
@@ -76,7 +77,7 @@ namespace ready4air
             mPrice = price;
         }
 
-        int GetListOrder() const
+        const Maybe <int> &GetListOrder() const
         {
             return mListOrder;
         }
@@ -92,13 +93,13 @@ namespace ready4air
         }
 
     private:
-        int mDeviceVersion;
-        std::string mCountryCode;
-        int mMediaId;
-        std::string mCurrencyCode;
-        bool mIsMainList;
-        float mPrice;
-        int mListOrder;
+        Maybe <int> mDeviceVersion;
+        Maybe <std::string> mCountryCode;
+        Maybe <int> mMediaId;
+        Maybe <std::string> mCurrencyCode;
+        Maybe <bool> mIsMainList;
+        Maybe <float> mPrice;
+        Maybe <int> mListOrder;
     };
 }
 

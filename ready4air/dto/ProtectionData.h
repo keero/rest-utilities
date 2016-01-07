@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PROTECTIONDATA_H
 #define READY4AIR_PROTECTIONDATA_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetKeyId() const
+        const Maybe <std::string> &GetKeyId() const
         {
             return mKeyId;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mKeyId = keyId;
         }
 
-        const Link &GetPlayReadyLicenser() const
+        const Maybe <Link> &GetPlayReadyLicenser() const
         {
             return mPlayReadyLicenser;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mPlayReadyLicenser = playReadyLicenser;
         }
 
-        const Link &GetWidevineLicenser() const
+        const Maybe <Link> &GetWidevineLicenser() const
         {
             return mWidevineLicenser;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mWidevineLicenser = widevineLicenser;
         }
 
-        const std::string &GetWidevinePSSH() const
+        const Maybe <std::string> &GetWidevinePSSH() const
         {
             return mWidevinePSSH;
         }
@@ -63,10 +64,10 @@ namespace ready4air
         }
 
     private:
-        std::string mKeyId;
-        Link mPlayReadyLicenser;
-        Link mWidevineLicenser;
-        std::string mWidevinePSSH;
+        Maybe <std::string> mKeyId;
+        Maybe <Link> mPlayReadyLicenser;
+        Maybe <Link> mWidevineLicenser;
+        Maybe <std::string> mWidevinePSSH;
     };
 }
 

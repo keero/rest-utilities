@@ -1,6 +1,7 @@
 #ifndef READY4AIR_EVENT_H
 #define READY4AIR_EVENT_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "MediaProduct.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetStart() const
+        const Maybe <std::string> &GetStart() const
         {
             return mStart;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mStart = start;
         }
 
-        const std::string &GetEnd() const
+        const Maybe <std::string> &GetEnd() const
         {
             return mEnd;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mEnd = anEnd;
         }
 
-        const MediaProduct &GetMedia() const
+        const Maybe <MediaProduct> &GetMedia() const
         {
             return mMedia;
         }
@@ -70,9 +71,9 @@ namespace ready4air
         }
 
     private:
-        std::string mStart;
-        std::string mEnd;
-        MediaProduct mMedia;
+        Maybe <std::string> mStart;
+        Maybe <std::string> mEnd;
+        Maybe <MediaProduct> mMedia;
     };
 }
 

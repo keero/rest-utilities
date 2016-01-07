@@ -1,6 +1,7 @@
 #ifndef READY4AIR_ENTITLEMENT_H
 #define READY4AIR_ENTITLEMENT_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "DRM.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetType() const
+        const Maybe <std::string> &GetType() const
         {
             return mType;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mType = type;
         }
 
-        const std::string &GetEntitledTo() const
+        const Maybe <std::string> &GetEntitledTo() const
         {
             return mEntitledTo;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mEntitledTo = entitledTo;
         }
 
-        const std::string &GetStartTime() const
+        const Maybe <std::string> &GetStartTime() const
         {
             return mStartTime;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mStartTime = startTime;
         }
 
-        const std::string &GetEndTime() const
+        const Maybe <std::string> &GetEndTime() const
         {
             return mEndTime;
         }
@@ -57,7 +58,7 @@ namespace ready4air
             mEndTime = endTime;
         }
 
-        const DRM &GetDRM() const
+        const Maybe <DRM> &GetDRM() const
         {
             return mDRM;
         }
@@ -67,7 +68,7 @@ namespace ready4air
             mDRM = DRM;
         }
 
-        const std::string &GetIdentifier() const
+        const Maybe <std::string> &GetIdentifier() const
         {
             return mIdentifier;
         }
@@ -127,12 +128,12 @@ namespace ready4air
         }
 
     private:
-        std::string mType;
-        std::string mEntitledTo;
-        std::string mStartTime;
-        std::string mEndTime;
-        DRM mDRM;
-        std::string mIdentifier;
+        Maybe <std::string> mType;
+        Maybe <std::string> mEntitledTo;
+        Maybe <std::string> mStartTime;
+        Maybe <std::string> mEndTime;
+        Maybe <DRM> mDRM;
+        Maybe <std::string> mIdentifier;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HLSMANIFEST_H
 #define READY4AIR_HLSMANIFEST_H
 
+#include "../maybe/Maybe.h"
 #include "FileBase.h"
 #include "hypermedia/Link.h"
 
@@ -13,7 +14,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -23,7 +24,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        short GetBandwidth() const
+        const Maybe <short> &GetBandwidth() const
         {
             return mBandwidth;
         }
@@ -33,7 +34,7 @@ namespace ready4air
             mBandwidth = bandwidth;
         }
 
-        int GetManifestTypeId() const
+        const Maybe <int> &GetManifestTypeId() const
         {
             return mManifestTypeId;
         }
@@ -43,7 +44,7 @@ namespace ready4air
             mManifestTypeId = manifestTypeId;
         }
 
-        const std::string &GetManifestTypeName() const
+        const Maybe <std::string> &GetManifestTypeName() const
         {
             return mManifestTypeName;
         }
@@ -53,7 +54,7 @@ namespace ready4air
             mManifestTypeName = manifestTypeName;
         }
 
-        int GetLocation() const
+        const Maybe <int> &GetLocation() const
         {
             return mLocation;
         }
@@ -63,7 +64,7 @@ namespace ready4air
             mLocation = location;
         }
 
-        const Link &GetMmsLink() const
+        const Maybe <Link> &GetMmsLink() const
         {
             return mMmsLink;
         }
@@ -126,12 +127,12 @@ namespace ready4air
         }
 
     private:
-        std::string mLanguage;
-        short mBandwidth;
-        int mManifestTypeId;
-        std::string mManifestTypeName;
-        int mLocation;
-        Link mMmsLink;
+        Maybe <std::string> mLanguage;
+        Maybe <short> mBandwidth;
+        Maybe <int> mManifestTypeId;
+        Maybe <std::string> mManifestTypeName;
+        Maybe <int> mLocation;
+        Maybe <Link> mMmsLink;
     };
 }
 

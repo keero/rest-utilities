@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PROMOTION_H
 #define READY4AIR_PROMOTION_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetImage() const
+        const Maybe <Link> &GetImage() const
         {
             return mImage;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mImage = image;
         }
 
-        const Link &GetImageLink() const
+        const Maybe <Link> &GetImageLink() const
         {
             return mImageLink;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mImageLink = imageLink;
         }
 
-        const Link &GetExternalSource() const
+        const Maybe <Link> &GetExternalSource() const
         {
             return mExternalSource;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mExternalSource = externalSource;
         }
 
-        const std::string &GetSource() const
+        const Maybe <std::string> &GetSource() const
         {
             return mSource;
         }
@@ -63,10 +64,10 @@ namespace ready4air
         }
 
     private:
-        Link mImage;
-        Link mImageLink;
-        Link mExternalSource;
-        std::string mSource;
+        Maybe <Link> mImage;
+        Maybe <Link> mImageLink;
+        Maybe <Link> mExternalSource;
+        Maybe <std::string> mSource;
     };
 }
 

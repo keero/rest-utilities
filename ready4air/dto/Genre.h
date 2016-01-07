@@ -1,6 +1,7 @@
 #ifndef READY4AIR_GENRE_H
 #define READY4AIR_GENRE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetName() const
+        const Maybe <std::string> &GetName() const
         {
             return mName;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mName = name;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mLink = link;
         }
 
-        bool IsMain() const
+        const Maybe <bool> &IsMain() const
         {
             return mIsMain;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mIsMain = isMain;
         }
 
-        int GetListId() const
+        const Maybe <int> &GetListId() const
         {
             return mListId;
         }
@@ -91,10 +92,10 @@ namespace ready4air
         }
 
     private:
-        std::string mName;
-        Link mLink;
-        bool mIsMain;
-        int mListId;
+        Maybe <std::string> mName;
+        Maybe <Link> mLink;
+        Maybe <bool> mIsMain;
+        Maybe <int> mListId;
     };
 }
 

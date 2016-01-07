@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PLAY_H
 #define READY4AIR_PLAY_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Manifests.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        int GetProductId() const
+        const Maybe <int> &GetProductId() const
         {
             return mProductId;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mProductId = productId;
         }
 
-        const Manifests &GetTrailers() const
+        const Maybe <Manifests> &GetTrailers() const
         {
             return mTrailers;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mTrailers = trailers;
         }
 
-        const Manifests &GetFeatures() const
+        const Maybe <Manifests> &GetFeatures() const
         {
             return mFeatures;
         }
@@ -53,9 +54,9 @@ namespace ready4air
         }
 
     private:
-        int mProductId;
-        Manifests mTrailers;
-        Manifests mFeatures;
+        Maybe <int> mProductId;
+        Maybe <Manifests> mTrailers;
+        Maybe <Manifests> mFeatures;
     };
 }
 

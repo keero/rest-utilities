@@ -1,6 +1,7 @@
 #ifndef READY4AIR_IMAGE_H
 #define READY4AIR_IMAGE_H
 
+#include "../maybe/Maybe.h"
 #include "FileBase.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetSecureLink() const
+        const Maybe <Link> &GetSecureLink() const
         {
             return mSecureLink;
         }
@@ -45,7 +46,7 @@ namespace ready4air
         }
 
     private:
-        Link mSecureLink;
+        Maybe <Link> mSecureLink;
     };
 }
 

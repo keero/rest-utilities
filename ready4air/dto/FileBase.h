@@ -1,6 +1,7 @@
 #ifndef READY4AIR_FILEBASE_H
 #define READY4AIR_FILEBASE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        int GetTypeId() const
+        const Maybe <int> &GetTypeId() const
         {
             return mTypeId;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mTypeId = typeId;
         }
 
-        const std::string &GetTypeName() const
+        const Maybe <std::string> &GetTypeName() const
         {
             return mTypeName;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mTypeName = typeName;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -70,9 +71,9 @@ namespace ready4air
         }
 
     private:
-        int mTypeId;
-        std::string mTypeName;
-        Link mLink;
+        Maybe <int> mTypeId;
+        Maybe <std::string> mTypeName;
+        Maybe <Link> mLink;
     };
 }
 

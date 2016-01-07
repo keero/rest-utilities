@@ -1,6 +1,7 @@
 #ifndef READY4AIR_LANGUAGE_H
 #define READY4AIR_LANGUAGE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetCode() const
+        const Maybe <std::string> &GetCode() const
         {
             return mCode;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mCode = code;
         }
 
-        const std::string &GetISO6391Code() const
+        const Maybe <std::string> &GetISO6391Code() const
         {
             return mISO6391Code;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mISO6391Code = ISO6391Code;
         }
 
-        const std::string &GetISO6392Code() const
+        const Maybe <std::string> &GetISO6392Code() const
         {
             return mISO6392Code;
         }
@@ -46,7 +47,7 @@ namespace ready4air
             mISO6392Code = ISO6392Code;
         }
 
-        const std::string &GetEnglishName() const
+        const Maybe <std::string> &GetEnglishName() const
         {
             return mEnglishName;
         }
@@ -83,10 +84,10 @@ namespace ready4air
         }
 
     private:
-        std::string mCode;
-        std::string mISO6391Code;
-        std::string mISO6392Code;
-        std::string mEnglishName;
+        Maybe <std::string> mCode;
+        Maybe <std::string> mISO6391Code;
+        Maybe <std::string> mISO6392Code;
+        Maybe <std::string> mEnglishName;
     };
 }
 

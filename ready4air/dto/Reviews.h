@@ -1,6 +1,7 @@
 #ifndef READY4AIR_REVIEWS_H
 #define READY4AIR_REVIEWS_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "UserRating.h"
 #include "CriticsQuote.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const UserRating &GetUserRating() const
+        const Maybe <UserRating> &GetUserRating() const
         {
             return mUserRating;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mUserRating = userRating;
         }
 
-        const std::string &GetFormattedAverageCriticsScore() const
+        const Maybe <std::string> &GetFormattedAverageCriticsScore() const
         {
             return mFormattedAverageCriticsScore;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mFormattedAverageCriticsScore = formattedAverageCriticsScore;
         }
 
-        const std::vector<CriticsQuote> &GetCriticsQuotes() const
+        const Maybe <std::vector<CriticsQuote> > &GetCriticsQuotes() const
         {
             return mCriticsQuotes;
         }
@@ -54,9 +55,9 @@ namespace ready4air
         }
 
     private:
-        UserRating mUserRating;
-        std::string mFormattedAverageCriticsScore;
-        std::vector<CriticsQuote> mCriticsQuotes;
+        Maybe <UserRating> mUserRating;
+        Maybe <std::string> mFormattedAverageCriticsScore;
+        Maybe <std::vector<CriticsQuote> > mCriticsQuotes;
     };
 }
 

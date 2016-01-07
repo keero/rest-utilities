@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PAGE_H
 #define READY4AIR_PAGE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Content.h"
 #include "hypermedia/Link.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetID() const
+        const Maybe <std::string> &GetID() const
         {
             return mID;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mID = ID;
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const std::string &GetDescription() const
+        const Maybe <std::string> &GetDescription() const
         {
             return mDescription;
         }
@@ -48,7 +49,7 @@ namespace ready4air
             mDescription = description;
         }
 
-        const std::string &GetVmaMessage() const
+        const Maybe <std::string> &GetVmaMessage() const
         {
             return mVmaMessage;
         }
@@ -58,7 +59,7 @@ namespace ready4air
             mVmaMessage = vmaMessage;
         }
 
-        const std::string &GetType() const
+        const Maybe <std::string> &GetType() const
         {
             return mType;
         }
@@ -68,7 +69,7 @@ namespace ready4air
             mType = type;
         }
 
-        const Content &GetContent() const
+        const Maybe <Content> &GetContent() const
         {
             return mContent;
         }
@@ -78,7 +79,7 @@ namespace ready4air
             mContent = content;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -94,13 +95,13 @@ namespace ready4air
         }
 
     private:
-        std::string mID;
-        std::string mTitle;
-        std::string mDescription;
-        std::string mVmaMessage;
-        std::string mType;
-        Content mContent;
-        Link mSelf;
+        Maybe <std::string> mID;
+        Maybe <std::string> mTitle;
+        Maybe <std::string> mDescription;
+        Maybe <std::string> mVmaMessage;
+        Maybe <std::string> mType;
+        Maybe <Content> mContent;
+        Maybe <Link> mSelf;
     };
 }
 

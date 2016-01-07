@@ -1,6 +1,7 @@
 #ifndef READY4AIR_SMOOTHMANIFEST_H
 #define READY4AIR_SMOOTHMANIFEST_H
 
+#include "../maybe/Maybe.h"
 #include "FileBase.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        int GetManifestTypeId() const
+        const Maybe <int> &GetManifestTypeId() const
         {
             return mManifestTypeId;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mManifestTypeId = manifestTypeId;
         }
 
-        const std::string &GetManifestTypeName() const
+        const Maybe <std::string> &GetManifestTypeName() const
         {
             return mManifestTypeName;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mManifestTypeName = manifestTypeName;
         }
 
-        int GetLocation() const
+        const Maybe <int> &GetLocation() const
         {
             return mLocation;
         }
@@ -52,9 +53,9 @@ namespace ready4air
         }
 
     private:
-        int mManifestTypeId;
-        std::string mManifestTypeName;
-        int mLocation;
+        Maybe <int> mManifestTypeId;
+        Maybe <std::string> mManifestTypeName;
+        Maybe <int> mLocation;
     };
 }
 

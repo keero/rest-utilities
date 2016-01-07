@@ -1,6 +1,7 @@
 #ifndef READY4AIR_LITERAL_H
 #define READY4AIR_LITERAL_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetKey() const
+        const Maybe <std::string> &GetKey() const
         {
             return mKey;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mKey = key;
         }
 
-        const std::string &GetValue() const
+        const Maybe <std::string> &GetValue() const
         {
             return mValue;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mValue = value;
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -63,10 +64,10 @@ namespace ready4air
         }
 
     private:
-        std::string mKey;
-        std::string mValue;
-        std::string mLanguage;
-        Link mSelf;
+        Maybe <std::string> mKey;
+        Maybe <std::string> mValue;
+        Maybe <std::string> mLanguage;
+        Maybe <Link> mSelf;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_USERLIST_H
 #define READY4AIR_USERLIST_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Form.h"
 #include "hypermedia/Link.h"
@@ -19,7 +20,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -29,7 +30,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetName() const
+        const Maybe <std::string> &GetName() const
         {
             return mName;
         }
@@ -39,7 +40,7 @@ namespace ready4air
             mName = name;
         }
 
-        bool IsAPublic() const
+        const Maybe <bool> &IsAPublic() const
         {
             return mPublic;
         }
@@ -49,7 +50,7 @@ namespace ready4air
             mPublic = aPublic;
         }
 
-        const std::string &GetOwner() const
+        const Maybe <std::string> &GetOwner() const
         {
             return mOwner;
         }
@@ -59,7 +60,7 @@ namespace ready4air
             mOwner = owner;
         }
 
-        int GetType() const
+        const Maybe <int> &GetType() const
         {
             return mType;
         }
@@ -69,7 +70,7 @@ namespace ready4air
             mType = type;
         }
 
-        const std::string &GetListType() const
+        const Maybe <std::string> &GetListType() const
         {
             return mListType;
         }
@@ -79,7 +80,7 @@ namespace ready4air
             mListType = listType;
         }
 
-        const Form &GetAddItems() const
+        const Maybe <Form> &GetAddItems() const
         {
             return mAddItems;
         }
@@ -89,7 +90,7 @@ namespace ready4air
             mAddItems = addItems;
         }
 
-        const Form &GetItemPosition() const
+        const Maybe <Form> &GetItemPosition() const
         {
             return mItemPosition;
         }
@@ -99,7 +100,7 @@ namespace ready4air
             mItemPosition = itemPosition;
         }
 
-        const Form &GetRemoveItems() const
+        const Maybe <Form> &GetRemoveItems() const
         {
             return mRemoveItems;
         }
@@ -109,7 +110,7 @@ namespace ready4air
             mRemoveItems = removeItems;
         }
 
-        const Link &GetItems() const
+        const Maybe <Link> &GetItems() const
         {
             return mItems;
         }
@@ -119,7 +120,7 @@ namespace ready4air
             mItems = items;
         }
 
-        const std::vector<UserListItem> &GetExposedItems() const
+        const Maybe <std::vector<UserListItem> > &GetExposedItems() const
         {
             return mExposedItems;
         }
@@ -129,7 +130,7 @@ namespace ready4air
             mExposedItems = exposedItems;
         }
 
-        const std::string &GetUserId() const
+        const Maybe <std::string> &GetUserId() const
         {
             return mUserId;
         }
@@ -139,7 +140,7 @@ namespace ready4air
             mUserId = userId;
         }
 
-        const std::string &GetDeviceId() const
+        const Maybe <std::string> &GetDeviceId() const
         {
             return mDeviceId;
         }
@@ -155,20 +156,19 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mName;
-        bool mPublic;
-        std::string mOwner;
-        int mType;
-        std::string mListType;
-        Form mAddItems;
-        Form mItemPosition;
-        Form mRemoveItems;
-        Link mItems;
-        std::vector<UserListItem> mExposedItems;
-        std::string mUserId;
-        std::string mDeviceId;
-
+        Maybe <std::string> mId;
+        Maybe <std::string> mName;
+        Maybe <bool> mPublic;
+        Maybe <std::string> mOwner;
+        Maybe <int> mType;
+        Maybe <std::string> mListType;
+        Maybe <Form> mAddItems;
+        Maybe <Form> mItemPosition;
+        Maybe <Form> mRemoveItems;
+        Maybe <Link> mItems;
+        Maybe <std::vector<UserListItem> > mExposedItems;
+        Maybe <std::string> mUserId;
+        Maybe <std::string> mDeviceId;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_SEASONPRODUCT_H
 #define READY4AIR_SEASONPRODUCT_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "MediaProduct.h"
 #include "Entitlement.h"
@@ -20,7 +21,7 @@ namespace ready4air
         {
         }
 
-        int GetProductId() const
+        const Maybe <int> &GetProductId() const
         {
             return mProductId;
         }
@@ -30,7 +31,7 @@ namespace ready4air
             mProductId = productId;
         }
 
-        const ProductType &GetProductType() const
+        const Maybe <ProductType> &GetProductType() const
         {
             return mProductType;
         }
@@ -40,7 +41,7 @@ namespace ready4air
             mProductType = productType;
         }
 
-        float GetPrice() const
+        const Maybe <float> &GetPrice() const
         {
             return mPrice;
         }
@@ -50,7 +51,7 @@ namespace ready4air
             mPrice = price;
         }
 
-        const std::string &GetCurrency() const
+        const Maybe <std::string> &GetCurrency() const
         {
             return mCurrency;
         }
@@ -60,7 +61,7 @@ namespace ready4air
             mCurrency = currency;
         }
 
-        const std::string &GetStrPrice() const
+        const Maybe <std::string> &GetStrPrice() const
         {
             return mStrPrice;
         }
@@ -70,7 +71,7 @@ namespace ready4air
             mStrPrice = strPrice;
         }
 
-        bool IsHD() const
+        const Maybe <bool> &IsHD() const
         {
             return mHD;
         }
@@ -80,7 +81,7 @@ namespace ready4air
             mHD = HD;
         }
 
-        bool IsDubbed() const
+        const Maybe <bool> &IsDubbed() const
         {
             return mDubbed;
         }
@@ -90,7 +91,7 @@ namespace ready4air
             mDubbed = dubbed;
         }
 
-        const std::vector<Entitlement> &GetEntitlements() const
+        const Maybe <std::vector<Entitlement> > &GetEntitlements() const
         {
             return mEntitlements;
         }
@@ -100,7 +101,7 @@ namespace ready4air
             mEntitlements = entitlements;
         }
 
-        const Form &GetPurchase() const
+        const Maybe <Form> &GetPurchase() const
         {
             return mPurchase;
         }
@@ -116,15 +117,15 @@ namespace ready4air
         }
 
     private:
-        int mProductId;
-        ProductType mProductType;
-        float mPrice;
-        std::string mCurrency;
-        std::string mStrPrice;
-        bool mHD;
-        bool mDubbed;
-        std::vector<Entitlement> mEntitlements;
-        Form mPurchase;
+        Maybe <int> mProductId;
+        Maybe <ProductType> mProductType;
+        Maybe <float> mPrice;
+        Maybe <std::string> mCurrency;
+        Maybe <std::string> mStrPrice;
+        Maybe <bool> mHD;
+        Maybe <bool> mDubbed;
+        Maybe <std::vector<Entitlement> > mEntitlements;
+        Maybe <Form> mPurchase;
     };
 }
 

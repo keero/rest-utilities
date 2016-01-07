@@ -1,6 +1,7 @@
 #ifndef READY4AIR_USERLISTITEM_H
 #define READY4AIR_USERLISTITEM_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        int GetPosition() const
+        const Maybe <int> &GetPosition() const
         {
             return mPosition;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mPosition = position;
         }
 
-        const std::string &GetContentId() const
+        const Maybe <std::string> &GetContentId() const
         {
             return mContentId;
         }
@@ -42,8 +43,8 @@ namespace ready4air
         }
 
     private:
-        int mPosition;
-        std::string mContentId;
+        Maybe <int> mPosition;
+        Maybe <std::string> mContentId;
     };
 }
 

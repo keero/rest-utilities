@@ -2,6 +2,7 @@
 #define READY4AIR_GENERICPAGE_H
 
 #include <exception>
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -29,7 +30,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetPrev() const
+        const Maybe <Link> &GetPrev() const
         {
             return mPrev;
         }
@@ -39,7 +40,7 @@ namespace ready4air
             mPrev = prev;
         }
 
-        const Link &GetNext() const
+        const Maybe <Link> &GetNext() const
         {
             return mNext;
         }
@@ -49,7 +50,7 @@ namespace ready4air
             mNext = next;
         }
 
-        const std::vector<T> &GetItems() const
+        const Maybe <std::vector<T> > &GetItems() const
         {
             return mItems;
         }
@@ -96,9 +97,9 @@ namespace ready4air
         }
 
     private:
-        Link mPrev;
-        Link mNext;
-        std::vector<T> mItems;
+        Maybe <Link> mPrev;
+        Maybe <Link> mNext;
+        Maybe <std::vector<T> > mItems;
     };
 }
 

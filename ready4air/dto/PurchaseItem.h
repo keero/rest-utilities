@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PURCHASEITEM_H
 #define READY4AIR_PURCHASEITEM_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Form.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetBusinessType() const
+        const Maybe <std::string> &GetBusinessType() const
         {
             return mBusinessType;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mBusinessType = businessType;
         }
 
-        float GetPrice() const
+        const Maybe <float> &GetPrice() const
         {
             return mPrice;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mPrice = price;
         }
 
-        const std::string &GetCurrency() const
+        const Maybe <std::string> &GetCurrency() const
         {
             return mCurrency;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mCurrency = currency;
         }
 
-        const std::string &GetStrPrice() const
+        const Maybe <std::string> &GetStrPrice() const
         {
             return mStrPrice;
         }
@@ -57,7 +58,7 @@ namespace ready4air
             mStrPrice = strPrice;
         }
 
-        const Form &GetForm() const
+        const Maybe <Form> &GetForm() const
         {
             return mForm;
         }
@@ -73,11 +74,11 @@ namespace ready4air
         }
 
     private:
-        std::string mBusinessType;
-        float mPrice;
-        std::string mCurrency;
-        std::string mStrPrice;
-        Form mForm;
+        Maybe <std::string> mBusinessType;
+        Maybe <float> mPrice;
+        Maybe <std::string> mCurrency;
+        Maybe <std::string> mStrPrice;
+        Maybe <Form> mForm;
     };
 }
 

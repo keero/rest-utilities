@@ -1,6 +1,7 @@
 #ifndef READY4AIR_EPISODE_H
 #define READY4AIR_EPISODE_H
 
+#include "../maybe/Maybe.h"
 #include "MediaProduct.h"
 #include "hypermedia/Link.h"
 
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        int GetEpisodeNo() const
+        const Maybe <int> &GetEpisodeNo() const
         {
             return mEpisodeNo;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mEpisodeNo = episodeNo;
         }
 
-        const Link &GetSerie() const
+        const Maybe <Link> &GetSerie() const
         {
             return mSerie;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mSerie = serie;
         }
 
-        const Link &GetSeason() const
+        const Maybe <Link> &GetSeason() const
         {
             return mSeason;
         }
@@ -48,7 +49,7 @@ namespace ready4air
             mSeason = season;
         }
 
-        int GetSeasonNo() const
+        const Maybe <int> &GetSeasonNo() const
         {
             return mSeasonNo;
         }
@@ -90,10 +91,10 @@ namespace ready4air
         }
 
     private:
-        int mEpisodeNo;
-        Link mSerie;
-        Link mSeason;
-        int mSeasonNo;
+        Maybe <int> mEpisodeNo;
+        Maybe <Link> mSerie;
+        Maybe <Link> mSeason;
+        Maybe <int> mSeasonNo;
     };
 }
 

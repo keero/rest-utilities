@@ -1,6 +1,7 @@
 #ifndef READY4AIR_QUOTEIMAGE_H
 #define READY4AIR_QUOTEIMAGE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        int GetWidth() const
+        const Maybe <int> &GetWidth() const
         {
             return mWidth;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mWidth = width;
         }
 
-        int GetHeight() const
+        const Maybe <int> &GetHeight() const
         {
             return mHeight;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mHeight = height;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -53,9 +54,9 @@ namespace ready4air
         }
 
     private:
-        int mWidth;
-        int mHeight;
-        Link mLink;
+        Maybe <int> mWidth;
+        Maybe <int> mHeight;
+        Maybe <Link> mLink;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_ERROR_H
 #define READY4AIR_ERROR_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Display.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        int GetCode() const
+        const Maybe <int> &GetCode() const
         {
             return mCode;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mCode = code;
         }
 
-        const std::string &GetMessage() const
+        const Maybe <std::string> &GetMessage() const
         {
             return mMessage;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mMessage = message;
         }
 
-        const Display &GetDisplay() const
+        const Maybe <Display> &GetDisplay() const
         {
             return mDisplay;
         }
@@ -76,9 +77,9 @@ namespace ready4air
         }
 
     private:
-        int mCode;
-        std::string mMessage;
-        Display mDisplay;
+        Maybe <int> mCode;
+        Maybe <std::string> mMessage;
+        Maybe <Display> mDisplay;
     };
 }
 

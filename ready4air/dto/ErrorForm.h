@@ -1,6 +1,7 @@
 #ifndef READY4AIR_ERRORFORM_H
 #define READY4AIR_ERRORFORM_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Form.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const Form &GetForm() const
+        const Maybe <Form> &GetForm() const
         {
             return mForm;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mForm = form;
         }
 
-        const std::string &GetMessage() const
+        const Maybe <std::string> &GetMessage() const
         {
             return mMessage;
         }
@@ -59,8 +60,8 @@ namespace ready4air
 
 
     private:
-        Form mForm;
-        std::string mMessage;
+        Maybe <Form> mForm;
+        Maybe <std::string> mMessage;
     };
 }
 

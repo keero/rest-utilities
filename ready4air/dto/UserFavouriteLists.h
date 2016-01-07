@@ -1,6 +1,7 @@
 #ifndef READY4AIR_USERFAVOURITELISTS_H
 #define READY4AIR_USERFAVOURITELISTS_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Form.h"
 #include "hypermedia/Link.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const Form &GetAddLists() const
+        const Maybe <Form> &GetAddLists() const
         {
             return mAddLists;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mAddLists = addLists;
         }
 
-        const Form &GetListPosition() const
+        const Maybe <Form> &GetListPosition() const
         {
             return mListPosition;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mListPosition = listPosition;
         }
 
-        const Form &GetRemoveLists() const
+        const Maybe <Form> &GetRemoveLists() const
         {
             return mRemoveLists;
         }
@@ -48,7 +49,7 @@ namespace ready4air
             mRemoveLists = removeLists;
         }
 
-        const Link &GetLists() const
+        const Maybe <Link> &GetLists() const
         {
             return mLists;
         }
@@ -58,7 +59,7 @@ namespace ready4air
             mLists = lists;
         }
 
-        const std::vector<std::string> &GetExposedItems() const
+        const Maybe <std::vector<std::string> > &GetExposedItems() const
         {
             return mExposedItems;
         }
@@ -74,11 +75,11 @@ namespace ready4air
         }
 
     private:
-        Form mAddLists;
-        Form mListPosition;
-        Form mRemoveLists;
-        Link mLists;
-        std::vector<std::string> mExposedItems;
+        Maybe <Form> mAddLists;
+        Maybe <Form> mListPosition;
+        Maybe <Form> mRemoveLists;
+        Maybe <Link> mLists;
+        Maybe <std::vector<std::string> > mExposedItems;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HELP_H
 #define READY4AIR_HELP_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const std::string &GetBody() const
+        const Maybe <std::string> &GetBody() const
         {
             return mBody;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mBody = body;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -85,10 +86,10 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mTitle;
-        std::string mBody;
-        Link mSelf;
+        Maybe <std::string> mId;
+        Maybe <std::string> mTitle;
+        Maybe <std::string> mBody;
+        Maybe <Link> mSelf;
     };
 }
 

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PAYMENTDATA_H
 #define READY4AIR_PAYMENTDATA_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetPhoneNumber() const
+        const Maybe <std::string> &GetPhoneNumber() const
         {
             return mPhoneNumber;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mPhoneNumber = phoneNumber;
         }
 
-        const std::string &GetReservationNumber() const
+        const Maybe <std::string> &GetReservationNumber() const
         {
             return mReservationNumber;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mReservationNumber = reservationNumber;
         }
 
-        int GetPin() const
+        const Maybe <int> &GetPin() const
         {
             return mPin;
         }
@@ -52,9 +53,9 @@ namespace ready4air
         }
 
     private:
-        std::string mPhoneNumber;
-        std::string mReservationNumber;
-        int mPin;
+        Maybe <std::string> mPhoneNumber;
+        Maybe <std::string> mReservationNumber;
+        Maybe <int> mPin;
     };
 }
 

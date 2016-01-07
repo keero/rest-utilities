@@ -1,6 +1,7 @@
 #ifndef READY4AIR_SECTION_H
 #define READY4AIR_SECTION_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "MediaProduct.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const Link &GetAll() const
+        const Maybe <Link> &GetAll() const
         {
             return mAll;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mAll = all;
         }
 
-        const std::vector<MediaProduct> &GetMedias() const
+        const Maybe <std::vector<MediaProduct> > &GetMedias() const
         {
             return mMedias;
         }
@@ -54,9 +55,9 @@ namespace ready4air
         }
 
     private:
-        std::string mTitle;
-        Link mAll;
-        std::vector<MediaProduct> mMedias;
+        Maybe <std::string> mTitle;
+        Maybe <Link> mAll;
+        Maybe <std::vector<MediaProduct> > mMedias;
     };
 }
 

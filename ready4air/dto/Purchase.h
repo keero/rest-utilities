@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PURCHASE_H
 #define READY4AIR_PURCHASE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "hypermedia/Form.h"
@@ -19,7 +20,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -29,7 +30,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetCpurchaseId() const
+        const Maybe <std::string> &GetCpurchaseId() const
         {
             return mCpurchaseId;
         }
@@ -39,7 +40,7 @@ namespace ready4air
             mCpurchaseId = cpurchaseId;
         }
 
-        const std::string &GetCrentalId() const
+        const Maybe <std::string> &GetCrentalId() const
         {
             return mCrentalId;
         }
@@ -49,7 +50,7 @@ namespace ready4air
             mCrentalId = crentalId;
         }
 
-        const std::vector<std::string> &GetCValueCodes() const
+        const Maybe <std::vector<std::string> > &GetCValueCodes() const
         {
             return mCValueCodes;
         }
@@ -59,7 +60,7 @@ namespace ready4air
             mCValueCodes = CValueCodes;
         }
 
-        const std::string &GetCurrency() const
+        const Maybe <std::string> &GetCurrency() const
         {
             return mCurrency;
         }
@@ -69,7 +70,7 @@ namespace ready4air
             mCurrency = currency;
         }
 
-        const std::string &GetIPAddress() const
+        const Maybe <std::string> &GetIPAddress() const
         {
             return mIPAddress;
         }
@@ -79,7 +80,7 @@ namespace ready4air
             mIPAddress = IPAddress;
         }
 
-        const std::string &GetIPCountry() const
+        const Maybe <std::string> &GetIPCountry() const
         {
             return mIPCountry;
         }
@@ -89,7 +90,7 @@ namespace ready4air
             mIPCountry = IPCountry;
         }
 
-        const std::string &GetProductId() const
+        const Maybe <std::string> &GetProductId() const
         {
             return mProductId;
         }
@@ -99,7 +100,7 @@ namespace ready4air
             mProductId = productId;
         }
 
-        float GetOriginalPrice() const
+        const Maybe <float> &GetOriginalPrice() const
         {
             return mOriginalPrice;
         }
@@ -109,7 +110,7 @@ namespace ready4air
             mOriginalPrice = originalPrice;
         }
 
-        const std::string &GetPaymentMethod() const
+        const Maybe <std::string> &GetPaymentMethod() const
         {
             return mPaymentMethod;
         }
@@ -119,7 +120,7 @@ namespace ready4air
             mPaymentMethod = paymentMethod;
         }
 
-        const std::string &GetPaymentReference() const
+        const Maybe <std::string> &GetPaymentReference() const
         {
             return mPaymentReference;
         }
@@ -129,7 +130,7 @@ namespace ready4air
             mPaymentReference = paymentReference;
         }
 
-        float GetPaidPrice() const
+        const Maybe <float> &GetPaidPrice() const
         {
             return mPaidPrice;
         }
@@ -139,7 +140,7 @@ namespace ready4air
             mPaidPrice = paidPrice;
         }
 
-        float GetRemainingAmount() const
+        const Maybe <float> &GetRemainingAmount() const
         {
             return mRemainingAmount;
         }
@@ -149,7 +150,7 @@ namespace ready4air
             mRemainingAmount = remainingAmount;
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -159,7 +160,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const std::string &GetTransactionTime() const
+        const Maybe <std::string> &GetTransactionTime() const
         {
             return mTransactionTime;
         }
@@ -169,7 +170,7 @@ namespace ready4air
             mTransactionTime = transactionTime;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -179,7 +180,7 @@ namespace ready4air
             mSelf = self;
         }
 
-        const Form &GetCommit() const
+        const Maybe <Form> &GetCommit() const
         {
             return mCommit;
         }
@@ -189,7 +190,7 @@ namespace ready4air
             mCommit = commit;
         }
 
-        const Form &GetCancel() const
+        const Maybe <Form> &GetCancel() const
         {
             return mCancel;
         }
@@ -199,7 +200,7 @@ namespace ready4air
             mCancel = cancel;
         }
 
-        const Form &GetUpdate() const
+        const Maybe <Form> &GetUpdate() const
         {
             return mUpdate;
         }
@@ -209,7 +210,7 @@ namespace ready4air
             mUpdate = update;
         }
 
-        const DRM &GetDRM() const
+        const Maybe <DRM> &GetDRM() const
         {
             return mDRM;
         }
@@ -219,7 +220,7 @@ namespace ready4air
             mDRM = DRM;
         }
 
-        const std::string &GetSignature() const
+        const Maybe <std::string> &GetSignature() const
         {
             return mSignature;
         }
@@ -235,27 +236,27 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mCpurchaseId;
-        std::string mCrentalId;
-        std::vector<std::string> mCValueCodes;
-        std::string mCurrency;
-        std::string mIPAddress;
-        std::string mIPCountry;
-        std::string mProductId;
-        float mOriginalPrice;
-        std::string mPaymentMethod;
-        std::string mPaymentReference;
-        float mPaidPrice;
-        float mRemainingAmount;
-        std::string mTitle;
-        std::string mTransactionTime;
-        Link mSelf;
-        Form mCommit;
-        Form mCancel;
-        Form mUpdate;
-        DRM mDRM;
-        std::string mSignature;
+        Maybe <std::string> mId;
+        Maybe <std::string> mCpurchaseId;
+        Maybe <std::string> mCrentalId;
+        Maybe <std::vector<std::string> > mCValueCodes;
+        Maybe <std::string> mCurrency;
+        Maybe <std::string> mIPAddress;
+        Maybe <std::string> mIPCountry;
+        Maybe <std::string> mProductId;
+        Maybe <float> mOriginalPrice;
+        Maybe <std::string> mPaymentMethod;
+        Maybe <std::string> mPaymentReference;
+        Maybe <float> mPaidPrice;
+        Maybe <float> mRemainingAmount;
+        Maybe <std::string> mTitle;
+        Maybe <std::string> mTransactionTime;
+        Maybe <Link> mSelf;
+        Maybe <Form> mCommit;
+        Maybe <Form> mCancel;
+        Maybe <Form> mUpdate;
+        Maybe <DRM> mDRM;
+        Maybe <std::string> mSignature;
     };
 }
 

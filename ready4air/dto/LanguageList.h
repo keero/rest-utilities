@@ -1,6 +1,7 @@
 #ifndef READY4AIR_LANGUAGELIST_H
 #define READY4AIR_LANGUAGELIST_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Language.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const Language &GetLanguage() const
+        const Maybe <Language> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        const std::string &GetName() const
+        const Maybe <std::string> &GetName() const
         {
             return mName;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mName = name;
         }
 
-        const std::string &GetDescription() const
+        const Maybe <std::string> &GetDescription() const
         {
             return mDescription;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mDescription = description;
         }
 
-        bool IsGenre() const
+        const Maybe <bool> &IsGenre() const
         {
             return mIsGenre;
         }
@@ -85,10 +86,10 @@ namespace ready4air
         }
 
     private:
-        Language mLanguage;
-        std::string mName;
-        std::string mDescription;
-        bool mIsGenre;
+        Maybe <Language> mLanguage;
+        Maybe <std::string> mName;
+        Maybe <std::string> mDescription;
+        Maybe <bool> mIsGenre;
     };
 }
 

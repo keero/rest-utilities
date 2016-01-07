@@ -1,6 +1,7 @@
 #ifndef READY4AIR_EPGINFO_H
 #define READY4AIR_EPGINFO_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Event.h"
 #include "hypermedia/Link.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const Event &GetNow() const
+        const Maybe <Event> &GetNow() const
         {
             return mNow;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mNow = now;
         }
 
-        const Event &GetNext() const
+        const Maybe <Event> &GetNext() const
         {
             return mNext;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mNext = next;
         }
 
-        const Link &GetAll() const
+        const Maybe <Link> &GetAll() const
         {
             return mAll;
         }
@@ -76,9 +77,9 @@ namespace ready4air
         }
 
     private:
-        Event mNow;
-        Event mNext;
-        Link mAll;
+        Maybe <Event> mNow;
+        Maybe <Event> mNext;
+        Maybe <Link> mAll;
 
     };
 }

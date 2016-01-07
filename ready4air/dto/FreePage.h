@@ -1,6 +1,7 @@
 #ifndef READY4AIR_FREEPAGE_H
 #define READY4AIR_FREEPAGE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetName() const
+        const Maybe <std::string> &GetName() const
         {
             return mName;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mName = name;
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -46,7 +47,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        const std::string &GetContent() const
+        const Maybe <std::string> &GetContent() const
         {
             return mContent;
         }
@@ -83,10 +84,10 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mName;
-        std::string mLanguage;
-        std::string mContent; // @NOTE: Type of content is client specific, change appropriately.
+        Maybe <std::string> mId;
+        Maybe <std::string> mName;
+        Maybe <std::string> mLanguage;
+        Maybe <std::string> mContent; // @NOTE: Type of content is client specific, change appropriately.
     };
 }
 

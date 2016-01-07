@@ -1,6 +1,7 @@
 #ifndef READY4AIR_MP4FILE_H
 #define READY4AIR_MP4FILE_H
 
+#include "../maybe/Maybe.h"
 #include "FileBase.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        int GetLocation() const
+        const Maybe <int> &GetLocation() const
         {
             return mLocation;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mLocation = location;
         }
 
-        const Link &GetMmsLink() const
+        const Maybe <Link> &GetMmsLink() const
         {
             return mMmsLink;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mMmsLink = mmsLink;
         }
 
-        const std::string &GetLanguage() const
+        const Maybe <std::string> &GetLanguage() const
         {
             return mLanguage;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mLanguage = language;
         }
 
-        short GetBandwidth() const
+        const Maybe <short> &GetBandwidth() const
         {
             return mBandwidth;
         }
@@ -63,10 +64,10 @@ namespace ready4air
         }
 
     private:
-        int mLocation;
-        Link mMmsLink;
-        std::string mLanguage;
-        short mBandwidth;
+        Maybe <int> mLocation;
+        Maybe <Link> mMmsLink;
+        Maybe <std::string> mLanguage;
+        Maybe <short> mBandwidth;
     };
 }
 

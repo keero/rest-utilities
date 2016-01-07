@@ -1,6 +1,7 @@
 #ifndef READY4AIR_SERIES_H
 #define READY4AIR_SERIES_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Image.h"
 #include "Cast.h"
@@ -21,7 +22,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -31,7 +32,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetExternalId() const
+        const Maybe <std::string> &GetExternalId() const
         {
             return mExternalId;
         }
@@ -41,7 +42,7 @@ namespace ready4air
             mExternalId = externalId;
         }
 
-        const std::string &GetOriginalTitle() const
+        const Maybe <std::string> &GetOriginalTitle() const
         {
             return mOriginalTitle;
         }
@@ -51,7 +52,7 @@ namespace ready4air
             mOriginalTitle = originalTitle;
         }
 
-        bool IsAdult() const
+        const Maybe <bool> &IsAdult() const
         {
             return mAdult;
         }
@@ -61,7 +62,7 @@ namespace ready4air
             mAdult = adult;
         }
 
-        const std::string &GetLocalTitle() const
+        const Maybe <std::string> &GetLocalTitle() const
         {
             return mLocalTitle;
         }
@@ -71,7 +72,7 @@ namespace ready4air
             mLocalTitle = localTitle;
         }
 
-        const std::string &GetShortTitle() const
+        const Maybe <std::string> &GetShortTitle() const
         {
             return mShortTitle;
         }
@@ -81,7 +82,7 @@ namespace ready4air
             mShortTitle = shortTitle;
         }
 
-        const std::string &GetLongSummary() const
+        const Maybe <std::string> &GetLongSummary() const
         {
             return mLongSummary;
         }
@@ -91,7 +92,7 @@ namespace ready4air
             mLongSummary = longSummary;
         }
 
-        const std::string &GetShortSummary() const
+        const Maybe <std::string> &GetShortSummary() const
         {
             return mShortSummary;
         }
@@ -101,7 +102,7 @@ namespace ready4air
             mShortSummary = shortSummary;
         }
 
-        const std::string &GetSortTitle() const
+        const Maybe <std::string> &GetSortTitle() const
         {
             return mSortTitle;
         }
@@ -111,7 +112,7 @@ namespace ready4air
             mSortTitle = sortTitle;
         }
 
-        short GetMinYear() const
+        const Maybe <short> &GetMinYear() const
         {
             return mMinYear;
         }
@@ -121,7 +122,7 @@ namespace ready4air
             mMinYear = minYear;
         }
 
-        short GetMaxYear() const
+        const Maybe <short> &GetMaxYear() const
         {
             return mMaxYear;
         }
@@ -131,7 +132,7 @@ namespace ready4air
             mMaxYear = maxYear;
         }
 
-        int GetEpisodeLength() const
+        const Maybe <int> &GetEpisodeLength() const
         {
             return mEpisodeLength;
         }
@@ -141,7 +142,7 @@ namespace ready4air
             mEpisodeLength = episodeLength;
         }
 
-        int GetAgeLimit() const
+        const Maybe <int> &GetAgeLimit() const
         {
             return mAgeLimit;
         }
@@ -151,7 +152,7 @@ namespace ready4air
             mAgeLimit = ageLimit;
         }
 
-        const std::string &GetProductionCountry() const
+        const Maybe <std::string> &GetProductionCountry() const
         {
             return mProductionCountry;
         }
@@ -161,7 +162,7 @@ namespace ready4air
             mProductionCountry = productionCountry;
         }
 
-        const std::vector<std::string> &GetAgeGroups() const
+        const Maybe <std::vector<std::string> > &GetAgeGroups() const
         {
             return mAgeGroups;
         }
@@ -171,7 +172,7 @@ namespace ready4air
             mAgeGroups = ageGroups;
         }
 
-        const std::vector<Image> &GetImages() const
+        const Maybe <std::vector<Image> > &GetImages() const
         {
             return mImages;
         }
@@ -181,7 +182,7 @@ namespace ready4air
             mImages = images;
         }
 
-        const std::vector<Cast> &GetCasts() const
+        const Maybe <std::vector<Cast> > &GetCasts() const
         {
             return mCasts;
         }
@@ -191,7 +192,7 @@ namespace ready4air
             mCasts = casts;
         }
 
-        const std::vector<Genre> &GetGenres() const
+        const Maybe <std::vector<Genre> > &GetGenres() const
         {
             return mGenres;
         }
@@ -201,7 +202,7 @@ namespace ready4air
             mGenres = genres;
         }
 
-        const Form &GetPurchaseFirstEpisode() const
+        const Maybe <Form> &GetPurchaseFirstEpisode() const
         {
             return mPurchaseFirstEpisode;
         }
@@ -211,7 +212,7 @@ namespace ready4air
             mPurchaseFirstEpisode = purchaseFirstEpisode;
         }
 
-        const std::string &GetModified() const
+        const Maybe <std::string> &GetModified() const
         {
             return mModified;
         }
@@ -221,7 +222,7 @@ namespace ready4air
             mModified = modified;
         }
 
-        const Link &GetSeasons() const
+        const Maybe <Link> &GetSeasons() const
         {
             return mSeasons;
         }
@@ -231,7 +232,7 @@ namespace ready4air
             mSeasons = seasons;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -247,28 +248,28 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mExternalId;
-        std::string mOriginalTitle;
-        bool mAdult;
-        std::string mLocalTitle;
-        std::string mShortTitle;
-        std::string mLongSummary;
-        std::string mShortSummary;
-        std::string mSortTitle;
-        short mMinYear;
-        short mMaxYear;
-        int mEpisodeLength;
-        int mAgeLimit;
-        std::string mProductionCountry;
-        std::vector<std::string> mAgeGroups;
-        std::vector<Image> mImages;
-        std::vector<Cast> mCasts;
-        std::vector<Genre> mGenres;
-        Form mPurchaseFirstEpisode;
-        std::string mModified;
-        Link mSeasons;
-        Link mSelf;
+        Maybe <std::string> mId;
+        Maybe <std::string> mExternalId;
+        Maybe <std::string> mOriginalTitle;
+        Maybe <bool> mAdult;
+        Maybe <std::string> mLocalTitle;
+        Maybe <std::string> mShortTitle;
+        Maybe <std::string> mLongSummary;
+        Maybe <std::string> mShortSummary;
+        Maybe <std::string> mSortTitle;
+        Maybe <short> mMinYear;
+        Maybe <short> mMaxYear;
+        Maybe <int> mEpisodeLength;
+        Maybe <int> mAgeLimit;
+        Maybe <std::string> mProductionCountry;
+        Maybe <std::vector<std::string> > mAgeGroups;
+        Maybe <std::vector<Image> > mImages;
+        Maybe <std::vector<Cast> > mCasts;
+        Maybe <std::vector<Genre> > mGenres;
+        Maybe <Form> mPurchaseFirstEpisode;
+        Maybe <std::string> mModified;
+        Maybe <Link> mSeasons;
+        Maybe <Link> mSelf;
     };
 }
 

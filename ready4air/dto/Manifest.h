@@ -1,6 +1,7 @@
 #ifndef READY4AIR_MANIFEST_H
 #define READY4AIR_MANIFEST_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 #include "ProtectionData.h"
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mLink = link;
         }
 
-        const ProtectionData &GetProtectionData() const
+        const Maybe <ProtectionData> &GetProtectionData() const
         {
             return mProtectionData;
         }
@@ -44,8 +45,8 @@ namespace ready4air
         }
 
     private:
-        Link mLink;
-        ProtectionData mProtectionData;
+        Maybe <Link> mLink;
+        Maybe <ProtectionData> mProtectionData;
     };
 }
 

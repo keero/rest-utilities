@@ -1,6 +1,7 @@
 #ifndef READY4AIR_MENUITEM_H
 #define READY4AIR_MENUITEM_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetText() const
+        const Maybe <std::string> &GetText() const
         {
             return mText;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mText = text;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mLink = link;
         }
 
-        const std::vector<MenuItem> &GetMenuItems() const
+        const Maybe <std::vector<MenuItem> > &GetMenuItems() const
         {
             return mMenuItems;
         }
@@ -53,9 +54,9 @@ namespace ready4air
         }
 
     private:
-        std::string mText;
-        Link mLink;
-        std::vector<MenuItem> mMenuItems;
+        Maybe <std::string> mText;
+        Maybe <Link> mLink;
+        Maybe <std::vector<MenuItem> > mMenuItems;
     };
 }
 

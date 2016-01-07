@@ -1,6 +1,7 @@
 #ifndef READY4AIR_TEASER_H
 #define READY4AIR_TEASER_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "MediaProduct.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const std::vector<MediaProduct> &GetMedias() const
+        const Maybe <std::vector<MediaProduct> > &GetMedias() const
         {
             return mMedias;
         }
@@ -33,7 +34,7 @@ namespace ready4air
         }
 
     private:
-        std::vector<MediaProduct> mMedias;
+        Maybe <std::vector<MediaProduct> > mMedias;
     };
 }
 

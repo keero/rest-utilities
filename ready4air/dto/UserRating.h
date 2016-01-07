@@ -1,6 +1,7 @@
 #ifndef READY4AIR_USERRATING_H
 #define READY4AIR_USERRATING_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        int GetNumberOfVotes() const
+        const Maybe <int> &GetNumberOfVotes() const
         {
             return mNumberOfVotes;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mNumberOfVotes = numberOfVotes;
         }
 
-        int GetValue() const
+        const Maybe <int> &GetValue() const
         {
             return mValue;
         }
@@ -36,7 +37,7 @@ namespace ready4air
             mValue = value;
         }
 
-        float GetAverageValue() const
+        const Maybe <float> &GetAverageValue() const
         {
             return mAverageValue;
         }
@@ -52,9 +53,9 @@ namespace ready4air
         }
 
     private:
-        int mNumberOfVotes;
-        int mValue;
-        float mAverageValue;
+        Maybe <int> mNumberOfVotes;
+        Maybe <int> mValue;
+        Maybe <float> mAverageValue;
     };
 }
 

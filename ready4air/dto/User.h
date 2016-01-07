@@ -1,6 +1,7 @@
 #ifndef READY4AIR_USER_H
 #define READY4AIR_USER_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "UserList.h"
 #include "hypermedia/Link.h"
@@ -22,7 +23,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetID() const
+        const Maybe <std::string> &GetID() const
         {
             return mID;
         }
@@ -32,7 +33,7 @@ namespace ready4air
             mID = ID;
         }
 
-        const std::string &GetAddress() const
+        const Maybe <std::string> &GetAddress() const
         {
             return mAddress;
         }
@@ -42,7 +43,7 @@ namespace ready4air
             mAddress = address;
         }
 
-        const std::string &GetCClastfour() const
+        const Maybe <std::string> &GetCClastfour() const
         {
             return mCClastfour;
         }
@@ -52,7 +53,7 @@ namespace ready4air
             mCClastfour = CClastfour;
         }
 
-        const std::string &GetCCreference() const
+        const Maybe <std::string> &GetCCreference() const
         {
             return mCCreference;
         }
@@ -62,7 +63,7 @@ namespace ready4air
             mCCreference = CCreference;
         }
 
-        bool IsCCvalid() const
+        const Maybe <bool> &IsCCvalid() const
         {
             return mCCvalid;
         }
@@ -72,7 +73,7 @@ namespace ready4air
             mCCvalid = CCvalid;
         }
 
-        const std::string &GetCity() const
+        const Maybe <std::string> &GetCity() const
         {
             return mCity;
         }
@@ -82,7 +83,7 @@ namespace ready4air
             mCity = city;
         }
 
-        const std::string &GetCountry() const
+        const Maybe <std::string> &GetCountry() const
         {
             return mCountry;
         }
@@ -92,7 +93,7 @@ namespace ready4air
             mCountry = country;
         }
 
-        const std::string &GetEmail() const
+        const Maybe <std::string> &GetEmail() const
         {
             return mEmail;
         }
@@ -102,7 +103,7 @@ namespace ready4air
             mEmail = email;
         }
 
-        const std::string &GetFirstName() const
+        const Maybe <std::string> &GetFirstName() const
         {
             return mFirstName;
         }
@@ -112,7 +113,7 @@ namespace ready4air
             mFirstName = firstName;
         }
 
-        const std::string &GetLastName() const
+        const Maybe <std::string> &GetLastName() const
         {
             return mLastName;
         }
@@ -122,7 +123,7 @@ namespace ready4air
             mLastName = lastName;
         }
 
-        const std::string &GetLastUsedDeviceId() const
+        const Maybe <std::string> &GetLastUsedDeviceId() const
         {
             return mLastUsedDeviceId;
         }
@@ -132,7 +133,7 @@ namespace ready4air
             mLastUsedDeviceId = lastUsedDeviceId;
         }
 
-        const std::string &GetMobile() const
+        const Maybe <std::string> &GetMobile() const
         {
             return mMobile;
         }
@@ -142,7 +143,7 @@ namespace ready4air
             mMobile = mobile;
         }
 
-        int GetNumberOfLogins() const
+        const Maybe <int> &GetNumberOfLogins() const
         {
             return mNumberOfLogins;
         }
@@ -152,7 +153,7 @@ namespace ready4air
             mNumberOfLogins = numberOfLogins;
         }
 
-        const std::string &GetPostalCode() const
+        const Maybe <std::string> &GetPostalCode() const
         {
             return mPostalCode;
         }
@@ -162,7 +163,7 @@ namespace ready4air
             mPostalCode = postalCode;
         }
 
-        const std::string &GetRegistrationDate() const
+        const Maybe <std::string> &GetRegistrationDate() const
         {
             return mRegistrationDate;
         }
@@ -172,7 +173,7 @@ namespace ready4air
             mRegistrationDate = registrationDate;
         }
 
-        const std::string &GetUserName() const
+        const Maybe <std::string> &GetUserName() const
         {
             return mUserName;
         }
@@ -182,7 +183,7 @@ namespace ready4air
             mUserName = userName;
         }
 
-        const std::string &GetMppToken() const
+        const Maybe <std::string> &GetMppToken() const
         {
             return mMppToken;
         }
@@ -192,7 +193,7 @@ namespace ready4air
             mMppToken = mppToken;
         }
 
-        const UserList &GetMyMoviesList() const
+        const Maybe <UserList> &GetMyMoviesList() const
         {
             return mMyMoviesList;
         }
@@ -202,7 +203,7 @@ namespace ready4air
             mMyMoviesList = myMoviesList;
         }
 
-        const UserList &GetMyWishList() const
+        const Maybe <UserList> &GetMyWishList() const
         {
             return mMyWishList;
         }
@@ -212,7 +213,7 @@ namespace ready4air
             mMyWishList = myWishList;
         }
 
-        const std::vector<std::string> &GetAvailablePaymentMethods() const
+        const Maybe <std::vector<std::string> > &GetAvailablePaymentMethods() const
         {
             return mAvailablePaymentMethods;
         }
@@ -222,7 +223,7 @@ namespace ready4air
             mAvailablePaymentMethods = availablePaymentMethods;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -232,7 +233,7 @@ namespace ready4air
             mSelf = self;
         }
 
-        const Form &GetUpdatePassword() const
+        const Maybe <Form> &GetUpdatePassword() const
         {
             return mUpdatePassword;
         }
@@ -242,7 +243,7 @@ namespace ready4air
             mUpdatePassword = updatePassword;
         }
 
-        const Form &GetUpdate() const
+        const Maybe <Form> &GetUpdate() const
         {
             return mUpdate;
         }
@@ -252,7 +253,7 @@ namespace ready4air
             mUpdate = update;
         }
 
-        bool IsShowAdult() const
+        const Maybe <bool> &IsShowAdult() const
         {
             return mShowAdult;
         }
@@ -262,7 +263,7 @@ namespace ready4air
             mShowAdult = showAdult;
         }
 
-        const std::vector<Bookmark> &GetBookmarks() const
+        const Maybe <std::vector<Bookmark> > &GetBookmarks() const
         {
             return mBookmarks;
         }
@@ -272,7 +273,7 @@ namespace ready4air
             mBookmarks = bookmarks;
         }
 
-        const Link &GetInactiveBookmarks() const
+        const Maybe <Link> &GetInactiveBookmarks() const
         {
             return mInactiveBookmarks;
         }
@@ -282,7 +283,7 @@ namespace ready4air
             mInactiveBookmarks = inactiveBookmarks;
         }
 
-        const Crud &GetManageBookmarks() const
+        const Maybe <Crud> &GetManageBookmarks() const
         {
             return mManageBookmarks;
         }
@@ -292,7 +293,7 @@ namespace ready4air
             mManageBookmarks = manageBookmarks;
         }
 
-        const Crud &GetManageLists() const
+        const Maybe <Crud> &GetManageLists() const
         {
             return mManageLists;
         }
@@ -302,7 +303,7 @@ namespace ready4air
             mManageLists = manageLists;
         }
 
-        const UserFavouriteLists &GetUserFavouriteLists() const
+        const Maybe <UserFavouriteLists> &GetUserFavouriteLists() const
         {
             return mUserFavouriteLists;
         }
@@ -312,7 +313,7 @@ namespace ready4air
             mUserFavouriteLists = userFavouriteLists;
         }
 
-        const Link &GetMoviesFinishedWatching() const
+        const Maybe <Link> &GetMoviesFinishedWatching() const
         {
             return mMoviesFinishedWatching;
         }
@@ -322,7 +323,7 @@ namespace ready4air
             mMoviesFinishedWatching = moviesFinishedWatching;
         }
 
-        const Link &GetMoviesCurrentlyWatching() const
+        const Maybe <Link> &GetMoviesCurrentlyWatching() const
         {
             return mMoviesCurrentlyWatching;
         }
@@ -332,7 +333,7 @@ namespace ready4air
             mMoviesCurrentlyWatching = moviesCurrentlyWatching;
         }
 
-        const Form &GetCancelSubscription() const
+        const Maybe <Form> &GetCancelSubscription() const
         {
             return mCancelSubscription;
         }
@@ -348,38 +349,38 @@ namespace ready4air
         }
 
     private:
-        std::string mID;
-        std::string mAddress;
-        std::string mCClastfour;
-        std::string mCCreference;
-        bool mCCvalid;
-        std::string mCity;
-        std::string mCountry;
-        std::string mEmail;
-        std::string mFirstName;
-        std::string mLastName;
-        std::string mLastUsedDeviceId;
-        std::string mMobile;
-        int mNumberOfLogins;
-        std::string mPostalCode;
-        std::string mRegistrationDate;
-        std::string mUserName;
-        std::string mMppToken;
-        UserList mMyMoviesList;
-        UserList mMyWishList;
-        std::vector<std::string> mAvailablePaymentMethods;
-        Link mSelf;
-        Form mUpdatePassword;
-        Form mUpdate;
-        bool mShowAdult;
-        std::vector<Bookmark> mBookmarks;
-        Link mInactiveBookmarks;
-        Crud mManageBookmarks;
-        Crud mManageLists;
-        UserFavouriteLists mUserFavouriteLists;
-        Link mMoviesFinishedWatching;
-        Link mMoviesCurrentlyWatching;
-        Form mCancelSubscription;
+        Maybe <std::string> mID;
+        Maybe <std::string> mAddress;
+        Maybe <std::string> mCClastfour;
+        Maybe <std::string> mCCreference;
+        Maybe <bool> mCCvalid;
+        Maybe <std::string> mCity;
+        Maybe <std::string> mCountry;
+        Maybe <std::string> mEmail;
+        Maybe <std::string> mFirstName;
+        Maybe <std::string> mLastName;
+        Maybe <std::string> mLastUsedDeviceId;
+        Maybe <std::string> mMobile;
+        Maybe <int> mNumberOfLogins;
+        Maybe <std::string> mPostalCode;
+        Maybe <std::string> mRegistrationDate;
+        Maybe <std::string> mUserName;
+        Maybe <std::string> mMppToken;
+        Maybe <UserList> mMyMoviesList;
+        Maybe <UserList> mMyWishList;
+        Maybe <std::vector<std::string> > mAvailablePaymentMethods;
+        Maybe <Link> mSelf;
+        Maybe <Form> mUpdatePassword;
+        Maybe <Form> mUpdate;
+        Maybe <bool> mShowAdult;
+        Maybe <std::vector<Bookmark> > mBookmarks;
+        Maybe <Link> mInactiveBookmarks;
+        Maybe <Crud> mManageBookmarks;
+        Maybe <Crud> mManageLists;
+        Maybe <UserFavouriteLists> mUserFavouriteLists;
+        Maybe <Link> mMoviesFinishedWatching;
+        Maybe <Link> mMoviesCurrentlyWatching;
+        Maybe <Form> mCancelSubscription;
     };
 }
 

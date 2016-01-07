@@ -1,6 +1,7 @@
 #ifndef READY4AIR_MANIFESTS_H
 #define READY4AIR_MANIFESTS_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Manifest.h"
 #include "PlaySubtitle.h"
@@ -20,7 +21,7 @@ namespace ready4air
         {
         }
 
-        const std::vector<Manifest> &GetSmooth() const
+        const Maybe <std::vector<Manifest> > &GetSmooth() const
         {
             return mSmooth;
         }
@@ -30,7 +31,7 @@ namespace ready4air
             mSmooth = smooth;
         }
 
-        const std::vector<Manifest> &GetDash() const
+        const Maybe <std::vector<Manifest> > &GetDash() const
         {
             return mDash;
         }
@@ -40,7 +41,7 @@ namespace ready4air
             mDash = dash;
         }
 
-        const std::vector<Manifest> &GetHls() const
+        const Maybe <std::vector<Manifest> > &GetHls() const
         {
             return mHls;
         }
@@ -50,7 +51,7 @@ namespace ready4air
             mHls = hls;
         }
 
-        const std::vector<PlaySubtitle> &GetSubtitles() const
+        const Maybe <std::vector<PlaySubtitle> > &GetSubtitles() const
         {
             return mSubtitles;
         }
@@ -60,7 +61,7 @@ namespace ready4air
             mSubtitles = subtitles;
         }
 
-        const std::vector<File> &GetProgressive() const
+        const Maybe <std::vector<File> > &GetProgressive() const
         {
             return mProgressive;
         }
@@ -70,7 +71,7 @@ namespace ready4air
             mProgressive = progressive;
         }
 
-        const Link &GetThumbnails() const
+        const Maybe <Link> &GetThumbnails() const
         {
             return mThumbnails;
         }
@@ -86,12 +87,12 @@ namespace ready4air
         }
 
     private:
-        std::vector<Manifest> mSmooth;
-        std::vector<Manifest> mDash;
-        std::vector<Manifest> mHls;
-        std::vector<PlaySubtitle> mSubtitles;
-        std::vector<File> mProgressive;
-        Link mThumbnails;
+        Maybe <std::vector<Manifest> > mSmooth;
+        Maybe <std::vector<Manifest> > mDash;
+        Maybe <std::vector<Manifest> > mHls;
+        Maybe <std::vector<PlaySubtitle> > mSubtitles;
+        Maybe <std::vector<File> > mProgressive;
+        Maybe <Link> mThumbnails;
     };
 }
 

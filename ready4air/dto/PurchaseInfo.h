@@ -1,6 +1,7 @@
 #ifndef READY4AIR_PURCHASEINFO_H
 #define READY4AIR_PURCHASEINFO_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Purchase.h"
 #include "PaymentData.h"
@@ -27,7 +28,7 @@ namespace ready4air
         {
         }
 
-        const Purchase &GetPurchase() const
+        const Maybe <Purchase> &GetPurchase() const
         {
             return mPurchase;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mPurchase = purchase;
         }
 
-        const PurchaseType &GetPurchaseType() const
+        const Maybe <PurchaseType> &GetPurchaseType() const
         {
             return mPurchaseType;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mPurchaseType = purchaseType;
         }
 
-        const PaymentData &GetPaymentData() const
+        const Maybe <PaymentData> &GetPaymentData() const
         {
             return mPaymentData;
         }
@@ -63,9 +64,9 @@ namespace ready4air
         }
 
     private:
-        Purchase mPurchase;
-        PurchaseType mPurchaseType;
-        PaymentData mPaymentData;
+        Maybe <Purchase> mPurchase;
+        Maybe <PurchaseType> mPurchaseType;
+        Maybe <PaymentData> mPaymentData;
     };
 }
 
