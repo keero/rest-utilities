@@ -82,7 +82,7 @@ namespace ready4air
                     if (expression.length())
                     {
                         std::vector<std::string> values;
-                        char op;
+                        char op = '\0';
                         const char *end = operators + 7;
                         const char *result = std::find(operators, end, expression[0]);
                         if (result != end)
