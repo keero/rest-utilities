@@ -30,7 +30,7 @@ namespace ready4air
 
         void SetUrl(const std::string &value)
         {
-            mUrl.Set(value);
+            mUrl = value;
         }
 
         const Maybe <std::string> &GetUrl() const
