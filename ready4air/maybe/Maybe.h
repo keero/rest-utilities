@@ -41,6 +41,27 @@ namespace ready4air
             return mJust;
         }
 
+        inline friend bool operator==(const Maybe &lhs, const Maybe &rhs)
+        {
+            return (lhs.mNothing && rhs.mNothing)
+                || (!lhs.mNothing && !rhs.mNothing && lhs.mJust == rhs.mJust);
+        }
+
+        inline friend bool operator==(const Maybe<T> &lhs, const T &rhs)
+        {
+            return (!lhs.mNothing && lhs.mJust == rhs);
+        }
+
+        inline friend bool operator==(const T &lhs, const Maybe<T> &rhs)
+        {
+            return rhs == lhs;
+        }
+
+        inline friend bool operator!=(const Maybe &lhs, const Maybe &rhs)
+        {
+            return !(lhs == rhs);
+        }
+
     private:
         bool mNothing;
         T mJust;
