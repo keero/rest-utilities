@@ -67,12 +67,12 @@ namespace ready4air
             mIsMainList = isMainList;
         }
 
-        const Maybe <float> &GetPrice() const
+        const Maybe <double> &GetPrice() const
         {
             return mPrice;
         }
 
-        void SetPrice(float price)
+        void SetPrice(double price)
         {
             mPrice = price;
         }
@@ -89,7 +89,43 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
         {
-            return false;
+            {
+                // Mandatory property
+                if (!value.HasMember("DeviceVersion") || !value["DeviceVersion"].IsInt()) return false;
+                SetDeviceVersion(value["DeviceVersion"].GetInt());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("CountryCode") || !value["CountryCode"].IsString()) return false;
+                SetCountryCode(value["CountryCode"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("MediaId") || !value["MediaId"].IsInt()) return false;
+                SetMediaId(value["MediaId"].GetInt());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("CurrencyCode") || !value["CurrencyCode"].IsString()) return false;
+                SetCurrencyCode(value["CurrencyCode"].GetString());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("IsMainList") || !value["IsMainList"].IsBool()) return false;
+                SetIsMainList(value["IsMainList"].GetBool());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("Price") || !value["Price"].IsDouble()) return false;
+                SetPrice(value["Price"].GetDouble());
+            }
+            {
+                // Mandatory property
+                if (!value.HasMember("ListOrder") || !value["ListOrder"].IsInt()) return false;
+                SetListOrder(value["ListOrder"].GetInt());
+            }
+
+            return true;
         }
 
     private:
@@ -98,7 +134,7 @@ namespace ready4air
         Maybe <int> mMediaId;
         Maybe <std::string> mCurrencyCode;
         Maybe <bool> mIsMainList;
-        Maybe <float> mPrice;
+        Maybe <double> mPrice;
         Maybe <int> mListOrder;
     };
 }
