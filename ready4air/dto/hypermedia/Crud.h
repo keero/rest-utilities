@@ -26,7 +26,7 @@ namespace ready4air
 
         void SetCreateOrUpdate(const Form &createOrUpdate)
         {
-            mCreateOrUpdate.Set(createOrUpdate);
+            mCreateOrUpdate = createOrUpdate;
         }
 
         const Maybe<Link> &GetRead() const
@@ -36,7 +36,7 @@ namespace ready4air
 
         void SetRead(const Link &read)
         {
-            mRead.Set(read);
+            mRead = read;
         }
 
         const Maybe<Form> &GetDelete() const
@@ -46,7 +46,7 @@ namespace ready4air
 
         void SetDelete(const Form &aDelete)
         {
-            mDelete.Set(aDelete);
+            mDelete = aDelete;
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)

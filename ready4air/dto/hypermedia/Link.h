@@ -30,7 +30,7 @@ namespace ready4air
 
         void SetTemplated(bool value)
         {
-            mTemplated.Set(value);
+            mTemplated = value;
         }
 
         Maybe<bool> GetTemplated() const
@@ -40,7 +40,7 @@ namespace ready4air
 
         void SetWithCredentials(bool value)
         {
-            mWithCredentials.Set(value);
+            mWithCredentials = value;
         }
 
         Maybe<bool> GetWithCredentials() const

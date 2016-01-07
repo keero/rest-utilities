@@ -25,7 +25,7 @@ namespace ready4air
 
         void SetAction(const Link &action)
         {
-            mAction.Set(action);
+            mAction = action;
         }
 
         const Maybe<std::string> &GetMethod() const
@@ -35,7 +35,7 @@ namespace ready4air
 
         void SetMethod(const std::string &method)
         {
-            mMethod.Set(method);
+            mMethod = method;
         }
 
         const Maybe<Link> &GetBody() const
@@ -45,7 +45,7 @@ namespace ready4air
 
         void SetBody(const Link &body)
         {
-            mBody.Set(body);
+            mBody = body;
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
