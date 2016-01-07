@@ -60,7 +60,7 @@ namespace ready4air
 
         std::string Expand()
         {
-            if (mUrl.Nothing()) return "";
+            if (!mUrl) return "";
             std::string url = mUrl.Just();
 
             std::ostringstream expanded;
