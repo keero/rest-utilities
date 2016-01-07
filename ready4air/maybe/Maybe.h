@@ -30,7 +30,7 @@ namespace ready4air
             return mJust;
         }
 
-        inline operator bool()
+        inline operator bool() const
         {
             return !mNothing;
         }
