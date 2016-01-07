@@ -1,6 +1,7 @@
 #ifndef READY4AIR_BUNDLE_H
 #define READY4AIR_BUNDLE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Image.h"
 #include "hypermedia/Link.h"
@@ -21,114 +22,114 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        Maybe<std::string> GetId() const
         {
             return mId;
         }
 
         void SetId(const std::string &id)
         {
-            mId = id;
+            mId.Set(id);
         }
 
-        const std::string &GetExternalId() const
+        Maybe<std::string> GetExternalId() const
         {
             return mExternalId;
         }
 
         void SetExternalId(const std::string &externalId)
         {
-            mExternalId = externalId;
+            mExternalId.Set(externalId);
         }
 
-        const std::string &GetOriginalTitle() const
+        Maybe<std::string> GetOriginalTitle() const
         {
             return mOriginalTitle;
         }
 
         void SetOriginalTitle(const std::string &originalTitle)
         {
-            mOriginalTitle = originalTitle;
+            mOriginalTitle.Set(originalTitle);
         }
 
-        const std::string &GetOriginalSummary() const
+        Maybe<std::string> GetOriginalSummary() const
         {
             return mOriginalSummary;
         }
 
         void SetOriginalSummary(const std::string &originalSummary)
         {
-            mOriginalSummary = originalSummary;
+            mOriginalSummary.Set(originalSummary);
         }
 
-        const std::string &GetLocalTitle() const
+        Maybe<std::string> GetLocalTitle() const
         {
             return mLocalTitle;
         }
 
         void SetLocalTitle(const std::string &localTitle)
         {
-            mLocalTitle = localTitle;
+            mLocalTitle.Set(localTitle);
         }
 
-        const std::string &GetLocalSummary() const
+        Maybe<std::string> GetLocalSummary() const
         {
             return mLocalSummary;
         }
 
         void SetLocalSummary(const std::string &localSummary)
         {
-            mLocalSummary = localSummary;
+            mLocalSummary.Set(localSummary);
         }
 
-        const std::vector<Image> &GetImages() const
+        Maybe<std::vector<Image> > GetImages() const
         {
             return mImages;
         }
 
         void SetImages(const std::vector<Image> &images)
         {
-            mImages = images;
+            mImages.Set(images);
         }
 
-        const std::vector<Link> &GetMediaProductLinks() const
+        Maybe<std::vector<Link> > GetMediaProductLinks() const
         {
             return mMediaProductLinks;
         }
 
         void SetMediaProductLinks(const std::vector<Link> &mediaProductLinks)
         {
-            mMediaProductLinks = mediaProductLinks;
+            mMediaProductLinks.Set(mediaProductLinks);
         }
 
-        const std::vector<WmvFile> &GetWmvFiles() const
+        Maybe<std::vector<WmvFile> > GetWmvFiles() const
         {
             return mWmvFiles;
         }
 
         void SetWmvFiles(const std::vector<WmvFile> &wmvFiles)
         {
-            mWmvFiles = wmvFiles;
+            mWmvFiles.Set(wmvFiles);
         }
 
-        const std::vector<SmoothManifest> &GetSmoothManifests() const
+        Maybe<std::vector<SmoothManifest> > GetSmoothManifests() const
         {
             return mSmoothManifests;
         }
 
         void SetSmoothManifests(const std::vector<SmoothManifest> &smoothManifests)
         {
-            mSmoothManifests = smoothManifests;
+            mSmoothManifests.Set(smoothManifests);
         }
 
-        const Link &GetSelf() const
+        Maybe<Link> GetSelf() const
         {
             return mSelf;
         }
 
         void SetSelf(const Link &self)
         {
-            mSelf = self;
+            mSelf.Set(self);
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
@@ -184,7 +185,8 @@ namespace ready4air
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i])) return false;
+                        if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i]))
+                            return false;
                         images.push_back(image);
                     }
                     SetImages(images);
@@ -199,7 +201,9 @@ namespace ready4air
                     for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
                     {
                         Link mediaProductLink;
-                        if (!value["MediaProductLinks"][i].IsObject() || !mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i])) return false;
+                        if (!value["MediaProductLinks"][i].IsObject() ||
+                            !mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i]))
+                            return false;
                         mediaProductLinks.push_back(mediaProductLink);
                     }
                     SetMediaProductLinks(mediaProductLinks);
@@ -214,7 +218,8 @@ namespace ready4air
                     for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
                     {
                         WmvFile wmvFile;
-                        if (!value["WmvFiles"][i].IsObject() || !wmvFile.InitFromJsonValue(value["WmvFiles"][i])) return false;
+                        if (!value["WmvFiles"][i].IsObject() || !wmvFile.InitFromJsonValue(value["WmvFiles"][i]))
+                            return false;
                         wmvFiles.push_back(wmvFile);
                     }
                     SetWmvFiles(wmvFiles);
@@ -229,7 +234,9 @@ namespace ready4air
                     for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
                     {
                         SmoothManifest smoothManifest;
-                        if (!value["SmoothManifests"][i].IsObject() || !smoothManifest.InitFromJsonValue(value["SmoothManifests"][i])) return false;
+                        if (!value["SmoothManifests"][i].IsObject() ||
+                            !smoothManifest.InitFromJsonValue(value["SmoothManifests"][i]))
+                            return false;
                         smoothManifests.push_back(smoothManifest);
                     }
                     SetSmoothManifests(smoothManifests);
@@ -249,17 +256,17 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mExternalId;
-        std::string mOriginalTitle;
-        std::string mOriginalSummary;
-        std::string mLocalTitle;
-        std::string mLocalSummary;
-        std::vector<Image> mImages;
-        std::vector<Link> mMediaProductLinks;
-        std::vector<WmvFile> mWmvFiles;
-        std::vector<SmoothManifest> mSmoothManifests;
-        Link mSelf;
+        Maybe <std::string> mId;
+        Maybe <std::string> mExternalId;
+        Maybe <std::string> mOriginalTitle;
+        Maybe <std::string> mOriginalSummary;
+        Maybe <std::string> mLocalTitle;
+        Maybe <std::string> mLocalSummary;
+        Maybe <std::vector<Image> > mImages;
+        Maybe <std::vector<Link> > mMediaProductLinks;
+        Maybe <std::vector<WmvFile> > mWmvFiles;
+        Maybe <std::vector<SmoothManifest> > mSmoothManifests;
+        Maybe <Link> mSelf;
     };
 }
 
