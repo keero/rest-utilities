@@ -32,7 +32,7 @@ namespace ready4air
             mId = id;
         }
 
-        Maybe<std::string> GetExternalId() const
+        const Maybe<std::string> &GetExternalId() const
         {
             return mExternalId;
         }
@@ -42,7 +42,7 @@ namespace ready4air
             mExternalId = externalId;
         }
 
-        Maybe<std::string> GetOriginalTitle() const
+        const Maybe<std::string> &GetOriginalTitle() const
         {
             return mOriginalTitle;
         }
@@ -52,7 +52,7 @@ namespace ready4air
             mOriginalTitle = originalTitle;
         }
 
-        Maybe<std::string> GetOriginalSummary() const
+        const Maybe<std::string> &GetOriginalSummary() const
         {
             return mOriginalSummary;
         }
@@ -62,7 +62,7 @@ namespace ready4air
             mOriginalSummary = originalSummary;
         }
 
-        Maybe<std::string> GetLocalTitle() const
+        const Maybe<std::string> &GetLocalTitle() const
         {
             return mLocalTitle;
         }
@@ -72,7 +72,7 @@ namespace ready4air
             mLocalTitle = localTitle;
         }
 
-        Maybe<std::string> GetLocalSummary() const
+        const Maybe<std::string> &GetLocalSummary() const
         {
             return mLocalSummary;
         }
@@ -82,7 +82,7 @@ namespace ready4air
             mLocalSummary = localSummary;
         }
 
-        Maybe<std::vector<Image> > GetImages() const
+        const Maybe<std::vector<Image> > &GetImages() const
         {
             return mImages;
         }
@@ -92,7 +92,7 @@ namespace ready4air
             mImages = images;
         }
 
-        Maybe<std::vector<Link> > GetMediaProductLinks() const
+        const Maybe<std::vector<Link> > &GetMediaProductLinks() const
         {
             return mMediaProductLinks;
         }
@@ -102,7 +102,7 @@ namespace ready4air
             mMediaProductLinks = mediaProductLinks;
         }
 
-        Maybe<std::vector<WmvFile> > GetWmvFiles() const
+        const Maybe<std::vector<WmvFile> > &GetWmvFiles() const
         {
             return mWmvFiles;
         }
@@ -112,7 +112,7 @@ namespace ready4air
             mWmvFiles = wmvFiles;
         }
 
-        Maybe<std::vector<SmoothManifest> > GetSmoothManifests() const
+        const Maybe<std::vector<SmoothManifest> > &GetSmoothManifests() const
         {
             return mSmoothManifests;
         }
@@ -122,7 +122,7 @@ namespace ready4air
             mSmoothManifests = smoothManifests;
         }
 
-        Maybe<Link> GetSelf() const
+        const Maybe<Link> &GetSelf() const
         {
             return mSelf;
         }
