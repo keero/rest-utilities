@@ -20,7 +20,7 @@ namespace ready4air
         }
 
 
-        Maybe <int> GetAgeLimit() const
+        const Maybe <int> &GetAgeLimit() const
         {
             return mAgeLimit;
         }
@@ -40,7 +40,7 @@ namespace ready4air
             mButtonImage = buttonImage;
         }
 
-        Maybe <int> GetPosition() const
+        const Maybe <int> &GetPosition() const
         {
             return mPosition;
         }

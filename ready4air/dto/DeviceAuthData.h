@@ -17,7 +17,7 @@ namespace ready4air
         {
         }
 
-        int GetDeviceVersion() const
+        const Maybe <int> &GetDeviceVersion() const
         {
             return mDeviceVersion;
         }
