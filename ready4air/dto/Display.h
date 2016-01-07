@@ -1,6 +1,7 @@
 #ifndef READY4AIR_DISPLAY_H
 #define READY4AIR_DISPLAY_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
@@ -16,7 +17,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -26,7 +27,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const std::string &GetMessage() const
+        const Maybe <std::string> &GetMessage() const
         {
             return mMessage;
         }
@@ -53,8 +54,8 @@ namespace ready4air
         }
 
     private:
-        std::string mTitle;
-        std::string mMessage;
+        Maybe <std::string> mTitle;
+        Maybe <std::string> mMessage;
     };
 }
 
