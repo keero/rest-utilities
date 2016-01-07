@@ -1,6 +1,7 @@
 #ifndef READY4AIR_BUTTON_H
 #define READY4AIR_BUTTON_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -19,7 +20,7 @@ namespace ready4air
         }
 
 
-        int GetAgeLimit() const
+        Maybe <int> GetAgeLimit() const
         {
             return mAgeLimit;
         }
@@ -29,7 +30,7 @@ namespace ready4air
             mAgeLimit = ageLimit;
         }
 
-        const std::string &GetButtonImage() const
+        const Maybe <std::string> &GetButtonImage() const
         {
             return mButtonImage;
         }
@@ -39,7 +40,7 @@ namespace ready4air
             mButtonImage = buttonImage;
         }
 
-        int GetPosition() const
+        Maybe <int> GetPosition() const
         {
             return mPosition;
         }
@@ -49,7 +50,7 @@ namespace ready4air
             mPosition = position;
         }
 
-        const std::string &GetTitle() const
+        const Maybe <std::string> &GetTitle() const
         {
             return mTitle;
         }
@@ -59,7 +60,7 @@ namespace ready4air
             mTitle = title;
         }
 
-        const std::string &GetType() const
+        const Maybe <std::string> &GetType() const
         {
             return mType;
         }
@@ -69,7 +70,7 @@ namespace ready4air
             mType = type;
         }
 
-        const Link &GetLink() const
+        const Maybe <Link> &GetLink() const
         {
             return mLink;
         }
@@ -123,12 +124,12 @@ namespace ready4air
         }
 
     private:
-        int mAgeLimit;
-        std::string mButtonImage;
-        int mPosition;
-        std::string mTitle;
-        std::string mType;
-        Link mLink;
+        Maybe <int> mAgeLimit;
+        Maybe <std::string> mButtonImage;
+        Maybe <int> mPosition;
+        Maybe <std::string> mTitle;
+        Maybe <std::string> mType;
+        Maybe <Link> mLink;
     };
 }
 
