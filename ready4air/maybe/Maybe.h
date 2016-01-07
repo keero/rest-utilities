@@ -25,14 +25,14 @@ namespace ready4air
             mNothing = true;
         }
 
-        bool Nothing() const
-        {
-            return mNothing;
-        }
-
         const T &Just() const
         {
             return mJust;
+        }
+
+        inline operator bool()
+        {
+            return !mNothing;
         }
 
         inline Maybe <T> &operator=(const T &rhs)
@@ -65,7 +65,7 @@ namespace ready4air
 
         inline friend std::ostream &operator<<(std::ostream &str, const Maybe &rhs)
         {
-            if (rhs.Nothing())
+            if (rhs.mNothing)
                 return str;
             else
                 return (str << rhs.Just());

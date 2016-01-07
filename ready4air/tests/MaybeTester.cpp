@@ -5,11 +5,11 @@ int main()
 {
     ready4air::Maybe<std::string> maybeString, maybeString2, maybeString3, maybeString4;
     ready4air::Maybe<int> maybeInt;
-    std::cout << "maybeString = " << (maybeString.Nothing() ? "Nothing" : maybeString.Just()) << std::endl;
+    std::cout << "maybeString = " << (!maybeString ? "Nothing" : maybeString.Just()) << std::endl;
     maybeString = "Apa";
-    std::cout << "maybeString = " << (maybeString.Nothing() ? "Nothing" : maybeString.Just()) << std::endl;
+    std::cout << "maybeString = " << (!maybeString ? "Nothing" : maybeString.Just()) << std::endl;
     maybeString.Unset();
-    std::cout << "maybeString = " << (maybeString.Nothing() ? "Nothing" : maybeString.Just()) << std::endl;
+    std::cout << "maybeString = " << (!maybeString ? "Nothing" : maybeString.Just()) << std::endl;
 
     std::cout << "maybeString2 " << (maybeString2 == maybeString3 ? "==" : "!=") << " maybeString3" << std::endl;
     maybeString2 = "Bepa";
