@@ -1,6 +1,7 @@
 #ifndef READY4AIR_CHANNEL_H
 #define READY4AIR_CHANNEL_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Image.h"
 #include "EpgInfo.h"
@@ -19,7 +20,7 @@ namespace ready4air
         {
         }
 
-        const std::string &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
@@ -29,7 +30,7 @@ namespace ready4air
             mId = id;
         }
 
-        const std::string &GetOriginalTitle() const
+        const Maybe <std::string> &GetOriginalTitle() const
         {
             return mOriginalTitle;
         }
@@ -39,7 +40,7 @@ namespace ready4air
             mOriginalTitle = originalTitle;
         }
 
-        const std::string &GetDescription() const
+        const Maybe <std::string> &GetDescription() const
         {
             return mDescription;
         }
@@ -49,7 +50,7 @@ namespace ready4air
             mDescription = description;
         }
 
-        const std::string &GetLocalTitle() const
+        const Maybe <std::string> &GetLocalTitle() const
         {
             return mLocalTitle;
         }
@@ -59,7 +60,7 @@ namespace ready4air
             mLocalTitle = localTitle;
         }
 
-        const std::string &GetShortTitle() const
+        const Maybe <std::string> &GetShortTitle() const
         {
             return mShortTitle;
         }
@@ -69,7 +70,7 @@ namespace ready4air
             mShortTitle = shortTitle;
         }
 
-        const std::string &GetLongSummary() const
+        const Maybe <std::string> &GetLongSummary() const
         {
             return mLongSummary;
         }
@@ -79,7 +80,7 @@ namespace ready4air
             mLongSummary = longSummary;
         }
 
-        const std::string &GetShortSummary() const
+        const Maybe <std::string> &GetShortSummary() const
         {
             return mShortSummary;
         }
@@ -89,7 +90,7 @@ namespace ready4air
             mShortSummary = shortSummary;
         }
 
-        const std::string &GetSortTitle() const
+        const Maybe <std::string> &GetSortTitle() const
         {
             return mSortTitle;
         }
@@ -99,7 +100,7 @@ namespace ready4air
             mSortTitle = sortTitle;
         }
 
-        const std::vector<Image> &GetImages() const
+        const Maybe <std::vector<Image> > &GetImages() const
         {
             return mImages;
         }
@@ -109,7 +110,7 @@ namespace ready4air
             mImages = images;
         }
 
-        const EpgInfo &GetEpgInfo() const
+        const Maybe <EpgInfo> &GetEpgInfo() const
         {
             return mEpgInfo;
         }
@@ -119,7 +120,7 @@ namespace ready4air
             mEpgInfo = epgInfo;
         }
 
-        const Link &GetSelf() const
+        const Maybe <Link> &GetSelf() const
         {
             return mSelf;
         }
@@ -227,17 +228,17 @@ namespace ready4air
         }
 
     private:
-        std::string mId;
-        std::string mOriginalTitle;
-        std::string mDescription;
-        std::string mLocalTitle;
-        std::string mShortTitle;
-        std::string mLongSummary;
-        std::string mShortSummary;
-        std::string mSortTitle;
-        std::vector<Image> mImages;
-        EpgInfo mEpgInfo;
-        Link mSelf;
+        Maybe <std::string> mId;
+        Maybe <std::string> mOriginalTitle;
+        Maybe <std::string> mDescription;
+        Maybe <std::string> mLocalTitle;
+        Maybe <std::string> mShortTitle;
+        Maybe <std::string> mLongSummary;
+        Maybe <std::string> mShortSummary;
+        Maybe <std::string> mSortTitle;
+        Maybe <std::vector<Image> > mImages;
+        Maybe <EpgInfo> mEpgInfo;
+        Maybe <Link> mSelf;
     };
 }
 
