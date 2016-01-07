@@ -29,7 +29,7 @@ namespace ready4air
 
         void SetId(const std::string &id)
         {
-            mId.Set(id);
+            mId = id;
         }
 
         Maybe<std::string> GetExternalId() const
@@ -39,7 +39,7 @@ namespace ready4air
 
         void SetExternalId(const std::string &externalId)
         {
-            mExternalId.Set(externalId);
+            mExternalId = externalId;
         }
 
         Maybe<std::string> GetOriginalTitle() const
@@ -49,7 +49,7 @@ namespace ready4air
 
         void SetOriginalTitle(const std::string &originalTitle)
         {
-            mOriginalTitle.Set(originalTitle);
+            mOriginalTitle = originalTitle;
         }
 
         Maybe<std::string> GetOriginalSummary() const
@@ -59,7 +59,7 @@ namespace ready4air
 
         void SetOriginalSummary(const std::string &originalSummary)
         {
-            mOriginalSummary.Set(originalSummary);
+            mOriginalSummary = originalSummary;
         }
 
         Maybe<std::string> GetLocalTitle() const
@@ -69,7 +69,7 @@ namespace ready4air
 
         void SetLocalTitle(const std::string &localTitle)
         {
-            mLocalTitle.Set(localTitle);
+            mLocalTitle = localTitle;
         }
 
         Maybe<std::string> GetLocalSummary() const
@@ -79,7 +79,7 @@ namespace ready4air
 
         void SetLocalSummary(const std::string &localSummary)
         {
-            mLocalSummary.Set(localSummary);
+            mLocalSummary = localSummary;
         }
 
         Maybe<std::vector<Image> > GetImages() const
@@ -89,7 +89,7 @@ namespace ready4air
 
         void SetImages(const std::vector<Image> &images)
         {
-            mImages.Set(images);
+            mImages = images;
         }
 
         Maybe<std::vector<Link> > GetMediaProductLinks() const
@@ -99,7 +99,7 @@ namespace ready4air
 
         void SetMediaProductLinks(const std::vector<Link> &mediaProductLinks)
         {
-            mMediaProductLinks.Set(mediaProductLinks);
+            mMediaProductLinks = mediaProductLinks;
         }
 
         Maybe<std::vector<WmvFile> > GetWmvFiles() const
@@ -109,7 +109,7 @@ namespace ready4air
 
         void SetWmvFiles(const std::vector<WmvFile> &wmvFiles)
         {
-            mWmvFiles.Set(wmvFiles);
+            mWmvFiles = wmvFiles;
         }
 
         Maybe<std::vector<SmoothManifest> > GetSmoothManifests() const
@@ -119,7 +119,7 @@ namespace ready4air
 
         void SetSmoothManifests(const std::vector<SmoothManifest> &smoothManifests)
         {
-            mSmoothManifests.Set(smoothManifests);
+            mSmoothManifests = smoothManifests;
         }
 
         Maybe<Link> GetSelf() const
@@ -129,7 +129,7 @@ namespace ready4air
 
         void SetSelf(const Link &self)
         {
-            mSelf.Set(self);
+            mSelf = self;
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
