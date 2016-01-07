@@ -1,6 +1,7 @@
 #ifndef READY4AIR_CONTENT_H
 #define READY4AIR_CONTENT_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "Button.h"
 #include "MenuItem.h"
@@ -24,7 +25,7 @@ namespace ready4air
         {
         }
 
-        const std::vector<Button> &GetButtons() const
+        const Maybe <std::vector<Button> > &GetButtons() const
         {
             return mButtons;
         }
@@ -34,7 +35,7 @@ namespace ready4air
             mButtons = buttons;
         }
 
-        const std::vector<MenuItem> &GetMenuItems() const
+        const Maybe <std::vector<MenuItem> > &GetMenuItems() const
         {
             return mMenuItems;
         }
@@ -44,7 +45,7 @@ namespace ready4air
             mMenuItems = menuItems;
         }
 
-        const std::vector<Section> &GetSections() const
+        const Maybe <std::vector<Section> > &GetSections() const
         {
             return mSections;
         }
@@ -54,7 +55,7 @@ namespace ready4air
             mSections = sections;
         }
 
-        const std::vector<Teaser> &GetTeasers() const
+        const Maybe <std::vector<Teaser> > &GetTeasers() const
         {
             return mTeasers;
         }
@@ -64,7 +65,7 @@ namespace ready4air
             mTeasers = teasers;
         }
 
-        const std::vector<Promotion> &GetPromotions() const
+        const Maybe <std::vector<Promotion> > &GetPromotions() const
         {
             return mPromotions;
         }
@@ -74,7 +75,7 @@ namespace ready4air
             mPromotions = promotions;
         }
 
-        const std::vector<LiveSection> &GetLiveSections() const
+        const Maybe <std::vector<LiveSection> > &GetLiveSections() const
         {
             return mLiveSections;
         }
@@ -84,7 +85,7 @@ namespace ready4air
             mLiveSections = liveSections;
         }
 
-        const Catalogue &GetCatalogue() const
+        const Maybe <Catalogue> &GetCatalogue() const
         {
             return mCatalogue;
         }
@@ -194,13 +195,13 @@ namespace ready4air
         }
 
     private:
-        std::vector<Button> mButtons;
-        std::vector<MenuItem> mMenuItems;
-        std::vector<Section> mSections;
-        std::vector<Teaser> mTeasers;
-        std::vector<Promotion> mPromotions;
-        std::vector<LiveSection> mLiveSections;
-        Catalogue mCatalogue;
+        Maybe <std::vector<Button> > mButtons;
+        Maybe <std::vector<MenuItem> > mMenuItems;
+        Maybe <std::vector<Section> > mSections;
+        Maybe <std::vector<Teaser> > mTeasers;
+        Maybe <std::vector<Promotion> > mPromotions;
+        Maybe <std::vector<LiveSection> > mLiveSections;
+        Maybe <Catalogue> mCatalogue;
     };
 }
 
