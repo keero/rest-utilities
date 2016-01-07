@@ -26,7 +26,7 @@ void formTest()
     if (form.InitFromJsonString(json))
     {
 //        ready4air::Maybe<ready4air::Link> link = form.GetAction();
-        if (!form.GetAction().Nothing())
+        if (form.GetAction())
         {
             ready4air::Link l = form.GetAction().Just();
             l.SetParam("apa", "a");
