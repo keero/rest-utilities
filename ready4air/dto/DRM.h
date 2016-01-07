@@ -1,6 +1,7 @@
 #ifndef READY4AIR_DRM_H
 #define READY4AIR_DRM_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -17,7 +18,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetCookie() const
+        const Maybe <Link> &GetCookie() const
         {
             return mCookie;
         }
@@ -27,7 +28,7 @@ namespace ready4air
             mCookie = cookie;
         }
 
-        const std::string &GetCustomData() const
+        const Maybe <std::string> &GetCustomData() const
         {
             return mCustomData;
         }
@@ -37,7 +38,7 @@ namespace ready4air
             mCustomData = customData;
         }
 
-        const std::string &GetCustomerToken() const
+        const Maybe <std::string> &GetCustomerToken() const
         {
             return mCustomerToken;
         }
@@ -47,7 +48,7 @@ namespace ready4air
             mCustomerToken = customerToken;
         }
 
-        const std::string &GetDeviceToken() const
+        const Maybe <std::string> &GetDeviceToken() const
         {
             return mDeviceToken;
         }
@@ -57,7 +58,7 @@ namespace ready4air
             mDeviceToken = deviceToken;
         }
 
-        const std::string &GetContentId() const
+        const Maybe <std::string> &GetContentId() const
         {
             return mContentId;
         }
@@ -100,11 +101,11 @@ namespace ready4air
         }
 
     private:
-        Link mCookie;
-        std::string mCustomData;
-        std::string mCustomerToken;
-        std::string mDeviceToken;
-        std::string mContentId;
+        Maybe <Link> mCookie;
+        Maybe <std::string> mCustomData;
+        Maybe <std::string> mCustomerToken;
+        Maybe <std::string> mDeviceToken;
+        Maybe <std::string> mContentId;
     };
 }
 
