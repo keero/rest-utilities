@@ -1,6 +1,7 @@
 #ifndef READY4AIR_CATALOGUE_H
 #define READY4AIR_CATALOGUE_H
 
+#include "../maybe/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
@@ -18,7 +19,7 @@ namespace ready4air
         {
         }
 
-        const Link &GetAllMovies() const
+        const Maybe <Link> &GetAllMovies() const
         {
             return mAllMovies;
         }
@@ -28,7 +29,7 @@ namespace ready4air
             mAllMovies = allMovies;
         }
 
-        const Link &GetAllSeries() const
+        const Maybe <Link> &GetAllSeries() const
         {
             return mAllSeries;
         }
@@ -38,7 +39,7 @@ namespace ready4air
             mAllSeries = allSeries;
         }
 
-        const Link &GetAllBundles() const
+        const Maybe <Link> &GetAllBundles() const
         {
             return mAllBundles;
         }
@@ -73,9 +74,9 @@ namespace ready4air
         }
 
     private:
-        Link mAllMovies;
-        Link mAllSeries;
-        Link mAllBundles;
+        Maybe <Link> mAllMovies;
+        Maybe <Link> mAllSeries;
+        Maybe <Link> mAllBundles;
     };
 }
 
