@@ -17,74 +17,74 @@ namespace ready4air
         {
         }
 
-        const Maybe<std::string> &GetId() const
+        const Maybe <std::string> &GetId() const
         {
             return mId;
         }
 
         void SetId(const std::string &id)
         {
-            mId.Set(id);
+            mId = id;
         }
 
-        const Maybe<std::string> &GetValue() const
+        const Maybe <std::string> &GetValue() const
         {
             return mValue;
         }
 
         void SetValue(const std::string &value)
         {
-            mValue.Set(value);
+            mValue = value;
         }
 
-        const Maybe<std::string> &GetCreated() const
+        const Maybe <std::string> &GetCreated() const
         {
             return mCreated;
         }
 
         void SetCreated(const std::string &created)
         {
-            mCreated.Set(created);
+            mCreated = created;
         }
 
-        const Maybe<std::string> &GetContentId() const
+        const Maybe <std::string> &GetContentId() const
         {
             return mContentId;
         }
 
         void SetContentId(const std::string &contentId)
         {
-            mContentId.Set(contentId);
+            mContentId = contentId;
         }
 
-        const Maybe<std::string> &GetDeviceId() const
+        const Maybe <std::string> &GetDeviceId() const
         {
             return mDeviceId;
         }
 
         void SetDeviceId(const std::string &deviceId)
         {
-            mDeviceId.Set(deviceId);
+            mDeviceId = deviceId;
         }
 
-        const Maybe<std::string> &GetUserId() const
+        const Maybe <std::string> &GetUserId() const
         {
             return mUserId;
         }
 
         void SetUserId(const std::string &userId)
         {
-            mUserId.Set(userId);
+            mUserId = userId;
         }
 
-        const Maybe<std::string> &GetModified() const
+        const Maybe <std::string> &GetModified() const
         {
             return mModified;
         }
 
         void SetModified(const std::string &modified)
         {
-            mModified.Set(modified);
+            mModified = modified;
         }
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value)
@@ -138,13 +138,13 @@ namespace ready4air
         }
 
     private:
-        Maybe<std::string> mId;
-        Maybe<std::string> mValue;
-        Maybe<std::string> mCreated;
-        Maybe<std::string> mContentId;
-        Maybe<std::string> mDeviceId;
-        Maybe<std::string> mUserId;
-        Maybe<std::string> mModified;
+        Maybe <std::string> mId;
+        Maybe <std::string> mValue;
+        Maybe <std::string> mCreated;
+        Maybe <std::string> mContentId;
+        Maybe <std::string> mDeviceId;
+        Maybe <std::string> mUserId;
+        Maybe <std::string> mModified;
     };
 }
 
