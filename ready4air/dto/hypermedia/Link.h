@@ -1,6 +1,7 @@
 #ifndef READY4AIR_HYPERMEDIA_LINK_H
 #define READY4AIR_HYPERMEDIA_LINK_H
 
+#include "../../maybe/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "../../urltemplate/UrlTemplate.h"
 
