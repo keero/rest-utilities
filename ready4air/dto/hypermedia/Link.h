@@ -1,7 +1,6 @@
 #ifndef READY4AIR_HYPERMEDIA_LINK_H
 #define READY4AIR_HYPERMEDIA_LINK_H
 
-#include "../../maybe/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "../../urltemplate/UrlTemplate.h"
 
@@ -73,31 +72,22 @@ namespace ready4air
             return mUrlTemplate.Expand();
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Href") || !value["Href"].IsString()) return false;
-                SetHref(value["Href"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Templated"))
-                {
-                    if (!value["Templated"].IsBool()) return false;
-                    SetTemplated(value["Templated"].GetBool());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("WithCredentials"))
-                {
-                    if (!value["WithCredentials"].IsBool()) return false;
-                    SetWithCredentials(value["WithCredentials"].GetBool());
-                }
-            }
+            std::string href;
+            bool templated;
+            bool withCredentials;
 
-            return true;
+            if (ParseString(value, "Href", true, href, parseErrors))
+                SetHref(href);
+
+            if (ParseBool(value, "Templated", false, templated, parseErrors))
+                SetTemplated(templated);
+
+            if (ParseBool(value, "WithCredentials", false, withCredentials, parseErrors))
+                SetWithCredentials(withCredentials);
+
+            return !parseErrors;
         }
 
     private:

@@ -1,7 +1,6 @@
 #ifndef READY4AIR_HYPERMEDIA_CRUD_H
 #define READY4AIR_HYPERMEDIA_CRUD_H
 
-#include "../../maybe/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "Form.h"
 #include "Link.h"
@@ -49,37 +48,22 @@ namespace ready4air
             mDelete = aDelete;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Non-mandatory property
-                if (value.HasMember("CreateOrUpdate"))
-                {
-                    Form createOrUpdateForm;
-                    if (!value["CreateOrUpdate"].IsObject() || !createOrUpdateForm.InitFromJsonValue(value["CreateOrUpdate"])) return false;
-                    SetCreateOrUpdate(createOrUpdateForm);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Read"))
-                {
-                    Link readLink;
-                    if (!value["Read"].IsObject() || !readLink.InitFromJsonValue(value["Read"])) return false;
-                    SetRead(readLink);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Delete"))
-                {
-                    Form deleteForm;
-                    if (!value["Delete"].IsObject() || !deleteForm.InitFromJsonValue(value["Delete"])) return false;
-                    SetDelete(deleteForm);
-                }
-            }
+            Form createOrUpdateForm;
+            Link readLink
+            Form deleteForm;
 
-            return true;
+            if (ParseObject(value, "CreateOrUpdate", false, createOrUpdateForm, parseErrors))
+                SetCreateOrUpdate(createOrUpdateForm);
+
+            if (ParseObject(value, "Read", false, readLink, parseErrors))
+                SetRead(readLink);
+
+            if (ParseObject(value, "Delete", false, deleteForm, parseErrors))
+                SetDelete(deleteForm);
+
+            return !parseErrors;
         }
 
     private:

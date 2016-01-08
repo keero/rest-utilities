@@ -1,7 +1,6 @@
 #ifndef READY4AIR_HYPERMEDIA_FORM_H
 #define READY4AIR_HYPERMEDIA_FORM_H
 
-#include "../../maybe/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "Link.h"
 
@@ -48,30 +47,22 @@ namespace ready4air
             mBody = body;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                Link actionLink;
-                if (!value.HasMember("Action") || !value["Action"].IsObject() || !actionLink.InitFromJsonValue(value["Action"])) return false;
-                SetAction(actionLink);
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Method") || !value["Method"].IsString()) return false;
-                SetMethod(value["Method"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Body"))
-                {
-                    Link bodyLink;
-                    if (!value["Body"].IsObject() || !bodyLink.InitFromJsonValue(value["Action"])) return false;
-                    SetBody(bodyLink);
-                }
-            }
+            Link actionLink;
+            std::string method;
+            Link bodyLink;
 
-            return true;
+            if (ParseObject(value, "Action", true, actionLink, parseErrors))
+                SetAction(actionLink);
+
+            if (ParseString(value, "Method", true, method, parseErrors))
+                SetMethod(method);
+
+            if (ParseObject(value, "Body", false, bodyLink, parseErrors))
+                SetBody(bodyLink);
+
+            return !parseErrors;
         }
 
     private:
