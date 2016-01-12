@@ -88,54 +88,38 @@ namespace ready4air
             mFullName = fullName;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-                SetId(value["Id"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CategoryId") || !value["CategoryId"].IsInt()) return false;
-                SetCategoryId((short) value["CategoryId"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CategoryName") || !value["CategoryName"].IsString()) return false;
-                SetCategoryName(value["CategoryName"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("FirstName"))
-                {
-                    if (!value["FirstName"].IsString()) return false;
-                    SetFirstName(value["FirstName"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("LastName"))
-                {
-                    if (!value["LastName"].IsString()) return false;
-                    SetLastName(value["LastName"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("MiddleName"))
-                {
-                    if (!value["MiddleName"].IsString()) return false;
-                    SetMiddleName(value["MiddleName"].GetString());
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("FullName") || !value["FullName"].IsString()) return false;
-                SetFullName(value["FullName"].GetString());
-            }
+            std::string id;
+            int categoryId;
+            std::string categoryName;
+            std::string firstName;
+            std::string lastName;
+            std::string middleName;
+            std::string fullName;
 
-            return true;
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseInt(value, "CategoryId", true, categoryId, parseErrors))
+                SetCategoryId((short) categoryId);
+
+            if (ParseString(value, "CategoryName", true, categoryName, parseErrors))
+                SetCategoryName(categoryName);
+
+            if (ParseString(value, "FirstName", false, firstName, parseErrors))
+                SetFirstName(firstName);
+
+            if (ParseString(value, "LastName", false, lastName, parseErrors))
+                SetLastName(lastName);
+
+            if (ParseString(value, "MiddleName", false, middleName, parseErrors))
+                SetMiddleName(middleName);
+
+            if (ParseString(value, "FullName", true, fullName, parseErrors))
+                SetFullName(fullName);
+
+            return !parseErrors;
         }
 
     private:

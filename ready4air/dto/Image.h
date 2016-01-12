@@ -28,21 +28,17 @@ namespace ready4air
             mSecureLink = secureLink;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            // Initialize parent properties
-            if (!FileBase::InitFromJsonValue(value)) return false;
+            Link secureLink;
 
-            {
-                // Non-mandatory property
-                if (value.HasMember("SecureLink"))
-                {
-                    Link secureLink;
-                    if (!value["SecureLink"].IsObject() || !secureLink.InitFromJsonValue(value["SecureLink"])) return false;
-                    SetSecureLink(secureLink);
-                }
-            }
-            return true;
+            // Initialize parent properties
+            FileBase::InitFromJsonValue(value, parseErrors);
+
+            if (ParseObject(value, "SecureLink", false, secureLink, parseErrors))
+                SetSecureLink(secureLink);
+
+            return !parseErrors;
         }
 
     private:

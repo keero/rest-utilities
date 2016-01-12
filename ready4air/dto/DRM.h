@@ -68,36 +68,30 @@ namespace ready4air
             mContentId = contentId;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                Link cookie;
-                if (!value.HasMember("Cookie") || !value["Cookie"].IsObject() || !cookie.InitFromJsonValue(value["Cookie"])) return false;
-                SetCookie(cookie);
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CustomData") || !value["CustomData"].IsString()) return false;
-                SetCustomData(value["CustomData"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CustomerToken") || !value["CustomerToken"].IsString()) return false;
-                SetCustomerToken(value["CustomerToken"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("DeviceToken") || !value["DeviceToken"].IsString()) return false;
-                SetDeviceToken(value["DeviceToken"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ContentId") || !value["ContentId"].IsString()) return false;
-                SetContentId(value["ContentId"].GetString());
-            }
+            Link cookie;
+            std::string customData;
+            std::string customerToken;
+            std::string deviceToken;
+            std::string contentId;
 
-            return true;
+            if (ParseObject(value, "Cookie", true, cookie, parseErrors))
+                SetCookie(cookie);
+
+            if (ParseString(value, "CustomData", true, customData, parseErrors))
+                SetCustomData(customData);
+
+            if (ParseString(value, "CustomerToken", true, customerToken, parseErrors))
+                SetCustomerToken(customerToken);
+
+            if (ParseString(value, "DeviceToken", true, deviceToken, parseErrors))
+                SetDeviceToken(deviceToken);
+
+            if (ParseString(value, "ContentId", true, contentId, parseErrors))
+                SetContentId(contentId);
+
+            return !parseErrors;
         }
 
     private:

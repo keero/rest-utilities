@@ -81,94 +81,74 @@ namespace ready4air
             mThumbnails = thumbnails;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            std::vector<Manifest> smooth;
+            std::vector<Manifest> dash;
+            std::vector<Manifest> hls;
+            std::vector<PlaySubtitle> subtitles;
+            std::vector<File> progressive;
+            Link thumbnails;
+
+            if (VerifyArray(value, "Smooth", false, parseErrors))
             {
-                // Non-mandatory property
-                if (value.HasMember("Smooth"))
+                for (rapidjson::SizeType i = 0; i < value["Smooth"].Size(); i += 1)
                 {
-                    if (!value["Smooth"].IsArray()) return false;
-                    std::vector<Manifest> manifests;
-                    for (rapidjson::SizeType i = 0; i < value["Smooth"].Size(); i += 1)
-                    {
-                        Manifest manifest;
-                        if (!value["Smooth"][i].IsObject() || !manifest.InitFromJsonValue(value["Smooth"][i])) return false;
-                        manifests.push_back(manifest);
-                    }
-                    SetSmooth(manifests);
+                    Manifest manifest;
+                    if (ParseObject(value["Smooth"][i], "", false, manifest, parseErrors))
+                        smooth.push_back(manifest);
                 }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Dash"))
-                {
-                    if (!value["Dash"].IsArray()) return false;
-                    std::vector<Manifest> manifests;
-                    for (rapidjson::SizeType i = 0; i < value["Dash"].Size(); i += 1)
-                    {
-                        Manifest manifest;
-                        if (!value["Dash"][i].IsObject() || !manifest.InitFromJsonValue(value["Dash"][i])) return false;
-                        manifests.push_back(manifest);
-                    }
-                    SetDash(manifests);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Hls"))
-                {
-                    if (!value["Hls"].IsArray()) return false;
-                    std::vector<Manifest> manifests;
-                    for (rapidjson::SizeType i = 0; i < value["Hls"].Size(); i += 1)
-                    {
-                        Manifest manifest;
-                        if (!value["Hls"][i].IsObject() || !manifest.InitFromJsonValue(value["Hls"][i])) return false;
-                        manifests.push_back(manifest);
-                    }
-                    SetHls(manifests);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Subtitles"))
-                {
-                    if (!value["Subtitles"].IsArray()) return false;
-                    std::vector<PlaySubtitle> subtitles;
-                    for (rapidjson::SizeType i = 0; i < value["Subtitles"].Size(); i += 1)
-                    {
-                        PlaySubtitle playSubtitle;
-                        if (!value["Subtitles"][i].IsObject() || !playSubtitle.InitFromJsonValue(value["Subtitles"][i])) return false;
-                        subtitles.push_back(playSubtitle);
-                    }
-                    SetSubtitles(subtitles);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Progressive"))
-                {
-                    if (!value["Progressive"].IsArray()) return false;
-                    std::vector<File> progressives;
-                    for (rapidjson::SizeType i = 0; i < value["Progressive"].Size(); i += 1)
-                    {
-                        File progressive;
-                        if (!value["Progressive"][i].IsObject() || !progressive.InitFromJsonValue(value["Progressive"][i])) return false;
-                        progressives.push_back(progressive);
-                    }
-                    SetProgressive(progressives);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Thumbnails"))
-                {
-                    Link thumbnails;
-                    if (!value["Thumbnails"].IsObject() || !thumbnails.InitFromJsonValue(value["Thumbnails"])) return false;
-                    SetThumbnails(thumbnails);
-                }
+                SetSmooth(smooth);
             }
 
-            return true;
+            if (VerifyArray(value, "Dash", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Dash"].Size(); i += 1)
+                {
+                    Manifest manifest;
+                    if (ParseObject(value["Dash"][i], "", false, manifest, parseErrors))
+                        dash.push_back(manifest);
+                }
+                SetDash(dash);
+            }
+
+            if (VerifyArray(value, "Hls", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Hls"].Size(); i += 1)
+                {
+                    Manifest manifest;
+                    if (ParseObject(value["Hls"][i], "", false, manifest, parseErrors))
+                        hls.push_back(manifest);
+                }
+                SetHls(hls);
+            }
+
+            if (VerifyArray(value, "Subtitles", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Subtitles"].Size(); i += 1)
+                {
+                    PlaySubtitle playSubtitle;
+                    if (ParseObject(value["Subtitles"][i], "", false, playSubtitle, parseErrors))
+                        subtitles.push_back(playSubtitle);
+                }
+                SetSubtitles(subtitles);
+            }
+
+            if (VerifyArray(value, "Progressive", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Progressive"].Size(); i += 1)
+                {
+                    File file;
+                    if (ParseObject(value["Progressive"][i], "", false, file, parseErrors))
+                        progressive.push_back(file);
+                }
+                SetProgressive(progressive);
+            }
+
+            if (ParseObject(value, "Thumbnails", false, thumbnails, parseErrors))
+                SetThumbnails(thumbnails);
+
+            return !parseErrors;
         }
 
     private:

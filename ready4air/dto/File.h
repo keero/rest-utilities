@@ -79,45 +79,34 @@ namespace ready4air
             mProtectionData = protectionData;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("FileTypeId") || !value["FileTypeId"].IsInt()) return false;
-                SetFileTypeId(value["FileTypeId"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("FileTypeName") || !value["FileTypeName"].IsString()) return false;
-                SetFileTypeName(value["FileTypeName"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Language") || !value["Language"].IsString()) return false;
-                SetLanguage(value["Language"].GetString());
-            }
-            {
-                // Mandatory property
-                Link link;
-                if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                SetLink(link);
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Bitrate") || !value["Bitrate"].IsInt()) return false;
-                SetBitrate(value["Bitrate"].GetInt());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ProtectionData"))
-                {
-                    ProtectionData protectionData;
-                    if (!value["ProtectionData"].IsObject() || !protectionData.InitFromJsonValue(value["ProtectionData"])) return false;
-                    SetProtectionData(protectionData);
-                }
-            }
+            int fileTypeId;
+            std::string fileTypeName;
+            std::string language;
+            Link link;
+            int bitrate;
+            ProtectionData protectionData;
 
-            return true;
+            if (ParseInt(value, "FileTypeId", true, fileTypeId, parseErrors))
+                SetFileTypeId(fileTypeId);
+
+            if (ParseString(value, "FileTypeName", true, fileTypeName, parseErrors))
+                SetFileTypeName(fileTypeName);
+
+            if (ParseString(value, "Language", true, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseObject(value, "Link", true, link, parseErrors))
+                SetLink(link);
+
+            if (ParseInt(value, "Bitrate", true, bitrate, parseErrors))
+                SetBitrate(bitrate);
+
+            if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors))
+                SetProtectionData(protectionData);
+
+            return !parseErrors;
         }
 
     private:

@@ -49,31 +49,22 @@ namespace ready4air
             mAll = all;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Non-mandatory property
-                if (value.HasMember("Now"))
-                {
-                    Event now;
-                    if (!value["Now"].IsObject() || !now.InitFromJsonValue(value["Now"])) return false;
-                    SetNow(now);
-                }
-            }
-            {
-                // Mandatory property
-                Event next;
-                if (!value.HasMember("Next") || !value["Next"].IsObject() || !next.InitFromJsonValue(value["Next"])) return false;
-                SetNext(next);
-            }
-            {
-                // Mandatory property
-                Link all;
-                if (!value.HasMember("All") || !value["All"].IsObject() || !all.InitFromJsonValue(value["All"])) return false;
-                SetAll(all);
-            }
+            Event now;
+            Event next;
+            Link all;
 
-            return true;
+            if (ParseObject(value, "Now", false, now, parseErrors))
+                SetNow(now);
+
+            if (ParseObject(value, "Next", true, next, parseErrors))
+                SetNext(next);
+
+            if (ParseObject(value, "All", true, all, parseErrors))
+                SetAll(all);
+
+            return !parseErrors;
         }
 
     private:

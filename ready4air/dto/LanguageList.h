@@ -58,31 +58,26 @@ namespace ready4air
             mIsGenre = isGenre;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                Language language;
-                if (!value.HasMember("Language") || !value["Language"].IsObject() || !language.InitFromJsonValue(value["Language"])) return false;
-                SetLanguage(language);
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Name") || !value["Name"].IsString()) return false;
-                SetName(value["Name"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Description") || !value["Description"].IsString()) return false;
-                SetDescription(value["Description"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("IsGenre") || !value["IsGenre"].IsBool()) return false;
-                SetIsGenre(value["IsGenre"].GetBool());
-            }
+            Language language;
+            std::string name;
+            std::string description;
+            bool isGenre;
 
-            return true;
+            if (ParseObject(value, "Language", true, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseString(value, "Name", true, name, parseErrors))
+                SetName(name);
+
+            if (ParseString(value, "Description", true, description, parseErrors))
+                SetDescription(description);
+
+            if (ParseBool(value, "IsGenre", true, isGenre, parseErrors))
+                SetIsGenre(isGenre);
+
+            return !parseErrors;
         }
 
     private:

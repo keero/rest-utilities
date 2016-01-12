@@ -15,6 +15,7 @@
 #include "PurchaseItem.h"
 #include "Reviews.h"
 #include "Genre.h"
+#include "Product.h"
 
 namespace ready4air
 {
@@ -416,9 +417,268 @@ namespace ready4air
             mGenres = genres;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        const Maybe<std::vector<Product> > &GetProducts() const
         {
-            return false;
+            return mProducts;
+        }
+
+        void SetProducts(const std::vector<Product> &products)
+        {
+            mProducts = products;
+        }
+
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+        {
+            int productId;
+            std::string titleId;
+            Link titleLink;
+            Link similar;
+            int mediaId;
+            std::string externalId;
+            std::string originalTitle;
+            bool adult;
+            int year;
+            std::string productionCountry;
+            int length;
+            std::string localTitle;
+            std::string shortTitle;
+            std::string longSummary;
+            std::string shortSummary;
+            std::string sortTitle;
+            std::string mainGenre;
+            int ageLimit;
+            bool hd;
+            bool dubbed;
+            std::string publishDate;
+            std::string unPublishDate;
+            std::string modified;
+            std::vector<std::string> ageGroups;
+            std::vector<Entitlement> entitlements;
+            std::vector<Cast> casts;
+            std::vector<Image> images;
+            std::vector<WmvFile> wmvFiles;
+            std::vector<SmoothManifest> smoothManifests;
+            std::vector<Mp4File> mp4Files;
+            std::vector<HlsManifest> hlsManifests;
+            std::vector<Subtitle> subtitles;
+            Link self;
+            Link fullPlay;
+            std::vector<PurchaseItem> purchaseItems;
+            Reviews reviews;
+            std::vector<Genre> genres;
+            std::vector<Product> products;
+
+            if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                SetProductId(productId);
+
+            if (ParseString(value, "TitleId", false, titleId, parseErrors))
+                SetTitleId(titleId);
+
+            if (ParseObject(value, "TitleLink", false, titleLink, parseErrors))
+                SetTitleLink(titleLink);
+
+            if (ParseObject(value, "Similar", false, similar, parseErrors))
+                SetSimilar(similar);
+
+            if (ParseInt(value, "MediaId", true, mediaId, parseErrors))
+                SetMediaId(mediaId);
+
+            if (ParseString(value, "ExternalId", false, externalId, parseErrors))
+                SetExternalId(externalId);
+
+            if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                SetOriginalTitle(originalTitle);
+
+            if (ParseBool(value, "Adult", true, adult, parseErrors))
+                SetAdult(adult);
+
+            if (ParseInt(value, "Year", true, year, parseErrors))
+                SetYear(year);
+
+            if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors))
+                SetProductionCountry(productionCountry);
+
+            if (ParseInt(value, "Length", false, length, parseErrors))
+                SetLength(length);
+
+            if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                SetLocalTitle(localTitle);
+
+            if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                SetShortTitle(shortTitle);
+
+            if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                SetLongSummary(longSummary);
+
+            if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                SetShortSummary(shortSummary);
+
+            if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                SetSortTitle(sortTitle);
+
+            if (ParseString(value, "MainGenre", false, mainGenre, parseErrors))
+                SetMainGenre(mainGenre);
+
+            if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                SetAgeLimit(ageLimit);
+
+            if (ParseBool(value, "HD", false, hd, parseErrors))
+                SetHD(hd);
+
+            if (ParseBool(value, "Dubbed", false, dubbed, parseErrors))
+                SetDubbed(dubbed);
+
+            if (ParseString(value, "PublishDate", false, publishDate, parseErrors))
+                SetPublishDate(publishDate);
+
+            if (ParseString(value, "UnPublishDate", false, unPublishDate, parseErrors))
+                SetUnPublishDate(unPublishDate);
+
+            if (ParseString(value, "Modified", false, modified, parseErrors))
+                SetModified(modified);
+
+            if (VerifyArray(value, "AgeGroups", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["AgeGroups"].Size(); i += 1)
+                {
+                    std::string ageGroup;
+                    if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors))
+                        ageGroups.push_back(ageGroup);
+                }
+                SetAgeGroups(ageGroups);
+            }
+
+            if (VerifyArray(value, "Entitlements", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Entitlements"].Size(); i += 1)
+                {
+                    Entitlement entitlement;
+                    if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors))
+                        entitlements.push_back(entitlement);
+                }
+                SetEntitlements(entitlements);
+            }
+
+            if (VerifyArray(value, "Casts", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Casts"].Size(); i += 1)
+                {
+                    Cast cast;
+                    if (ParseObject(value["Casts"][i], "", false, cast, parseErrors))
+                        casts.push_back(cast);
+                }
+                SetCasts(casts);
+            }
+
+            if (VerifyArray(value, "Images", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                {
+                    Image image;
+                    if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        images.push_back(image);
+                }
+                SetImages(images);
+            }
+
+            if (VerifyArray(value, "WmvFiles", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
+                {
+                    WmvFile wmvFile;
+                    if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors))
+                        wmvFiles.push_back(wmvFile);
+                }
+                SetWmvFiles(wmvFiles);
+            }
+
+            if (VerifyArray(value, "SmoothManifests", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
+                {
+                    SmoothManifest smoothManifest;
+                    if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors))
+                        smoothManifests.push_back(smoothManifest);
+                }
+                SetSmoothManifests(smoothManifests);
+            }
+
+            if (VerifyArray(value, "Mp4Files", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Mp4Files"].Size(); i += 1)
+                {
+                    Mp4File mp4File;
+                    if (ParseObject(value["Mp4Files"][i], "", false, mp4File, parseErrors))
+                        mp4Files.push_back(mp4File);
+                }
+                SetMp4Files(mp4Files);
+            }
+
+            if (VerifyArray(value, "HlsManifests", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["HlsManifests"].Size(); i += 1)
+                {
+                    HlsManifest hlsManifest;
+                    if (ParseObject(value["HlsManifests"][i], "", false, hlsManifest, parseErrors))
+                        hlsManifests.push_back(hlsManifest);
+                }
+                SetHlsManifests(hlsManifests);
+            }
+
+            if (VerifyArray(value, "Subtitles", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Subtitles"].Size(); i += 1)
+                {
+                    Subtitle subtitle;
+                    if (ParseObject(value["Subtitles"][i], "", false, subtitle, parseErrors))
+                        subtitles.push_back(subtitle);
+                }
+                SetSubtitles(subtitles);
+            }
+
+            if (ParseObject(value, "Self", false, self, parseErrors))
+                SetSelf(self);
+
+            if (ParseObject(value, "FullPlay", false, fullPlay, parseErrors))
+                SetFullPlay(fullPlay);
+
+            if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
+                {
+                    PurchaseItem purchaseItem;
+                    if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        purchaseItems.push_back(purchaseItem);
+                }
+                SetPurchaseItems(purchaseItems);
+            }
+
+            if (ParseObject(value, "Reviews", false, reviews, parseErrors))
+                SetReviews(reviews);
+
+            if (VerifyArray(value, "Genres", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Genres"].Size(); i += 1)
+                {
+                    Genre genre;
+                    if (ParseObject(value["Genres"][i], "", false, genre, parseErrors))
+                        genres.push_back(genre);
+                }
+                SetGenres(genres);
+            }
+
+            if (VerifyArray(value, "Products", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Products"].Size(); i += 1)
+                {
+                    Product product;
+                    if (ParseObject(value["Products"][i], "", false, product, parseErrors))
+                        products.push_back(product);
+                }
+                SetProducts(products);
+            }
+
+            return !parseErrors;
         }
 
     private:
@@ -459,6 +719,7 @@ namespace ready4air
         Maybe <std::vector<PurchaseItem> > mPurchaseItems;
         Maybe <Reviews> mReviews;
         Maybe <std::vector<Genre> > mGenres;
+        Maybe <std::vector<Product> > mProducts;
 
     protected:
         Maybe <ProductType> mProductType;

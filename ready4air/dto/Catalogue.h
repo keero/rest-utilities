@@ -49,28 +49,22 @@ namespace ready4air
             mAllBundles = allBundles;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                Link allMovies;
-                if (!value.HasMember("AllMovies") || !value["AllMovies"].IsObject() || !allMovies.InitFromJsonValue(value["AllMovies"])) return false;
-                SetAllMovies(allMovies);
-            }
-            {
-                // Mandatory property
-                Link allSeries;
-                if (!value.HasMember("AllSeries") || !value["AllSeries"].IsObject() || !allSeries.InitFromJsonValue(value["AllSeries"])) return false;
-                SetAllSeries(allSeries);
-            }
-            {
-                // Mandatory property
-                Link allBundles;
-                if (!value.HasMember("AllBundles") || !value["AllBundles"].IsObject() || !allBundles.InitFromJsonValue(value["AllBundles"])) return false;
-                SetAllBundles(allBundles);
-            }
+            Link allMovies;
+            Link allSeries;
+            Link allBundles;
 
-            return true;
+            if (ParseObject(value, "AllMovies", true, allMovies, parseErrors))
+                SetAllMovies(allMovies);
+
+            if (ParseObject(value, "AllSeries", true, allSeries, parseErrors))
+                SetAllSeries(allSeries);
+
+            if (ParseObject(value, "AllBundles", true, allBundles, parseErrors))
+                SetAllBundles(allBundles);
+
+            return !parseErrors;
         }
 
     private:

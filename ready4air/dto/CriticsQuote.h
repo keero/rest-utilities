@@ -69,52 +69,30 @@ namespace ready4air
             mImages = images;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Non-mandatory property
-                if (value.HasMember("Text"))
-                {
-                    if (!value["Text"].IsString()) return false;
-                    SetText(value["Text"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Source"))
-                {
-                    if (!value["Source"].IsString()) return false;
-                    SetSource(value["Source"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Score"))
-                {
-                    if (!value["Score"].IsString()) return false;
-                    SetScore(value["Score"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Link"))
-                {
-                    Link link;
-                    if (!value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                    SetLink(link);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Images"))
-                {
-                    QuoteImages images;
-                    if (!value["Images"].IsObject() || !images.InitFromJsonValue(value["Images"])) return false;
-                    SetImages(images);
-                }
-            }
+            std::string text;
+            std::string source;
+            std::string score;
+            Link link;
+            QuoteImages images;
 
-            return true;
+            if (ParseString(value, "Text", false, text, parseErrors))
+                SetText(text);
+
+            if (ParseString(value, "Source", false, source, parseErrors))
+                SetSource(source);
+
+            if (ParseString(value, "Score", false, score, parseErrors))
+                SetScore(score);
+
+            if (ParseObject(value, "Link", false, link, parseErrors))
+                SetLink(link);
+
+            if (ParseObject(value, "Images", false, images, parseErrors))
+                SetImages(images);
+
+            return !parseErrors;
         }
 
     private:

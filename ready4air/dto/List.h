@@ -121,103 +121,82 @@ namespace ready4air
             mItems = items;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            int listId;
+            int listType;
+            std::string name;
+            bool isGenre;
+            std::string description;
+            std::vector<Image> images;
+            std::map<std::string, std::string> custom;
+            std::vector<LanguageList> languageLists;
+            std::vector<ListMedia> listMedias;
+            Link items;
+
+            if (ParseInt(value, "ListId", true, listId, parseErrors))
+                SetListId(listId);
+
+            if (ParseInt(value, "ListType", true, listType, parseErrors))
+                SetListType(listType);
+
+            if (ParseString(value, "Name", true, name, parseErrors))
+                SetName(name);
+
+            if (ParseBool(value, "IsGenre", true, isGenre, parseErrors))
+                SetIsGenre(isGenre);
+
+            if (ParseString(value, "Description", false, description, parseErrors))
+                SetDescription(description);
+
+            if (VerifyArray(value, "Images", false, parseErrors))
             {
-                // Mandatory property
-                if (!value.HasMember("ListId") || !value["ListId"].IsInt()) return false;
-                SetListId(value["ListId"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ListType") || !value["ListType"].IsInt()) return false;
-                SetListType(value["ListType"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Name") || !value["Name"].IsString()) return false;
-                SetName(value["Name"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("IsGenre") || !value["IsGenre"].IsBool()) return false;
-                SetIsGenre(value["IsGenre"].GetBool());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Description"))
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                 {
-                    if (!value["Description"].IsString()) return false;
-                    SetDescription(value["Description"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Images"))
-                {
-                    if (!value["Images"].IsArray()) return false;
-                    std::vector<Image> images;
-                    for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
-                    {
-                        Image image;
-                        if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i])) return false;
+                    Image image;
+                    if (ParseObject(value["Images"][i], "", false, image, parseErrors))
                         images.push_back(image);
-                    }
-                    SetImages(images);
                 }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Custom"))
-                {
-                    if (!value["Custom"].IsObject()) return false;
-                    std::map<std::string, std::string> custom;
-                    for (rapidjson::Value::ConstMemberIterator itr = value.MemberBegin(); itr != value.MemberEnd(); ++itr)
-                    {
-                        if (itr->value.GetType() != rapidjson::kStringType) return false;
-                        custom[itr->name.GetString()] = itr->value.GetString();
-                    }
-                    SetCustom(custom);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("LanguageLists"))
-                {
-                    if (!value["LanguageLists"].IsArray()) return false;
-                    std::vector<LanguageList> languageLists;
-                    for (rapidjson::SizeType i = 0; i < value["LanguageLists"].Size(); i += 1)
-                    {
-                        LanguageList languageList;
-                        if (!value["LanguageLists"][i].IsObject() || !languageList.InitFromJsonValue(value["LanguageLists"][i])) return false;
-                        languageLists.push_back(languageList);
-                    }
-                    SetLanguageLists(languageLists);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ListMedias"))
-                {
-                    if (!value["ListMedias"].IsArray()) return false;
-                    std::vector<ListMedia> listMedias;
-                    for (rapidjson::SizeType i = 0; i < value["ListMedias"].Size(); i += 1)
-                    {
-                        ListMedia listMedia;
-                        if (!value["ListMedias"][i].IsObject() || !listMedia.InitFromJsonValue(value["ListMedias"][i])) return false;
-                        listMedias.push_back(listMedia);
-                    }
-                    SetListMedias(listMedias);
-                }
-            }
-            {
-                // Mandatory property
-                Link items;
-                if (!value.HasMember("Items") || !value["Items"].IsObject() || !items.InitFromJsonValue(value["Items"])) return false;
-                SetItems(items);
+                SetImages(images);
             }
 
-            return true;
+            if (VerifyObject(value, "Custom", false, parseErrors))
+            {
+                for (rapidjson::Value::ConstMemberIterator itr = value["Custom"].MemberBegin(); itr != value["Custom"].MemberEnd(); ++itr)
+                {
+                    std::string customValue;
+                    if (ParseString(itr->value, "", false, customValue, parseErrors))
+                        custom[itr->name.GetString()] = customValue;
+                }
+                SetCustom(custom);
+            }
+
+            if (VerifyArray(value, "LanguageLists", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["LanguageLists"].Size(); i += 1)
+                {
+                    LanguageList languageList;
+                    if (ParseObject(value["LanguageLists"][i], "", false, languageList, parseErrors))
+                        languageLists.push_back(languageList);
+                }
+                SetLanguageLists(languageLists);
+            }
+
+            if (VerifyArray(value, "ListMedias", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["ListMedias"].Size(); i += 1)
+                {
+                    ListMedia listMedia;
+                    if (ParseObject(value["ListMedias"][i], "", false, listMedia, parseErrors))
+                        listMedias.push_back(listMedia);
+                }
+                SetListMedias(listMedias);
+            }
+
+            if (ParseObject(value, "Items", true, items, parseErrors))
+                SetItems(items);
+
+            return !parseErrors;
         }
 
     private:

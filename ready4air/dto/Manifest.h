@@ -39,25 +39,18 @@ namespace ready4air
             mProtectionData = protectionData;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                Link link;
-                if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                SetLink(link);
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ProtectionData"))
-                {
-                    ProtectionData protectionData;
-                    if (!value["ProtectionData"].IsObject() || !protectionData.InitFromJsonValue(value["ProtectionData"])) return false;
-                    SetProtectionData(protectionData);
-                }
-            }
+            Link link;
+            ProtectionData protectionData;
 
-            return true;
+            if (ParseObject(value, "Link", true, link, parseErrors))
+                SetLink(link);
+
+            if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors))
+                SetProtectionData(protectionData);
+
+            return !parseErrors;
         }
 
     private:

@@ -132,128 +132,88 @@ namespace ready4air
             mSelf = self;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            std::string id;
+            std::string externalId;
+            std::string originalTitle;
+            std::string originalSummary;
+            std::string localTitle;
+            std::string localSummary;
+            std::vector<Image> images;
+            std::vector<Link> mediaProductLinks;
+            std::vector<WmvFile> wmvFiles;
+            std::vector<SmoothManifest> smoothManifests;
+            Link self;
+
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "ExternalId", true, externalId, parseErrors))
+                SetExternalId(externalId);
+
+            if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                SetOriginalTitle(originalTitle);
+
+            if (ParseString(value, "OriginalSummary", false, originalSummary, parseErrors))
+                SetOriginalSummary(originalSummary);
+
+            if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                SetLocalTitle(localTitle);
+
+            if (ParseString(value, "LocalSummary", false, localSummary, parseErrors))
+                SetLocalSummary(localSummary);
+
+            if (VerifyArray(value, "Images", false, parseErrors))
             {
-                // Mandatory property
-                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-                SetId(value["Id"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ExternalId") || !value["ExternalId"].IsString()) return false;
-                SetExternalId(value["ExternalId"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("OriginalTitle"))
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                 {
-                    if (!value["OriginalTitle"].IsString()) return false;
-                    SetOriginalTitle(value["OriginalTitle"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("OriginalSummary"))
-                {
-                    if (!value["OriginalSummary"].IsString()) return false;
-                    SetOriginalSummary(value["OriginalSummary"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("LocalTitle"))
-                {
-                    if (!value["LocalTitle"].IsString()) return false;
-                    SetLocalTitle(value["LocalTitle"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("LocalSummary"))
-                {
-                    if (!value["LocalSummary"].IsString()) return false;
-                    SetLocalSummary(value["LocalSummary"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Images"))
-                {
-                    if (!value["Images"].IsArray()) return false;
-                    std::vector<Image> images;
-                    for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
-                    {
-                        Image image;
-                        if (!value["Images"][i].IsObject() || !image.InitFromJsonValue(value["Images"][i]))
-                            return false;
+                    Image image;
+                    if (ParseObject(value["Images"][i], "", false, image, parseErrors))
                         images.push_back(image);
-                    }
-                    SetImages(images);
                 }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("MediaProductLinks"))
-                {
-                    if (!value["MediaProductLinks"].IsArray()) return false;
-                    std::vector<Link> mediaProductLinks;
-                    for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
-                    {
-                        Link mediaProductLink;
-                        if (!value["MediaProductLinks"][i].IsObject() ||
-                            !mediaProductLink.InitFromJsonValue(value["MediaProductLinks"][i]))
-                            return false;
-                        mediaProductLinks.push_back(mediaProductLink);
-                    }
-                    SetMediaProductLinks(mediaProductLinks);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("WmvFiles"))
-                {
-                    if (!value["WmvFiles"].IsArray()) return false;
-                    std::vector<WmvFile> wmvFiles;
-                    for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
-                    {
-                        WmvFile wmvFile;
-                        if (!value["WmvFiles"][i].IsObject() || !wmvFile.InitFromJsonValue(value["WmvFiles"][i]))
-                            return false;
-                        wmvFiles.push_back(wmvFile);
-                    }
-                    SetWmvFiles(wmvFiles);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("SmoothManifests"))
-                {
-                    if (!value["SmoothManifests"].IsArray()) return false;
-                    std::vector<SmoothManifest> smoothManifests;
-                    for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
-                    {
-                        SmoothManifest smoothManifest;
-                        if (!value["SmoothManifests"][i].IsObject() ||
-                            !smoothManifest.InitFromJsonValue(value["SmoothManifests"][i]))
-                            return false;
-                        smoothManifests.push_back(smoothManifest);
-                    }
-                    SetSmoothManifests(smoothManifests);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Self"))
-                {
-                    Link self;
-                    if (!value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
-                    SetSelf(self);
-                }
+                SetImages(images);
             }
 
-            return true;
+            if (VerifyArray(value, "MediaProductLinks", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
+                {
+                    Link mediaProductLink;
+                    if (ParseObject(value["MediaProductLinks"][i], "", false, mediaProductLink, parseErrors))
+                        mediaProductLinks.push_back(mediaProductLink);
+                }
+                SetMediaProductLinks(mediaProductLinks);
+            }
+
+            if (VerifyArray(value, "WmvFiles", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
+                {
+                    WmvFile wmvFile;
+                    if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors))
+                        wmvFiles.push_back(wmvFile);
+                }
+                SetWmvFiles(wmvFiles);
+            }
+
+            if (VerifyArray(value, "SmoothManifests", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
+                {
+                    SmoothManifest smoothManifest;
+                    if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors))
+                        smoothManifests.push_back(smoothManifest);
+                }
+                SetSmoothManifests(smoothManifests);
+            }
+
+            if (ParseObject(value, "Self", false, self, parseErrors))
+                SetSelf(self);
+
+            return !parseErrors;
         }
+
 
     private:
         Maybe <std::string> mId;

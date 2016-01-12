@@ -87,54 +87,38 @@ namespace ready4air
             mModified = modified;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-                SetId(value["Id"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Value") || !value["Value"].IsString()) return false;
-                SetValue(value["Value"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Created") || !value["Created"].IsString()) return false;
-                SetCreated(value["Created"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ContentId") || !value["ContentId"].IsString()) return false;
-                SetContentId(value["ContentId"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("DeviceId"))
-                {
-                    if (!value["DeviceId"].IsString()) return false;
-                    SetDeviceId(value["DeviceId"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("UserId"))
-                {
-                    if (!value["UserId"].IsString()) return false;
-                    SetUserId(value["UserId"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Modified"))
-                {
-                    if (!value["Modified"].IsString()) return false;
-                    SetModified(value["Modified"].GetString());
-                }
-            }
+            std::string id;
+            std::string val;
+            std::string created;
+            std::string contentId;
+            std::string deviceId;
+            std::string userId;
+            std::string modified;
 
-            return true;
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "Value", true, val, parseErrors))
+                SetValue(val);
+
+            if (ParseString(value, "Created", true, created, parseErrors))
+                SetCreated(created);
+
+            if (ParseString(value, "ContentId", true, contentId, parseErrors))
+                SetContentId(contentId);
+
+            if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                SetDeviceId(deviceId);
+
+            if (ParseString(value, "UserId", false, userId, parseErrors))
+                SetUserId(userId);
+
+            if (ParseString(value, "Modified", false, modified, parseErrors))
+                SetModified(modified);
+
+            return !parseErrors;
         }
 
     private:

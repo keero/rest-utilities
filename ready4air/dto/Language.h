@@ -57,30 +57,26 @@ namespace ready4air
             mEnglishName = englishName;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Code") || !value["Code"].IsString()) return false;
-                SetCode(value["Code"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ISO6391Code") || !value["ISO6391Code"].IsString()) return false;
-                SetISO6391Code(value["ISO6391Code"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ISO6392Code") || !value["ISO6392Code"].IsString()) return false;
-                SetISO6392Code(value["ISO6392Code"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("EnglishName") || !value["EnglishName"].IsString()) return false;
-                SetEnglishName(value["EnglishName"].GetString());
-            }
+            std::string code;
+            std::string iso6391Code;
+            std::string iso6392Code;
+            std::string englishName;
 
-            return true;
+            if (ParseString(value, "Code", true, code, parseErrors))
+                SetCode(code);
+
+            if (ParseString(value, "ISO6391Code", true, iso6391Code, parseErrors))
+                SetISO6391Code(iso6391Code);
+
+            if (ParseString(value, "ISO6392Code", true, iso6392Code, parseErrors))
+                SetISO6392Code(iso6392Code);
+
+            if (ParseString(value, "EnglishName", true, englishName, parseErrors))
+                SetEnglishName(englishName);
+
+            return !parseErrors;
         }
 
     private:

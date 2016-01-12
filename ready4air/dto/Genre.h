@@ -58,37 +58,26 @@ namespace ready4air
             mListId = listId;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Non-mandatory property
-                if (value.HasMember("Name"))
-                {
-                    if (!value["Name"].IsString()) return false;
-                    SetName(value["Name"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Link"))
-                {
-                    Link link;
-                    if (!value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                    SetLink(link);
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("IsMain") || !value["IsMain"].IsBool()) return false;
-                SetIsMain(value["IsMain"].GetBool());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ListId") || !value["ListId"].IsInt()) return false;
-                SetListId(value["ListId"].GetInt());
-            }
+            std::string name;
+            Link link;
+            bool isMain;
+            int listId;
 
-            return true;
+            if (ParseString(value, "Name", false, name, parseErrors))
+                SetName(name);
+
+            if (ParseObject(value, "Link", false, link, parseErrors))
+                SetLink(link);
+
+            if (ParseBool(value, "IsMain", true, isMain, parseErrors))
+                SetIsMain(isMain);
+
+            if (ParseInt(value, "ListId", true, listId, parseErrors))
+                SetListId(listId);
+
+            return !parseErrors;
         }
 
     private:

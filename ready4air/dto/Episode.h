@@ -59,35 +59,29 @@ namespace ready4air
             mSeasonNo = seasonNo;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            int episodeNo;
+            Link serie;
+            Link season;
+            int seasonNo;
+
             // Initialize parent properties
-            if (!MediaProduct::InitFromJsonValue(value)) return false;
+            MediaProduct::InitFromJsonValue(value, parseErrors);
 
-            {
-                // Mandatory property
-                if (!value.HasMember("EpisodeNo") || !value["EpisodeNo"].IsInt()) return false;
-                SetEpisodeNo(value["EpisodeNo"].GetInt());
-            }
-            {
-                // Mandatory property
-                Link serie;
-                if (!value.HasMember("Serie") || !value["Serie"].IsObject() || !serie.InitFromJsonValue(value["Serie"])) return false;
+            if (ParseInt(value, "EpisodeNo", true, episodeNo, parseErrors))
+                SetEpisodeNo(episodeNo);
+
+            if (ParseObject(value, "Serie", true, serie, parseErrors))
                 SetSerie(serie);
-            }
-            {
-                // Mandatory property
-                Link season;
-                if (!value.HasMember("Season") || !value["Season"].IsObject() || !season.InitFromJsonValue(value["Season"])) return false;
-                SetSeason(season);
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("SeasonNo") || !value["SeasonNo"].IsInt()) return false;
-                SetSeasonNo(value["SeasonNo"].GetInt());
-            }
 
-            return true;
+            if (ParseObject(value, "Season", true, season, parseErrors))
+                SetSeason(season);
+
+            if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors))
+                SetSeasonNo(seasonNo);
+
+            return !parseErrors;
         }
 
     private:

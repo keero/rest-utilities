@@ -57,30 +57,26 @@ namespace ready4air
             mContent = content;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Id") || !value["Id"].IsString()) return false;
-                SetId(value["Id"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Name") || !value["Name"].IsString()) return false;
-                SetName(value["Name"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Language") || !value["Language"].IsString()) return false;
-                SetLanguage(value["Language"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Content") || !value["Content"].IsString()) return false;
-                SetContent(value["Content"].GetString());
-            }
+            std::string id;
+            std::string name;
+            std::string language;
+            std::string content;
 
-            return true;
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "Name", true, name, parseErrors))
+                SetName(name);
+
+            if (ParseString(value, "Language", true, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseString(value, "Content", true, content, parseErrors))
+                SetContent(content);
+
+            return !parseErrors;
         }
 
     private:

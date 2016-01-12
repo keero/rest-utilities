@@ -58,31 +58,26 @@ namespace ready4air
             mSelf = self;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Key") || !value["Key"].IsString()) return false;
-                SetKey(value["Key"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Value") || !value["Value"].IsString()) return false;
-                SetValue(value["Value"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Language") || !value["Language"].IsString()) return false;
-                SetLanguage(value["Language"].GetString());
-            }
-            {
-                // Mandatory property
-                Link self;
-                if (!value.HasMember("Self") || !value["Self"].IsObject() || !self.InitFromJsonValue(value["Self"])) return false;
-                SetSelf(self);
-            }
+            std::string key;
+            std::string val;
+            std::string language;
+            Link self;
 
-            return true;
+            if (ParseString(value, "Key", true, key, parseErrors))
+                SetKey(key);
+
+            if (ParseString(value, "Value", true, val, parseErrors))
+                SetValue(val);
+
+            if (ParseString(value, "Language", true, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseObject(value, "Self", true, self, parseErrors))
+                SetSelf(self);
+
+            return !parseErrors;
         }
 
     private:

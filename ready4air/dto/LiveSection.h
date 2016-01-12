@@ -49,36 +49,30 @@ namespace ready4air
             mAll = all;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            std::string title;
+            std::vector<Channel> channels;
+            Link all;
+
+            if (ParseString(value, "Title", true, title, parseErrors))
+                SetTitle(title);
+
+            if (VerifyArray(value, "Channels", true, parseErrors))
             {
-                // Mandatory property
-                if (!value.HasMember("Title") || !value["Title"].IsString()) return false;
-                SetTitle(value["Title"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Channels") || !value["Channels"].IsArray()) return false;
-                std::vector<Channel> channels;
                 for (rapidjson::SizeType i = 0; i < value["Channels"].Size(); i += 1)
                 {
                     Channel channel;
-                    if (!value["Channels"][i].IsObject() || !channel.InitFromJsonValue(value["Channels"][i])) return false;
-                    channels.push_back(channel);
+                    if (ParseObject(value["Channels"][i], "", false, channel, parseErrors))
+                        channels.push_back(channel);
                 }
                 SetChannels(channels);
             }
-            {
-                // Non-mandatory property
-                if (value.HasMember("All"))
-                {
-                    Link all;
-                    if (!value["All"].IsObject() || !all.InitFromJsonValue(value["All"])) return false;
-                    SetAll(all);
-                }
-            }
 
-            return true;
+            if (ParseObject(value, "All", false, all, parseErrors))
+                SetAll(all);
+
+            return !parseErrors;
         }
 
     private:

@@ -74,56 +74,37 @@ namespace ready4air
             mMmsLink = mmsLink;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            std::string language;
+            int bandwidth;
+            int manifestTypeId;
+            std::string manifestTypeName;
+            int location;
+            Link mmsLink;
+
             // Initialize parent properties
-            if (!FileBase::InitFromJsonValue(value)) return false;
+            FileBase::InitFromJsonValue(value, parseErrors));
 
-            {
-                // Non-mandatory property
-                if (value.HasMember("Language"))
-                {
-                    if (!value["Language"].IsString()) return false;
-                    SetLanguage(value["Language"].GetString());
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Bandwidth") || !value["Bandwidth"].IsInt()) return false;
-                SetBandwidth((short) value["Bandwidth"].GetInt());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ManifestTypeId"))
-                {
-                    if (!value["ManifestTypeId"].IsInt()) return false;
-                    SetManifestTypeId(value["ManifestTypeId"].GetInt());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ManifestTypeName"))
-                {
-                    if (!value["ManifestTypeName"].IsString()) return false;
-                    SetManifestTypeName(value["ManifestTypeName"].GetString());
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Location") || !value["Location"].IsInt()) return false;
-                SetLocation(value["Location"].GetInt());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("MmsLink"))
-                {
-                    Link mmsLink;
-                    if (!value["MmsLink"].IsObject() || !mmsLink.InitFromJsonValue(value["MmsLink"])) return false;
-                    SetMmsLink(mmsLink);
-                }
-            }
+            if (ParseString(value, "Language", false, language, parseErrors))
+                SetLanguage(language);
 
-            return true;
+            if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
+                SetBandwidth((short) bandwidth);
+
+            if (ParseInt(value, "ManifestTypeId", false, manifestTypeId, parseErrors))
+                SetManifestTypeId(manifestTypeId);
+
+            if (ParseString(value, "ManifestTypeName", false, manifestTypeName, parseErrors))
+                SetManifestTypeName(manifestTypeName);
+
+            if (ParseInt(value, "Location", true, location, parseErrors))
+                SetLocation(location);
+
+            if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors))
+                SetMmsLink(mmsLink);
+
+            return !parseErrors;
         }
 
     private:

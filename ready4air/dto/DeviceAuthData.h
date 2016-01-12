@@ -87,60 +87,38 @@ namespace ready4air
             mIpAddress = ipAddress;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("DeviceVersion") || !value["DeviceVersion"].IsInt()) return false;
-                SetDeviceVersion(value["DeviceVersion"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Country") || !value["Country"].IsString()) return false;
-                SetCountry(value["Country"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Language"))
-                {
-                    if (!value["Language"].IsString()) return false;
-                    SetLanguage(value["Language"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("DeviceId"))
-                {
-                    if (!value["DeviceId"].IsString()) return false;
-                    SetDeviceId(value["DeviceId"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Token"))
-                {
-                    if (!value["Token"].IsString()) return false;
-                    SetToken(value["Token"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ExpirationDateTime"))
-                {
-                    if (!value["ExpirationDateTime"].IsString()) return false;
-                    SetExpirationDateTime(value["ExpirationDateTime"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("IpAddress"))
-                {
-                    if (!value["IpAddress"].IsString()) return false;
-                    SetIpAddress(value["IpAddress"].GetString());
-                }
-            }
+            int deviceVersion;
+            std::string country;
+            std::string language;
+            std::string deviceId;
+            std::string token;
+            std::string expirationDateTime;
+            std::string ipAddress;
 
-            return true;
+            if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
+                SetDeviceVersion(deviceVersion);
+
+            if (ParseString(value, "Country", true, country, parseErrors))
+                SetCountry(country);
+
+            if (ParseString(value, "Language", false, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                SetDeviceId(deviceId);
+
+            if (ParseString(value, "Token", false, token, parseErrors))
+                SetToken(token);
+
+            if (ParseString(value, "ExpirationDateTime", false, expirationDateTime, parseErrors))
+                SetExpirationDateTime(expirationDateTime);
+
+            if (ParseString(value, "IpAddress", false, ipAddress, parseErrors))
+                SetIpAddress(ipAddress);
+
+            return !parseErrors;
         }
 
     private:

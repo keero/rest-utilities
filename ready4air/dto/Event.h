@@ -48,26 +48,22 @@ namespace ready4air
             mMedia = media;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Start") || !value["Start"].IsString()) return false;
-                SetStart(value["Start"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("End") || !value["End"].IsString()) return false;
-                SetEnd(value["End"].GetString());
-            }
-            {
-                // Mandatory property
-                MediaProduct media;
-                if (!value.HasMember("Media") || !value["Media"].IsObject() || !media.InitFromJsonValue(value["Media"])) return false;
-                SetMedia(media);
-            }
+            std::string start;
+            std::string end;
+            MediaProduct media;
 
-            return true;
+            if (ParseString(value, "Start", true, start, parseErrors))
+                SetStart(start);
+
+            if (ParseString(value, "End", true, end, parseErrors))
+                SetEnd(end);
+
+            if (ParseObject(value, "Media", true, media, parseErrors))
+                SetMedia(media);
+
+            return !parseErrors;
         }
 
     private:

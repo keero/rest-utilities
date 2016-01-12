@@ -37,20 +37,18 @@ namespace ready4air
             mMessage = message;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Title") || !value["Title"].IsString()) return false;
-                SetTitle(value["Title"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Message") || !value["Message"].IsString()) return false;
-                SetMessage(value["Message"].GetString());
-            }
+            std::string title;
+            std::string message;
 
-            return true;
+            if (ParseString(value, "Title", true, title, parseErrors))
+                SetTitle(title);
+
+            if (ParseString(value, "Message", true, message, parseErrors))
+                SetMessage(message);
+
+            return !parseErrors;
         }
 
     private:

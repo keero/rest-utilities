@@ -60,40 +60,30 @@ namespace ready4air
             mItems = items;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
+            Link prev;
+            Link next;
+            std::vector<T> items;
+
+            if (ParseObject(value, "Prev", false, prev, parseErrors))
+                SetPrev(prev);
+
+            if (ParseObject(value, "Next", false, next, parseErrors))
+                SetNext(next);
+
+            if (VerifyArray(value, "Items", true, parseErrors))
             {
-                // Non-mandatory property
-                if (value.HasMember("Prev"))
-                {
-                    Link prev;
-                    if (!value["Prev"].IsObject() || !prev.InitFromJsonValue(value["Prev"])) return false;
-                    SetPrev(prev);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Next"))
-                {
-                    Link next;
-                    if (!value["Next"].IsObject() || !next.InitFromJsonValue(value["Next"])) return false;
-                    SetNext(next);
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Items") || !value["Items"].IsArray()) return false;
-                std::vector<T> items;
                 for (rapidjson::SizeType i = 0; i < value["Items"].Size(); i += 1)
                 {
                     T item;
-                    if (!value["Items"][i].IsObject() || !item.InitFromJsonValue(value["Items"][i])) return false;
-                    items.push_back(item);
+                    if (ParseObject(value["Items"][i], "", false, item, parseErrors))
+                        items.push_back(item);
                 }
                 SetItems(items);
             }
 
-            return true;
+            return !parseErrors;
         }
 
     private:

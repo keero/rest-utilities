@@ -80,47 +80,34 @@ namespace ready4air
             mLink = link;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Non-mandatory property
-                if (value.HasMember("AgeLimit"))
-                {
-                    if (!value["AgeLimit"].IsInt()) return false;
-                    SetAgeLimit(value["AgeLimit"].GetInt());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("ButtonImage"))
-                {
-                    if (!value["ButtonImage"].IsString()) return false;
-                    SetButtonImage(value["ButtonImage"].GetString());
-                }
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Position") || !value["Position"].IsInt()) return false;
-                SetPosition(value["Position"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Title") || !value["Title"].IsString()) return false;
-                SetTitle(value["Title"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Type") || !value["Type"].IsString()) return false;
-                SetType(value["Type"].GetString());
-            }
-            {
-                // Mandatory property
-                Link link;
-                if (!value.HasMember("Link") || !value["Link"].IsObject() || !link.InitFromJsonValue(value["Link"])) return false;
-                SetLink(link);
-            }
+            int ageLimit;
+            std::string buttonImage;
+            int position;
+            std::string title;
+            std::string type;
+            Link link;
 
-            return true;
+            if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                SetAgeLimit(ageLimit);
+
+            if (ParseString(value, "ButtonImage", false, buttonImage, parseErrors))
+                SetButtonImage(buttonImage);
+
+            if (ParseInt(value, "Position", true, position, parseErrors))
+                SetPosition(position);
+
+            if (ParseString(value, "Title", true, title, parseErrors))
+                SetTitle(title);
+
+            if (ParseString(value, "Type", true, type, parseErrors))
+                SetType(type);
+
+            if (ParseObject(value, "Link", true, link, parseErrors))
+                SetLink(link);
+
+            return !parseErrors;
         }
 
     private:

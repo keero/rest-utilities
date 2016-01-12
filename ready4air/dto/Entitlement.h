@@ -78,53 +78,34 @@ namespace ready4air
             mIdentifier = identifier;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("Type") || !value["Type"].IsString()) return false;
-                SetType(value["Type"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("EntitledTo") || !value["EntitledTo"].IsString()) return false;
-                SetEntitledTo(value["EntitledTo"].GetString());
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("StartTime"))
-                {
-                    if (!value["StartTime"].IsString()) return false;
-                    SetStartTime(value["StartTime"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("EndTime"))
-                {
-                    if (!value["EndTime"].IsString()) return false;
-                    SetEndTime(value["EndTime"].GetString());
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("DRM"))
-                {
-                    DRM drm;
-                    if (!value["DRM"].IsObject() || !drm.InitFromJsonValue(value["DRM"])) return false;
-                    SetDRM(drm);
-                }
-            }
-            {
-                // Non-mandatory property
-                if (value.HasMember("Identifier"))
-                {
-                    if (!value["Identifier"].IsString()) return false;
-                    SetIdentifier(value["Identifier"].GetString());
-                }
-            }
+            std::string type;
+            std::string entitledTo;
+            std::string startTime;
+            std::string endTime;
+            DRM drm;
+            std::string identifier;
 
-            return true;
+            if (ParseString(value, "Type", true, type, parseErrors))
+                SetType(type);
+
+            if (ParseString(value, "EntitledTo", true, entitledTo, parseErrors))
+                SetEntitledTo(entitledTo);
+
+            if (ParseString(value, "StartTime", false, startTime, parseErrors))
+                SetStartTime(startTime);
+
+            if (ParseString(value, "EndTime", false, endTime, parseErrors))
+                SetEndTime(endTime);
+
+            if (ParseObject(value, "DRM", false, drm, parseErrors))
+                SetDRM(drm);
+
+            if (ParseString(value, "Identifier", false, identifier, parseErrors))
+                SetIdentifier(identifier);
+
+            return !parseErrors;
         }
 
     private:

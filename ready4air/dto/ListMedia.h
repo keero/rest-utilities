@@ -87,45 +87,38 @@ namespace ready4air
             mListOrder = listOrder;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            {
-                // Mandatory property
-                if (!value.HasMember("DeviceVersion") || !value["DeviceVersion"].IsInt()) return false;
-                SetDeviceVersion(value["DeviceVersion"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CountryCode") || !value["CountryCode"].IsString()) return false;
-                SetCountryCode(value["CountryCode"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("MediaId") || !value["MediaId"].IsInt()) return false;
-                SetMediaId(value["MediaId"].GetInt());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("CurrencyCode") || !value["CurrencyCode"].IsString()) return false;
-                SetCurrencyCode(value["CurrencyCode"].GetString());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("IsMainList") || !value["IsMainList"].IsBool()) return false;
-                SetIsMainList(value["IsMainList"].GetBool());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("Price") || !value["Price"].IsDouble()) return false;
-                SetPrice(value["Price"].GetDouble());
-            }
-            {
-                // Mandatory property
-                if (!value.HasMember("ListOrder") || !value["ListOrder"].IsInt()) return false;
-                SetListOrder(value["ListOrder"].GetInt());
-            }
+            int deviceVersion;
+            std::string countryCode;
+            int mediaId;
+            std::string currencyCode;
+            bool isMainList;
+            double price;
+            int listOrder;
 
-            return true;
+            if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
+                SetDeviceVersion(deviceVersion);
+
+            if (ParseString(value, "CountryCode", true, countryCode, parseErrors))
+                SetCountryCode(countryCode);
+
+            if (ParseInt(value, "MediaId", true, mediaId, parseErrors))
+                SetDeviceVersion(mediaId);
+
+            if (ParseString(value, "CurrencyCode", true, currencyCode, parseErrors))
+                SetCurrencyCode(currencyCode);
+
+            if (ParseBool(value, "IsMainList", true, isMainList, parseErrors))
+                SetIsMainList(isMainList);
+
+            if (ParseDouble(value, "Price", true, price, parseErrors))
+                SetPrice(price);
+
+            if (ParseInt(value, "ListOrder", true, listOrder, parseErrors))
+                SetListOrder(listOrder);
+
+            return !parseErrors;
         }
 
     private:
