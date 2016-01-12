@@ -54,7 +54,7 @@ namespace ready4air
             int location;
 
             // Initialize parent properties
-            FileBase::InitFromJsonValue(value, parseErrors));
+            FileBase::InitFromJsonValue(value, parseErrors);
 
             if (ParseInt(value, "ManifestTypeId", true, manifestTypeId, parseErrors))
                 SetManifestTypeId(manifestTypeId);

@@ -84,7 +84,7 @@ namespace ready4air
             Link mmsLink;
 
             // Initialize parent properties
-            FileBase::InitFromJsonValue(value, parseErrors));
+            FileBase::InitFromJsonValue(value, parseErrors);
 
             if (ParseString(value, "Language", false, language, parseErrors))
                 SetLanguage(language);

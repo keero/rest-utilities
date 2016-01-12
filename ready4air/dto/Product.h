@@ -74,7 +74,7 @@ namespace ready4air
             mEntitlements = entitlements;
         }
 
-        const Maybe<std::vector<PurchaseItem>> &GetPurchaseItems() const
+        const Maybe<std::vector<PurchaseItem> > &GetPurchaseItems() const
         {
             return mPurchaseItems;
         }

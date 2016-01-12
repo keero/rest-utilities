@@ -66,7 +66,7 @@ namespace ready4air
             int bandwidth;
 
             // Initialize parent properties
-            FileBase::InitFromJsonValue(value, parseErrors));
+            FileBase::InitFromJsonValue(value, parseErrors);
 
             if (ParseInt(value, "Location", true, location, parseErrors))
                 SetLocation(location);

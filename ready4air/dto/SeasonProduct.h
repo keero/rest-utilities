@@ -129,7 +129,7 @@ namespace ready4air
             std::string strPrice;
             bool hd;
             bool dubbed;
-            Entitlement entitlements;
+            std::vector<Entitlement> entitlements;
             Form purchase;
             std::vector<PurchaseItem> purchaseItems;
 
@@ -151,8 +151,16 @@ namespace ready4air
             if (ParseBool(value, "Dubbed", false, dubbed, parseErrors))
                 SetDubbed(dubbed);
 
-            if (ParseObject(value, "Entitlements", true, entitlements, parseErrors))
+            if (VerifyArray(value, "Entitlements", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Entitlements"].Size(); i += 1)
+                {
+                    Entitlement entitlement;
+                    if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors))
+                        entitlements.push_back(entitlement);
+                }
                 SetEntitlements(entitlements);
+            }
 
             if (ParseObject(value, "Purchase", false, purchase, parseErrors))
                 SetPurchase(purchase);
