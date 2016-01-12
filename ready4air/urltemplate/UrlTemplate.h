@@ -70,6 +70,8 @@ namespace ready4air
             std::sregex_iterator exprs_begin = std::sregex_iterator(url.begin(), url.end(), expr_regex);
             std::sregex_iterator exprs_end = std::sregex_iterator();
 
+            bool lastIsOp = false;
+
             for (std::sregex_iterator i = exprs_begin; i != exprs_end; ++i)
             {
                 std::smatch expr_match = *i;
@@ -120,20 +122,30 @@ namespace ready4air
                             }
 
 
-                            if (values.size()) ss2 << op;
+
+                            if (values.size() && !lastIsOp)
+                            {
+                                ss2 << op;
+                                lastIsOp = true;
+                            }
 
                         }
                         for (size_t j = 0; j < values.size(); ++j)
                         {
-                            if (j != 0)
+                            if (j > 0 && values[j-1].length() > 0)
                                 ss2 << separator;
-                            ss2 << values[j];
+                            if (values[j].length() > 0)
+                            {
+                                ss2 << values[j];
+                                lastIsOp = false;
+                            }
                         }
                         expanded << ss2.str();
                     }
 
                     if (literal.length())
                     {
+                        if (literal[0] == '&' && lastIsOp) literal = literal.substr(1);
                         expanded << encodeReserved(literal);
                     }
                 }
