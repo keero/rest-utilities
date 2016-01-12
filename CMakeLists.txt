@@ -83,6 +83,7 @@ set(READY4AIR_DTO_SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/ready4air/dto/Purchase.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/PaymentData.h
         ${PROJECT_SOURCE_DIR}/ready4air/dto/PurchaseInfo.h
+        ${PROJECT_SOURCE_DIR}/ready4air/dto/Product.h
         )
 
 add_executable(HypermediaTester
