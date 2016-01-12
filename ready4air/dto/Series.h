@@ -242,9 +242,130 @@ namespace ready4air
             mSelf = self;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string id;
+            std::string externalId;
+            std::string originalTitle;
+            bool adult;
+            std::string localTitle;
+            std::string shortTitle;
+            std::string longSummary;
+            std::string shortSummary;
+            std::string sortTitle;
+            int minYear;
+            int maxYear;
+            int episodeLength;
+            int ageLimit;
+            std::string productionCountry;
+            std::vector<std::string> ageGroups;
+            std::vector<Image> images;
+            std::vector<Cast> casts;
+            std::vector<Genre> genres;
+            Form purchaseFirstEpisode;
+            std::string modified;
+            Link seasons;
+            Link self;
+
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "ExternalId", true, externalId, parseErrors))
+                SetExternalId(externalId);
+
+            if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                SetOriginalTitle(originalTitle);
+
+            if (ParseBool(value, "Adult", true, adult, parseErrors))
+                SetAdult(adult);
+
+            if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                SetLocalTitle(localTitle);
+
+            if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                SetShortTitle(shortTitle);
+
+            if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                SetLongSummary(longSummary);
+
+            if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                SetShortSummary(shortSummary);
+
+            if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                SetSortTitle(sortTitle);
+
+            if (ParseInt(value, "MinYear", true, minYear, parseErrors))
+                SetMinYear((short) minYear);
+
+            if (ParseInt(value, "MaxYear", true, maxYear, parseErrors))
+                SetMaxYear((short) maxYear);
+
+            if (ParseInt(value, "EpisodeLength", false, episodeLength, parseErrors))
+                SetEpisodeLength(episodeLength);
+
+            if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                SetAgeLimit(ageLimit);
+
+            if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors))
+                SetProductionCountry(productionCountry);
+
+            if (VerifyArray(value, "AgeGroups", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["AgeGroups"].Size(); i += 1)
+                {
+                    std::string ageGroup;
+                    if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors))
+                        ageGroups.push_back(ageGroup);
+                }
+                SetAgeGroups(ageGroups);
+            }
+
+            if (VerifyArray(value, "Images", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                {
+                    Image image;
+                    if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        images.push_back(image);
+                }
+                SetImages(images);
+            }
+
+            if (VerifyArray(value, "Casts", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Casts"].Size(); i += 1)
+                {
+                    Cast cast;
+                    if (ParseObject(value["Casts"][i], "", false, cast, parseErrors))
+                        casts.push_back(cast);
+                }
+                SetCasts(casts);
+            }
+
+            if (VerifyArray(value, "Genres", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Genres"].Size(); i += 1)
+                {
+                    Genre genre;
+                    if (ParseObject(value["Genres"][i], "", false, genre, parseErrors))
+                        genres.push_back(genre);
+                }
+                SetGenres(genres);
+            }
+
+            if (ParseObject(value, "PurchaseFirstEpisode", false, purchaseFirstEpisode, parseErrors))
+                SetPurchaseFirstEpisode(purchaseFirstEpisode);
+
+            if (ParseString(value, "Modified", false, modified, parseErrors))
+                SetModified(modified);
+
+            if (ParseObject(value, "Seasons", false, seasons, parseErrors))
+                SetSeasons(seasons);
+
+            if (ParseObject(value, "Self", false, self, parseErrors))
+                SetSelf(self);
+
+            return !parseErrors;
         }
 
     private:

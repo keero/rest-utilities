@@ -48,9 +48,22 @@ namespace ready4air
             mFeatures = features;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int productId;
+            Manifests trailers;
+            Manifests features;
+
+            if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                SetProductId(productId);
+
+            if (ParseObject(value, "Trailers", false, trailers, parseErrors))
+                SetTrailers(trailers);
+
+            if (ParseObject(value, "Features", false, features, parseErrors))
+                SetFeatures(features);
+
+            return !parseErrors;
         }
 
     private:

@@ -47,9 +47,25 @@ namespace ready4air
             mLocation = location;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int manifestTypeId;
+            std::string manifestTypeName;
+            int location;
+
+            // Initialize parent properties
+            FileBase::InitFromJsonValue(value, parseErrors));
+
+            if (ParseInt(value, "ManifestTypeId", true, manifestTypeId, parseErrors))
+                SetManifestTypeId(manifestTypeId);
+
+            if (ParseString(value, "ManifestTypeName", true, manifestTypeName, parseErrors))
+                SetManifestTypeName(manifestTypeName);
+
+            if (ParseInt(value, "Location", true, location, parseErrors))
+                SetLocation(location);
+
+            return !parseErrors;
         }
 
     private:

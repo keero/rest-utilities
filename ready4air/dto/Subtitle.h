@@ -58,9 +58,26 @@ namespace ready4air
             mLink = link;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string type;
+            std::string encoding;
+            std::string language;
+            Link link;
+
+            if (ParseString(value, "Type", true, type, parseErrors))
+                SetType(type);
+
+            if (ParseString(value, "Encoding", true, encoding, parseErrors))
+                SetEncoding(encoding);
+
+            if (ParseString(value, "Language", true, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseObject(value, "Link", false, link, parseErrors))
+                SetLink(link);
+
+            return !parseErrors;
         }
 
     private:

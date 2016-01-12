@@ -58,9 +58,29 @@ namespace ready4air
             mBandwidth = bandwidth;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int location;
+            Link mmsLink;
+            std::string language;
+            int bandwidth;
+
+            // Initialize parent properties
+            FileBase::InitFromJsonValue(value, parseErrors));
+
+            if (ParseInt(value, "Location", true, location, parseErrors))
+                SetLocation(location);
+
+            if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors))
+                SetMmsLink(mmsLink);
+
+            if (ParseString(value, "Language", false, language, parseErrors))
+                SetLanguage(language);
+
+            if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
+                SetBandwidth((short) bandwidth);
+
+            return !parseErrors;
         }
 
     private:

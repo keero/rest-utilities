@@ -47,9 +47,22 @@ namespace ready4air
             mPin = pin;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string phoneNumber;
+            std::string reservationNumber;
+            int pin;
+
+            if (ParseString(value, "PhoneNumber", false, phoneNumber, parseErrors))
+                SetPhoneNumber(phoneNumber);
+
+            if (ParseString(value, "ReservationNumber", false, reservationNumber, parseErrors))
+                SetReservationNumber(reservationNumber);
+
+            if (ParseInt(value, "Pin", false, pin, parseErrors))
+                SetPin(pin);
+
+            return !parseErrors;
         }
 
     private:

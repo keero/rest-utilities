@@ -49,9 +49,22 @@ namespace ready4air
             mScore = score;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            QuoteImage smallLogo;
+            QuoteImage largeLogo;
+            QuoteImage score;
+
+            if (ParseObject(value, "SmallLogo", false, smallLogo, parseErrors))
+                SetSmallLogo(smallLogo);
+
+            if (ParseObject(value, "LargeLogo", false, largeLogo, parseErrors))
+                SetLargeLogo(largeLogo);
+
+            if (ParseObject(value, "Score", false, score, parseErrors))
+                SetScore(score);
+
+            return !parseErrors;
         }
 
     private:

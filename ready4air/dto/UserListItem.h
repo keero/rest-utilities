@@ -37,9 +37,18 @@ namespace ready4air
             mContentId = contentId;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int position;
+            std::string contentId;
+
+            if (ParseInt(value, "Position", true, position, parseErrors))
+                SetPosition(position);
+
+            if (ParseString(value, "ContentId", true, contentId, parseErrors))
+                SetContentId(contentId);
+
+            return !parseErrors;
         }
 
     private:

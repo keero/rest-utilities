@@ -58,9 +58,26 @@ namespace ready4air
             mSource = source;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            Link image;
+            Link imageLink;
+            Link externalSource;
+            std::string source;
+
+            if (ParseObject(value, "Image", false, image, parseErrors))
+                SetImage(image);
+
+            if (ParseObject(value, "ImageLink", false, imageLink, parseErrors))
+                SetImageLink(imageLink);
+
+            if (ParseObject(value, "ExternalSource", false, externalSource, parseErrors))
+                SetExternalSource(externalSource);
+
+            if (ParseString(value, "Source", false, source, parseErrors))
+                SetSource(source);
+
+            return !parseErrors;
         }
 
     private:

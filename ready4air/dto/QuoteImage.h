@@ -48,9 +48,22 @@ namespace ready4air
             mLink = link;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int width;
+            int height;
+            Link link;
+
+            if (ParseInt(value, "Width", true, width, parseErrors))
+                SetWidth(width);
+
+            if (ParseInt(value, "Height", true, height, parseErrors))
+                SetHeight(height);
+
+            if (ParseObject(value, "Link", false, link, parseErrors))
+                SetLink(link);
+
+            return !parseErrors;
         }
 
     private:

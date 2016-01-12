@@ -69,9 +69,38 @@ namespace ready4air
             mExposedItems = exposedItems;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            Form addLists;
+            Form listPosition;
+            Form removeLists;
+            Link lists;
+            std::vector<std::string> exposedItems;
+
+            if (ParseObject(value, "AddLists", true, addLists, parseErrors))
+                SetAddLists(addLists);
+
+            if (ParseObject(value, "ListPosition", true, listPosition, parseErrors))
+                SetListPosition(listPosition);
+
+            if (ParseObject(value, "RemoveLists", true, removeLists, parseErrors))
+                SetRemoveLists(removeLists);
+
+            if (ParseObject(value, "Lists", false, lists, parseErrors))
+                SetLists(lists);
+
+            if (VerifyArray(value, "ExposedItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["ExposedItems"].Size(); i += 1)
+                {
+                    std::string exposedItem;
+                    if (ParseString(value["ExposedItems"][i], "", false, exposedItem, parseErrors))
+                        exposedItems.push_back(exposedItem);
+                }
+                SetExposedItems(exposedItems);
+            }
+
+            return !parseErrors;
         }
 
     private:

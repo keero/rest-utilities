@@ -40,12 +40,12 @@ namespace ready4air
             mName = name;
         }
 
-        const Maybe <bool> &IsAPublic() const
+        const Maybe <bool> &IsPublic() const
         {
             return mPublic;
         }
 
-        void SetAPublic(bool aPublic)
+        void SetPublic(bool aPublic)
         {
             mPublic = aPublic;
         }
@@ -150,9 +150,70 @@ namespace ready4air
             mDeviceId = deviceId;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string id;
+            std::string name;
+            bool aPublic;
+            std::string owner;
+            int type;
+            std::string listType;
+            Form addItems;
+            Form itemPosition;
+            Form removeItems;
+            Link items;
+            std::vector<UserListItem> exposedItems;
+            std::string userId;
+            std::string deviceId;
+
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "Name", true, name, parseErrors))
+                SetName(name);
+
+            if (ParseBool(value, "Public", true, aPublic, parseErrors))
+                SetPublic(aPublic);
+
+            if (ParseString(value, "Owner", true, owner, parseErrors))
+                SetOwner(owner);
+
+            if (ParseInt(value, "Type", true, type, parseErrors))
+                SetType(type);
+
+            if (ParseString(value, "ListType", true, listType, parseErrors))
+                SetListType(listType);
+
+            if (ParseObject(value, "AddItems", false, addItems, parseErrors))
+                SetAddItems(addItems);
+
+            if (ParseObject(value, "ItemPosition", false, itemPosition, parseErrors))
+                SetItemPosition(itemPosition);
+
+            if (ParseObject(value, "RemoveItems", false, removeItems, parseErrors))
+                SetRemoveItems(removeItems);
+
+            if (ParseObject(value, "Items", false, items, parseErrors))
+                SetItems(items);
+
+            if (VerifyArray(value, "ExposedItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["ExposedItems"].Size(); i += 1)
+                {
+                    UserListItem userListItem;
+                    if (ParseObject(value["ExposedItems"][i], "", false, userListItem, parseErrors))
+                        exposedItems.push_back(userListItem);
+                }
+                SetExposedItems(exposedItems);
+            }
+
+            if (ParseString(value, "UserId", false, userId, parseErrors))
+                SetUserId(userId);
+
+            if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                SetDeviceId(deviceId);
+
+            return !parseErrors;
         }
 
     private:

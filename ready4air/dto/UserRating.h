@@ -37,25 +37,38 @@ namespace ready4air
             mValue = value;
         }
 
-        const Maybe <float> &GetAverageValue() const
+        const Maybe <double> &GetAverageValue() const
         {
             return mAverageValue;
         }
 
-        void SetAverageValue(float averageValue)
+        void SetAverageValue(double averageValue)
         {
             mAverageValue = averageValue;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int numberOfVotes;
+            int val;
+            double averageValue;
+
+            if (ParseInt(value, "NumberOfVotes", true, numberOfVotes, parseErrors))
+                SetNumberOfVotes(numberOfVotes);
+
+            if (ParseInt(value, "Value", true, val, parseErrors))
+                SetValue(val);
+
+            if (ParseDouble(value, "AverageValue", true, averageValue, parseErrors))
+                SetAverageValue(averageValue);
+
+            return !parseErrors;
         }
 
     private:
         Maybe <int> mNumberOfVotes;
         Maybe <int> mValue;
-        Maybe <float> mAverageValue;
+        Maybe <double> mAverageValue;
     };
 }
 

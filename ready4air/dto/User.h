@@ -343,9 +343,168 @@ namespace ready4air
             mCancelSubscription = cancelSubscription;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        const Maybe<Form> &GetAddVoucherToSubscription() const
         {
-            return false;
+            return mAddVoucherToSubscription;
+        }
+
+        void SetAddVoucherToSubscription(const Form &addVoucherToSubscription)
+        {
+            mAddVoucherToSubscription = addVoucherToSubscription;
+        }
+
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+        {
+            std::string id;
+            std::string address;
+            std::string cclastfour;
+            std::string ccreference;
+            bool ccvalid;
+            std::string city;
+            std::string country;
+            std::string email;
+            std::string firstName;
+            std::string lastName;
+            std::string lastUsedDeviceId;
+            std::string mobile;
+            int numberOfLogins;
+            std::string postalCode;
+            std::string registrationDate;
+            std::string userName;
+            std::string mppToken;
+            UserList myMoviesList;
+            UserList myWishList;
+            std::vector<std::string> availablePaymentMethods;
+            Link self;
+            Form updatePassword;
+            Form update;
+            bool showAdult;
+            std::vector<Bookmark> bookmarks;
+            Link inactiveBookmarks;
+            Crud manageBookmarks;
+            Crud manageLists;
+            UserFavouriteLists userFavouriteLists;
+            Link moviesFinishedWatching;
+            Link moviesCurrentlyWatching;
+            Form cancelSubscription;
+            Form addVoucherToSubscription;
+
+            if (ParseString(value, "ID", true, id, parseErrors))
+                SetID(id);
+
+            if (ParseString(value, "Address", false, address, parseErrors))
+                SetAddress(address);
+
+            if (ParseString(value, "CClastfour", false, cclastfour, parseErrors))
+                SetCClastfour(cclastfour);
+
+            if (ParseString(value, "CCreference", false, ccreference, parseErrors))
+                SetCCreference(ccreference);
+
+            if (ParseBool(value, "CCvalid", true, ccvalid, parseErrors))
+                SetCCvalid(ccvalid);
+
+            if (ParseString(value, "City", false, city, parseErrors))
+                SetCity(city);
+
+            if (ParseString(value, "Country", false, country, parseErrors))
+                SetCountry(country);
+
+            if (ParseString(value, "Email", false, email, parseErrors))
+                SetEmail(email);
+
+            if (ParseString(value, "FirstName", false, firstName, parseErrors))
+                SetFirstName(firstName);
+
+            if (ParseString(value, "LastName", false, lastName, parseErrors))
+                SetLastName(lastName);
+
+            if (ParseString(value, "LastUsedDeviceId", true, lastUsedDeviceId, parseErrors))
+                SetLastUsedDeviceId(lastUsedDeviceId);
+
+            if (ParseString(value, "Mobile", false, mobile, parseErrors))
+                SetMobile(mobile);
+
+            if (ParseInt(value, "NumberOfLogins", true, numberOfLogins, parseErrors))
+                SetNumberOfLogins(numberOfLogins);
+
+            if (ParseString(value, "PostalCode", false, postalCode, parseErrors))
+                SetPostalCode(postalCode);
+
+            if (ParseString(value, "RegistrationDate", true, registrationDate, parseErrors))
+                SetRegistrationDate(registrationDate);
+
+            if (ParseString(value, "UserName", true, userName, parseErrors))
+                SetUserName(userName);
+
+            if (ParseString(value, "MppToken", false, mppToken, parseErrors))
+                SetMppToken(mppToken);
+
+            if (ParseObject(value, "MyMoviesList", false, myMoviesList, parseErrors))
+                SetMyMoviesList(myMoviesList);
+
+            if (ParseObject(value, "MyWishList", false, myWishList, parseErrors))
+                SetMyWishList(myWishList);
+
+            if (VerifyArray(value, "AvailablePaymentMethods", true, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
+                {
+                    std::string availablePaymentMethod;
+                    if (ParseString(value["AvailablePaymentMethods"][i], "", false, availablePaymentMethod, parseErrors))
+                        availablePaymentMethods.push_back(availablePaymentMethod);
+                }
+                SetAvailablePaymentMethods(availablePaymentMethods);
+            }
+
+            if (ParseObject(value, "Self", true, self, parseErrors))
+                SetSelf(self);
+
+            if (ParseObject(value, "UpdatePassword", true, updatePassword, parseErrors))
+                SetUpdatePassword(updatePassword);
+
+            if (ParseObject(value, "Update", true, update, parseErrors))
+                SetUpdate(update);
+
+            if (ParseBool(value, "ShowAdult", true, showAdult, parseErrors))
+                SetShowAdult(showAdult);
+
+            if (VerifyArray(value, "Bookmarks", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Bookmarks"].Size(); i += 1)
+                {
+                    Bookmark bookmark;
+                    if (ParseObject(value["Bookmarks"][i], "", false, bookmark, parseErrors))
+                        bookmarks.push_back(bookmark);
+                }
+                SetBookmarks(bookmarks);
+            }
+
+            if (ParseObject(value, "InactiveBookmarks", false, inactiveBookmarks, parseErrors))
+                SetInactiveBookmarks(inactiveBookmarks);
+
+            if (ParseObject(value, "ManageBookmarks", true, manageBookmarks, parseErrors))
+                SetManageBookmarks(manageBookmarks);
+
+            if (ParseObject(value, "ManageLists", true, manageLists, parseErrors))
+                SetManageLists(manageLists);
+
+            if (ParseObject(value, "UserFavouriteLists", false, userFavouriteLists, parseErrors))
+                SetUserFavouriteLists(userFavouriteLists);
+
+            if (ParseObject(value, "MoviesFinishedWatching", false, moviesFinishedWatching, parseErrors))
+                SetMoviesFinishedWatching(moviesFinishedWatching);
+
+            if (ParseObject(value, "MoviesCurrentlyWatching", false, moviesCurrentlyWatching, parseErrors))
+                SetMoviesCurrentlyWatching(moviesCurrentlyWatching);
+
+            if (ParseObject(value, "CancelSubscription", true, cancelSubscription, parseErrors))
+                SetCancelSubscription(cancelSubscription);
+
+            if (ParseObject(value, "AddVoucherToSubscription", true, addVoucherToSubscription, parseErrors))
+                SetAddVoucherToSubscription(addVoucherToSubscription);
+
+            return !parseErrors;
         }
 
     private:
@@ -381,6 +540,7 @@ namespace ready4air
         Maybe <Link> mMoviesFinishedWatching;
         Maybe <Link> mMoviesCurrentlyWatching;
         Maybe <Form> mCancelSubscription;
+        Maybe <Form> mAddVoucherToSubscription;
     };
 }
 

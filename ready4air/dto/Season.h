@@ -284,19 +284,154 @@ namespace ready4air
             mAllEpisodes = allEpisodes;
         }
 
-        const Maybe <Form> &GetPurchase() const
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return mPurchase;
-        }
+            int seasonNo;
+            Link serie;
+            std::vector<Episode> episodes;
+            std::vector<SeasonProduct> seasonProducts;
+            std::string titleId;
+            Link titleLink;
+            std::string originalTitle;
+            bool adult;
+            std::string localTitle;
+            std::string shortTitle;
+            std::string longSummary;
+            std::string shortSummary;
+            std::string sortTitle;
+            std::string productionCountry;
+            int year;
+            int length;
+            std::string publishDate;
+            std::string unPublishDate;
+            int ageLimit;
+            std::string modified;
+            std::vector<Cast> casts;
+            std::vector<Image> images;
+            std::vector<Genre> genres;
+            Link self;
+            Link watchedEpisodes;
+            Link allEpisodes;
 
-        void SetPurchase(const Form &purchase)
-        {
-            mPurchase = purchase;
-        }
+            if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors))
+                SetSeasonNo(seasonNo);
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
-        {
-            return false;
+            if (ParseObject(value, "Serie", true, serie, parseErrors))
+                SetSerie(serie);
+
+            if (VerifyArray(value, "Episodes", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Episodes"].Size(); i += 1)
+                {
+                    Episode episode;
+                    if (ParseObject(value["Episodes"][i], "", false, episode, parseErrors))
+                        episodes.push_back(episode);
+                }
+                SetEpisodes(episodes);
+            }
+
+            if (VerifyArray(value, "SeasonProducts", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["SeasonProducts"].Size(); i += 1)
+                {
+                    SeasonProduct seasonProduct;
+                    if (ParseObject(value["SeasonProducts"][i], "", false, seasonProduct, parseErrors))
+                        seasonProducts.push_back(seasonProduct);
+                }
+                SetSeasonProducts(seasonProducts);
+            }
+
+            if (ParseString(value, "TitleId", false, titleId, parseErrors))
+                SetTitleId(titleId);
+
+            if (ParseObject(value, "TitleLink", false, titleLink, parseErrors))
+                SetTitleLink(titleLink);
+
+            if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                SetOriginalTitle(originalTitle);
+
+            if (ParseBool(value, "Adult", true, adult, parseErrors))
+                SetAdult(adult);
+
+            if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                SetLocalTitle(localTitle);
+
+            if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                SetShortTitle(shortTitle);
+
+            if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                SetLongSummary(longSummary);
+
+            if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                SetShortSummary(shortSummary);
+
+            if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                SetSortTitle(sortTitle);
+
+            if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors))
+                SetProductionCountry(productionCountry);
+
+            if (ParseInt(value, "Year", true, year, parseErrors))
+                SetYear((short) year);
+
+            if (ParseInt(value, "Length", false, length, parseErrors))
+                SetLength(length);
+
+            if (ParseString(value, "PublishDate", false, publishDate, parseErrors))
+                SetPublishDate(publishDate);
+
+            if (ParseString(value, "UnPublishDate", false, unPublishDate, parseErrors))
+                SetUnPublishDate(unPublishDate);
+
+            if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                SetAgeLimit(ageLimit);
+
+            if (ParseString(value, "Modified", false, modified, parseErrors))
+                SetModified(modified);
+
+            if (VerifyArray(value, "Casts", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Casts"].Size(); i += 1)
+                {
+                    Cast cast;
+                    if (ParseObject(value["Casts"][i], "", false, cast, parseErrors))
+                        casts.push_back(cast);
+                }
+                SetCasts(casts);
+            }
+
+            if (VerifyArray(value, "Images", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
+                {
+                    Image image;
+                    if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        images.push_back(image);
+                }
+                SetImages(images);
+            }
+
+            if (VerifyArray(value, "Genres", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Genres"].Size(); i += 1)
+                {
+                    Genre genre;
+                    if (ParseObject(value["Genres"][i], "", false, genre, parseErrors))
+                        genres.push_back(genre);
+                }
+                SetGenres(genres);
+            }
+
+            if (ParseObject(value, "Self", false, self, parseErrors))
+                SetSelf(self);
+
+            if (ParseObject(value, "WatchedEpisodes", false, watchedEpisodes, parseErrors))
+                SetWatchedEpisodes(watchedEpisodes);
+
+            if (ParseObject(value, "AllEpisodes", true, allEpisodes, parseErrors))
+                SetAllEpisodes(allEpisodes);
+
+            return !parseErrors;
         }
 
     private:
@@ -326,7 +461,6 @@ namespace ready4air
         Maybe <Link> mSelf;
         Maybe <Link> mWatchedEpisodes;
         Maybe <Link> mAllEpisodes;
-        Maybe <Form> mPurchase;
     };
 }
 

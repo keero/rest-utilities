@@ -89,9 +89,38 @@ namespace ready4air
             mSelf = self;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string id;
+            std::string title;
+            std::string description;
+            std::string vmaMessage;
+            std::string type;
+            Content content;
+            Link self;
+
+            if (ParseString(value, "ID", true, id, parseErrors))
+                SetID(id);
+
+            if (ParseString(value, "Title", false, title, parseErrors))
+                SetTitle(title);
+
+            if (ParseString(value, "Description", false, description, parseErrors))
+                SetDescription(description);
+
+            if (ParseString(value, "VmaMessage", false, vmaMessage, parseErrors))
+                SetVmaMessage(vmaMessage);
+
+            if (ParseString(value, "Type", false, type, parseErrors))
+                SetType(type);
+
+            if (ParseObject(value, "Content", true, content, parseErrors))
+                SetContent(content);
+
+            if (ParseObject(value, "Self", true, self, parseErrors))
+                SetSelf(self);
+
+            return !parseErrors;
         }
 
     private:

@@ -8,15 +8,6 @@
 
 namespace ready4air
 {
-    enum PurchaseType
-    {
-        None = 0,
-        Tvod = 1,
-        SeasonPass = 2,
-        BundlePurchase = 3,
-        Est = 4
-    };
-
     class PurchaseInfo : public JsonDeserializable
     {
     public:
@@ -38,12 +29,12 @@ namespace ready4air
             mPurchase = purchase;
         }
 
-        const Maybe <PurchaseType> &GetPurchaseType() const
+        const Maybe <std::string> &GetPurchaseType() const
         {
             return mPurchaseType;
         }
 
-        void SetPurchaseType(const PurchaseType &purchaseType)
+        void SetPurchaseType(const std::string &purchaseType)
         {
             mPurchaseType = purchaseType;
         }
@@ -58,14 +49,27 @@ namespace ready4air
             mPaymentData = paymentData;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            Purchase purchase;
+            std::string purchaseType;
+            PaymentData paymentData;
+
+            if (ParseObject(value, "Purchase", true, purchase, parseErrors))
+                SetPurchase(purchase);
+
+            if (ParseString(value, "PurchaseType", true, purchaseType, parseErrors))
+                SetPurchaseType(purchaseType);
+
+            if (ParseObject(value, "PaymentData", false, paymentData, parseErrors))
+                SetPaymentData(paymentData);
+
+            return !parseErrors;
         }
 
     private:
         Maybe <Purchase> mPurchase;
-        Maybe <PurchaseType> mPurchaseType;
+        Maybe <std::string> mPurchaseType;
         Maybe <PaymentData> mPaymentData;
     };
 }

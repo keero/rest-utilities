@@ -100,12 +100,12 @@ namespace ready4air
             mProductId = productId;
         }
 
-        const Maybe <float> &GetOriginalPrice() const
+        const Maybe <double> &GetOriginalPrice() const
         {
             return mOriginalPrice;
         }
 
-        void SetOriginalPrice(float originalPrice)
+        void SetOriginalPrice(double originalPrice)
         {
             mOriginalPrice = originalPrice;
         }
@@ -130,22 +130,22 @@ namespace ready4air
             mPaymentReference = paymentReference;
         }
 
-        const Maybe <float> &GetPaidPrice() const
+        const Maybe <double> &GetPaidPrice() const
         {
             return mPaidPrice;
         }
 
-        void SetPaidPrice(float paidPrice)
+        void SetPaidPrice(double paidPrice)
         {
             mPaidPrice = paidPrice;
         }
 
-        const Maybe <float> &GetRemainingAmount() const
+        const Maybe <double> &GetRemainingAmount() const
         {
             return mRemainingAmount;
         }
 
-        void SetRemainingAmount(float remainingAmount)
+        void SetRemainingAmount(double remainingAmount)
         {
             mRemainingAmount = remainingAmount;
         }
@@ -230,9 +230,102 @@ namespace ready4air
             mSignature = signature;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string id;
+            std::string cpurchaseId;
+            std::string crentalId;
+            std::vector<std::string> cValueCodes;
+            std::string currency;
+            std::string ipAddress;
+            std::string ipCountry;
+            std::string productId;
+            double originalPrice;
+            std::string paymentMethod;
+            std::string paymentReference;
+            double paidPrice;
+            double remainingAmount;
+            std::string title;
+            std::string transactionTime;
+            Link self;
+            Form commit;
+            Form cancel;
+            Form update;
+            DRM drm;
+            std::string signature;
+
+            if (ParseString(value, "Id", true, id, parseErrors))
+                SetId(id);
+
+            if (ParseString(value, "CpurchaseId", false, cpurchaseId, parseErrors))
+                SetCpurchaseId(cpurchaseId);
+
+            if (ParseString(value, "CrentalId", false, crentalId, parseErrors))
+                SetCrentalId(crentalId);
+
+            if (VerifyArray(value, "CValueCodes", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["CValueCodes"].Size(); i += 1)
+                {
+                    std::string cValueCode;
+                    if (ParseString(value["CValueCodes"][i], "", false, cValueCode, parseErrors))
+                        cValueCodes.push_back(cValueCode);
+                }
+                SetCValueCodes(cValueCodes);
+            }
+
+            if (ParseString(value, "Currency", true, currency, parseErrors))
+                SetCurrency(currency);
+
+            if (ParseString(value, "IPAddress", true, ipAddress, parseErrors))
+                SetIPAddress(ipAddress);
+
+            if (ParseString(value, "IPCountry", true, ipCountry, parseErrors))
+                SetIPCountry(ipCountry);
+
+            if (ParseString(value, "ProductId", true, productId, parseErrors))
+                SetProductId(productId);
+
+            if (ParseDouble(value, "OriginalPrice", true, originalPrice, parseErrors))
+                SetOriginalPrice(originalPrice);
+
+            if (ParseString(value, "PaymentMethod", false, paymentMethod, parseErrors))
+                SetPaymentMethod(paymentMethod);
+
+            if (ParseString(value, "PaymentReference", false, paymentReference, parseErrors))
+                SetPaymentReference(paymentReference);
+
+            if (ParseDouble(value, "PaidPrice", true, paidPrice, parseErrors))
+                SetPaidPrice(paidPrice);
+
+            if (ParseDouble(value, "RemainingAmount", true, remainingAmount, parseErrors))
+                SetRemainingAmount(remainingAmount);
+
+            if (ParseString(value, "Title", false, title, parseErrors))
+                SetTitle(title);
+
+            if (ParseString(value, "TransactionTime", false, transactionTime, parseErrors))
+                SetTransactionTime(transactionTime);
+
+            if (ParseObject(value, "Self", true, self, parseErrors))
+                SetSelf(self);
+
+            if (ParseObject(value, "Commit", false, commit, parseErrors))
+                SetCommit(commit);
+
+            if (ParseObject(value, "Cancel", false, cancel, parseErrors))
+                SetCancel(cancel);
+
+            if (ParseObject(value, "Update", false, update, parseErrors))
+                SetUpdate(update);
+
+            if (ParseObject(value, "DRM", false, drm, parseErrors))
+                SetDRM(drm);
+
+            if (ParseString(value, "Signature", true, signature, parseErrors))
+                SetSignature(signature);
+
+            return !parseErrors;
         }
 
     private:
@@ -244,11 +337,11 @@ namespace ready4air
         Maybe <std::string> mIPAddress;
         Maybe <std::string> mIPCountry;
         Maybe <std::string> mProductId;
-        Maybe <float> mOriginalPrice;
+        Maybe <double> mOriginalPrice;
         Maybe <std::string> mPaymentMethod;
         Maybe <std::string> mPaymentReference;
-        Maybe <float> mPaidPrice;
-        Maybe <float> mRemainingAmount;
+        Maybe <double> mPaidPrice;
+        Maybe <double> mRemainingAmount;
         Maybe <std::string> mTitle;
         Maybe <std::string> mTransactionTime;
         Maybe <Link> mSelf;

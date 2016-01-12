@@ -58,9 +58,26 @@ namespace ready4air
             mWidevinePSSH = widevinePSSH;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string keyId;
+            Link playReadyLicenser;
+            Link widevineLicenser;
+            std::string widevinePSSH;
+
+            if (ParseString(value, "KeyId", true, keyId, parseErrors))
+                SetKeyId(keyId);
+
+            if (ParseObject(value, "PlayReadyLicenser", true, playReadyLicenser, parseErrors))
+                SetPlayReadyLicenser(playReadyLicenser);
+
+            if (ParseObject(value, "WidevineLicenser", true, widevineLicenser, parseErrors))
+                SetWidevineLicenser(widevineLicenser);
+
+            if (ParseString(value, "WidevinePSSH", true, widevinePSSH, parseErrors))
+                SetWidevinePSSH(widevinePSSH);
+
+            return !parseErrors;
         }
 
     private:

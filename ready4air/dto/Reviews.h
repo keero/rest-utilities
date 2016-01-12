@@ -49,9 +49,30 @@ namespace ready4air
             mCriticsQuotes = criticsQuotes;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            UserRating userRating;
+            std::string formattedAverageCriticsScore;
+            std::vector<CriticsQuote> criticsQuotes;
+
+            if (ParseObject(value, "UserRating", false, userRating, parseErrors))
+                SetUserRating(userRating);
+
+            if (ParseString(value, "FormattedAverageCriticsScore", false, formattedAverageCriticsScore, parseErrors))
+                SetFormattedAverageCriticsScore(formattedAverageCriticsScore);
+
+            if (VerifyArray(value, "CriticsQuotes", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["CriticsQuotes"].Size(); i += 1)
+                {
+                    CriticsQuote criticsQuote;
+                    if (ParseObject(value["CriticsQuotes"][i], "", false, criticsQuote, parseErrors))
+                        criticsQuotes.push_back(criticsQuote);
+                }
+                SetCriticsQuotes(criticsQuotes);
+            }
+
+            return !parseErrors;
         }
 
     private:

@@ -49,9 +49,30 @@ namespace ready4air
             mMedias = medias;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string title;
+            Link all;
+            std::vector<MediaProduct> medias;
+
+            if (ParseString(value, "Title", true, title, parseErrors))
+                SetTitle(title);
+
+            if (ParseObject(value, "All", false, all, parseErrors))
+                SetAll(all);
+
+            if (VerifyArray(value, "Medias", true, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["Medias"].Size(); i += 1)
+                {
+                    MediaProduct mediaProduct;
+                    if (ParseObject(value["Medias"][i], "", false, mediaProduct, parseErrors))
+                        medias.push_back(mediaProduct);
+                }
+                SetMedias(medias);
+            }
+
+            return !parseErrors;
         }
 
     private:

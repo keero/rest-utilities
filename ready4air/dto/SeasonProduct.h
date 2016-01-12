@@ -41,12 +41,12 @@ namespace ready4air
             mProductType = productType;
         }
 
-        const Maybe <float> &GetPrice() const
+        const Maybe <double> &GetPrice() const
         {
             return mPrice;
         }
 
-        void SetPrice(float price)
+        void SetPrice(double price)
         {
             mPrice = price;
         }
@@ -111,21 +111,77 @@ namespace ready4air
             mPurchase = purchase;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        const Maybe <std::vector<PurchaseItem> > &GetPurchaseItems() const
         {
-            return false;
+            return mPurchaseItems;
+        }
+
+        void SetPurchaseItems(const std::vector<PurchaseItem> &purchaseItems)
+        {
+            mPurchaseItems = purchaseItems;
+        }
+
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+        {
+            int productId;
+            double price;
+            std::string currency;
+            std::string strPrice;
+            bool hd;
+            bool dubbed;
+            Entitlement entitlements;
+            Form purchase;
+            std::vector<PurchaseItem> purchaseItems;
+
+            if (ParseInt(value, "ProductId", false, productId, parseErrors))
+                SetProductId(productId);
+
+            if (ParseDouble(value, "Price", false, price, parseErrors))
+                SetPrice(price);
+
+            if (ParseString(value, "Currency", false, currency, parseErrors))
+                SetCurrency(currency);
+
+            if (ParseString(value, "StrPrice", false, strPrice, parseErrors))
+                SetStrPrice(strPrice);
+
+            if (ParseBool(value, "HD", false, hd, parseErrors))
+                SetHD(hd);
+
+            if (ParseBool(value, "Dubbed", false, dubbed, parseErrors))
+                SetDubbed(dubbed);
+
+            if (ParseObject(value, "Entitlements", true, entitlements, parseErrors))
+                SetEntitlements(entitlements);
+
+            if (ParseObject(value, "Purchase", false, purchase, parseErrors))
+                SetPurchase(purchase);
+
+            if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
+                {
+                    PurchaseItem purchaseItem;
+                    if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        purchaseItems.push_back(purchaseItem);
+                }
+                SetPurchaseItems(purchaseItems);
+            }
+
+            return !parseErrors;
         }
 
     private:
         Maybe <int> mProductId;
         Maybe <ProductType> mProductType;
-        Maybe <float> mPrice;
+        Maybe <double> mPrice;
         Maybe <std::string> mCurrency;
         Maybe <std::string> mStrPrice;
         Maybe <bool> mHD;
         Maybe <bool> mDubbed;
         Maybe <std::vector<Entitlement> > mEntitlements;
         Maybe <Form> mPurchase;
+        Maybe <std::vector<PurchaseItem> > mPurchaseItems;
     };
 }
 

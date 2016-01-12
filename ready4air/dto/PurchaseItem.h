@@ -28,12 +28,12 @@ namespace ready4air
             mBusinessType = businessType;
         }
 
-        const Maybe <float> &GetPrice() const
+        const Maybe <double> &GetPrice() const
         {
             return mPrice;
         }
 
-        void SetPrice(float price)
+        void SetPrice(double price)
         {
             mPrice = price;
         }
@@ -68,14 +68,35 @@ namespace ready4air
             mForm = form;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string businessType;
+            double price;
+            std::string currency;
+            std::string strPrice;
+            Form form;
+
+            if (ParseString(value, "BusinessType", true, businessType, parseErrors))
+                SetBusinessType(businessType);
+
+            if (ParseDouble(value, "Price", false, price, parseErrors))
+                SetPrice(price);
+
+            if (ParseString(value, "Currency", false, currency, parseErrors))
+                SetCurrency(currency);
+
+            if (ParseString(value, "StrPrice", false, strPrice, parseErrors))
+                SetStrPrice(strPrice);
+
+            if (ParseObject(value, "Form", false, form, parseErrors))
+                SetForm(form);
+
+            return !parseErrors;
         }
 
     private:
         Maybe <std::string> mBusinessType;
-        Maybe <float> mPrice;
+        Maybe <double> mPrice;
         Maybe <std::string> mCurrency;
         Maybe <std::string> mStrPrice;
         Maybe <Form> mForm;

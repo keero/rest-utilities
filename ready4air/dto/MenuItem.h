@@ -48,9 +48,30 @@ namespace ready4air
             mMenuItems = menuItems;
         }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value)
+        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            std::string text;
+            Link link;
+            std::vector<MenuItem> menuItems;
+
+            if (ParseString(value, "Text", true, text, parseErrors))
+                SetText(text);
+
+            if (ParseObject(value, "Link", false, link, parseErrors))
+                SetLink(link);
+
+            if (VerifyArray(value, "MenuItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["MenuItems"].Size(); i += 1)
+                {
+                    MenuItem menuItem;
+                    if (ParseObject(value["MenuItems"][i], "", false, menuItem, parseErrors))
+                        menuItems.push_back(menuItem);
+                }
+                SetMenuItems(menuItems);
+            }
+
+            return !parseErrors;
         }
 
     private:

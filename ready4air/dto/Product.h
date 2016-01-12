@@ -86,7 +86,40 @@ namespace ready4air
 
         virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
-            return false;
+            int productId;
+            bool hd;
+            bool dubbed;
+            Link fullPLay;
+            Entitlement entitlements;
+            std::vector<PurchaseItem> purchaseItems;
+
+            if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                SetProductId(productId);
+
+            if (ParseBool(value, "HD", true, hd, parseErrors))
+                SetHD(hd);
+
+            if (ParseBool(value, "Dubbed", true, dubbed, parseErrors))
+                SetDubbed(dubbed);
+
+            if (ParseObject(value, "FullPLay", false, fullPLay, parseErrors))
+                SetFullPLay(fullPLay);
+
+            if (ParseObject(value, "Entitlements", true, entitlements, parseErrors))
+                SetEntitlements(entitlements);
+
+            if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+            {
+                for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
+                {
+                    PurchaseItem purchaseItem;
+                    if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        purchaseItems.push_back(purchaseItem);
+                }
+                SetPurchaseItems(purchaseItems);
+            }
+
+            return !parseErrors;
         }
 
 
