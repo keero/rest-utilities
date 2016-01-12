@@ -49,7 +49,7 @@ namespace ready4air
         std::vector<ParseErrorItem> mItems;
     };
 
-    static const char* kTypeNames[] = { "Null", "Bool", "Bool", "Object", "Array", "String", "Number" };
+    static const std::string kTypeNames[] = { "Null", "Bool", "Bool", "Object", "Array", "String", "Number" };
 
     class JsonDeserializable
     {
@@ -92,7 +92,22 @@ namespace ready4air
 
         bool ParseString(const rapidjson::Value &value, const std::string &key, bool mandatory, std::string &result, ParseErrors &parseErrors)
         {
-            if (value.HasMember(key.c_str()))
+            if (key.size() == 0)
+            {
+                if (value.IsString())
+                {
+                    result = value.GetString();
+                    return true;
+                }
+                else
+                {
+                    parseErrors.Error(PARSE_ERROR_WRONG_TYPE,
+                                      "Array item has wrong type: "
+                                      + kTypeNames[value.GetType()]
+                                      + ". Expecting String.");
+                }
+            }
+            else if (value.HasMember(key.c_str()))
             {
                 if (value[key.c_str()].IsString())
                 {
@@ -164,7 +179,21 @@ namespace ready4air
 
         bool ParseObject(const rapidjson::Value &value, const std::string &key, bool mandatory, JsonDeserializable &result, ParseErrors &parseErrors)
         {
-            if (value.HasMember(key.c_str()))
+            if (key.size() == 0)
+            {
+                if (value.IsObject())
+                {
+                    return result.InitFromJsonValue(value, parseErrors);
+                }
+                else
+                {
+                    parseErrors.Error(PARSE_ERROR_WRONG_TYPE,
+                                      "Array item has wrong type: "
+                                      + kTypeNames[value.GetType()]
+                                      + ". Expecting Object.");
+                }
+            }
+            else if (value.HasMember(key.c_str()))
             {
                 if (value[key.c_str()].IsObject())
                 {
@@ -176,6 +205,54 @@ namespace ready4air
                                      "Property " + key + " has wrong type: "
                                      + kTypeNames[value[key.c_str()].GetType()]
                                      + ". Expecting Object.");
+                }
+            }
+            else if (mandatory)
+            {
+                parseErrors.Error(PARSE_ERROR_NOT_FOUND, "Mandatory property " + key + " is missing.");
+            }
+
+            return false;
+        }
+
+        bool VerifyArray(const rapidjson::Value &value, const std::string &key, bool mandatory, ParseErrors &parseErrors)
+        {
+            if (value.HasMember(key.c_str()))
+            {
+                if (value[key.c_str()].IsArray())
+                {
+                    return true;
+                }
+                else
+                {
+                    parseErrors.Error(PARSE_ERROR_WRONG_TYPE,
+                                      "Property " + key + " has wrong type: "
+                                      + kTypeNames[value[key.c_str()].GetType()]
+                                      + ". Expecting Array.");
+                }
+            }
+            else if (mandatory)
+            {
+                parseErrors.Error(PARSE_ERROR_NOT_FOUND, "Mandatory property " + key + " is missing.");
+            }
+
+            return false;
+        }
+
+        bool VerifyObject(const rapidjson::Value &value, const std::string &key, bool mandatory, ParseErrors &parseErrors)
+        {
+            if (value.HasMember(key.c_str()))
+            {
+                if (value[key.c_str()].IsObject())
+                {
+                    return true;
+                }
+                else
+                {
+                    parseErrors.Error(PARSE_ERROR_WRONG_TYPE,
+                                      "Property " + key + " has wrong type: "
+                                      + kTypeNames[value[key.c_str()].GetType()]
+                                      + ". Expecting Object.");
                 }
             }
             else if (mandatory)
