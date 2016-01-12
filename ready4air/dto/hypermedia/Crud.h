@@ -52,7 +52,7 @@ namespace ready4air
         virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
         {
             Form createOrUpdateForm;
-            Link readLink
+            Link readLink;
             Form deleteForm;
 
             if (ParseObject(value, "CreateOrUpdate", false, createOrUpdateForm, parseErrors))
