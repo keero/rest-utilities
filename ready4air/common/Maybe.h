@@ -5,6 +5,8 @@
 #ifndef REST_UTILITIES_MAYBE_H
 #define REST_UTILITIES_MAYBE_H
 
+#include <iostream>
+
 namespace ready4air
 {
     template<typename T>
@@ -63,9 +65,19 @@ namespace ready4air
             return !(lhs == rhs);
         }
 
+        inline friend bool operator!=(const Maybe<T> &lhs, const T &rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        inline friend bool operator!=(const T &lhs, const Maybe<T> &rhs)
+        {
+            return !(lhs == rhs);
+        }
+
         inline friend std::ostream &operator<<(std::ostream &str, const Maybe &rhs)
         {
-            if (rhs.mNothing)
+            if (!rhs)
                 return str;
             else
                 return (str << rhs.Just());
