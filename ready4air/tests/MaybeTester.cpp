@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 
 int main()
 {
