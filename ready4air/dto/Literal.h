@@ -4,13 +4,12 @@
 #include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
-#include "abstract/Mappable.h"
 
 namespace ready4air
 {
     namespace dto
     {
-        class Literal : public JsonDeserializable, public Mappable
+        class Literal : public JsonDeserializable
         {
         public:
             Literal()
