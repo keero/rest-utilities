@@ -1,49 +1,52 @@
 #ifndef READY4AIR_IMAGE_H
 #define READY4AIR_IMAGE_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "FileBase.h"
 #include "hypermedia/Link.h"
 
 namespace ready4air
 {
-    class Image : public FileBase
+    namespace dto
     {
-    public:
-        Image()
+        class Image : public FileBase
         {
-        }
+        public:
+            Image()
+            {
+            }
 
-        virtual ~Image()
-        {
-        }
+            virtual ~Image()
+            {
+            }
 
-        const Maybe <Link> &GetSecureLink() const
-        {
-            return mSecureLink;
-        }
+            const Maybe<Link> &GetSecureLink() const
+            {
+                return mSecureLink;
+            }
 
-        void SetSecureLink(const Link &secureLink)
-        {
-            mSecureLink = secureLink;
-        }
+            void SetSecureLink(const Link &secureLink)
+            {
+                mSecureLink = secureLink;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            Link secureLink;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                Link secureLink;
 
-            // Initialize parent properties
-            FileBase::InitFromJsonValue(value, parseErrors);
+                // Initialize parent properties
+                FileBase::InitFromJsonValue(value, parseErrors);
 
-            if (ParseObject(value, "SecureLink", false, secureLink, parseErrors))
-                SetSecureLink(secureLink);
+                if (ParseObject(value, "SecureLink", false, secureLink, parseErrors))
+                    SetSecureLink(secureLink);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <Link> mSecureLink;
-    };
+        private:
+            Maybe<Link> mSecureLink;
+        };
+    }
 }
 
 #endif //READY4AIR_IMAGE_H

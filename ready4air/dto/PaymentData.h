@@ -1,75 +1,78 @@
 #ifndef READY4AIR_PAYMENTDATA_H
 #define READY4AIR_PAYMENTDATA_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
 {
-    class PaymentData : public JsonDeserializable
+    namespace dto
     {
-    public:
-        PaymentData()
+        class PaymentData : public JsonDeserializable
         {
-        }
+        public:
+            PaymentData()
+            {
+            }
 
-        virtual ~PaymentData()
-        {
-        }
+            virtual ~PaymentData()
+            {
+            }
 
-        const Maybe <std::string> &GetPhoneNumber() const
-        {
-            return mPhoneNumber;
-        }
+            const Maybe <std::string> &GetPhoneNumber() const
+            {
+                return mPhoneNumber;
+            }
 
-        void SetPhoneNumber(const std::string &phoneNumber)
-        {
-            mPhoneNumber = phoneNumber;
-        }
+            void SetPhoneNumber(const std::string &phoneNumber)
+            {
+                mPhoneNumber = phoneNumber;
+            }
 
-        const Maybe <std::string> &GetReservationNumber() const
-        {
-            return mReservationNumber;
-        }
+            const Maybe <std::string> &GetReservationNumber() const
+            {
+                return mReservationNumber;
+            }
 
-        void SetReservationNumber(const std::string &reservationNumber)
-        {
-            mReservationNumber = reservationNumber;
-        }
+            void SetReservationNumber(const std::string &reservationNumber)
+            {
+                mReservationNumber = reservationNumber;
+            }
 
-        const Maybe <int> &GetPin() const
-        {
-            return mPin;
-        }
+            const Maybe<int> &GetPin() const
+            {
+                return mPin;
+            }
 
-        void SetPin(int pin)
-        {
-            mPin = pin;
-        }
+            void SetPin(int pin)
+            {
+                mPin = pin;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            std::string phoneNumber;
-            std::string reservationNumber;
-            int pin;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                std::string phoneNumber;
+                std::string reservationNumber;
+                int pin;
 
-            if (ParseString(value, "PhoneNumber", false, phoneNumber, parseErrors))
-                SetPhoneNumber(phoneNumber);
+                if (ParseString(value, "PhoneNumber", false, phoneNumber, parseErrors))
+                    SetPhoneNumber(phoneNumber);
 
-            if (ParseString(value, "ReservationNumber", false, reservationNumber, parseErrors))
-                SetReservationNumber(reservationNumber);
+                if (ParseString(value, "ReservationNumber", false, reservationNumber, parseErrors))
+                    SetReservationNumber(reservationNumber);
 
-            if (ParseInt(value, "Pin", false, pin, parseErrors))
-                SetPin(pin);
+                if (ParseInt(value, "Pin", false, pin, parseErrors))
+                    SetPin(pin);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <std::string> mPhoneNumber;
-        Maybe <std::string> mReservationNumber;
-        Maybe <int> mPin;
-    };
+        private:
+            Maybe <std::string> mPhoneNumber;
+            Maybe <std::string> mReservationNumber;
+            Maybe<int> mPin;
+        };
+    }
 }
 
 #endif //READY4AIR_PAYMENTDATA_H

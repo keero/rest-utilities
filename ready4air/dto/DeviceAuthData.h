@@ -1,135 +1,138 @@
 #ifndef READY4AIR_DEVICEAUTHDATA_H
 #define READY4AIR_DEVICEAUTHDATA_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
 {
-    class DeviceAuthData : public JsonDeserializable
+    namespace dto
     {
-    public:
-        DeviceAuthData()
+        class DeviceAuthData : public JsonDeserializable
         {
-        }
+        public:
+            DeviceAuthData()
+            {
+            }
 
-        virtual ~DeviceAuthData()
-        {
-        }
+            virtual ~DeviceAuthData()
+            {
+            }
 
-        const Maybe <int> &GetDeviceVersion() const
-        {
-            return mDeviceVersion;
-        }
+            const Maybe<int> &GetDeviceVersion() const
+            {
+                return mDeviceVersion;
+            }
 
-        void SetDeviceVersion(int deviceVersion)
-        {
-            mDeviceVersion = deviceVersion;
-        }
+            void SetDeviceVersion(int deviceVersion)
+            {
+                mDeviceVersion = deviceVersion;
+            }
 
-        const Maybe <std::string> &GetCountry() const
-        {
-            return mCountry;
-        }
+            const Maybe <std::string> &GetCountry() const
+            {
+                return mCountry;
+            }
 
-        void SetCountry(const std::string &country)
-        {
-            mCountry = country;
-        }
+            void SetCountry(const std::string &country)
+            {
+                mCountry = country;
+            }
 
-        const Maybe <std::string> &GetLanguage() const
-        {
-            return mLanguage;
-        }
+            const Maybe <std::string> &GetLanguage() const
+            {
+                return mLanguage;
+            }
 
-        void SetLanguage(const std::string &language)
-        {
-            mLanguage = language;
-        }
+            void SetLanguage(const std::string &language)
+            {
+                mLanguage = language;
+            }
 
-        const Maybe <std::string> &GetDeviceId() const
-        {
-            return mDeviceId;
-        }
+            const Maybe <std::string> &GetDeviceId() const
+            {
+                return mDeviceId;
+            }
 
-        void SetDeviceId(const std::string &deviceId)
-        {
-            mDeviceId = deviceId;
-        }
+            void SetDeviceId(const std::string &deviceId)
+            {
+                mDeviceId = deviceId;
+            }
 
-        const Maybe <std::string> &GetToken() const
-        {
-            return mToken;
-        }
+            const Maybe <std::string> &GetToken() const
+            {
+                return mToken;
+            }
 
-        void SetToken(const std::string &token)
-        {
-            mToken = token;
-        }
+            void SetToken(const std::string &token)
+            {
+                mToken = token;
+            }
 
-        const Maybe <std::string> &GetExpirationDateTime() const
-        {
-            return mExpirationDateTime;
-        }
+            const Maybe <std::string> &GetExpirationDateTime() const
+            {
+                return mExpirationDateTime;
+            }
 
-        void SetExpirationDateTime(const std::string &expirationDateTime)
-        {
-            mExpirationDateTime = expirationDateTime;
-        }
+            void SetExpirationDateTime(const std::string &expirationDateTime)
+            {
+                mExpirationDateTime = expirationDateTime;
+            }
 
-        const Maybe <std::string> &GetIpAddress() const
-        {
-            return mIpAddress;
-        }
+            const Maybe <std::string> &GetIpAddress() const
+            {
+                return mIpAddress;
+            }
 
-        void SetIpAddress(const std::string &ipAddress)
-        {
-            mIpAddress = ipAddress;
-        }
+            void SetIpAddress(const std::string &ipAddress)
+            {
+                mIpAddress = ipAddress;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            int deviceVersion;
-            std::string country;
-            std::string language;
-            std::string deviceId;
-            std::string token;
-            std::string expirationDateTime;
-            std::string ipAddress;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                int deviceVersion;
+                std::string country;
+                std::string language;
+                std::string deviceId;
+                std::string token;
+                std::string expirationDateTime;
+                std::string ipAddress;
 
-            if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
-                SetDeviceVersion(deviceVersion);
+                if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
+                    SetDeviceVersion(deviceVersion);
 
-            if (ParseString(value, "Country", true, country, parseErrors))
-                SetCountry(country);
+                if (ParseString(value, "Country", true, country, parseErrors))
+                    SetCountry(country);
 
-            if (ParseString(value, "Language", false, language, parseErrors))
-                SetLanguage(language);
+                if (ParseString(value, "Language", false, language, parseErrors))
+                    SetLanguage(language);
 
-            if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
-                SetDeviceId(deviceId);
+                if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                    SetDeviceId(deviceId);
 
-            if (ParseString(value, "Token", false, token, parseErrors))
-                SetToken(token);
+                if (ParseString(value, "Token", false, token, parseErrors))
+                    SetToken(token);
 
-            if (ParseString(value, "ExpirationDateTime", false, expirationDateTime, parseErrors))
-                SetExpirationDateTime(expirationDateTime);
+                if (ParseString(value, "ExpirationDateTime", false, expirationDateTime, parseErrors))
+                    SetExpirationDateTime(expirationDateTime);
 
-            if (ParseString(value, "IpAddress", false, ipAddress, parseErrors))
-                SetIpAddress(ipAddress);
+                if (ParseString(value, "IpAddress", false, ipAddress, parseErrors))
+                    SetIpAddress(ipAddress);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <int> mDeviceVersion;
-        Maybe <std::string> mCountry;
-        Maybe <std::string> mLanguage;
-        Maybe <std::string> mDeviceId;
-        Maybe <std::string> mToken;
-        Maybe <std::string> mExpirationDateTime;
-        Maybe <std::string> mIpAddress;
-    };
+        private:
+            Maybe<int> mDeviceVersion;
+            Maybe <std::string> mCountry;
+            Maybe <std::string> mLanguage;
+            Maybe <std::string> mDeviceId;
+            Maybe <std::string> mToken;
+            Maybe <std::string> mExpirationDateTime;
+            Maybe <std::string> mIpAddress;
+        };
+    }
 }
 
 #endif //READY4AIR_DEVICEAUTHDATA_H

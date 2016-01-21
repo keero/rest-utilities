@@ -1,94 +1,97 @@
 #ifndef READY4AIR_MP4FILE_H
 #define READY4AIR_MP4FILE_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "FileBase.h"
 #include "hypermedia/Link.h"
 
 namespace ready4air
 {
-    class Mp4File : public FileBase
+    namespace dto
     {
-    public:
-        Mp4File()
+        class Mp4File : public FileBase
         {
-        }
+        public:
+            Mp4File()
+            {
+            }
 
-        virtual ~Mp4File()
-        {
-        }
+            virtual ~Mp4File()
+            {
+            }
 
-        const Maybe <int> &GetLocation() const
-        {
-            return mLocation;
-        }
+            const Maybe<int> &GetLocation() const
+            {
+                return mLocation;
+            }
 
-        void SetLocation(int location)
-        {
-            mLocation = location;
-        }
+            void SetLocation(int location)
+            {
+                mLocation = location;
+            }
 
-        const Maybe <Link> &GetMmsLink() const
-        {
-            return mMmsLink;
-        }
+            const Maybe <Link> &GetMmsLink() const
+            {
+                return mMmsLink;
+            }
 
-        void SetMmsLink(const Link &mmsLink)
-        {
-            mMmsLink = mmsLink;
-        }
+            void SetMmsLink(const Link &mmsLink)
+            {
+                mMmsLink = mmsLink;
+            }
 
-        const Maybe <std::string> &GetLanguage() const
-        {
-            return mLanguage;
-        }
+            const Maybe <std::string> &GetLanguage() const
+            {
+                return mLanguage;
+            }
 
-        void SetLanguage(const std::string &language)
-        {
-            mLanguage = language;
-        }
+            void SetLanguage(const std::string &language)
+            {
+                mLanguage = language;
+            }
 
-        const Maybe <short> &GetBandwidth() const
-        {
-            return mBandwidth;
-        }
+            const Maybe<short> &GetBandwidth() const
+            {
+                return mBandwidth;
+            }
 
-        void SetBandwidth(short bandwidth)
-        {
-            mBandwidth = bandwidth;
-        }
+            void SetBandwidth(short bandwidth)
+            {
+                mBandwidth = bandwidth;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            int location;
-            Link mmsLink;
-            std::string language;
-            int bandwidth;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                int location;
+                Link mmsLink;
+                std::string language;
+                int bandwidth;
 
-            // Initialize parent properties
-            FileBase::InitFromJsonValue(value, parseErrors);
+                // Initialize parent properties
+                FileBase::InitFromJsonValue(value, parseErrors);
 
-            if (ParseInt(value, "Location", true, location, parseErrors))
-                SetLocation(location);
+                if (ParseInt(value, "Location", true, location, parseErrors))
+                    SetLocation(location);
 
-            if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors))
-                SetMmsLink(mmsLink);
+                if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors))
+                    SetMmsLink(mmsLink);
 
-            if (ParseString(value, "Language", false, language, parseErrors))
-                SetLanguage(language);
+                if (ParseString(value, "Language", false, language, parseErrors))
+                    SetLanguage(language);
 
-            if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
-                SetBandwidth((short) bandwidth);
+                if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
+                    SetBandwidth((short) bandwidth);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <int> mLocation;
-        Maybe <Link> mMmsLink;
-        Maybe <std::string> mLanguage;
-        Maybe <short> mBandwidth;
-    };
+        private:
+            Maybe<int> mLocation;
+            Maybe <Link> mMmsLink;
+            Maybe <std::string> mLanguage;
+            Maybe<short> mBandwidth;
+        };
+    }
 }
 
 #endif //READY4AIR_MP4FILE_H

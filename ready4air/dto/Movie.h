@@ -5,18 +5,21 @@
 
 namespace ready4air
 {
-    class Movie : public MediaProduct
+    namespace dto
     {
-    public:
-        Movie()
+        class Movie : public MediaProduct
         {
-            mProductType = MovieProductType;
-        }
+        public:
+            Movie()
+            {
+                mProductType = MovieProductType;
+            }
 
-        virtual ~Movie()
-        {
-        }
-    };
+            virtual ~Movie()
+            {
+            }
+        };
+    }
 }
 
 #endif //READY4AIR_MOVIE_H

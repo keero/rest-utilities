@@ -1,76 +1,79 @@
 #ifndef READY4AIR_QUOTEIMAGE_H
 #define READY4AIR_QUOTEIMAGE_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
 namespace ready4air
 {
-    class QuoteImage : public JsonDeserializable
+    namespace dto
     {
-    public:
-        QuoteImage()
+        class QuoteImage : public JsonDeserializable
         {
-        }
+        public:
+            QuoteImage()
+            {
+            }
 
-        virtual ~QuoteImage()
-        {
-        }
+            virtual ~QuoteImage()
+            {
+            }
 
-        const Maybe <int> &GetWidth() const
-        {
-            return mWidth;
-        }
+            const Maybe<int> &GetWidth() const
+            {
+                return mWidth;
+            }
 
-        void SetWidth(int width)
-        {
-            mWidth = width;
-        }
+            void SetWidth(int width)
+            {
+                mWidth = width;
+            }
 
-        const Maybe <int> &GetHeight() const
-        {
-            return mHeight;
-        }
+            const Maybe<int> &GetHeight() const
+            {
+                return mHeight;
+            }
 
-        void SetHeight(int height)
-        {
-            mHeight = height;
-        }
+            void SetHeight(int height)
+            {
+                mHeight = height;
+            }
 
-        const Maybe <Link> &GetLink() const
-        {
-            return mLink;
-        }
+            const Maybe <Link> &GetLink() const
+            {
+                return mLink;
+            }
 
-        void SetLink(const Link &link)
-        {
-            mLink = link;
-        }
+            void SetLink(const Link &link)
+            {
+                mLink = link;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            int width;
-            int height;
-            Link link;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                int width;
+                int height;
+                Link link;
 
-            if (ParseInt(value, "Width", true, width, parseErrors))
-                SetWidth(width);
+                if (ParseInt(value, "Width", true, width, parseErrors))
+                    SetWidth(width);
 
-            if (ParseInt(value, "Height", true, height, parseErrors))
-                SetHeight(height);
+                if (ParseInt(value, "Height", true, height, parseErrors))
+                    SetHeight(height);
 
-            if (ParseObject(value, "Link", false, link, parseErrors))
-                SetLink(link);
+                if (ParseObject(value, "Link", false, link, parseErrors))
+                    SetLink(link);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <int> mWidth;
-        Maybe <int> mHeight;
-        Maybe <Link> mLink;
-    };
+        private:
+            Maybe<int> mWidth;
+            Maybe<int> mHeight;
+            Maybe <Link> mLink;
+        };
+    }
 }
 
 #endif //READY4AIR_QUOTEIMAGE_H

@@ -1,77 +1,80 @@
 #ifndef READY4AIR_CATALOGUE_H
 #define READY4AIR_CATALOGUE_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 #include "hypermedia/Link.h"
 
 namespace ready4air
 {
-    class Catalogue : public JsonDeserializable
+    namespace dto
     {
-
-    public:
-        Catalogue()
+        class Catalogue : public JsonDeserializable
         {
-        }
 
-        virtual ~Catalogue()
-        {
-        }
+        public:
+            Catalogue()
+            {
+            }
 
-        const Maybe <Link> &GetAllMovies() const
-        {
-            return mAllMovies;
-        }
+            virtual ~Catalogue()
+            {
+            }
 
-        void SetAllMovies(const Link &allMovies)
-        {
-            mAllMovies = allMovies;
-        }
+            const Maybe <Link> &GetAllMovies() const
+            {
+                return mAllMovies;
+            }
 
-        const Maybe <Link> &GetAllSeries() const
-        {
-            return mAllSeries;
-        }
+            void SetAllMovies(const Link &allMovies)
+            {
+                mAllMovies = allMovies;
+            }
 
-        void SetAllSeries(const Link &allSeries)
-        {
-            mAllSeries = allSeries;
-        }
+            const Maybe <Link> &GetAllSeries() const
+            {
+                return mAllSeries;
+            }
 
-        const Maybe <Link> &GetAllBundles() const
-        {
-            return mAllBundles;
-        }
+            void SetAllSeries(const Link &allSeries)
+            {
+                mAllSeries = allSeries;
+            }
 
-        void SetAllBundles(const Link &allBundles)
-        {
-            mAllBundles = allBundles;
-        }
+            const Maybe <Link> &GetAllBundles() const
+            {
+                return mAllBundles;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            Link allMovies;
-            Link allSeries;
-            Link allBundles;
+            void SetAllBundles(const Link &allBundles)
+            {
+                mAllBundles = allBundles;
+            }
 
-            if (ParseObject(value, "AllMovies", true, allMovies, parseErrors))
-                SetAllMovies(allMovies);
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                Link allMovies;
+                Link allSeries;
+                Link allBundles;
 
-            if (ParseObject(value, "AllSeries", true, allSeries, parseErrors))
-                SetAllSeries(allSeries);
+                if (ParseObject(value, "AllMovies", true, allMovies, parseErrors))
+                    SetAllMovies(allMovies);
 
-            if (ParseObject(value, "AllBundles", true, allBundles, parseErrors))
-                SetAllBundles(allBundles);
+                if (ParseObject(value, "AllSeries", true, allSeries, parseErrors))
+                    SetAllSeries(allSeries);
 
-            return !parseErrors;
-        }
+                if (ParseObject(value, "AllBundles", true, allBundles, parseErrors))
+                    SetAllBundles(allBundles);
 
-    private:
-        Maybe <Link> mAllMovies;
-        Maybe <Link> mAllSeries;
-        Maybe <Link> mAllBundles;
-    };
+                return !parseErrors;
+            }
+
+        private:
+            Maybe <Link> mAllMovies;
+            Maybe <Link> mAllSeries;
+            Maybe <Link> mAllBundles;
+        };
+    }
 }
 
 #endif //READY4AIR_CATALOGUE_H

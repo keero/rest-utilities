@@ -1,136 +1,139 @@
 #ifndef READY4AIR_CAST_H
 #define READY4AIR_CAST_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "abstract/JsonDeserializable.h"
 
 namespace ready4air
 {
-    class Cast : public JsonDeserializable
+    namespace dto
     {
-
-    public:
-        Cast()
+        class Cast : public JsonDeserializable
         {
-        }
 
-        virtual ~Cast()
-        {
-        }
+        public:
+            Cast()
+            {
+            }
 
-        const Maybe <std::string> &GetId() const
-        {
-            return mId;
-        }
+            virtual ~Cast()
+            {
+            }
 
-        void SetId(const std::string &id)
-        {
-            mId = id;
-        }
+            const Maybe <std::string> &GetId() const
+            {
+                return mId;
+            }
 
-        const Maybe <short> &GetCategoryId() const
-        {
-            return mCategoryId;
-        }
+            void SetId(const std::string &id)
+            {
+                mId = id;
+            }
 
-        void SetCategoryId(short categoryId)
-        {
-            mCategoryId = categoryId;
-        }
+            const Maybe<short> &GetCategoryId() const
+            {
+                return mCategoryId;
+            }
 
-        const Maybe <std::string> &GetCategoryName() const
-        {
-            return mCategoryName;
-        }
+            void SetCategoryId(short categoryId)
+            {
+                mCategoryId = categoryId;
+            }
 
-        void SetCategoryName(const std::string &categoryName)
-        {
-            mCategoryName = categoryName;
-        }
+            const Maybe <std::string> &GetCategoryName() const
+            {
+                return mCategoryName;
+            }
 
-        const Maybe <std::string> &GetFirstName() const
-        {
-            return mFirstName;
-        }
+            void SetCategoryName(const std::string &categoryName)
+            {
+                mCategoryName = categoryName;
+            }
 
-        void SetFirstName(const std::string &firstName)
-        {
-            mFirstName = firstName;
-        }
+            const Maybe <std::string> &GetFirstName() const
+            {
+                return mFirstName;
+            }
 
-        const Maybe <std::string> &GetLastName() const
-        {
-            return mLastName;
-        }
+            void SetFirstName(const std::string &firstName)
+            {
+                mFirstName = firstName;
+            }
 
-        void SetLastName(const std::string &lastName)
-        {
-            mLastName = lastName;
-        }
+            const Maybe <std::string> &GetLastName() const
+            {
+                return mLastName;
+            }
 
-        const Maybe <std::string> &GetMiddleName() const
-        {
-            return mMiddleName;
-        }
+            void SetLastName(const std::string &lastName)
+            {
+                mLastName = lastName;
+            }
 
-        void SetMiddleName(const std::string &middleName)
-        {
-            mMiddleName = middleName;
-        }
+            const Maybe <std::string> &GetMiddleName() const
+            {
+                return mMiddleName;
+            }
 
-        const Maybe <std::string> &GetFullName() const
-        {
-            return mFullName;
-        }
+            void SetMiddleName(const std::string &middleName)
+            {
+                mMiddleName = middleName;
+            }
 
-        void SetFullName(const std::string &fullName)
-        {
-            mFullName = fullName;
-        }
+            const Maybe <std::string> &GetFullName() const
+            {
+                return mFullName;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            std::string id;
-            int categoryId;
-            std::string categoryName;
-            std::string firstName;
-            std::string lastName;
-            std::string middleName;
-            std::string fullName;
+            void SetFullName(const std::string &fullName)
+            {
+                mFullName = fullName;
+            }
 
-            if (ParseString(value, "Id", true, id, parseErrors))
-                SetId(id);
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                std::string id;
+                int categoryId;
+                std::string categoryName;
+                std::string firstName;
+                std::string lastName;
+                std::string middleName;
+                std::string fullName;
 
-            if (ParseInt(value, "CategoryId", true, categoryId, parseErrors))
-                SetCategoryId((short) categoryId);
+                if (ParseString(value, "Id", true, id, parseErrors))
+                    SetId(id);
 
-            if (ParseString(value, "CategoryName", true, categoryName, parseErrors))
-                SetCategoryName(categoryName);
+                if (ParseInt(value, "CategoryId", true, categoryId, parseErrors))
+                    SetCategoryId((short) categoryId);
 
-            if (ParseString(value, "FirstName", false, firstName, parseErrors))
-                SetFirstName(firstName);
+                if (ParseString(value, "CategoryName", true, categoryName, parseErrors))
+                    SetCategoryName(categoryName);
 
-            if (ParseString(value, "LastName", false, lastName, parseErrors))
-                SetLastName(lastName);
+                if (ParseString(value, "FirstName", false, firstName, parseErrors))
+                    SetFirstName(firstName);
 
-            if (ParseString(value, "MiddleName", false, middleName, parseErrors))
-                SetMiddleName(middleName);
+                if (ParseString(value, "LastName", false, lastName, parseErrors))
+                    SetLastName(lastName);
 
-            if (ParseString(value, "FullName", true, fullName, parseErrors))
-                SetFullName(fullName);
+                if (ParseString(value, "MiddleName", false, middleName, parseErrors))
+                    SetMiddleName(middleName);
 
-            return !parseErrors;
-        }
+                if (ParseString(value, "FullName", true, fullName, parseErrors))
+                    SetFullName(fullName);
 
-    private:
-        Maybe <std::string> mId;
-        Maybe <short> mCategoryId;
-        Maybe <std::string> mCategoryName;
-        Maybe <std::string> mFirstName;
-        Maybe <std::string> mLastName;
-        Maybe <std::string> mMiddleName;
-        Maybe <std::string> mFullName;
-    };
+                return !parseErrors;
+            }
+
+        private:
+            Maybe <std::string> mId;
+            Maybe<short> mCategoryId;
+            Maybe <std::string> mCategoryName;
+            Maybe <std::string> mFirstName;
+            Maybe <std::string> mLastName;
+            Maybe <std::string> mMiddleName;
+            Maybe <std::string> mFullName;
+        };
+    }
 }
 
 #endif //READY4AIR_CAST_H

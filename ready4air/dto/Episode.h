@@ -1,95 +1,98 @@
 #ifndef READY4AIR_EPISODE_H
 #define READY4AIR_EPISODE_H
 
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 #include "MediaProduct.h"
 #include "hypermedia/Link.h"
 
 namespace ready4air
 {
-    class Episode : public MediaProduct
+    namespace dto
     {
-    public:
-        Episode()
+        class Episode : public MediaProduct
         {
-            mProductType = EpisodeProductType;
-        }
+        public:
+            Episode()
+            {
+                mProductType = EpisodeProductType;
+            }
 
-        virtual ~Episode()
-        {
-        }
+            virtual ~Episode()
+            {
+            }
 
-        const Maybe <int> &GetEpisodeNo() const
-        {
-            return mEpisodeNo;
-        }
+            const Maybe<int> &GetEpisodeNo() const
+            {
+                return mEpisodeNo;
+            }
 
-        void SetEpisodeNo(int episodeNo)
-        {
-            mEpisodeNo = episodeNo;
-        }
+            void SetEpisodeNo(int episodeNo)
+            {
+                mEpisodeNo = episodeNo;
+            }
 
-        const Maybe <Link> &GetSerie() const
-        {
-            return mSerie;
-        }
+            const Maybe<Link> &GetSerie() const
+            {
+                return mSerie;
+            }
 
-        void SetSerie(const Link &serie)
-        {
-            mSerie = serie;
-        }
+            void SetSerie(const Link &serie)
+            {
+                mSerie = serie;
+            }
 
-        const Maybe <Link> &GetSeason() const
-        {
-            return mSeason;
-        }
+            const Maybe<Link> &GetSeason() const
+            {
+                return mSeason;
+            }
 
-        void SetSeason(const Link &season)
-        {
-            mSeason = season;
-        }
+            void SetSeason(const Link &season)
+            {
+                mSeason = season;
+            }
 
-        const Maybe <int> &GetSeasonNo() const
-        {
-            return mSeasonNo;
-        }
+            const Maybe<int> &GetSeasonNo() const
+            {
+                return mSeasonNo;
+            }
 
-        void SetSeasonNo(int seasonNo)
-        {
-            mSeasonNo = seasonNo;
-        }
+            void SetSeasonNo(int seasonNo)
+            {
+                mSeasonNo = seasonNo;
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            int episodeNo;
-            Link serie;
-            Link season;
-            int seasonNo;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                int episodeNo;
+                Link serie;
+                Link season;
+                int seasonNo;
 
-            // Initialize parent properties
-            MediaProduct::InitFromJsonValue(value, parseErrors);
+                // Initialize parent properties
+                MediaProduct::InitFromJsonValue(value, parseErrors);
 
-            if (ParseInt(value, "EpisodeNo", true, episodeNo, parseErrors))
-                SetEpisodeNo(episodeNo);
+                if (ParseInt(value, "EpisodeNo", true, episodeNo, parseErrors))
+                    SetEpisodeNo(episodeNo);
 
-            if (ParseObject(value, "Serie", true, serie, parseErrors))
-                SetSerie(serie);
+                if (ParseObject(value, "Serie", true, serie, parseErrors))
+                    SetSerie(serie);
 
-            if (ParseObject(value, "Season", true, season, parseErrors))
-                SetSeason(season);
+                if (ParseObject(value, "Season", true, season, parseErrors))
+                    SetSeason(season);
 
-            if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors))
-                SetSeasonNo(seasonNo);
+                if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors))
+                    SetSeasonNo(seasonNo);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe <int> mEpisodeNo;
-        Maybe <Link> mSerie;
-        Maybe <Link> mSeason;
-        Maybe <int> mSeasonNo;
-    };
+        private:
+            Maybe<int> mEpisodeNo;
+            Maybe<Link> mSerie;
+            Maybe<Link> mSeason;
+            Maybe<int> mSeasonNo;
+        };
+    }
 }
 
 #endif //READY4AIR_EPISODE_H
