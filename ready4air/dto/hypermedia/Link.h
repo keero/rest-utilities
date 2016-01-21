@@ -1,101 +1,104 @@
 #ifndef READY4AIR_HYPERMEDIA_LINK_H
 #define READY4AIR_HYPERMEDIA_LINK_H
 
-#include "../../maybe/Maybe.h"
+#include "../../common/Maybe.h"
 #include "../abstract/JsonDeserializable.h"
 #include "../../urltemplate/UrlTemplate.h"
 
 namespace ready4air
 {
-    class Link : public JsonDeserializable
+    namespace dto
     {
-    public:
-        Link()
+        class Link : public JsonDeserializable
         {
-        }
+        public:
+            Link()
+            {
+            }
 
-        virtual ~Link()
-        {
-        }
+            virtual ~Link()
+            {
+            }
 
-        void SetHref(const std::string &value)
-        {
-            mUrlTemplate.SetUrl(value);
-        }
+            void SetHref(const std::string &value)
+            {
+                mUrlTemplate.SetUrl(value);
+            }
 
-        const Maybe<std::string> &GetHref() const
-        {
-            return mUrlTemplate.GetUrl();
-        }
+            const Maybe<std::string> &GetHref() const
+            {
+                return mUrlTemplate.GetUrl();
+            }
 
-        void SetTemplated(bool value)
-        {
-            mTemplated = value;
-        }
+            void SetTemplated(bool value)
+            {
+                mTemplated = value;
+            }
 
-        Maybe<bool> GetTemplated() const
-        {
-            return mTemplated;
-        }
+            Maybe<bool> GetTemplated() const
+            {
+                return mTemplated;
+            }
 
-        void SetWithCredentials(bool value)
-        {
-            mWithCredentials = value;
-        }
+            void SetWithCredentials(bool value)
+            {
+                mWithCredentials = value;
+            }
 
-        Maybe<bool> GetWithCredentials() const
-        {
-            return mWithCredentials;
-        }
+            Maybe<bool> GetWithCredentials() const
+            {
+                return mWithCredentials;
+            }
 
-        void SetParam(const std::string &key, const std::string &value)
-        {
-            mUrlTemplate.SetParam(key, value);
-        }
+            void SetParam(const std::string &key, const std::string &value)
+            {
+                mUrlTemplate.SetParam(key, value);
+            }
 
-        const std::string &GetParam(const std::string &key) const
-        {
-            return mUrlTemplate.GetParam(key);
-        }
+            const std::string &GetParam(const std::string &key) const
+            {
+                return mUrlTemplate.GetParam(key);
+            }
 
-        void UnsetParam(const std::string &key)
-        {
-            mUrlTemplate.UnsetParam(key);
-        }
+            void UnsetParam(const std::string &key)
+            {
+                mUrlTemplate.UnsetParam(key);
+            }
 
-        void ClearParams()
-        {
-            mUrlTemplate.ClearParams();
-        }
+            void ClearParams()
+            {
+                mUrlTemplate.ClearParams();
+            }
 
-        const std::string GetExpandedUrl()
-        {
-            return mUrlTemplate.Expand();
-        }
+            const std::string GetExpandedUrl() const
+            {
+                return mUrlTemplate.Expand();
+            }
 
-        virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
-        {
-            std::string href;
-            bool templated;
-            bool withCredentials;
+            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            {
+                std::string href;
+                bool templated;
+                bool withCredentials;
 
-            if (ParseString(value, "Href", true, href, parseErrors))
-                SetHref(href);
+                if (ParseString(value, "Href", true, href, parseErrors))
+                    SetHref(href);
 
-            if (ParseBool(value, "Templated", false, templated, parseErrors))
-                SetTemplated(templated);
+                if (ParseBool(value, "Templated", false, templated, parseErrors))
+                    SetTemplated(templated);
 
-            if (ParseBool(value, "WithCredentials", false, withCredentials, parseErrors))
-                SetWithCredentials(withCredentials);
+                if (ParseBool(value, "WithCredentials", false, withCredentials, parseErrors))
+                    SetWithCredentials(withCredentials);
 
-            return !parseErrors;
-        }
+                return !parseErrors;
+            }
 
-    private:
-        Maybe<bool> mTemplated;
-        Maybe<bool> mWithCredentials;
-        UrlTemplate mUrlTemplate;
-    };
+        private:
+            Maybe<bool> mTemplated;
+            Maybe<bool> mWithCredentials;
+            UrlTemplate mUrlTemplate;
+        };
+    }
 }
 
 #endif //READY4AIR_HYPERMEDIA_LINK_H
