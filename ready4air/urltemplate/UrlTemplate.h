@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
-#include "../maybe/Maybe.h"
+#include "../common/Maybe.h"
 
 typedef std::map<std::string, std::string> UrlContext;
 
@@ -58,7 +58,7 @@ namespace ready4air
             mUrlContext.clear();
         }
 
-        std::string Expand()
+        std::string Expand() const
         {
             if (!mUrl) return "";
             std::string url = mUrl.Just();
@@ -154,7 +154,7 @@ namespace ready4air
         }
 
     private:
-        std::string getValues(char op, const std::string &key, const std::string &modifier)
+        std::string getValues(char op, const std::string &key, const std::string &modifier) const
         {
             if (modifier.length()) throw "Support for modifier syntax is not yet supported";
 
