@@ -1,9 +1,5 @@
-//
-// Created by Martin Kero on 05/01/16.
-//
-
-#ifndef REST_UTILITIES_MAYBE_H
-#define REST_UTILITIES_MAYBE_H
+#ifndef READY4AIR_MAYBE_H
+#define READY4AIR_MAYBE_H
 
 #include <iostream>
 
@@ -89,4 +85,4 @@ namespace ready4air
     };
 }
 
-#endif //REST_UTILITIES_MAYBE_H
+#endif //READY4AIR_MAYBE_H

@@ -1,9 +1,5 @@
-//
-// Created by Martin Kero on 13/01/16.
-//
-
-#ifndef REST_UTILITIES_EITHER_H
-#define REST_UTILITIES_EITHER_H
+#ifndef READY4AIR_EITHER_H
+#define READY4AIR_EITHER_H
 
 
 #include "Maybe.h"
@@ -112,4 +108,4 @@ namespace ready4air
     };
 }
 
-#endif //REST_UTILITIES_EITHER_H
+#endif //READY4AIR_EITHER_H
