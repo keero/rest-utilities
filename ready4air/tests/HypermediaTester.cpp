@@ -2,12 +2,16 @@
 #include "../dto/hypermedia/Link.h"
 #include "../dto/hypermedia/Form.h"
 
+using namespace std;
+using namespace ready4air;
+using namespace dto;
+
 void linkTest()
 {
-    std::string json = "{\"Href\":\"http://www.example.com/{apa}/somethingelse{?bepa,cepa}\",\"Templated\":true,\"WithCredentials\":false}";
-    std::string brokenJson = "{\"Href\":false,\"Templated\":true,\"WithCredentials\":false}";
-    ready4air::Link link;
-    ready4air::ParseErrors parseErrors;
+    string json = "{\"Href\":\"http://www.example.com/{apa}/somethingelse{?bepa,cepa}\",\"Templated\":true,\"WithCredentials\":false}";
+    string brokenJson = "{\"Href\":false,\"Templated\":true,\"WithCredentials\":false}";
+    Link link;
+    ParseErrors parseErrors;
 
     link.InitFromJsonString(brokenJson, parseErrors);
 
@@ -15,8 +19,8 @@ void linkTest()
     {
         for (size_t i = 0; i < parseErrors.GetParseErrors().size(); i += 1)
         {
-            ready4air::ParseErrors::ParseErrorItem item = parseErrors.GetParseErrors()[i];
-            std::cout << item.Code << ": " << item.Message << std::endl;
+            ParseErrors::ParseErrorItem item = parseErrors.GetParseErrors()[i];
+            cout << item.Code << ": " << item.Message << endl;
         }
     }
     else
@@ -25,17 +29,17 @@ void linkTest()
         link.SetParam("bepa", "b");
         link.SetParam("cepa", "c");
         
-        std::cout << link.GetExpandedUrl() << '\n';
+        cout << link.GetExpandedUrl() << '\n';
     }
 
 }
 
 void formTest()
 {
-    std::string json = "{\"Action\": {\"Href\":\"http://www.example.com/{apa}/somethingelse{?bepa,cepa}\",\"Templated\":true,\"WithCredentials\":false}, \"Method\": \"POST\"}";
-    std::string brokenJson = "{\"Action\": {\"Href\":3,\"Templated\":\"apa\",\"WithCredentials\":7}, \"Method\": {\"apa\": false}}";
-    ready4air::Form form;
-    ready4air::ParseErrors parseErrors;
+    string json = "{\"Action\": {\"Href\":\"http://www.example.com/{apa}/somethingelse{?bepa,cepa}\",\"Templated\":true,\"WithCredentials\":false}, \"Method\": \"POST\"}";
+    string brokenJson = "{\"Action\": {\"Href\":3,\"Templated\":\"apa\",\"WithCredentials\":7}, \"Method\": {\"apa\": false}}";
+    Form form;
+    ParseErrors parseErrors;
 
     form.InitFromJsonString(json, parseErrors);
 
@@ -43,17 +47,17 @@ void formTest()
     {
         for (size_t i = 0; i < parseErrors.GetParseErrors().size(); i += 1)
         {
-            ready4air::ParseErrors::ParseErrorItem item = parseErrors.GetParseErrors()[i];
-            std::cout << item.Code << ": " << item.Message << std::endl;
+            ParseErrors::ParseErrorItem item = parseErrors.GetParseErrors()[i];
+            cout << item.Code << ": " << item.Message << endl;
         }
     }
     else
     {
-        ready4air::Link l = form.GetAction().Just();
+        Link l = form.GetAction().Just();
         l.SetParam("apa", "a");
         l.SetParam("bepa", "b");
         l.SetParam("cepa", "c");
-        std::cout << form.GetMethod().Just() << " " << l.GetExpandedUrl() << '\n';
+        cout << form.GetMethod().Just() << " " << l.GetExpandedUrl() << '\n';
     }
 
 }
