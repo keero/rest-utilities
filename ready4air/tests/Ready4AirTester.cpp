@@ -18,31 +18,34 @@
 #include "../dto/Series.h"
 #include "../dto/User.h"
 
+using namespace std;
+using namespace ready4air;
+using namespace dto;
 
 bool TestGenericPage()
 {
-    std::ostringstream ss;
-    std::ifstream fs("../input/GenericPage.json");
+    ostringstream ss;
+    ifstream fs("../input/GenericPage.json");
 
     if (fs.is_open())
     {
-        std::string content;
+        string content;
         while (fs >> content)
         {
             ss << content;
         }
-        std::string json = ss.str();
-        ready4air::GenericPage<ready4air::Error> errorPage;
-        ready4air::ParseErrors parseErrors;
+        string json = ss.str();
+        GenericPage<Error> errorPage;
+        ParseErrors parseErrors;
 
-        if (!errorPage.InitFromJsonString(json, parseErrors)) std::cout << "Unable to parse errorPage." << std::endl;
+        if (!errorPage.InitFromJsonString(json, parseErrors)) cout << "Unable to parse errorPage." << endl;
 
         if (errorPage.GetItems())
         {
-            std::vector<ready4air::Error> items = errorPage.GetItems().Just();
+            vector<Error> items = errorPage.GetItems().Just();
             for (size_t i = 0; i < items.size(); i += 1)
             {
-                std::cout << "Error.Code = " <<items[i].GetCode() << std::endl;
+                cout << "Error.Code = " <<items[i].GetCode() << endl;
             }
         }
     }
@@ -51,30 +54,30 @@ bool TestGenericPage()
 
 int main()
 {
-    ready4air::Bundle bundle;
-    ready4air::Device device;
-    ready4air::Episode episode;
-    ready4air::Error error;
-    ready4air::FreePage freePage;
-    ready4air::GenericPage<ready4air::Movie> genericPage;
-    ready4air::Help help;
-    ready4air::List list;
-    ready4air::Literal literal;
-    ready4air::Movie movie;
-    ready4air::Page page;
-    ready4air::PurchaseInfo purchaseInfo;
-    ready4air::Season season;
-    ready4air::Series series;
-    ready4air::User user;
+    Bundle bundle;
+    Device device;
+    Episode episode;
+    Error error;
+    FreePage freePage;
+    GenericPage<Movie> genericPage;
+    Help help;
+    List list;
+    Literal literal;
+    Movie movie;
+    Page page;
+    PurchaseInfo purchaseInfo;
+    Season season;
+    Series series;
+    User user;
 
-    std::string json = "{\"Id\": \"apa\", \"ExternalId\": \"bepa\"}";
-    ready4air::ParseErrors parseErrors;
+    string json = "{\"Id\": \"apa\", \"ExternalId\": \"bepa\"}";
+    ParseErrors parseErrors;
     bundle.InitFromJsonString(json, parseErrors);
 
-    std::string id = bundle.GetId() ? bundle.GetId().Just() : "";
-    std::string externalId = bundle.GetExternalId() ? bundle.GetExternalId().Just() : "";
+    string id = bundle.GetId() ? bundle.GetId().Just() : "";
+    string externalId = bundle.GetExternalId() ? bundle.GetExternalId().Just() : "";
 
-    std::cout << id << ' ' << externalId << std::endl;
+    cout << id << ' ' << externalId << endl;
     TestGenericPage();
     return 0;
 }
