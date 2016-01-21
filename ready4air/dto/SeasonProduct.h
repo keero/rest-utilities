@@ -93,7 +93,7 @@ namespace ready4air
                 mDubbed = dubbed;
             }
 
-            const Maybe <std::vector<Entitlement>> &GetEntitlements() const
+            const Maybe <std::vector<Entitlement> > &GetEntitlements() const
             {
                 return mEntitlements;
             }
@@ -113,7 +113,7 @@ namespace ready4air
                 mPurchase = purchase;
             }
 
-            const Maybe <std::vector<PurchaseItem>> &GetPurchaseItems() const
+            const Maybe <std::vector<PurchaseItem> > &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
@@ -189,9 +189,9 @@ namespace ready4air
             Maybe <std::string> mStrPrice;
             Maybe<bool> mHD;
             Maybe<bool> mDubbed;
-            Maybe <std::vector<Entitlement>> mEntitlements;
+            Maybe <std::vector<Entitlement> > mEntitlements;
             Maybe <Form> mPurchase;
-            Maybe <std::vector<PurchaseItem>> mPurchaseItems;
+            Maybe <std::vector<PurchaseItem> > mPurchaseItems;
         };
     }
 }

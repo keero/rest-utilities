@@ -52,7 +52,7 @@ namespace ready4air
                 mCrentalId = crentalId;
             }
 
-            const Maybe <std::vector<std::string>> &GetCValueCodes() const
+            const Maybe <std::vector<std::string> > &GetCValueCodes() const
             {
                 return mCValueCodes;
             }
@@ -334,7 +334,7 @@ namespace ready4air
             Maybe <std::string> mId;
             Maybe <std::string> mCpurchaseId;
             Maybe <std::string> mCrentalId;
-            Maybe <std::vector<std::string>> mCValueCodes;
+            Maybe <std::vector<std::string> > mCValueCodes;
             Maybe <std::string> mCurrency;
             Maybe <std::string> mIPAddress;
             Maybe <std::string> mIPCountry;
