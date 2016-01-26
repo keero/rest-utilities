@@ -4,11 +4,11 @@
 #include <map>
 #include <sstream>
 #include <iterator>
-#include <regex>
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
 #include "../common/Maybe.h"
+#include "../common/Regex.h"
 
 typedef std::map<std::string, std::string> UrlContext;
 
@@ -65,99 +65,87 @@ namespace ready4air
 
             std::ostringstream expanded;
 
-            std::regex expr_regex("\\{([^\\{\\}]+)\\}|([^\\{\\}]+)");
-
-            std::sregex_iterator exprs_begin = std::sregex_iterator(url.begin(), url.end(), expr_regex);
-            std::sregex_iterator exprs_end = std::sregex_iterator();
+            std::string exprRegex = "^\\{([^\\{\\}]+)\\}";
+            std::string literalRegex = "([^\\{\\}]+)";
+            std::string subject = url;
+            std::string match;
+            std::string rest;
 
             bool lastIsOp = false;
-
-            for (std::sregex_iterator i = exprs_begin; i != exprs_end; ++i)
+            while (subject.length() > 0)
             {
-                std::smatch expr_match = *i;
-
-                if (expr_match.size() == 3)
+                if (ready4air::Regex::MatchSingle(exprRegex, subject, match, rest))
                 {
-                    std::string expression = expr_match[1];
-                    std::string literal = expr_match[2];
-
-                    if (expression.length())
+                    std::vector<std::string> values;
+                    char op = '\0';
+                    const char *end = operators + 7;
+                    const char *result = std::find(operators, end, match[0]);
+                    if (result != end)
                     {
-                        std::vector<std::string> values;
-                        char op = '\0';
-                        const char *end = operators + 7;
-                        const char *result = std::find(operators, end, expression[0]);
-                        if (result != end)
-                        {
-                            op = *result;
-                            expression = expression.substr(1, std::string::npos);
-                        }
-
-                        std::stringstream ss(expression);
-                        std::string item;
-                        while (getline(ss, item, ','))
-                        {
-                            std::regex var_regex("([^:\\*]*)(?::(\\d+)|(\\*))?");
-                            std::smatch var_match;
-                            if (regex_match(item, var_match, var_regex) && var_match.size() == 4)
-                            {
-                                std::string key = var_match[1];
-                                std::string modifier = var_match[2].length() ? var_match[2] : var_match[3];
-                                values.push_back(getValues(op, key, modifier));
-                            }
-                        }
-
-                        std::stringstream ss2;
-                        char separator = ',';
-
-                        if (op && op != '+')
-                        {
-                            if (op == '?')
-                            {
-                                separator = '&';
-                            }
-                            else if (op != '#')
-                            {
-                                separator = op;
-                            }
-
-
-
-                            if (values.size() && !lastIsOp)
-                            {
-                                ss2 << op;
-                                lastIsOp = true;
-                            }
-
-                        }
-                        for (size_t j = 0; j < values.size(); ++j)
-                        {
-                            if (j > 0 && values[j-1].length() > 0)
-                                ss2 << separator;
-                            if (values[j].length() > 0)
-                            {
-                                ss2 << values[j];
-                                lastIsOp = false;
-                            }
-                        }
-                        expanded << ss2.str();
+                        op = *result;
+                        match = match.substr(1, std::string::npos);
                     }
 
-                    if (literal.length())
+                    std::stringstream ss(match);
+                    std::string item;
+                    while (getline(ss, item, ','))
                     {
-                        if (literal[0] == '&' && lastIsOp) literal = literal.substr(1);
-                        expanded << encodeReserved(literal);
+                        values.push_back(getValues(op, item));
                     }
+
+                    std::stringstream ss2;
+                    char separator = ',';
+
+                    if (op && op != '+')
+                    {
+                        if (op == '?')
+                        {
+                            separator = '&';
+                        }
+                        else if (op != '#')
+                        {
+                            separator = op;
+                        }
+
+
+
+                        if (values.size() && !lastIsOp)
+                        {
+                            ss2 << op;
+                            lastIsOp = true;
+                        }
+
+                    }
+                    for (size_t j = 0; j < values.size(); ++j)
+                    {
+                        if (j > 0 && values[j-1].length() > 0)
+                        {
+                            ss2 << separator;
+                            lastIsOp = true;
+                        }
+                        if (values[j].length() > 0)
+                        {
+                            ss2 << values[j];
+                            lastIsOp = false;
+                        }
+                    }
+                    expanded << ss2.str();
                 }
+                else if (ready4air::Regex::MatchSingle(literalRegex, subject, match, rest))
+                {
+                    if (match[0] == '&' && lastIsOp) match = match.substr(1);
+                    expanded << encodeReserved(match);
+                }
+                else
+                    break;
+                subject = rest;
             }
             return expanded.str();
         }
 
     private:
-        std::string getValues(char op, const std::string &key, const std::string &modifier) const
+        std::string getValues(char op, const std::string &key) const
         {
-            if (modifier.length()) throw "Support for modifier syntax is not yet supported";
-
             std::ostringstream result;
             UrlContext::const_iterator search = mUrlContext.find(key);
 
@@ -185,24 +173,19 @@ namespace ready4air
         static std::string encodeReserved(const std::string &value)
         {
             std::ostringstream result;
-            std::regex rgx("%[0-9A-Fa-f]{2}");
-            std::sregex_token_iterator iter(value.begin(),
-                                            value.end(),
-                                            rgx,
-                                            -1);
-            std::sregex_token_iterator end;
-            for (; iter != end; ++iter)
+
+            std::vector<std::string> tokens;
+            Regex::Split("(%[[:xdigit:]]{2})", value, tokens);
+
+            for (size_t i = 0; i < tokens.size(); i += 1)
             {
-                std::string item(*iter);
-                std::regex rgx2("%[0-9A-Fa-f]");
-                std::smatch m;
-                if (regex_match(item, m, rgx2))
+                std::string item = tokens[i];
+                if (!Regex::Match("(%[[:xdigit:]])", item))
                 {
                     item = encodeURI(item, false);
                 }
                 result << item;
             }
-
             return result.str();
         }
 
