@@ -16,6 +16,7 @@
 #include "Reviews.h"
 #include "Genre.h"
 #include "Product.h"
+#include "Play.h"
 
 namespace ready4air
 {
@@ -379,6 +380,16 @@ namespace ready4air
                 mSelf = self;
             }
 
+            const Maybe<Play> &GetPlay() const
+            {
+                return mPlay;
+            }
+
+            void SetPlay(const Play &play)
+            {
+                mPlay = play;
+            }
+
             const Maybe<Link> &GetFullPlay() const
             {
                 return mFullPlay;
@@ -464,6 +475,7 @@ namespace ready4air
                 std::vector<HlsManifest> hlsManifests;
                 std::vector<Subtitle> subtitles;
                 Link self;
+                Play play;
                 Link fullPlay;
                 std::vector<PurchaseItem> purchaseItems;
                 Reviews reviews;
@@ -641,6 +653,9 @@ namespace ready4air
                 if (ParseObject(value, "Self", false, self, parseErrors))
                     SetSelf(self);
 
+                if (ParseObject(value, "Play", false, play, parseErrors))
+                    SetPlay(play);
+
                 if (ParseObject(value, "FullPlay", false, fullPlay, parseErrors))
                     SetFullPlay(fullPlay);
 
@@ -717,6 +732,7 @@ namespace ready4air
             Maybe<std::vector<HlsManifest> > mHlsManifests;
             Maybe<std::vector<Subtitle> > mSubtitles;
             Maybe<Link> mSelf;
+            Maybe<Play> mPlay;
             Maybe<Link> mFullPlay;
             Maybe<std::vector<PurchaseItem> > mPurchaseItems;
             Maybe<Reviews> mReviews;
