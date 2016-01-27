@@ -58,7 +58,7 @@ namespace ready4air
             mUrlContext.clear();
         }
 
-        std::string Expand() const
+        std::string Expand()
         {
             if (!mUrl) return "";
             std::string url = mUrl.Just();
@@ -140,7 +140,9 @@ namespace ready4air
                     break;
                 subject = rest;
             }
-            return expanded.str();
+            std::string expandedStr = expanded.str();
+            if (isKeyOperator(expandedStr.back())) expandedStr.pop_back();
+            return expandedStr;
         }
 
     private:
