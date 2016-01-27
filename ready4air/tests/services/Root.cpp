@@ -2,11 +2,15 @@
 #include <sstream>
 #include <fstream>
 
+
+#ifndef READY4AIR_UNUSED
+#define READY4AIR_UNUSED(arg)
+#endif
+
+//#include <ready4air/services.h>
 #include "../../services/Root.h"
 #include "HttpClient.h"
 #include "AuthDeviceEvent.h"
-//#include "HttpClient.h"
-//#include "../../services/LiteralsService.h"
 
 using namespace std;
 using namespace ready4air;
