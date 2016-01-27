@@ -58,7 +58,7 @@ namespace ready4air
             mUrlContext.clear();
         }
 
-        std::string Expand()
+        std::string Expand() const
         {
             if (!mUrl) return "";
             std::string url = mUrl.Just();
