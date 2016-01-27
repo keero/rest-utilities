@@ -15,21 +15,18 @@
 #include "exceptions/BadEventType.h"
 #include "exceptions/BadHttpClientType.h"
 
-#define READY4AIR_SERVICE_ROOT_HREF "https://pp.sfanytime.com/Neonstingray.Nettv4.RestApi/api/devices{?apiKey,manufacturer,model,udid}"
-
 namespace ready4air
 {
 
     namespace services
     {
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
         class Root
         {
+        private:
+
         public:
             Root()
             {
-                if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <AuthDeviceResponse>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~Root()
@@ -43,9 +40,8 @@ namespace ready4air
                 mServiceRoot.SetWithCredentials(true);
             }
 
-            bool AuthDevice(DevicesService <HTTP_CLIENT_TYPE, EVENT_TYPE> &devicesService, const std::string &apiKey, const std::string &manufacturer, const std::string &model, const std::string &udid)
+            bool AuthDevice(IHttpClient *pClient, const std::string &apiKey, const std::string &manufacturer, const std::string &model, const std::string &udid)
             {
-                IHttpClient *pClient = &devicesService;
                 RequestData requestData;
 
                 mServiceRoot.SetParam("apiKey", apiKey);
@@ -53,7 +49,7 @@ namespace ready4air
                 mServiceRoot.SetParam("model", model);
                 mServiceRoot.SetParam("udid", udid);
 
-                requestData = mRequestService.CreateRequestFromLink(DevicesService <HTTP_CLIENT_TYPE, EVENT_TYPE>::AUTH_DEVICE_REQUEST, mServiceRoot);
+                requestData = RequestService::CreateRequestFromLink(ROOT_AUTHDEVICE_REQUEST, mServiceRoot);
 
                 pClient->DoRequest(requestData);
                 return true;
@@ -61,9 +57,6 @@ namespace ready4air
 
         private:
             dto::Link mServiceRoot;
-            RequestService mRequestService;
-            BadHttpClientType mBadHttpClientType;
-            BadEventType mBadEventType;
         };
     }
 }

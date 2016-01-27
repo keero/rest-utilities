@@ -15,23 +15,15 @@ namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> UsersResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class UsersService : public HTTP_CLIENT_TYPE
         {
         public:
-            typedef enum {
-                LOGIN_USER_REQUEST = 1,
-                REGISTER_USER_REQUEST,
-                FORGOT_PASSWORD_USER_REQUEST,
-                SELF_USER_REQUEST
-            } _;
-
             UsersService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <UsersResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~UsersService()
@@ -43,45 +35,27 @@ namespace ready4air
                 return mUser;
             }
 
-            EVENT_TYPE GetLoginEvent() const
-            {
-                return mLoginEvent;
-            }
-
-            EVENT_TYPE GetRegisterEvent() const
-            {
-                return mRegisterEvent;
-            }
-
-            EVENT_TYPE GetForgotPasswordEvent() const
-            {
-                return mForgotPasswordEvent;
-            }
-
         protected:
             void SetUser(const dto::User &user)
             {
                 mUser = user;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;
-                UsersResponse payload;
-                Error error;
-                error.SetHttpStatusCode(responseData.GetStatusCode());
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent;
+
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 switch (requestData.GetCallee())
                 {
-                    case LOGIN_USER_REQUEST:
-                    case SELF_USER_REQUEST:
+                    case DEVICE_LOGIN_REQUEST:
+                    case USER_SELF_REQUEST:
                     {
-                        IEvent <UsersResponse> *pEvent = GetLoginEvent();
+                        pEvent = &LoginEvent;
                         switch (responseData.GetStatusCode())
                         {
                             case ResponseData::HTTP_STATUS_CODE_OK:
@@ -93,17 +67,14 @@ namespace ready4air
                                 }
                                 else
                                 {
-                                    error.SetMessage("Failed to parse User.");
-                                    error.SetParseErrors(parseErrors);
-                                    payload = error;
+                                    pPayload->SetMessage("Failed to parse User.");
                                 }
                                 break;
                             }
 
                             default:
                             {
-                                error.SetMessage("Login failed.");
-                                payload = error;
+                                pPayload->SetMessage("Login failed.");
                                 break;
                             }
                         }
@@ -111,9 +82,9 @@ namespace ready4air
                         break;
                     }
 
-                    case REGISTER_USER_REQUEST:
+                    case DEVICE_REGISTER_REQUEST:
                     {
-                        IEvent <UsersResponse> *pEvent = GetRegisterEvent();
+                        pEvent = &RegisterEvent;
                         switch (responseData.GetStatusCode())
                         {
                             case ResponseData::HTTP_STATUS_CODE_OK:
@@ -121,8 +92,7 @@ namespace ready4air
 
                             default:
                             {
-                                error.SetMessage("Register failed.");
-                                payload = error;
+                                pPayload->SetMessage("Register failed.");
                                 break;
                             }
                         }
@@ -130,9 +100,9 @@ namespace ready4air
                         break;
                     }
 
-                    case FORGOT_PASSWORD_USER_REQUEST:
+                    case DEVICE_FORGOTPASSWORD_REQUEST:
                     {
-                        IEvent <UsersResponse> *pEvent = GetForgotPasswordEvent();
+                        pEvent = &ForgotPasswordEvent;
                         switch (responseData.GetStatusCode())
                         {
                             case ResponseData::HTTP_STATUS_CODE_OK:
@@ -140,8 +110,7 @@ namespace ready4air
 
                             default:
                             {
-                                error.SetMessage("ForgotPassword failed.");
-                                payload = error;
+                                pPayload->SetMessage("ForgotPassword failed.");
                                 break;
                             }
                         }
@@ -154,15 +123,16 @@ namespace ready4air
                 }
             }
 
+        public:
+            EVENT_TYPE LoginEvent;
+            EVENT_TYPE RegisterEvent;
+            EVENT_TYPE ForgotPasswordEvent;
 
         private:
-            EVENT_TYPE mLoginEvent;
-            EVENT_TYPE mRegisterEvent;
-            EVENT_TYPE mForgotPasswordEvent;
             Maybe <dto::User> mUser;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

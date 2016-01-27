@@ -9,26 +9,22 @@
 #include "RequestService.h"
 #include "Error.h"
 #include "exceptions/BadEventType.h"
+#include "exceptions/BadEventPayloadType.h"
 #include "exceptions/BadHttpClientType.h"
 
 namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> MediasResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class MediasService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            typedef enum {
-                SELF_MEDIA_REQUEST = 1
-            } _;
-
             MediasService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <MediasResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~MediasService()
@@ -38,11 +34,6 @@ namespace ready4air
             const Maybe<dto::MediaProduct> &GetMedia() const
             {
                 return mMedia;
-            }
-
-            EVENT_TYPE GetSelfEvent() const
-            {
-                return mSelfEvent;
             }
 
             virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
@@ -63,23 +54,19 @@ namespace ready4air
                 mMedia = media;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;
-                MediasResponse payload;
-                Error error;
-                IEvent <MediasResponse> *pEvent;
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &MediaEvent;
+
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 switch (requestData.GetCallee())
                 {
-                    case SELF_MEDIA_REQUEST:
+                    case MEDIA_SELF_REQUEST:
                     default:
-                        pEvent = GetSelfEvent();
                         break;
                 }
 
@@ -94,28 +81,27 @@ namespace ready4air
                         }
                         else
                         {
-                            error.SetMessage("Failed to parse Media.");
-                            error.SetParseErrors(parseErrors);
-                            payload = error;
+                            pPayload->SetMessage("Failed to parse Media.");
                         }
                         break;
                     }
                     default:
                         // @TODO: Add error reporting
-                        error.SetMessage("Unexpected medias response.");
-                        payload = error;
+                        pPayload->SetMessage("Unexpected medias response.");
                         break;
                 }
 
                 pEvent->Emit(payload);
             }
 
+        public:
+            EVENT_TYPE MediaEvent;
+
         private:
-            EVENT_TYPE mSelfEvent;
             Maybe <dto::MediaProduct> mMedia;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

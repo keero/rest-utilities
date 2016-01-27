@@ -9,27 +9,24 @@
 #include "RequestService.h"
 #include "Error.h"
 #include "exceptions/BadEventType.h"
+#include "exceptions/BadEventPayloadType.h"
 #include "exceptions/BadHttpClientType.h"
 
 namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> LiteralsResponse;
         typedef std::map <std::string, dto::Literal> Literals;
 
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class LiteralsService : public HTTP_CLIENT_TYPE
         {
         public:
-            typedef enum {
-                LITERALS_REQUEST = 1
-            } _;
-
             LiteralsService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <LiteralsResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~LiteralsService()
@@ -47,30 +44,21 @@ namespace ready4air
                 return result;
             }
 
-            EVENT_TYPE GetLiteralsEvent() const
-            {
-                return mLiteralsEvent;
-            }
-
         protected:
             void SetLiteral(const std::string &key, const dto::Literal &value)
             {
                 mLiterals[key] = value;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
+                READY4AIR_UNUSED(requestData);
                 dto::ParseErrors parseErrors;
-                LiteralsResponse payload;
-                Error error;
-                IEvent <LiteralsResponse> *pEvent = GetLiteralsEvent();
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &LiteralsEvent;
 
-                error.SetHttpStatusCode(responseData.GetStatusCode());
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 if (responseData.GetStatusCode() == ResponseData::HTTP_STATUS_CODE_OK)
                 {
@@ -79,8 +67,7 @@ namespace ready4air
                     if (d.Parse(responseData.GetBody().c_str()).HasParseError() || !d.IsArray())
                     {
                         // @TODO: Add error reporting
-                        error.SetMessage("Unexpected literals response.");
-                        payload = error;
+                        pPayload->SetMessage("Unexpected literals response.");
                     }
                     else
                     {
@@ -97,19 +84,19 @@ namespace ready4air
                 else
                 {
                     // @TODO: Add error reporting
-                    error.SetMessage("Unexpected literals response.");
-                    payload = error;
+                    pPayload->SetMessage("Unexpected literals response.");
                 }
                 pEvent->Emit(payload);
             }
 
+        public:
+            EVENT_TYPE LiteralsEvent;
 
         private:
-            EVENT_TYPE mLiteralsEvent;
             Literals mLiterals;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

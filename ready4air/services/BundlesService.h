@@ -9,26 +9,22 @@
 #include "RequestService.h"
 #include "Error.h"
 #include "exceptions/BadEventType.h"
+#include "exceptions/BadEventPayloadType.h"
 #include "exceptions/BadHttpClientType.h"
 
 namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> BundlesResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class BundlesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            typedef enum {
-                SELF_BUNDLE_REQUEST = 1
-            } _;
-
             BundlesService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <BundlesResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~BundlesService()
@@ -38,11 +34,6 @@ namespace ready4air
             const Maybe<dto::Bundle> &GetBundle() const
             {
                 return mBundle;
-            }
-
-            EVENT_TYPE GetSelfEvent() const
-            {
-                return mSelfEvent;
             }
 
             virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
@@ -63,23 +54,20 @@ namespace ready4air
                 mBundle = bundle;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;
-                BundlesResponse payload;
-                Error error;
-                IEvent <BundlesResponse> *pEvent;
+                dto::ParseErrors parseErrors;
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &BundleEvent;
+
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 switch (requestData.GetCallee())
                 {
-                    case SELF_BUNDLE_REQUEST:
+                    case BUNDLE_SELF_REQUEST:
                     default:
-                        pEvent = GetSelfEvent();
                         break;
                 }
 
@@ -94,28 +82,27 @@ namespace ready4air
                         }
                         else
                         {
-                            error.SetMessage("Failed to parse Bundle.");
-                            error.SetParseErrors(parseErrors);
-                            payload = error;
+                            pPayload->SetMessage("Failed to parse Bundle.");
                         }
                         break;
                     }
                     default:
                         // @TODO: Add error reporting
-                        error.SetMessage("Unexpected bundles response.");
-                        payload = error;
+                        pPayload->SetMessage("Unexpected bundles response.");
                         break;
                 }
 
                 pEvent->Emit(payload);
             }
 
+        public:
+            EVENT_TYPE BundleEvent;
+
         private:
-            EVENT_TYPE mSelfEvent;
             Maybe <dto::Bundle> mBundle;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

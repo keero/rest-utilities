@@ -15,21 +15,15 @@ namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> HelpsResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class HelpsService : public HTTP_CLIENT_TYPE
         {
         public:
-            typedef enum {
-                HELPS_REQUEST = 1,
-                SELF_HELPS_REQUEST
-            } _;
-
             HelpsService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <HelpsResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~HelpsService()
@@ -41,30 +35,21 @@ namespace ready4air
                 return mHelp;
             }
 
-            EVENT_TYPE GetHelpsEvent() const
-            {
-                return mHelpsEvent;
-            }
-
         protected:
             void SetHelp(const dto::Help &help)
             {
                 mHelp = help;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
+                READY4AIR_UNUSED(requestData);
                 dto::ParseErrors parseErrors;
-                HelpsResponse payload;
-                Error error;
-                IEvent <HelpsResponse> *pEvent = GetHelpsEvent();
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &HelpsEvent;
 
-                error.SetHttpStatusCode(responseData.GetStatusCode());
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 if (responseData.GetStatusCode() == ResponseData::HTTP_STATUS_CODE_OK)
                 {
@@ -75,26 +60,22 @@ namespace ready4air
                     }
                     else
                     {
-                        error.SetMessage("Failed to parse Help.");
-                        error.SetParseErrors(parseErrors);
-                        payload = error;
+                        pPayload->SetMessage("Failed to parse Help.");
                     }
-                    pEvent->Emit(payload);
                 }
                 else
                 {
                     // @TODO: Add error reporting
-                    error.SetMessage("Unexpected helps response.");
-                    payload = error;
-                    pEvent->Emit(payload);
+                    pPayload->SetMessage("Unexpected helps response.");
                 }
+                pEvent->Emit(payload);
             }
 
+        public:
+            EVENT_TYPE HelpsEvent;
 
         private:
-            EVENT_TYPE mHelpsEvent;
             Maybe <dto::Help> mHelp;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
         };

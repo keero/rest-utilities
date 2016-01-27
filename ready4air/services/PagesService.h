@@ -9,27 +9,22 @@
 #include "RequestService.h"
 #include "Error.h"
 #include "exceptions/BadEventType.h"
+#include "exceptions/BadEventPayloadType.h"
 #include "exceptions/BadHttpClientType.h"
 
 namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> PagesResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class PagesService : public HTTP_CLIENT_TYPE
         {
         public:
-            typedef enum {
-                HOME_PAGE_REQUEST = 1,
-                SELF_PAGE_REQUEST
-            } _;
-
             PagesService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <PagesResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~PagesService()
@@ -41,30 +36,21 @@ namespace ready4air
                 return mPage;
             }
 
-            EVENT_TYPE GetHomeEvent() const
-            {
-                return mHomeEvent;
-            }
-
         protected:
             void SetPage(const dto::Page &page)
             {
                 mPage = page;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
+                READY4AIR_UNUSED(requestData);
                 dto::ParseErrors parseErrors;
-                PagesResponse payload;
-                Error error;
-                IEvent <PagesResponse> *pEvent = GetHomeEvent();
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &HomeEvent;
 
-                error.SetHttpStatusCode(responseData.GetStatusCode());
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 if (responseData.GetStatusCode() == ResponseData::HTTP_STATUS_CODE_OK)
                 {
@@ -75,28 +61,26 @@ namespace ready4air
                     }
                     else
                     {
-                        error.SetMessage("Failed to parse Page.");
-                        error.SetParseErrors(parseErrors);
-                        payload = error;
+                        pPayload->SetMessage("Failed to parse Page.");
                     }
-                    pEvent->Emit(payload);
                 }
                 else
                 {
                     // @TODO: Add error reporting
-                    error.SetMessage("Unexpected pages response.");
-                    payload = error;
-                    pEvent->Emit(payload);
+                    pPayload->SetMessage("Unexpected pages response.");
                 }
+                pEvent->Emit(payload);
             }
 
 
+        public:
+            EVENT_TYPE HomeEvent;
+
         private:
-            EVENT_TYPE mHomeEvent;
             Maybe <dto::Page> mPage;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

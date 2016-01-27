@@ -15,20 +15,15 @@ namespace ready4air
 {
     namespace services
     {
-        typedef Maybe <Error> SeriesResponse;
-
-        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE>
+        template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class SeriesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            typedef enum {
-                SELF_SERIES_REQUEST = 1
-            } _;
-
             SeriesService()
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
-                if (!std::is_base_of<IEvent <SeriesResponse>, EVENT_TYPE>::value) throw mBadEventType;
+                if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
+                if (!std::is_base_of<IEvent <EVENT_PAYLOAD_TYPE>, EVENT_TYPE>::value) throw mBadEventType;
             }
 
             virtual ~SeriesService()
@@ -38,11 +33,6 @@ namespace ready4air
             const Maybe<dto::Series> &GetSeries() const
             {
                 return mSeries;
-            }
-
-            EVENT_TYPE GetSelfEvent() const
-            {
-                return mSelfEvent;
             }
 
             virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
@@ -63,23 +53,19 @@ namespace ready4air
                 mSeries = series;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;
-                SeriesResponse payload;
-                Error error;
-                IEvent <SeriesResponse> *pEvent;
+                EVENT_PAYLOAD_TYPE payload;
+                IEventPayload *pPayload = &payload;
+                IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &SeriesEvent;
+
+                pPayload->SetHttpStatusCode(responseData.GetStatusCode());
 
                 switch (requestData.GetCallee())
                 {
-                    case SELF_SERIES_REQUEST:
+                    case SERIES_SELF_REQUEST:
                     default:
-                        pEvent = GetSelfEvent();
                         break;
                 }
 
@@ -94,28 +80,27 @@ namespace ready4air
                         }
                         else
                         {
-                            error.SetMessage("Failed to parse Series.");
-                            error.SetParseErrors(parseErrors);
-                            payload = error;
+                            pPayload->SetMessage("Failed to parse Series.");
                         }
                         break;
                     }
                     default:
                         // @TODO: Add error reporting
-                        error.SetMessage("Unexpected series response.");
-                        payload = error;
+                        pPayload->SetMessage("Unexpected series response.");
                         break;
                 }
 
                 pEvent->Emit(payload);
             }
 
+        public:
+            EVENT_TYPE SeriesEvent;
+
         private:
-            EVENT_TYPE mSelfEvent;
             Maybe <dto::Series> mSeries;
-            RequestService mRequestService;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }
