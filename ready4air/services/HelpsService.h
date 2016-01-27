@@ -10,6 +10,7 @@
 #include "Error.h"
 #include "exceptions/BadEventType.h"
 #include "exceptions/BadHttpClientType.h"
+#include "exceptions/BadEventPayloadType.h"
 
 namespace ready4air
 {
@@ -78,6 +79,7 @@ namespace ready4air
             Maybe <dto::Help> mHelp;
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
+            BadEventPayloadType mBadEventPayloadType;
         };
     }
 }

@@ -1,4 +1,4 @@
-//#ifndef READY4AIR_SERVICES_DEVICESSERVICE_H
+#ifndef READY4AIR_SERVICES_DEVICESSERVICE_H
 #define READY4AIR_SERVICES_DEVICESSERVICE_H
 
 
@@ -105,7 +105,7 @@ namespace ready4air
                     link.SetParam("username", username);
                     link.SetParam("password", password);
 
-                    requestData = RequestService::CreateRequestFromLink(DEVICE_LOGIN_REQUEST link);
+                    requestData = RequestService::CreateRequestFromLink(DEVICE_LOGIN_REQUEST, link);
 
                     pClient->DoRequest(requestData);
                     return true;

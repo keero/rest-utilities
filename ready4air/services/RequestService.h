@@ -12,7 +12,7 @@ namespace ready4air
         class RequestService
         {
         public:
-            static const RequestData CreateRequestFromLink(Callee callee, dto::Link &link) const
+            static const RequestData CreateRequestFromLink(Callee callee, dto::Link &link)
             {
                 RequestData requestData;
                 requestData.SetURI(link.GetExpandedUrl());
@@ -22,7 +22,7 @@ namespace ready4air
                 return requestData;
             }
 
-            static const RequestData CreateRequestFromForm(Callee callee, dto::Form &form) const
+            static const RequestData CreateRequestFromForm(Callee callee, dto::Form &form)
             {
                 RequestData requestData;
                 if (form.GetAction())

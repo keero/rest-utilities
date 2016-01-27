@@ -85,11 +85,6 @@ namespace ready4air
                 return mPaginated;
             }
 
-            const RequestService &GetRequestService() const
-            {
-                return mRequestService;
-            }
-
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;

@@ -57,7 +57,6 @@ namespace ready4air
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
                 dto::ParseErrors parseErrors;
-                dto::ParseErrors parseErrors;
                 EVENT_PAYLOAD_TYPE payload;
                 IEventPayload *pPayload = &payload;
                 IEvent <EVENT_PAYLOAD_TYPE> *pEvent = &BundleEvent;
