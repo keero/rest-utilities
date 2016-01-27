@@ -10,10 +10,13 @@ namespace ready4air
     public:
         typedef enum
         {
+            HTTP_STATUS_CODE_NONE = 0,
             HTTP_STATUS_CODE_OK = 200,
+            HTTP_STATUS_CODE_NOT_MODIFIED = 304,
             HTTP_STATUS_CODE_UNAUTHORIZED = 401,
             HTTP_STATUS_CODE_PAYMENT_REQUIRED = 402,
-            HTTP_STATUS_CODE_NOT_FOUND = 404
+            HTTP_STATUS_CODE_NOT_FOUND = 404,
+            HTTP_STATUS_CODE_UNDEFINED = 999
 
         } HTTP_STATUS_CODE;
 
