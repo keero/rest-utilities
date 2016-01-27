@@ -2,8 +2,12 @@
 
 echo "#ifndef READY4AIR_H"
 echo "#define READY4AIR_H"
-for file in "$@"
-do
-    echo "#include \"${file##*/}\""
-done
+
+ready4air/tools/depends.sh $@
+
+#for file in "$@"
+#do
+#    echo "#include \"${file##*/}\""
+#done
+
 echo "#endif //READY4AIR_H"
