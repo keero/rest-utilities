@@ -6,6 +6,31 @@
 
 namespace ready4air
 {
+    typedef enum {
+        ROOT_AUTHDEVICE_REQUEST = 1,
+        ROOT_ADDDEVICE_REQUEST,
+        DEVICE_HOME_REQUEST,
+        DEVICE_HELPS_REQUEST,
+        DEVICE_LITERALS_REQUEST,
+        DEVICE_LOGIN_REQUEST,
+        DEVICE_REGISTER_REQUEST,
+        DEVICE_FORGOTPASSWORD_REQUEST,
+        DEVICE_SELF_REQUEST,
+        DEVICE_SEARCH_REQUEST,
+        DEVICE_SEARCHASYOUTYPE_REQUEST,
+        DEVICE_SEARCHMOVIES_REQUEST,
+        DEVICE_SEARCHSERIES_REQUEST,
+        DEVICE_SEARCHBUNDLES_REQUEST,
+        DEVICE_SEARCHMOVIESBYPERSON_REQUEST,
+        BUNDLE_SELF_REQUEST,
+        MEDIA_SELF_REQUEST,
+        MOVIE_SELF_REQUEST,
+        SERIES_SELF_REQUEST,
+        PAGINATED_NEXT_REQUEST,
+        PAGINATED_PREV_REQUEST,
+        USER_SELF_REQUEST
+    } Callee;
+
     class RequestData
     {
     public:
@@ -57,12 +82,12 @@ namespace ready4air
             mBody = body;
         }
 
-        int GetCallee() const
+        Callee GetCallee() const
         {
             return mCallee;
         }
 
-        void SetCallee(int callee)
+        void SetCallee(Callee callee)
         {
             mCallee = callee;
         }
@@ -81,7 +106,7 @@ namespace ready4air
         std::string mMethod;
         bool mWithCredentials;
         Maybe <std::string> mBody;
-        int mCallee;
+        Callee mCallee;
     };
 }
 
