@@ -30,53 +30,53 @@ namespace ready4air
                 mCookie = cookie;
             }
 
-            const Maybe <std::string> &GetCustomData() const
+            const Maybe <STRING_T> &GetCustomData() const
             {
                 return mCustomData;
             }
 
-            void SetCustomData(const std::string &customData)
+            void SetCustomData(const STRING_T &customData)
             {
                 mCustomData = customData;
             }
 
-            const Maybe <std::string> &GetCustomerToken() const
+            const Maybe <STRING_T> &GetCustomerToken() const
             {
                 return mCustomerToken;
             }
 
-            void SetCustomerToken(const std::string &customerToken)
+            void SetCustomerToken(const STRING_T &customerToken)
             {
                 mCustomerToken = customerToken;
             }
 
-            const Maybe <std::string> &GetDeviceToken() const
+            const Maybe <STRING_T> &GetDeviceToken() const
             {
                 return mDeviceToken;
             }
 
-            void SetDeviceToken(const std::string &deviceToken)
+            void SetDeviceToken(const STRING_T &deviceToken)
             {
                 mDeviceToken = deviceToken;
             }
 
-            const Maybe <std::string> &GetContentId() const
+            const Maybe <STRING_T> &GetContentId() const
             {
                 return mContentId;
             }
 
-            void SetContentId(const std::string &contentId)
+            void SetContentId(const STRING_T &contentId)
             {
                 mContentId = contentId;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link cookie;
-                std::string customData;
-                std::string customerToken;
-                std::string deviceToken;
-                std::string contentId;
+                STRING_T customData;
+                STRING_T customerToken;
+                STRING_T deviceToken;
+                STRING_T contentId;
 
                 if (ParseObject(value, "Cookie", true, cookie, parseErrors))
                     SetCookie(cookie);
@@ -98,10 +98,10 @@ namespace ready4air
 
         private:
             Maybe <Link> mCookie;
-            Maybe <std::string> mCustomData;
-            Maybe <std::string> mCustomerToken;
-            Maybe <std::string> mDeviceToken;
-            Maybe <std::string> mContentId;
+            Maybe <STRING_T> mCustomData;
+            Maybe <STRING_T> mCustomerToken;
+            Maybe <STRING_T> mDeviceToken;
+            Maybe <STRING_T> mContentId;
         };
     }
 }

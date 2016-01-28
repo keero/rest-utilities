@@ -46,32 +46,32 @@ namespace ready4air
                 mSerie = serie;
             }
 
-            const Maybe<std::vector<Episode> > &GetEpisodes() const
+            const Maybe<VECTOR_T<Episode> > &GetEpisodes() const
             {
                 return mEpisodes;
             }
 
-            void SetEpisodes(const std::vector<Episode> &episodes)
+            void SetEpisodes(const VECTOR_T<Episode> &episodes)
             {
                 mEpisodes = episodes;
             }
 
-            const Maybe<std::vector<SeasonProduct> > &GetSeasonProducts() const
+            const Maybe<VECTOR_T<SeasonProduct> > &GetSeasonProducts() const
             {
                 return mSeasonProducts;
             }
 
-            void SetSeasonProducts(const std::vector<SeasonProduct> &seasonProducts)
+            void SetSeasonProducts(const VECTOR_T<SeasonProduct> &seasonProducts)
             {
                 mSeasonProducts = seasonProducts;
             }
 
-            const Maybe<std::string> &GetTitleId() const
+            const Maybe<STRING_T> &GetTitleId() const
             {
                 return mTitleId;
             }
 
-            void SetTitleId(const std::string &titleId)
+            void SetTitleId(const STRING_T &titleId)
             {
                 mTitleId = titleId;
             }
@@ -86,92 +86,92 @@ namespace ready4air
                 mTitleLink = titleLink;
             }
 
-            const Maybe<std::string> &GetOriginalTitle() const
+            const Maybe<STRING_T> &GetOriginalTitle() const
             {
                 return mOriginalTitle;
             }
 
-            void SetOriginalTitle(const std::string &originalTitle)
+            void SetOriginalTitle(const STRING_T &originalTitle)
             {
                 mOriginalTitle = originalTitle;
             }
 
-            const Maybe<bool> &IsAdult() const
+            const Maybe<BOOL_T> &IsAdult() const
             {
                 return mAdult;
             }
 
-            void SetAdult(bool adult)
+            void SetAdult(BOOL_T adult)
             {
                 mAdult = adult;
             }
 
-            const Maybe<std::string> &GetLocalTitle() const
+            const Maybe<STRING_T> &GetLocalTitle() const
             {
                 return mLocalTitle;
             }
 
-            void SetLocalTitle(const std::string &localTitle)
+            void SetLocalTitle(const STRING_T &localTitle)
             {
                 mLocalTitle = localTitle;
             }
 
-            const Maybe<std::string> &GetShortTitle() const
+            const Maybe<STRING_T> &GetShortTitle() const
             {
                 return mShortTitle;
             }
 
-            void SetShortTitle(const std::string &shortTitle)
+            void SetShortTitle(const STRING_T &shortTitle)
             {
                 mShortTitle = shortTitle;
             }
 
-            const Maybe<std::string> &GetLongSummary() const
+            const Maybe<STRING_T> &GetLongSummary() const
             {
                 return mLongSummary;
             }
 
-            void SetLongSummary(const std::string &longSummary)
+            void SetLongSummary(const STRING_T &longSummary)
             {
                 mLongSummary = longSummary;
             }
 
-            const Maybe<std::string> &GetShortSummary() const
+            const Maybe<STRING_T> &GetShortSummary() const
             {
                 return mShortSummary;
             }
 
-            void SetShortSummary(const std::string &shortSummary)
+            void SetShortSummary(const STRING_T &shortSummary)
             {
                 mShortSummary = shortSummary;
             }
 
-            const Maybe<std::string> &GetSortTitle() const
+            const Maybe<STRING_T> &GetSortTitle() const
             {
                 return mSortTitle;
             }
 
-            void SetSortTitle(const std::string &sortTitle)
+            void SetSortTitle(const STRING_T &sortTitle)
             {
                 mSortTitle = sortTitle;
             }
 
-            const Maybe<std::string> &GetProductionCountry() const
+            const Maybe<STRING_T> &GetProductionCountry() const
             {
                 return mProductionCountry;
             }
 
-            void SetProductionCountry(const std::string &productionCountry)
+            void SetProductionCountry(const STRING_T &productionCountry)
             {
                 mProductionCountry = productionCountry;
             }
 
-            const Maybe<short> &GetYear() const
+            const Maybe<INT16_T> &GetYear() const
             {
                 return mYear;
             }
 
-            void SetYear(short year)
+            void SetYear(INT16_T year)
             {
                 mYear = year;
             }
@@ -186,22 +186,22 @@ namespace ready4air
                 mLength = length;
             }
 
-            const Maybe<std::string> &GetPublishDate() const
+            const Maybe<STRING_T> &GetPublishDate() const
             {
                 return mPublishDate;
             }
 
-            void SetPublishDate(const std::string &publishDate)
+            void SetPublishDate(const STRING_T &publishDate)
             {
                 mPublishDate = publishDate;
             }
 
-            const Maybe<std::string> &GetUnPublishDate() const
+            const Maybe<STRING_T> &GetUnPublishDate() const
             {
                 return mUnPublishDate;
             }
 
-            void SetUnPublishDate(const std::string &unPublishDate)
+            void SetUnPublishDate(const STRING_T &unPublishDate)
             {
                 mUnPublishDate = unPublishDate;
             }
@@ -216,42 +216,42 @@ namespace ready4air
                 mAgeLimit = ageLimit;
             }
 
-            const Maybe<std::string> &GetModified() const
+            const Maybe<STRING_T> &GetModified() const
             {
                 return mModified;
             }
 
-            void SetModified(const std::string &modified)
+            void SetModified(const STRING_T &modified)
             {
                 mModified = modified;
             }
 
-            const Maybe<std::vector<Cast> > &GetCasts() const
+            const Maybe<VECTOR_T<Cast> > &GetCasts() const
             {
                 return mCasts;
             }
 
-            void SetCasts(const std::vector<Cast> &casts)
+            void SetCasts(const VECTOR_T<Cast> &casts)
             {
                 mCasts = casts;
             }
 
-            const Maybe<std::vector<Image> > &GetImages() const
+            const Maybe<VECTOR_T<Image> > &GetImages() const
             {
                 return mImages;
             }
 
-            void SetImages(const std::vector<Image> &images)
+            void SetImages(const VECTOR_T<Image> &images)
             {
                 mImages = images;
             }
 
-            const Maybe<std::vector<Genre> > &GetGenres() const
+            const Maybe<VECTOR_T<Genre> > &GetGenres() const
             {
                 return mGenres;
             }
 
-            void SetGenres(const std::vector<Genre> &genres)
+            void SetGenres(const VECTOR_T<Genre> &genres)
             {
                 mGenres = genres;
             }
@@ -286,31 +286,31 @@ namespace ready4air
                 mAllEpisodes = allEpisodes;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int seasonNo;
+                INT32_T seasonNo;
                 Link serie;
-                std::vector<Episode> episodes;
-                std::vector<SeasonProduct> seasonProducts;
-                std::string titleId;
+                VECTOR_T<Episode> episodes;
+                VECTOR_T<SeasonProduct> seasonProducts;
+                STRING_T titleId;
                 Link titleLink;
-                std::string originalTitle;
-                bool adult;
-                std::string localTitle;
-                std::string shortTitle;
-                std::string longSummary;
-                std::string shortSummary;
-                std::string sortTitle;
-                std::string productionCountry;
-                int year;
-                int length;
-                std::string publishDate;
-                std::string unPublishDate;
-                int ageLimit;
-                std::string modified;
-                std::vector<Cast> casts;
-                std::vector<Image> images;
-                std::vector<Genre> genres;
+                STRING_T originalTitle;
+                BOOL_T adult;
+                STRING_T localTitle;
+                STRING_T shortTitle;
+                STRING_T longSummary;
+                STRING_T shortSummary;
+                STRING_T sortTitle;
+                STRING_T productionCountry;
+                INT32_T year;
+                INT32_T length;
+                STRING_T publishDate;
+                STRING_T unPublishDate;
+                INT32_T ageLimit;
+                STRING_T modified;
+                VECTOR_T<Cast> casts;
+                VECTOR_T<Image> images;
+                VECTOR_T<Genre> genres;
                 Link self;
                 Link watchedEpisodes;
                 Link allEpisodes;
@@ -374,7 +374,7 @@ namespace ready4air
                     SetProductionCountry(productionCountry);
 
                 if (ParseInt(value, "Year", true, year, parseErrors))
-                    SetYear((short) year);
+                    SetYear((INT16_T) year);
 
                 if (ParseInt(value, "Length", false, length, parseErrors))
                     SetLength(length);
@@ -439,27 +439,27 @@ namespace ready4air
         private:
             Maybe<int> mSeasonNo;
             Maybe<Link> mSerie;
-            Maybe<std::vector<Episode> > mEpisodes;
-            Maybe<std::vector<SeasonProduct> > mSeasonProducts;
-            Maybe<std::string> mTitleId;
+            Maybe<VECTOR_T<Episode> > mEpisodes;
+            Maybe<VECTOR_T<SeasonProduct> > mSeasonProducts;
+            Maybe<STRING_T> mTitleId;
             Maybe<Link> mTitleLink;
-            Maybe<std::string> mOriginalTitle;
-            Maybe<bool> mAdult;
-            Maybe<std::string> mLocalTitle;
-            Maybe<std::string> mShortTitle;
-            Maybe<std::string> mLongSummary;
-            Maybe<std::string> mShortSummary;
-            Maybe<std::string> mSortTitle;
-            Maybe<std::string> mProductionCountry;
-            Maybe<short> mYear;
+            Maybe<STRING_T> mOriginalTitle;
+            Maybe<BOOL_T> mAdult;
+            Maybe<STRING_T> mLocalTitle;
+            Maybe<STRING_T> mShortTitle;
+            Maybe<STRING_T> mLongSummary;
+            Maybe<STRING_T> mShortSummary;
+            Maybe<STRING_T> mSortTitle;
+            Maybe<STRING_T> mProductionCountry;
+            Maybe<INT16_T> mYear;
             Maybe<int> mLength;
-            Maybe<std::string> mPublishDate;
-            Maybe<std::string> mUnPublishDate;
+            Maybe<STRING_T> mPublishDate;
+            Maybe<STRING_T> mUnPublishDate;
             Maybe<int> mAgeLimit;
-            Maybe<std::string> mModified;
-            Maybe<std::vector<Cast> > mCasts;
-            Maybe<std::vector<Image> > mImages;
-            Maybe<std::vector<Genre> > mGenres;
+            Maybe<STRING_T> mModified;
+            Maybe<VECTOR_T<Cast> > mCasts;
+            Maybe<VECTOR_T<Image> > mImages;
+            Maybe<VECTOR_T<Genre> > mGenres;
             Maybe<Link> mSelf;
             Maybe<Link> mWatchedEpisodes;
             Maybe<Link> mAllEpisodes;

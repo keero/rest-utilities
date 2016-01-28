@@ -23,82 +23,82 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetId() const
+            const Maybe<STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe<std::string> &GetManufacturer() const
+            const Maybe<STRING_T> &GetManufacturer() const
             {
                 return mManufacturer;
             }
 
-            void SetManufacturer(const std::string &manufacturer)
+            void SetManufacturer(const STRING_T &manufacturer)
             {
                 mManufacturer = manufacturer;
             }
 
-            const Maybe<std::string> &GetModel() const
+            const Maybe<STRING_T> &GetModel() const
             {
                 return mModel;
             }
 
-            void SetModel(const std::string &model)
+            void SetModel(const STRING_T &model)
             {
                 mModel = model;
             }
 
-            const Maybe<std::string> &GetUdId() const
+            const Maybe<STRING_T> &GetUdId() const
             {
                 return mUdId;
             }
 
-            void SetUdId(const std::string &udId)
+            void SetUdId(const STRING_T &udId)
             {
                 mUdId = udId;
             }
 
-            const Maybe<std::string> &GetDeviceInfo() const
+            const Maybe<STRING_T> &GetDeviceInfo() const
             {
                 return mDeviceInfo;
             }
 
-            void SetDeviceInfo(const std::string &deviceInfo)
+            void SetDeviceInfo(const STRING_T &deviceInfo)
             {
                 mDeviceInfo = deviceInfo;
             }
 
-            const Maybe<std::string> &GetLastUsedDate() const
+            const Maybe<STRING_T> &GetLastUsedDate() const
             {
                 return mLastUsedDate;
             }
 
-            void SetLastUsedDate(const std::string &lastUsedDate)
+            void SetLastUsedDate(const STRING_T &lastUsedDate)
             {
                 mLastUsedDate = lastUsedDate;
             }
 
-            const Maybe<std::string> &GetLastUsedIP() const
+            const Maybe<STRING_T> &GetLastUsedIP() const
             {
                 return mLastUsedIP;
             }
 
-            void SetLastUsedIP(const std::string &lastUsedIP)
+            void SetLastUsedIP(const STRING_T &lastUsedIP)
             {
                 mLastUsedIP = lastUsedIP;
             }
 
-            const Maybe<std::string> &GetRegistrationDate() const
+            const Maybe<STRING_T> &GetRegistrationDate() const
             {
                 return mRegistrationDate;
             }
 
-            void SetRegistrationDate(const std::string &registrationDate)
+            void SetRegistrationDate(const STRING_T &registrationDate)
             {
                 mRegistrationDate = registrationDate;
             }
@@ -163,12 +163,12 @@ namespace ready4air
                 mForgotPassword = forgotPassword;
             }
 
-            const Maybe<std::vector<std::string> > &GetAvailablePaymentMethods() const
+            const Maybe<VECTOR_T<STRING_T> > &GetAvailablePaymentMethods() const
             {
                 return mAvailablePaymentMethods;
             }
 
-            void SetAvailablePaymentMethods(const std::vector<std::string> &availablePaymentMethods)
+            void SetAvailablePaymentMethods(const VECTOR_T<STRING_T> &availablePaymentMethods)
             {
                 mAvailablePaymentMethods = availablePaymentMethods;
             }
@@ -273,22 +273,22 @@ namespace ready4air
                 mDeviceAuthData = deviceAuthData;
             }
 
-            const Maybe<std::string> &GetApiVersion() const
+            const Maybe<STRING_T> &GetApiVersion() const
             {
                 return mApiVersion;
             }
 
-            void SetApiVersion(const std::string &apiVersion)
+            void SetApiVersion(const STRING_T &apiVersion)
             {
                 mApiVersion = apiVersion;
             }
 
-            const Maybe<std::string> &GetApiDocumentationLink() const
+            const Maybe<STRING_T> &GetApiDocumentationLink() const
             {
                 return mApiDocumentationLink;
             }
 
-            void SetApiDocumentationLink(const std::string &apiDocumentationLink)
+            void SetApiDocumentationLink(const STRING_T &apiDocumentationLink)
             {
                 mApiDocumentationLink = apiDocumentationLink;
             }
@@ -343,23 +343,23 @@ namespace ready4air
                 mAllLists = allLists;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string manufacturer;
-                std::string model;
-                std::string udId;
-                std::string deviceInfo;
-                std::string lastUsedDate;
-                std::string lastUsedIP;
-                std::string registrationDate;
+                STRING_T id;
+                STRING_T manufacturer;
+                STRING_T model;
+                STRING_T udId;
+                STRING_T deviceInfo;
+                STRING_T lastUsedDate;
+                STRING_T lastUsedIP;
+                STRING_T registrationDate;
                 Link home;
                 Link helps;
                 Link literals;
                 Link login;
                 Form aRegister;
                 Form forgotPassword;
-                std::vector<std::string> availablePaymentMethods;
+                VECTOR_T<STRING_T> availablePaymentMethods;
                 Link self;
                 Link search;
                 Link searchAsYouType;
@@ -370,8 +370,8 @@ namespace ready4air
                 Link searchBundles;
                 Link allPublicUserLists;
                 DeviceAuthData deviceAuthData;
-                std::string apiVersion;
-                std::string apiDocumentationLink;
+                STRING_T apiVersion;
+                STRING_T apiDocumentationLink;
                 Crud manageFreePages;
                 Link searchMoviesByPerson;
                 Link createMppSession;
@@ -424,7 +424,7 @@ namespace ready4air
                 {
                     for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
                     {
-                        std::string availablePaymentMethod;
+                        STRING_T availablePaymentMethod;
                         if (ParseString(value["AvailablePaymentMethods"][i], "", false, availablePaymentMethod,
                                         parseErrors))
                             availablePaymentMethods.push_back(availablePaymentMethod);
@@ -487,21 +487,21 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mId;
-            Maybe<std::string> mManufacturer;
-            Maybe<std::string> mModel;
-            Maybe<std::string> mUdId;
-            Maybe<std::string> mDeviceInfo;
-            Maybe<std::string> mLastUsedDate;
-            Maybe<std::string> mLastUsedIP;
-            Maybe<std::string> mRegistrationDate;
+            Maybe<STRING_T> mId;
+            Maybe<STRING_T> mManufacturer;
+            Maybe<STRING_T> mModel;
+            Maybe<STRING_T> mUdId;
+            Maybe<STRING_T> mDeviceInfo;
+            Maybe<STRING_T> mLastUsedDate;
+            Maybe<STRING_T> mLastUsedIP;
+            Maybe<STRING_T> mRegistrationDate;
             Maybe<Link> mHome;
             Maybe<Link> mHelps;
             Maybe<Link> mLiterals;
             Maybe<Link> mLogin;
             Maybe<Form> mRegister;
             Maybe<Form> mForgotPassword;
-            Maybe<std::vector<std::string> > mAvailablePaymentMethods;
+            Maybe<VECTOR_T<STRING_T> > mAvailablePaymentMethods;
             Maybe<Link> mSelf;
             Maybe<Link> mSearch;
             Maybe<Link> mSearchAsYouType;
@@ -512,8 +512,8 @@ namespace ready4air
             Maybe<Link> mSearchBundles;
             Maybe<Link> mAllPublicUserLists;
             Maybe<DeviceAuthData> mDeviceAuthData;
-            Maybe<std::string> mApiVersion;
-            Maybe<std::string> mApiDocumentationLink;
+            Maybe<STRING_T> mApiVersion;
+            Maybe<STRING_T> mApiDocumentationLink;
             Maybe<Crud> mManageFreePages;
             Maybe<Link> mSearchMoviesByPerson;
             Maybe<Link> mCreateMppSession;

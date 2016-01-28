@@ -30,20 +30,20 @@ namespace ready4air
                 mForm = form;
             }
 
-            const Maybe<std::string> &GetMessage() const
+            const Maybe<STRING_T> &GetMessage() const
             {
                 return mMessage;
             }
 
-            void SetMessage(const std::string &message)
+            void SetMessage(const STRING_T &message)
             {
                 mMessage = message;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Form form;
-                std::string message;
+                STRING_T message;
 
                 if (ParseObject(value, "Form", true, form, parseErrors))
                     SetForm(form);
@@ -57,7 +57,7 @@ namespace ready4air
 
         private:
             Maybe<Form> mForm;
-            Maybe<std::string> mMessage;
+            Maybe<STRING_T> mMessage;
         };
     }
 }

@@ -61,12 +61,12 @@ namespace ready4air
                 mSeasonNo = seasonNo;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int episodeNo;
+                INT32_T episodeNo;
                 Link serie;
                 Link season;
-                int seasonNo;
+                INT32_T seasonNo;
 
                 // Initialize parent properties
                 MediaProduct::InitFromJsonValue(value, parseErrors);

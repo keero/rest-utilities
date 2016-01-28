@@ -19,22 +19,22 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetPhoneNumber() const
+            const Maybe <STRING_T> &GetPhoneNumber() const
             {
                 return mPhoneNumber;
             }
 
-            void SetPhoneNumber(const std::string &phoneNumber)
+            void SetPhoneNumber(const STRING_T &phoneNumber)
             {
                 mPhoneNumber = phoneNumber;
             }
 
-            const Maybe <std::string> &GetReservationNumber() const
+            const Maybe <STRING_T> &GetReservationNumber() const
             {
                 return mReservationNumber;
             }
 
-            void SetReservationNumber(const std::string &reservationNumber)
+            void SetReservationNumber(const STRING_T &reservationNumber)
             {
                 mReservationNumber = reservationNumber;
             }
@@ -49,11 +49,11 @@ namespace ready4air
                 mPin = pin;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string phoneNumber;
-                std::string reservationNumber;
-                int pin;
+                STRING_T phoneNumber;
+                STRING_T reservationNumber;
+                INT32_T pin;
 
                 if (ParseString(value, "PhoneNumber", false, phoneNumber, parseErrors))
                     SetPhoneNumber(phoneNumber);
@@ -68,8 +68,8 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mPhoneNumber;
-            Maybe <std::string> mReservationNumber;
+            Maybe <STRING_T> mPhoneNumber;
+            Maybe <STRING_T> mReservationNumber;
             Maybe<int> mPin;
         };
     }

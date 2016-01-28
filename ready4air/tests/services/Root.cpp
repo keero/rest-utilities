@@ -3,8 +3,8 @@
 #include <fstream>
 
 
-#ifndef READY4AIR_UNUSED
-#define READY4AIR_UNUSED(arg)
+#ifndef UNUSED
+#define UNUSED(arg)
 #endif
 
 //#include <ready4air/services.h>
@@ -20,10 +20,10 @@ using namespace services;
 
 int main(void)
 {
-    Root<HttpClient, AuthDeviceEvent> root;
-    DevicesService<HttpClient, AuthDeviceEvent> devicesService;
-    AuthDeviceEvent authDeviceEvent = devicesService.GetAuthDeviceEvent();
-    root.AuthDevice(devicesService, "Fake", "Fake", "Fake", "Fake");
+    Root root;
+    DevicesService<HttpClient, AuthDeviceEvent, EventPayload> devicesService;
+//    AuthDeviceEvent authDeviceEvent = devicesService.AuthDeviceEvent;
+    root.AuthDevice(&devicesService, "Fake", "Fake", "Fake", "Fake");
     return 0;
 }
 

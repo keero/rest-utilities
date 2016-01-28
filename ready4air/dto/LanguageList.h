@@ -30,42 +30,42 @@ namespace ready4air
                 mLanguage = language;
             }
 
-            const Maybe<std::string> &GetName() const
+            const Maybe<STRING_T> &GetName() const
             {
                 return mName;
             }
 
-            void SetName(const std::string &name)
+            void SetName(const STRING_T &name)
             {
                 mName = name;
             }
 
-            const Maybe<std::string> &GetDescription() const
+            const Maybe<STRING_T> &GetDescription() const
             {
                 return mDescription;
             }
 
-            void SetDescription(const std::string &description)
+            void SetDescription(const STRING_T &description)
             {
                 mDescription = description;
             }
 
-            const Maybe<bool> &IsGenre() const
+            const Maybe<BOOL_T> &IsGenre() const
             {
                 return mIsGenre;
             }
 
-            void SetIsGenre(bool isGenre)
+            void SetIsGenre(BOOL_T isGenre)
             {
                 mIsGenre = isGenre;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Language language;
-                std::string name;
-                std::string description;
-                bool isGenre;
+                STRING_T name;
+                STRING_T description;
+                BOOL_T isGenre;
 
                 if (ParseObject(value, "Language", true, language, parseErrors))
                     SetLanguage(language);
@@ -84,9 +84,9 @@ namespace ready4air
 
         private:
             Maybe<Language> mLanguage;
-            Maybe<std::string> mName;
-            Maybe<std::string> mDescription;
-            Maybe<bool> mIsGenre;
+            Maybe<STRING_T> mName;
+            Maybe<STRING_T> mDescription;
+            Maybe<BOOL_T> mIsGenre;
         };
     }
 }

@@ -44,7 +44,7 @@ namespace ready4air
 
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
-                READY4AIR_UNUSED(requestData);
+                UNUSED(requestData);
                 dto::ParseErrors parseErrors;
                 EVENT_PAYLOAD_TYPE payload;
                 IEventPayload *pPayload = &payload;

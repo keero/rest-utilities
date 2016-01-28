@@ -20,12 +20,12 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetText() const
+            const Maybe <STRING_T> &GetText() const
             {
                 return mText;
             }
 
-            void SetText(const std::string &text)
+            void SetText(const STRING_T &text)
             {
                 mText = text;
             }
@@ -40,21 +40,21 @@ namespace ready4air
                 mLink = link;
             }
 
-            const Maybe <std::vector<MenuItem> > &GetMenuItems() const
+            const Maybe <VECTOR_T<MenuItem> > &GetMenuItems() const
             {
                 return mMenuItems;
             }
 
-            void SetMenuItems(const std::vector<MenuItem> &menuItems)
+            void SetMenuItems(const VECTOR_T<MenuItem> &menuItems)
             {
                 mMenuItems = menuItems;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string text;
+                STRING_T text;
                 Link link;
-                std::vector<MenuItem> menuItems;
+                VECTOR_T<MenuItem> menuItems;
 
                 if (ParseString(value, "Text", true, text, parseErrors))
                     SetText(text);
@@ -77,9 +77,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mText;
+            Maybe <STRING_T> mText;
             Maybe <Link> mLink;
-            Maybe <std::vector<MenuItem> > mMenuItems;
+            Maybe <VECTOR_T<MenuItem> > mMenuItems;
         };
     }
 }

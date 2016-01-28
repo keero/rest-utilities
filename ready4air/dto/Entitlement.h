@@ -20,42 +20,42 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetType() const
+            const Maybe<STRING_T> &GetType() const
             {
                 return mType;
             }
 
-            void SetType(const std::string &type)
+            void SetType(const STRING_T &type)
             {
                 mType = type;
             }
 
-            const Maybe<std::string> &GetEntitledTo() const
+            const Maybe<STRING_T> &GetEntitledTo() const
             {
                 return mEntitledTo;
             }
 
-            void SetEntitledTo(const std::string &entitledTo)
+            void SetEntitledTo(const STRING_T &entitledTo)
             {
                 mEntitledTo = entitledTo;
             }
 
-            const Maybe<std::string> &GetStartTime() const
+            const Maybe<STRING_T> &GetStartTime() const
             {
                 return mStartTime;
             }
 
-            void SetStartTime(const std::string &startTime)
+            void SetStartTime(const STRING_T &startTime)
             {
                 mStartTime = startTime;
             }
 
-            const Maybe<std::string> &GetEndTime() const
+            const Maybe<STRING_T> &GetEndTime() const
             {
                 return mEndTime;
             }
 
-            void SetEndTime(const std::string &endTime)
+            void SetEndTime(const STRING_T &endTime)
             {
                 mEndTime = endTime;
             }
@@ -70,24 +70,24 @@ namespace ready4air
                 mDRM = DRM;
             }
 
-            const Maybe<std::string> &GetIdentifier() const
+            const Maybe<STRING_T> &GetIdentifier() const
             {
                 return mIdentifier;
             }
 
-            void SetIdentifier(const std::string &identifier)
+            void SetIdentifier(const STRING_T &identifier)
             {
                 mIdentifier = identifier;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string type;
-                std::string entitledTo;
-                std::string startTime;
-                std::string endTime;
+                STRING_T type;
+                STRING_T entitledTo;
+                STRING_T startTime;
+                STRING_T endTime;
                 DRM drm;
-                std::string identifier;
+                STRING_T identifier;
 
                 if (ParseString(value, "Type", true, type, parseErrors))
                     SetType(type);
@@ -111,12 +111,12 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mType;
-            Maybe<std::string> mEntitledTo;
-            Maybe<std::string> mStartTime;
-            Maybe<std::string> mEndTime;
+            Maybe<STRING_T> mType;
+            Maybe<STRING_T> mEntitledTo;
+            Maybe<STRING_T> mStartTime;
+            Maybe<STRING_T> mEndTime;
             Maybe<DRM> mDRM;
-            Maybe<std::string> mIdentifier;
+            Maybe<STRING_T> mIdentifier;
         };
     }
 }

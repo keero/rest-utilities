@@ -30,7 +30,7 @@ namespace ready4air
                 mSecureLink = secureLink;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link secureLink;
 

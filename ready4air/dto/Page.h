@@ -21,52 +21,52 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetID() const
+            const Maybe<STRING_T> &GetID() const
             {
                 return mID;
             }
 
-            void SetID(const std::string &ID)
+            void SetID(const STRING_T &ID)
             {
                 mID = ID;
             }
 
-            const Maybe<std::string> &GetTitle() const
+            const Maybe<STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
 
-            const Maybe<std::string> &GetDescription() const
+            const Maybe<STRING_T> &GetDescription() const
             {
                 return mDescription;
             }
 
-            void SetDescription(const std::string &description)
+            void SetDescription(const STRING_T &description)
             {
                 mDescription = description;
             }
 
-            const Maybe<std::string> &GetVmaMessage() const
+            const Maybe<STRING_T> &GetVmaMessage() const
             {
                 return mVmaMessage;
             }
 
-            void SetVmaMessage(const std::string &vmaMessage)
+            void SetVmaMessage(const STRING_T &vmaMessage)
             {
                 mVmaMessage = vmaMessage;
             }
 
-            const Maybe<std::string> &GetType() const
+            const Maybe<STRING_T> &GetType() const
             {
                 return mType;
             }
 
-            void SetType(const std::string &type)
+            void SetType(const STRING_T &type)
             {
                 mType = type;
             }
@@ -91,13 +91,13 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string title;
-                std::string description;
-                std::string vmaMessage;
-                std::string type;
+                STRING_T id;
+                STRING_T title;
+                STRING_T description;
+                STRING_T vmaMessage;
+                STRING_T type;
                 Content content;
                 Link self;
 
@@ -126,11 +126,11 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mID;
-            Maybe<std::string> mTitle;
-            Maybe<std::string> mDescription;
-            Maybe<std::string> mVmaMessage;
-            Maybe<std::string> mType;
+            Maybe<STRING_T> mID;
+            Maybe<STRING_T> mTitle;
+            Maybe<STRING_T> mDescription;
+            Maybe<STRING_T> mVmaMessage;
+            Maybe<STRING_T> mType;
             Maybe<Content> mContent;
             Maybe<Link> mSelf;
         };

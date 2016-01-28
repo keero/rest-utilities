@@ -20,12 +20,12 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetName() const
+            const Maybe <STRING_T> &GetName() const
             {
                 return mName;
             }
 
-            void SetName(const std::string &name)
+            void SetName(const STRING_T &name)
             {
                 mName = name;
             }
@@ -40,12 +40,12 @@ namespace ready4air
                 mLink = link;
             }
 
-            const Maybe<bool> &IsMain() const
+            const Maybe<BOOL_T> &IsMain() const
             {
                 return mIsMain;
             }
 
-            void SetIsMain(bool isMain)
+            void SetIsMain(BOOL_T isMain)
             {
                 mIsMain = isMain;
             }
@@ -60,12 +60,12 @@ namespace ready4air
                 mListId = listId;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string name;
+                STRING_T name;
                 Link link;
-                bool isMain;
-                int listId;
+                BOOL_T isMain;
+                INT32_T listId;
 
                 if (ParseString(value, "Name", false, name, parseErrors))
                     SetName(name);
@@ -83,9 +83,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mName;
+            Maybe <STRING_T> mName;
             Maybe <Link> mLink;
-            Maybe<bool> mIsMain;
+            Maybe<BOOL_T> mIsMain;
             Maybe<int> mListId;
         };
     }

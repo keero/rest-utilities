@@ -19,30 +19,30 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetTitle() const
+            const Maybe <STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
 
-            const Maybe <std::string> &GetMessage() const
+            const Maybe <STRING_T> &GetMessage() const
             {
                 return mMessage;
             }
 
-            void SetMessage(const std::string &message)
+            void SetMessage(const STRING_T &message)
             {
                 mMessage = message;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string title;
-                std::string message;
+                STRING_T title;
+                STRING_T message;
 
                 if (ParseString(value, "Title", true, title, parseErrors))
                     SetTitle(title);
@@ -54,8 +54,8 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mTitle;
-            Maybe <std::string> mMessage;
+            Maybe <STRING_T> mTitle;
+            Maybe <STRING_T> mMessage;
         };
     }
 }

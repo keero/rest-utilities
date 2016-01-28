@@ -23,52 +23,52 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::vector<Manifest> > &GetSmooth() const
+            const Maybe<VECTOR_T<Manifest> > &GetSmooth() const
             {
                 return mSmooth;
             }
 
-            void SetSmooth(const std::vector<Manifest> &smooth)
+            void SetSmooth(const VECTOR_T<Manifest> &smooth)
             {
                 mSmooth = smooth;
             }
 
-            const Maybe<std::vector<Manifest> > &GetDash() const
+            const Maybe<VECTOR_T<Manifest> > &GetDash() const
             {
                 return mDash;
             }
 
-            void SetDash(const std::vector<Manifest> &dash)
+            void SetDash(const VECTOR_T<Manifest> &dash)
             {
                 mDash = dash;
             }
 
-            const Maybe<std::vector<Manifest> > &GetHls() const
+            const Maybe<VECTOR_T<Manifest> > &GetHls() const
             {
                 return mHls;
             }
 
-            void SetHls(const std::vector<Manifest> &hls)
+            void SetHls(const VECTOR_T<Manifest> &hls)
             {
                 mHls = hls;
             }
 
-            const Maybe<std::vector<PlaySubtitle> > &GetSubtitles() const
+            const Maybe<VECTOR_T<PlaySubtitle> > &GetSubtitles() const
             {
                 return mSubtitles;
             }
 
-            void SetSubtitles(const std::vector<PlaySubtitle> &subtitles)
+            void SetSubtitles(const VECTOR_T<PlaySubtitle> &subtitles)
             {
                 mSubtitles = subtitles;
             }
 
-            const Maybe<std::vector<File> > &GetProgressive() const
+            const Maybe<VECTOR_T<File> > &GetProgressive() const
             {
                 return mProgressive;
             }
 
-            void SetProgressive(const std::vector<File> &progressive)
+            void SetProgressive(const VECTOR_T<File> &progressive)
             {
                 mProgressive = progressive;
             }
@@ -83,13 +83,13 @@ namespace ready4air
                 mThumbnails = thumbnails;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::vector<Manifest> smooth;
-                std::vector<Manifest> dash;
-                std::vector<Manifest> hls;
-                std::vector<PlaySubtitle> subtitles;
-                std::vector<File> progressive;
+                VECTOR_T<Manifest> smooth;
+                VECTOR_T<Manifest> dash;
+                VECTOR_T<Manifest> hls;
+                VECTOR_T<PlaySubtitle> subtitles;
+                VECTOR_T<File> progressive;
                 Link thumbnails;
 
                 if (VerifyArray(value, "Smooth", false, parseErrors))
@@ -154,11 +154,11 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::vector<Manifest> > mSmooth;
-            Maybe<std::vector<Manifest> > mDash;
-            Maybe<std::vector<Manifest> > mHls;
-            Maybe<std::vector<PlaySubtitle> > mSubtitles;
-            Maybe<std::vector<File> > mProgressive;
+            Maybe<VECTOR_T<Manifest> > mSmooth;
+            Maybe<VECTOR_T<Manifest> > mDash;
+            Maybe<VECTOR_T<Manifest> > mHls;
+            Maybe<VECTOR_T<PlaySubtitle> > mSubtitles;
+            Maybe<VECTOR_T<File> > mProgressive;
             Maybe<Link> mThumbnails;
         };
     }

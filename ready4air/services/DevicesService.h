@@ -41,7 +41,7 @@ namespace ready4air
             {
             }
 
-            bool Home(IHttpClient *pClient, const std::string &language) const
+            BOOL_T Home(IHttpClient *pClient, const STRING_T &language) const
             {
                 if (GetDevice() && GetDevice().Just().GetHome())
                 {
@@ -59,7 +59,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Helps(IHttpClient *pClient, const std::string &language) const
+            BOOL_T Helps(IHttpClient *pClient, const STRING_T &language) const
             {
                 if (GetDevice() && GetDevice().Just().GetHelps())
                 {
@@ -77,7 +77,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Literals(IHttpClient *pClient, const std::string &language) const
+            BOOL_T Literals(IHttpClient *pClient, const STRING_T &language) const
             {
                 if (GetDevice() && GetDevice().Just().GetLiterals())
                 {
@@ -95,7 +95,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Login(IHttpClient *pClient, const std::string &username, const std::string &password) const
+            BOOL_T Login(IHttpClient *pClient, const STRING_T &username, const STRING_T &password) const
             {
                 if (GetDevice() && GetDevice().Just().GetLogin())
                 {
@@ -114,7 +114,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Register(IHttpClient *pClient, const std::string &email, const std::string &password) const
+            BOOL_T Register(IHttpClient *pClient, const STRING_T &email, const STRING_T &password) const
             {
                 if (GetDevice() && GetDevice().Just().GetRegister() && GetDevice().Just().GetRegister().Just().GetAction())
                 {
@@ -135,7 +135,7 @@ namespace ready4air
                     return false;
             }
 
-            bool ForgotPassword(IHttpClient *pClient, const std::string &userName) const
+            BOOL_T ForgotPassword(IHttpClient *pClient, const STRING_T &userName) const
             {
                 if (GetDevice() && GetDevice().Just().GetForgotPassword() && GetDevice().Just().GetForgotPassword().Just().GetAction())
                 {
@@ -155,7 +155,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Self(void) const
+            BOOL_T Self(void) const
             {
                 if (GetDevice() && GetDevice().Just().GetSelf())
                 {
@@ -174,7 +174,7 @@ namespace ready4air
 
             }
 
-            bool Search(IHttpClient *pClient, const std::string &search) const
+            BOOL_T Search(IHttpClient *pClient, const STRING_T &search) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearch())
                 {
@@ -192,7 +192,7 @@ namespace ready4air
                     return false;
             }
 
-            bool SearchAsYouType(IHttpClient *pClient, const std::string &search) const
+            BOOL_T SearchAsYouType(IHttpClient *pClient, const STRING_T &search) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearchAsYouType())
                 {
@@ -210,7 +210,7 @@ namespace ready4air
                     return false;
             }
 
-            bool SearchMovies(IHttpClient *pClient, const std::string &search) const
+            BOOL_T SearchMovies(IHttpClient *pClient, const STRING_T &search) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearchMovies())
                 {
@@ -228,7 +228,7 @@ namespace ready4air
                     return false;
             }
 
-            bool SearchSeries(IHttpClient *pClient, const std::string &search) const
+            BOOL_T SearchSeries(IHttpClient *pClient, const STRING_T &search) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearchSeries())
                 {
@@ -246,7 +246,7 @@ namespace ready4air
                     return false;
             }
 
-            bool SearchBundles(IHttpClient *pClient, const std::string &search) const
+            BOOL_T SearchBundles(IHttpClient *pClient, const STRING_T &search) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearchBundles())
                 {
@@ -264,7 +264,7 @@ namespace ready4air
                     return false;
             }
 
-            bool SearchMoviesByPerson(IHttpClient *pClient, const std::string &personId) const
+            BOOL_T SearchMoviesByPerson(IHttpClient *pClient, const STRING_T &personId) const
             {
                 if (GetDevice() && GetDevice().Just().GetSearchMoviesByPerson())
                 {

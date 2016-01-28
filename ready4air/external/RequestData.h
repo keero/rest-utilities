@@ -42,42 +42,42 @@ namespace ready4air
         {
         }
 
-        const std::string &GetURI() const
+        const STRING_T &GetURI() const
         {
             return mURI;
         }
 
-        void SetURI(const std::string &URI)
+        void SetURI(const STRING_T &URI)
         {
             mURI = URI;
         }
 
-        const std::string &GetMethod() const
+        const STRING_T &GetMethod() const
         {
             return mMethod;
         }
 
-        void SetMethod(const std::string &method)
+        void SetMethod(const STRING_T &method)
         {
             mMethod = method;
         }
 
-        bool IsWithCredentials() const
+        BOOL_T IsWithCredentials() const
         {
             return mWithCredentials;
         }
 
-        void SetWithCredentials(bool withCredentials)
+        void SetWithCredentials(BOOL_T withCredentials)
         {
             mWithCredentials = withCredentials;
         }
 
-        const Maybe<std::string> &GetBody() const
+        const Maybe<STRING_T> &GetBody() const
         {
             return mBody;
         }
 
-        void SetBody(const std::string &body)
+        void SetBody(const STRING_T &body)
         {
             mBody = body;
         }
@@ -102,10 +102,10 @@ namespace ready4air
         }
 
     private:
-        std::string mURI;
-        std::string mMethod;
-        bool mWithCredentials;
-        Maybe <std::string> mBody;
+        STRING_T mURI;
+        STRING_T mMethod;
+        BOOL_T mWithCredentials;
+        Maybe <STRING_T> mBody;
         Callee mCallee;
     };
 }

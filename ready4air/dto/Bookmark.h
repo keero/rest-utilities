@@ -19,85 +19,85 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetId() const
+            const Maybe <STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe <std::string> &GetValue() const
+            const Maybe <STRING_T> &GetValue() const
             {
                 return mValue;
             }
 
-            void SetValue(const std::string &value)
+            void SetValue(const STRING_T &value)
             {
                 mValue = value;
             }
 
-            const Maybe <std::string> &GetCreated() const
+            const Maybe <STRING_T> &GetCreated() const
             {
                 return mCreated;
             }
 
-            void SetCreated(const std::string &created)
+            void SetCreated(const STRING_T &created)
             {
                 mCreated = created;
             }
 
-            const Maybe <std::string> &GetContentId() const
+            const Maybe <STRING_T> &GetContentId() const
             {
                 return mContentId;
             }
 
-            void SetContentId(const std::string &contentId)
+            void SetContentId(const STRING_T &contentId)
             {
                 mContentId = contentId;
             }
 
-            const Maybe <std::string> &GetDeviceId() const
+            const Maybe <STRING_T> &GetDeviceId() const
             {
                 return mDeviceId;
             }
 
-            void SetDeviceId(const std::string &deviceId)
+            void SetDeviceId(const STRING_T &deviceId)
             {
                 mDeviceId = deviceId;
             }
 
-            const Maybe <std::string> &GetUserId() const
+            const Maybe <STRING_T> &GetUserId() const
             {
                 return mUserId;
             }
 
-            void SetUserId(const std::string &userId)
+            void SetUserId(const STRING_T &userId)
             {
                 mUserId = userId;
             }
 
-            const Maybe <std::string> &GetModified() const
+            const Maybe <STRING_T> &GetModified() const
             {
                 return mModified;
             }
 
-            void SetModified(const std::string &modified)
+            void SetModified(const STRING_T &modified)
             {
                 mModified = modified;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string val;
-                std::string created;
-                std::string contentId;
-                std::string deviceId;
-                std::string userId;
-                std::string modified;
+                STRING_T id;
+                STRING_T val;
+                STRING_T created;
+                STRING_T contentId;
+                STRING_T deviceId;
+                STRING_T userId;
+                STRING_T modified;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
                     SetId(id);
@@ -124,13 +124,13 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mId;
-            Maybe <std::string> mValue;
-            Maybe <std::string> mCreated;
-            Maybe <std::string> mContentId;
-            Maybe <std::string> mDeviceId;
-            Maybe <std::string> mUserId;
-            Maybe <std::string> mModified;
+            Maybe <STRING_T> mId;
+            Maybe <STRING_T> mValue;
+            Maybe <STRING_T> mCreated;
+            Maybe <STRING_T> mContentId;
+            Maybe <STRING_T> mDeviceId;
+            Maybe <STRING_T> mUserId;
+            Maybe <STRING_T> mModified;
         };
     }
 }

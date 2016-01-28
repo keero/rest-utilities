@@ -29,12 +29,12 @@ namespace ready4air
                 mManifestTypeId = manifestTypeId;
             }
 
-            const Maybe <std::string> &GetManifestTypeName() const
+            const Maybe <STRING_T> &GetManifestTypeName() const
             {
                 return mManifestTypeName;
             }
 
-            void SetManifestTypeName(const std::string &manifestTypeName)
+            void SetManifestTypeName(const STRING_T &manifestTypeName)
             {
                 mManifestTypeName = manifestTypeName;
             }
@@ -49,11 +49,11 @@ namespace ready4air
                 mLocation = location;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int manifestTypeId;
-                std::string manifestTypeName;
-                int location;
+                INT32_T manifestTypeId;
+                STRING_T manifestTypeName;
+                INT32_T location;
 
                 // Initialize parent properties
                 FileBase::InitFromJsonValue(value, parseErrors);
@@ -72,7 +72,7 @@ namespace ready4air
 
         private:
             Maybe<int> mManifestTypeId;
-            Maybe <std::string> mManifestTypeName;
+            Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
         };
     }

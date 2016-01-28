@@ -36,7 +36,7 @@ namespace ready4air
                 return mMovie;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
             {
                 dto::Movie movie;
                 if (movie.InitFromJsonValue(value, parseErrors))

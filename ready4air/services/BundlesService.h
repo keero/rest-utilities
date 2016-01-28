@@ -36,7 +36,7 @@ namespace ready4air
                 return mBundle;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
             {
                 dto::Bundle bundle;
                 if (bundle.InitFromJsonValue(value, parseErrors))

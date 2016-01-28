@@ -27,62 +27,62 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::vector<Button> > &GetButtons() const
+            const Maybe<VECTOR_T<Button> > &GetButtons() const
             {
                 return mButtons;
             }
 
-            void SetButtons(const std::vector<Button> &buttons)
+            void SetButtons(const VECTOR_T<Button> &buttons)
             {
                 mButtons = buttons;
             }
 
-            const Maybe<std::vector<MenuItem> > &GetMenuItems() const
+            const Maybe<VECTOR_T<MenuItem> > &GetMenuItems() const
             {
                 return mMenuItems;
             }
 
-            void SetMenuItems(const std::vector<MenuItem> &menuItems)
+            void SetMenuItems(const VECTOR_T<MenuItem> &menuItems)
             {
                 mMenuItems = menuItems;
             }
 
-            const Maybe<std::vector<Section> > &GetSections() const
+            const Maybe<VECTOR_T<Section> > &GetSections() const
             {
                 return mSections;
             }
 
-            void SetSections(const std::vector<Section> &sections)
+            void SetSections(const VECTOR_T<Section> &sections)
             {
                 mSections = sections;
             }
 
-            const Maybe<std::vector<Teaser> > &GetTeasers() const
+            const Maybe<VECTOR_T<Teaser> > &GetTeasers() const
             {
                 return mTeasers;
             }
 
-            void SetTeasers(const std::vector<Teaser> &teasers)
+            void SetTeasers(const VECTOR_T<Teaser> &teasers)
             {
                 mTeasers = teasers;
             }
 
-            const Maybe<std::vector<Promotion> > &GetPromotions() const
+            const Maybe<VECTOR_T<Promotion> > &GetPromotions() const
             {
                 return mPromotions;
             }
 
-            void SetPromotions(const std::vector<Promotion> &promotions)
+            void SetPromotions(const VECTOR_T<Promotion> &promotions)
             {
                 mPromotions = promotions;
             }
 
-            const Maybe<std::vector<LiveSection> > &GetLiveSections() const
+            const Maybe<VECTOR_T<LiveSection> > &GetLiveSections() const
             {
                 return mLiveSections;
             }
 
-            void SetLiveSections(const std::vector<LiveSection> &liveSections)
+            void SetLiveSections(const VECTOR_T<LiveSection> &liveSections)
             {
                 mLiveSections = liveSections;
             }
@@ -97,14 +97,14 @@ namespace ready4air
                 mCatalogue = catalogue;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::vector<Button> buttons;
-                std::vector<MenuItem> menuItems;
-                std::vector<Section> sections;
-                std::vector<Teaser> teasers;
-                std::vector<Promotion> promotions;
-                std::vector<LiveSection> liveSections;
+                VECTOR_T<Button> buttons;
+                VECTOR_T<MenuItem> menuItems;
+                VECTOR_T<Section> sections;
+                VECTOR_T<Teaser> teasers;
+                VECTOR_T<Promotion> promotions;
+                VECTOR_T<LiveSection> liveSections;
                 Catalogue catalogue;
 
                 if (VerifyArray(value, "Buttons", false, parseErrors))
@@ -180,12 +180,12 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::vector<Button> > mButtons;
-            Maybe<std::vector<MenuItem> > mMenuItems;
-            Maybe<std::vector<Section> > mSections;
-            Maybe<std::vector<Teaser> > mTeasers;
-            Maybe<std::vector<Promotion> > mPromotions;
-            Maybe<std::vector<LiveSection> > mLiveSections;
+            Maybe<VECTOR_T<Button> > mButtons;
+            Maybe<VECTOR_T<MenuItem> > mMenuItems;
+            Maybe<VECTOR_T<Section> > mSections;
+            Maybe<VECTOR_T<Teaser> > mTeasers;
+            Maybe<VECTOR_T<Promotion> > mPromotions;
+            Maybe<VECTOR_T<LiveSection> > mLiveSections;
             Maybe<Catalogue> mCatalogue;
         };
     }

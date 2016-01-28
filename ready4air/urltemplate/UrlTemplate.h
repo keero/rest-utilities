@@ -10,9 +10,9 @@
 #include "../common/Maybe.h"
 #include "../common/Regex.h"
 
-typedef std::map<std::string, std::string> UrlContext;
+typedef MAP_T<STRING_T, STRING_T> UrlContext;
 
-const char operators[7] = {'+', '#', '.', '/', ';', '?', '&'};
+const INT8_T operators[7] = {'+', '#', '.', '/', ';', '?', '&'};
 
 namespace ready4air
 {
@@ -28,27 +28,27 @@ namespace ready4air
         {
         }
 
-        void SetUrl(const std::string &value)
+        void SetUrl(const STRING_T &value)
         {
             mUrl = value;
         }
 
-        const Maybe <std::string> &GetUrl() const
+        const Maybe <STRING_T> &GetUrl() const
         {
             return mUrl;
         }
 
-        void SetParam(const std::string &key, const std::string &value)
+        void SetParam(const STRING_T &key, const STRING_T &value)
         {
             mUrlContext[key] = value;
         }
 
-        const std::string &GetParam(const std::string &key) const
+        const STRING_T &GetParam(const STRING_T &key) const
         {
             return mUrlContext.find(key)->second;
         }
 
-        void UnsetParam(const std::string &key)
+        void UnsetParam(const STRING_T &key)
         {
             mUrlContext.erase(key);
         }
@@ -58,43 +58,43 @@ namespace ready4air
             mUrlContext.clear();
         }
 
-        std::string Expand() const
+        STRING_T Expand() const
         {
             if (!mUrl) return "";
-            std::string url = mUrl.Just();
+            STRING_T url = mUrl.Just();
 
             std::ostringstream expanded;
 
-            std::string exprRegex = "^\\{([^\\{\\}]+)\\}";
-            std::string literalRegex = "([^\\{\\}]+)";
-            std::string subject = url;
-            std::string match;
-            std::string rest;
+            STRING_T exprRegex = "^\\{([^\\{\\}]+)\\}";
+            STRING_T literalRegex = "([^\\{\\}]+)";
+            STRING_T subject = url;
+            STRING_T match;
+            STRING_T rest;
 
-            bool lastIsOp = false;
+            BOOL_T lastIsOp = false;
             while (subject.length() > 0)
             {
                 if (ready4air::Regex::MatchSingle(exprRegex, subject, match, rest))
                 {
-                    std::vector<std::string> values;
-                    char op = '\0';
-                    const char *end = operators + 7;
-                    const char *result = std::find(operators, end, match[0]);
+                    VECTOR_T<STRING_T> values;
+                    INT8_T op = '\0';
+                    const INT8_T *end = operators + 7;
+                    const INT8_T *result = std::find(operators, end, match[0]);
                     if (result != end)
                     {
                         op = *result;
-                        match = match.substr(1, std::string::npos);
+                        match = match.substr(1, STRING_T::npos);
                     }
 
                     std::stringstream ss(match);
-                    std::string item;
+                    STRING_T item;
                     while (getline(ss, item, ','))
                     {
                         values.push_back(getValues(op, item));
                     }
 
                     std::stringstream ss2;
-                    char separator = ',';
+                    INT8_T separator = ',';
 
                     if (op && op != '+')
                     {
@@ -140,13 +140,13 @@ namespace ready4air
                     break;
                 subject = rest;
             }
-            std::string expandedStr = expanded.str();
+            STRING_T expandedStr = expanded.str();
             if (isKeyOperator(expandedStr.back())) expandedStr.pop_back();
             return expandedStr;
         }
 
     private:
-        std::string getValues(char op, const std::string &key) const
+        STRING_T getValues(INT8_T op, const STRING_T &key) const
         {
             std::ostringstream result;
             UrlContext::const_iterator search = mUrlContext.find(key);
@@ -172,16 +172,16 @@ namespace ready4air
             return result.str();
         }
 
-        static std::string encodeReserved(const std::string &value)
+        static STRING_T encodeReserved(const STRING_T &value)
         {
             std::ostringstream result;
 
-            std::vector<std::string> tokens;
+            VECTOR_T<STRING_T> tokens;
             Regex::Split("(%[[:xdigit:]]{2})", value, tokens);
 
             for (size_t i = 0; i < tokens.size(); i += 1)
             {
-                std::string item = tokens[i];
+                STRING_T item = tokens[i];
                 if (!Regex::Match("(%[[:xdigit:]])", item))
                 {
                     item = encodeURI(item, false);
@@ -191,15 +191,15 @@ namespace ready4air
             return result.str();
         }
 
-        static std::string encodeURI(const std::string &value, bool isComponent)
+        static STRING_T encodeURI(const STRING_T &value, BOOL_T isComponent)
         {
             std::ostringstream escaped;
             escaped.fill('0');
             escaped << std::hex;
 
-            for (std::string::const_iterator i = value.begin(), n = value.end(); i != n; ++i)
+            for (STRING_T::const_iterator i = value.begin(), n = value.end(); i != n; ++i)
             {
-                std::string::value_type c = (*i);
+                STRING_T::value_type c = (*i);
 
                 if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '!' || c == '~' || c == '*' || c == '\'' ||
                     c == '(' || c == ')'
@@ -213,17 +213,17 @@ namespace ready4air
                 }
 
                 escaped << std::uppercase;
-                escaped << '%' << std::setw(2) << int((unsigned char) c);
+                escaped << '%' << std::setw(2) << INT32_T((UINT8_T) c);
                 escaped << std::nouppercase;
             }
 
             return escaped.str();
         }
 
-        static std::string encodeValue(char op, const std::string &value, const std::string &key)
+        static STRING_T encodeValue(INT8_T op, const STRING_T &value, const STRING_T &key)
         {
             std::ostringstream result;
-            std::string v(op == '+' || op == '#' ? encodeReserved(value) : encodeURI(value, true));
+            STRING_T v(op == '+' || op == '#' ? encodeReserved(value) : encodeURI(value, true));
 
             if (key.length())
             {
@@ -235,18 +235,18 @@ namespace ready4air
             return result.str();
         }
 
-        static bool isDefined(const std::string &value)
+        static BOOL_T isDefined(const STRING_T &value)
         {
             return value.length() > 0;
         }
 
-        static bool isKeyOperator(char op)
+        static BOOL_T isKeyOperator(INT8_T op)
         {
             return op == ';' || op == '&' || op == '?';
         }
 
     private:
-        Maybe <std::string> mUrl;
+        Maybe <STRING_T> mUrl;
         UrlContext mUrlContext;
     };
 }

@@ -50,22 +50,22 @@ namespace ready4air
                 mExternalSource = externalSource;
             }
 
-            const Maybe <std::string> &GetSource() const
+            const Maybe <STRING_T> &GetSource() const
             {
                 return mSource;
             }
 
-            void SetSource(const std::string &source)
+            void SetSource(const STRING_T &source)
             {
                 mSource = source;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link image;
                 Link imageLink;
                 Link externalSource;
-                std::string source;
+                STRING_T source;
 
                 if (ParseObject(value, "Image", false, image, parseErrors))
                     SetImage(image);
@@ -86,7 +86,7 @@ namespace ready4air
             Maybe <Link> mImage;
             Maybe <Link> mImageLink;
             Maybe <Link> mExternalSource;
-            Maybe <std::string> mSource;
+            Maybe <STRING_T> mSource;
         };
     }
 }

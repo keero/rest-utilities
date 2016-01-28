@@ -27,12 +27,12 @@ namespace ready4air
             mHttpStatusCode = httpStatusCode;
         }
 
-        const std::string &GetMessage() const
+        const STRING_T &GetMessage() const
         {
             return mMessage;
         }
 
-        void SetMessage(const std::string &message)
+        void SetMessage(const STRING_T &message)
         {
             mMessage = message;
         }
@@ -49,7 +49,7 @@ namespace ready4air
 
     private:
         ResponseData::HTTP_STATUS_CODE mHttpStatusCode;
-        std::string mMessage;
+        STRING_T mMessage;
         dto::ParseErrors mParseErrors;
     };
 }

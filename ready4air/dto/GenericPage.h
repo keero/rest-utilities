@@ -16,7 +16,7 @@ namespace ready4air
         private:
             class BadType : public std::exception
             {
-                virtual const char *what() const throw()
+                virtual const INT8_T *what() const throw()
                 {
                     return "Template class T must inherit ready4air::JsonDeserializable";
                 }
@@ -52,21 +52,21 @@ namespace ready4air
                 mNext = next;
             }
 
-            const Maybe <std::vector<T> > &GetItems() const
+            const Maybe <VECTOR_T<T> > &GetItems() const
             {
                 return mItems;
             }
 
-            void SetItems(const std::vector<T> &items)
+            void SetItems(const VECTOR_T<T> &items)
             {
                 mItems = items;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link prev;
                 Link next;
-                std::vector<T> items;
+                VECTOR_T<T> items;
 
                 if (ParseObject(value, "Prev", false, prev, parseErrors))
                     SetPrev(prev);
@@ -93,7 +93,7 @@ namespace ready4air
         private:
             Maybe <Link> mPrev;
             Maybe <Link> mNext;
-            Maybe <std::vector<T> > mItems;
+            Maybe <VECTOR_T<T> > mItems;
         };
     }
 }

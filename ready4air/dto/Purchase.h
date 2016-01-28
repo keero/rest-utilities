@@ -22,152 +22,152 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetId() const
+            const Maybe <STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe <std::string> &GetCpurchaseId() const
+            const Maybe <STRING_T> &GetCpurchaseId() const
             {
                 return mCpurchaseId;
             }
 
-            void SetCpurchaseId(const std::string &cpurchaseId)
+            void SetCpurchaseId(const STRING_T &cpurchaseId)
             {
                 mCpurchaseId = cpurchaseId;
             }
 
-            const Maybe <std::string> &GetCrentalId() const
+            const Maybe <STRING_T> &GetCrentalId() const
             {
                 return mCrentalId;
             }
 
-            void SetCrentalId(const std::string &crentalId)
+            void SetCrentalId(const STRING_T &crentalId)
             {
                 mCrentalId = crentalId;
             }
 
-            const Maybe <std::vector<std::string> > &GetCValueCodes() const
+            const Maybe <VECTOR_T<STRING_T> > &GetCValueCodes() const
             {
                 return mCValueCodes;
             }
 
-            void SetCValueCodes(const std::vector<std::string> &CValueCodes)
+            void SetCValueCodes(const VECTOR_T<STRING_T> &CValueCodes)
             {
                 mCValueCodes = CValueCodes;
             }
 
-            const Maybe <std::string> &GetCurrency() const
+            const Maybe <STRING_T> &GetCurrency() const
             {
                 return mCurrency;
             }
 
-            void SetCurrency(const std::string &currency)
+            void SetCurrency(const STRING_T &currency)
             {
                 mCurrency = currency;
             }
 
-            const Maybe <std::string> &GetIPAddress() const
+            const Maybe <STRING_T> &GetIPAddress() const
             {
                 return mIPAddress;
             }
 
-            void SetIPAddress(const std::string &IPAddress)
+            void SetIPAddress(const STRING_T &IPAddress)
             {
                 mIPAddress = IPAddress;
             }
 
-            const Maybe <std::string> &GetIPCountry() const
+            const Maybe <STRING_T> &GetIPCountry() const
             {
                 return mIPCountry;
             }
 
-            void SetIPCountry(const std::string &IPCountry)
+            void SetIPCountry(const STRING_T &IPCountry)
             {
                 mIPCountry = IPCountry;
             }
 
-            const Maybe <std::string> &GetProductId() const
+            const Maybe <STRING_T> &GetProductId() const
             {
                 return mProductId;
             }
 
-            void SetProductId(const std::string &productId)
+            void SetProductId(const STRING_T &productId)
             {
                 mProductId = productId;
             }
 
-            const Maybe<double> &GetOriginalPrice() const
+            const Maybe<DOUBLE_T> &GetOriginalPrice() const
             {
                 return mOriginalPrice;
             }
 
-            void SetOriginalPrice(double originalPrice)
+            void SetOriginalPrice(DOUBLE_T originalPrice)
             {
                 mOriginalPrice = originalPrice;
             }
 
-            const Maybe <std::string> &GetPaymentMethod() const
+            const Maybe <STRING_T> &GetPaymentMethod() const
             {
                 return mPaymentMethod;
             }
 
-            void SetPaymentMethod(const std::string &paymentMethod)
+            void SetPaymentMethod(const STRING_T &paymentMethod)
             {
                 mPaymentMethod = paymentMethod;
             }
 
-            const Maybe <std::string> &GetPaymentReference() const
+            const Maybe <STRING_T> &GetPaymentReference() const
             {
                 return mPaymentReference;
             }
 
-            void SetPaymentReference(const std::string &paymentReference)
+            void SetPaymentReference(const STRING_T &paymentReference)
             {
                 mPaymentReference = paymentReference;
             }
 
-            const Maybe<double> &GetPaidPrice() const
+            const Maybe<DOUBLE_T> &GetPaidPrice() const
             {
                 return mPaidPrice;
             }
 
-            void SetPaidPrice(double paidPrice)
+            void SetPaidPrice(DOUBLE_T paidPrice)
             {
                 mPaidPrice = paidPrice;
             }
 
-            const Maybe<double> &GetRemainingAmount() const
+            const Maybe<DOUBLE_T> &GetRemainingAmount() const
             {
                 return mRemainingAmount;
             }
 
-            void SetRemainingAmount(double remainingAmount)
+            void SetRemainingAmount(DOUBLE_T remainingAmount)
             {
                 mRemainingAmount = remainingAmount;
             }
 
-            const Maybe <std::string> &GetTitle() const
+            const Maybe <STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
 
-            const Maybe <std::string> &GetTransactionTime() const
+            const Maybe <STRING_T> &GetTransactionTime() const
             {
                 return mTransactionTime;
             }
 
-            void SetTransactionTime(const std::string &transactionTime)
+            void SetTransactionTime(const STRING_T &transactionTime)
             {
                 mTransactionTime = transactionTime;
             }
@@ -222,39 +222,39 @@ namespace ready4air
                 mDRM = DRM;
             }
 
-            const Maybe <std::string> &GetSignature() const
+            const Maybe <STRING_T> &GetSignature() const
             {
                 return mSignature;
             }
 
-            void SetSignature(const std::string &signature)
+            void SetSignature(const STRING_T &signature)
             {
                 mSignature = signature;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string cpurchaseId;
-                std::string crentalId;
-                std::vector<std::string> cValueCodes;
-                std::string currency;
-                std::string ipAddress;
-                std::string ipCountry;
-                std::string productId;
-                double originalPrice;
-                std::string paymentMethod;
-                std::string paymentReference;
-                double paidPrice;
-                double remainingAmount;
-                std::string title;
-                std::string transactionTime;
+                STRING_T id;
+                STRING_T cpurchaseId;
+                STRING_T crentalId;
+                VECTOR_T<STRING_T> cValueCodes;
+                STRING_T currency;
+                STRING_T ipAddress;
+                STRING_T ipCountry;
+                STRING_T productId;
+                DOUBLE_T originalPrice;
+                STRING_T paymentMethod;
+                STRING_T paymentReference;
+                DOUBLE_T paidPrice;
+                DOUBLE_T remainingAmount;
+                STRING_T title;
+                STRING_T transactionTime;
                 Link self;
                 Form commit;
                 Form cancel;
                 Form update;
                 DRM drm;
-                std::string signature;
+                STRING_T signature;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
                     SetId(id);
@@ -269,7 +269,7 @@ namespace ready4air
                 {
                     for (rapidjson::SizeType i = 0; i < value["CValueCodes"].Size(); i += 1)
                     {
-                        std::string cValueCode;
+                        STRING_T cValueCode;
                         if (ParseString(value["CValueCodes"][i], "", false, cValueCode, parseErrors))
                             cValueCodes.push_back(cValueCode);
                     }
@@ -331,27 +331,27 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mId;
-            Maybe <std::string> mCpurchaseId;
-            Maybe <std::string> mCrentalId;
-            Maybe <std::vector<std::string> > mCValueCodes;
-            Maybe <std::string> mCurrency;
-            Maybe <std::string> mIPAddress;
-            Maybe <std::string> mIPCountry;
-            Maybe <std::string> mProductId;
-            Maybe<double> mOriginalPrice;
-            Maybe <std::string> mPaymentMethod;
-            Maybe <std::string> mPaymentReference;
-            Maybe<double> mPaidPrice;
-            Maybe<double> mRemainingAmount;
-            Maybe <std::string> mTitle;
-            Maybe <std::string> mTransactionTime;
+            Maybe <STRING_T> mId;
+            Maybe <STRING_T> mCpurchaseId;
+            Maybe <STRING_T> mCrentalId;
+            Maybe <VECTOR_T<STRING_T> > mCValueCodes;
+            Maybe <STRING_T> mCurrency;
+            Maybe <STRING_T> mIPAddress;
+            Maybe <STRING_T> mIPCountry;
+            Maybe <STRING_T> mProductId;
+            Maybe<DOUBLE_T> mOriginalPrice;
+            Maybe <STRING_T> mPaymentMethod;
+            Maybe <STRING_T> mPaymentReference;
+            Maybe<DOUBLE_T> mPaidPrice;
+            Maybe<DOUBLE_T> mRemainingAmount;
+            Maybe <STRING_T> mTitle;
+            Maybe <STRING_T> mTransactionTime;
             Maybe <Link> mSelf;
             Maybe <Form> mCommit;
             Maybe <Form> mCancel;
             Maybe <Form> mUpdate;
             Maybe <DRM> mDRM;
-            Maybe <std::string> mSignature;
+            Maybe <STRING_T> mSignature;
         };
     }
 }

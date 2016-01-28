@@ -20,22 +20,22 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetStart() const
+            const Maybe <STRING_T> &GetStart() const
             {
                 return mStart;
             }
 
-            void SetStart(const std::string &start)
+            void SetStart(const STRING_T &start)
             {
                 mStart = start;
             }
 
-            const Maybe <std::string> &GetEnd() const
+            const Maybe <STRING_T> &GetEnd() const
             {
                 return mEnd;
             }
 
-            void SetEnd(const std::string &anEnd)
+            void SetEnd(const STRING_T &anEnd)
             {
                 mEnd = anEnd;
             }
@@ -50,10 +50,10 @@ namespace ready4air
                 mMedia = media;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string start;
-                std::string end;
+                STRING_T start;
+                STRING_T end;
                 MediaProduct media;
 
                 if (ParseString(value, "Start", true, start, parseErrors))
@@ -69,8 +69,8 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mStart;
-            Maybe <std::string> mEnd;
+            Maybe <STRING_T> mStart;
+            Maybe <STRING_T> mEnd;
             Maybe <MediaProduct> mMedia;
         };
     }

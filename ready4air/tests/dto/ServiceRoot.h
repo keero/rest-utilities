@@ -18,19 +18,19 @@ namespace ready4air
         class ServiceRoot
         {
         public:
-            static bool RunTest(const std::string &jsonFilePath, dto::Device &device)
+            static BOOL_T RunTest(const STRING_T &jsonFilePath, dto::Device &device)
             {
                 std::ostringstream ss;
                 std::ifstream fs(jsonFilePath);
 
                 if (fs.is_open())
                 {
-                    std::string content;
+                    STRING_T content;
                     while (fs >> content)
                     {
                         ss << content;
                     }
-                    std::string json = ss.str();
+                    STRING_T json = ss.str();
 
                     dto::ParseErrors parseErrors;
 
@@ -39,7 +39,7 @@ namespace ready4air
                         std::cout << "Unable to parse ServiceRoot response." << std::endl;
                         if (parseErrors)
                         {
-                            std::vector<dto::ParseErrors::ParseErrorItem> items = parseErrors.GetParseErrors();
+                            VECTOR_T<dto::ParseErrors::ParseErrorItem> items = parseErrors.GetParseErrors();
                             for (size_t i = 0; i < items.size(); i += 1)
                             {
                                 dto::ParseErrors::ParseErrorItem item = items[i];

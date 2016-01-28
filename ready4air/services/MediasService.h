@@ -36,7 +36,7 @@ namespace ready4air
                 return mMedia;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
             {
                 dto::MediaProduct media;
                 if (media.InitFromJsonValue(value, parseErrors))

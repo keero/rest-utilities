@@ -31,22 +31,22 @@ namespace ready4air
                 mFileTypeId = fileTypeId;
             }
 
-            const Maybe<std::string> &GetFileTypeName() const
+            const Maybe<STRING_T> &GetFileTypeName() const
             {
                 return mFileTypeName;
             }
 
-            void SetFileTypeName(const std::string &fileTypeName)
+            void SetFileTypeName(const STRING_T &fileTypeName)
             {
                 mFileTypeName = fileTypeName;
             }
 
-            const Maybe<std::string> &GetLanguage() const
+            const Maybe<STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
@@ -81,13 +81,13 @@ namespace ready4air
                 mProtectionData = protectionData;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int fileTypeId;
-                std::string fileTypeName;
-                std::string language;
+                INT32_T fileTypeId;
+                STRING_T fileTypeName;
+                STRING_T language;
                 Link link;
-                int bitrate;
+                INT32_T bitrate;
                 ProtectionData protectionData;
 
                 if (ParseInt(value, "FileTypeId", true, fileTypeId, parseErrors))
@@ -113,8 +113,8 @@ namespace ready4air
 
         private:
             Maybe<int> mFileTypeId;
-            Maybe<std::string> mFileTypeName;
-            Maybe<std::string> mLanguage;
+            Maybe<STRING_T> mFileTypeName;
+            Maybe<STRING_T> mLanguage;
             Maybe<Link> mLink;
             Maybe<int> mBitrate;
             Maybe<ProtectionData> mProtectionData;

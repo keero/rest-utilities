@@ -29,12 +29,12 @@ namespace ready4air
                 mDeviceVersion = deviceVersion;
             }
 
-            const Maybe <std::string> &GetCountryCode() const
+            const Maybe <STRING_T> &GetCountryCode() const
             {
                 return mCountryCode;
             }
 
-            void SetCountryCode(const std::string &countryCode)
+            void SetCountryCode(const STRING_T &countryCode)
             {
                 mCountryCode = countryCode;
             }
@@ -49,32 +49,32 @@ namespace ready4air
                 mMediaId = mediaId;
             }
 
-            const Maybe <std::string> &GetCurrencyCode() const
+            const Maybe <STRING_T> &GetCurrencyCode() const
             {
                 return mCurrencyCode;
             }
 
-            void SetCurrencyCode(const std::string &currencyCode)
+            void SetCurrencyCode(const STRING_T &currencyCode)
             {
                 mCurrencyCode = currencyCode;
             }
 
-            const Maybe<bool> &IsMainList() const
+            const Maybe<BOOL_T> &IsMainList() const
             {
                 return mIsMainList;
             }
 
-            void SetIsMainList(bool isMainList)
+            void SetIsMainList(BOOL_T isMainList)
             {
                 mIsMainList = isMainList;
             }
 
-            const Maybe<double> &GetPrice() const
+            const Maybe<DOUBLE_T> &GetPrice() const
             {
                 return mPrice;
             }
 
-            void SetPrice(double price)
+            void SetPrice(DOUBLE_T price)
             {
                 mPrice = price;
             }
@@ -89,15 +89,15 @@ namespace ready4air
                 mListOrder = listOrder;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int deviceVersion;
-                std::string countryCode;
-                int mediaId;
-                std::string currencyCode;
-                bool isMainList;
-                double price;
-                int listOrder;
+                INT32_T deviceVersion;
+                STRING_T countryCode;
+                INT32_T mediaId;
+                STRING_T currencyCode;
+                BOOL_T isMainList;
+                DOUBLE_T price;
+                INT32_T listOrder;
 
                 if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
                     SetDeviceVersion(deviceVersion);
@@ -125,11 +125,11 @@ namespace ready4air
 
         private:
             Maybe<int> mDeviceVersion;
-            Maybe <std::string> mCountryCode;
+            Maybe <STRING_T> mCountryCode;
             Maybe<int> mMediaId;
-            Maybe <std::string> mCurrencyCode;
-            Maybe<bool> mIsMainList;
-            Maybe<double> mPrice;
+            Maybe <STRING_T> mCurrencyCode;
+            Maybe<BOOL_T> mIsMainList;
+            Maybe<DOUBLE_T> mPrice;
             Maybe<int> mListOrder;
         };
     }

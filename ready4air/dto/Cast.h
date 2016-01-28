@@ -20,91 +20,91 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetId() const
+            const Maybe <STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe<short> &GetCategoryId() const
+            const Maybe<INT16_T> &GetCategoryId() const
             {
                 return mCategoryId;
             }
 
-            void SetCategoryId(short categoryId)
+            void SetCategoryId(INT16_T categoryId)
             {
                 mCategoryId = categoryId;
             }
 
-            const Maybe <std::string> &GetCategoryName() const
+            const Maybe <STRING_T> &GetCategoryName() const
             {
                 return mCategoryName;
             }
 
-            void SetCategoryName(const std::string &categoryName)
+            void SetCategoryName(const STRING_T &categoryName)
             {
                 mCategoryName = categoryName;
             }
 
-            const Maybe <std::string> &GetFirstName() const
+            const Maybe <STRING_T> &GetFirstName() const
             {
                 return mFirstName;
             }
 
-            void SetFirstName(const std::string &firstName)
+            void SetFirstName(const STRING_T &firstName)
             {
                 mFirstName = firstName;
             }
 
-            const Maybe <std::string> &GetLastName() const
+            const Maybe <STRING_T> &GetLastName() const
             {
                 return mLastName;
             }
 
-            void SetLastName(const std::string &lastName)
+            void SetLastName(const STRING_T &lastName)
             {
                 mLastName = lastName;
             }
 
-            const Maybe <std::string> &GetMiddleName() const
+            const Maybe <STRING_T> &GetMiddleName() const
             {
                 return mMiddleName;
             }
 
-            void SetMiddleName(const std::string &middleName)
+            void SetMiddleName(const STRING_T &middleName)
             {
                 mMiddleName = middleName;
             }
 
-            const Maybe <std::string> &GetFullName() const
+            const Maybe <STRING_T> &GetFullName() const
             {
                 return mFullName;
             }
 
-            void SetFullName(const std::string &fullName)
+            void SetFullName(const STRING_T &fullName)
             {
                 mFullName = fullName;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                int categoryId;
-                std::string categoryName;
-                std::string firstName;
-                std::string lastName;
-                std::string middleName;
-                std::string fullName;
+                STRING_T id;
+                INT32_T categoryId;
+                STRING_T categoryName;
+                STRING_T firstName;
+                STRING_T lastName;
+                STRING_T middleName;
+                STRING_T fullName;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
                     SetId(id);
 
                 if (ParseInt(value, "CategoryId", true, categoryId, parseErrors))
-                    SetCategoryId((short) categoryId);
+                    SetCategoryId((INT16_T) categoryId);
 
                 if (ParseString(value, "CategoryName", true, categoryName, parseErrors))
                     SetCategoryName(categoryName);
@@ -125,13 +125,13 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mId;
-            Maybe<short> mCategoryId;
-            Maybe <std::string> mCategoryName;
-            Maybe <std::string> mFirstName;
-            Maybe <std::string> mLastName;
-            Maybe <std::string> mMiddleName;
-            Maybe <std::string> mFullName;
+            Maybe <STRING_T> mId;
+            Maybe<INT16_T> mCategoryId;
+            Maybe <STRING_T> mCategoryName;
+            Maybe <STRING_T> mFirstName;
+            Maybe <STRING_T> mLastName;
+            Maybe <STRING_T> mMiddleName;
+            Maybe <STRING_T> mFullName;
         };
     }
 }

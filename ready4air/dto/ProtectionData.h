@@ -20,12 +20,12 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetKeyId() const
+            const Maybe<STRING_T> &GetKeyId() const
             {
                 return mKeyId;
             }
 
-            void SetKeyId(const std::string &keyId)
+            void SetKeyId(const STRING_T &keyId)
             {
                 mKeyId = keyId;
             }
@@ -50,22 +50,22 @@ namespace ready4air
                 mWidevineLicenser = widevineLicenser;
             }
 
-            const Maybe<std::string> &GetWidevinePSSH() const
+            const Maybe<STRING_T> &GetWidevinePSSH() const
             {
                 return mWidevinePSSH;
             }
 
-            void SetWidevinePSSH(const std::string &widevinePSSH)
+            void SetWidevinePSSH(const STRING_T &widevinePSSH)
             {
                 mWidevinePSSH = widevinePSSH;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string keyId;
+                STRING_T keyId;
                 Link playReadyLicenser;
                 Link widevineLicenser;
-                std::string widevinePSSH;
+                STRING_T widevinePSSH;
 
                 if (ParseString(value, "KeyId", true, keyId, parseErrors))
                     SetKeyId(keyId);
@@ -83,10 +83,10 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mKeyId;
+            Maybe<STRING_T> mKeyId;
             Maybe<Link> mPlayReadyLicenser;
             Maybe<Link> mWidevineLicenser;
-            Maybe<std::string> mWidevinePSSH;
+            Maybe<STRING_T> mWidevinePSSH;
         };
     }
 }

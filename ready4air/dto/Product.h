@@ -36,22 +36,22 @@ namespace ready4air
                 mProductId = productId;
             }
 
-            const Maybe<bool> &GetHD() const
+            const Maybe<BOOL_T> &GetHD() const
             {
                 return mHD;
             }
 
-            void SetHD(bool HD)
+            void SetHD(BOOL_T HD)
             {
                 mHD = HD;
             }
 
-            const Maybe<bool> &GetDubbed() const
+            const Maybe<BOOL_T> &GetDubbed() const
             {
                 return mDubbed;
             }
 
-            void SetDubbed(bool dubbed)
+            void SetDubbed(BOOL_T dubbed)
             {
                 mDubbed = dubbed;
             }
@@ -76,24 +76,24 @@ namespace ready4air
                 mEntitlements = entitlements;
             }
 
-            const Maybe <std::vector<PurchaseItem> > &GetPurchaseItems() const
+            const Maybe <VECTOR_T<PurchaseItem> > &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
 
-            void SetPurchaseItems(const std::vector<PurchaseItem> &purchaseItems)
+            void SetPurchaseItems(const VECTOR_T<PurchaseItem> &purchaseItems)
             {
                 mPurchaseItems = purchaseItems;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int productId;
-                bool hd;
-                bool dubbed;
+                INT32_T productId;
+                BOOL_T hd;
+                BOOL_T dubbed;
                 Link fullPLay;
                 Entitlement entitlements;
-                std::vector<PurchaseItem> purchaseItems;
+                VECTOR_T<PurchaseItem> purchaseItems;
 
                 if (ParseInt(value, "ProductId", true, productId, parseErrors))
                     SetProductId(productId);
@@ -127,11 +127,11 @@ namespace ready4air
 
         private:
             Maybe<int> mProductId;
-            Maybe<bool> mHD;
-            Maybe<bool> mDubbed;
+            Maybe<BOOL_T> mHD;
+            Maybe<BOOL_T> mDubbed;
             Maybe <Link> mFullPLay;
             Maybe <Entitlement> mEntitlements;
-            Maybe <std::vector<PurchaseItem> > mPurchaseItems;
+            Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
         };
     }
 }

@@ -20,47 +20,47 @@ namespace ready4air
             {
             }
 
-            void SetHref(const std::string &value)
+            void SetHref(const STRING_T &value)
             {
                 mUrlTemplate.SetUrl(value);
             }
 
-            const Maybe<std::string> &GetHref() const
+            const Maybe<STRING_T> &GetHref() const
             {
                 return mUrlTemplate.GetUrl();
             }
 
-            void SetTemplated(bool value)
+            void SetTemplated(BOOL_T value)
             {
                 mTemplated = value;
             }
 
-            Maybe<bool> GetTemplated() const
+            Maybe<BOOL_T> GetTemplated() const
             {
                 return mTemplated;
             }
 
-            void SetWithCredentials(bool value)
+            void SetWithCredentials(BOOL_T value)
             {
                 mWithCredentials = value;
             }
 
-            Maybe<bool> GetWithCredentials() const
+            Maybe<BOOL_T> GetWithCredentials() const
             {
                 return mWithCredentials;
             }
 
-            void SetParam(const std::string &key, const std::string &value)
+            void SetParam(const STRING_T &key, const STRING_T &value)
             {
                 mUrlTemplate.SetParam(key, value);
             }
 
-            const std::string &GetParam(const std::string &key) const
+            const STRING_T &GetParam(const STRING_T &key) const
             {
                 return mUrlTemplate.GetParam(key);
             }
 
-            void UnsetParam(const std::string &key)
+            void UnsetParam(const STRING_T &key)
             {
                 mUrlTemplate.UnsetParam(key);
             }
@@ -70,16 +70,16 @@ namespace ready4air
                 mUrlTemplate.ClearParams();
             }
 
-            const std::string GetExpandedUrl() const
+            const STRING_T GetExpandedUrl() const
             {
                 return mUrlTemplate.Expand();
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string href;
-                bool templated;
-                bool withCredentials;
+                STRING_T href;
+                BOOL_T templated;
+                BOOL_T withCredentials;
 
                 if (ParseString(value, "Href", true, href, parseErrors))
                     SetHref(href);
@@ -94,8 +94,8 @@ namespace ready4air
             }
 
         private:
-            Maybe<bool> mTemplated;
-            Maybe<bool> mWithCredentials;
+            Maybe<BOOL_T> mTemplated;
+            Maybe<BOOL_T> mWithCredentials;
             UrlTemplate mUrlTemplate;
         };
     }

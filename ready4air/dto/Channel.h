@@ -22,92 +22,92 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetId() const
+            const Maybe<STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe<std::string> &GetOriginalTitle() const
+            const Maybe<STRING_T> &GetOriginalTitle() const
             {
                 return mOriginalTitle;
             }
 
-            void SetOriginalTitle(const std::string &originalTitle)
+            void SetOriginalTitle(const STRING_T &originalTitle)
             {
                 mOriginalTitle = originalTitle;
             }
 
-            const Maybe<std::string> &GetDescription() const
+            const Maybe<STRING_T> &GetDescription() const
             {
                 return mDescription;
             }
 
-            void SetDescription(const std::string &description)
+            void SetDescription(const STRING_T &description)
             {
                 mDescription = description;
             }
 
-            const Maybe<std::string> &GetLocalTitle() const
+            const Maybe<STRING_T> &GetLocalTitle() const
             {
                 return mLocalTitle;
             }
 
-            void SetLocalTitle(const std::string &localTitle)
+            void SetLocalTitle(const STRING_T &localTitle)
             {
                 mLocalTitle = localTitle;
             }
 
-            const Maybe<std::string> &GetShortTitle() const
+            const Maybe<STRING_T> &GetShortTitle() const
             {
                 return mShortTitle;
             }
 
-            void SetShortTitle(const std::string &shortTitle)
+            void SetShortTitle(const STRING_T &shortTitle)
             {
                 mShortTitle = shortTitle;
             }
 
-            const Maybe<std::string> &GetLongSummary() const
+            const Maybe<STRING_T> &GetLongSummary() const
             {
                 return mLongSummary;
             }
 
-            void SetLongSummary(const std::string &longSummary)
+            void SetLongSummary(const STRING_T &longSummary)
             {
                 mLongSummary = longSummary;
             }
 
-            const Maybe<std::string> &GetShortSummary() const
+            const Maybe<STRING_T> &GetShortSummary() const
             {
                 return mShortSummary;
             }
 
-            void SetShortSummary(const std::string &shortSummary)
+            void SetShortSummary(const STRING_T &shortSummary)
             {
                 mShortSummary = shortSummary;
             }
 
-            const Maybe<std::string> &GetSortTitle() const
+            const Maybe<STRING_T> &GetSortTitle() const
             {
                 return mSortTitle;
             }
 
-            void SetSortTitle(const std::string &sortTitle)
+            void SetSortTitle(const STRING_T &sortTitle)
             {
                 mSortTitle = sortTitle;
             }
 
-            const Maybe<std::vector<Image> > &GetImages() const
+            const Maybe<VECTOR_T<Image> > &GetImages() const
             {
                 return mImages;
             }
 
-            void SetImages(const std::vector<Image> &images)
+            void SetImages(const VECTOR_T<Image> &images)
             {
                 mImages = images;
             }
@@ -132,17 +132,17 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string originalTitle;
-                std::string description;
-                std::string localTitle;
-                std::string shortTitle;
-                std::string longSummary;
-                std::string shortSummary;
-                std::string sortTitle;
-                std::vector<Image> images;
+                STRING_T id;
+                STRING_T originalTitle;
+                STRING_T description;
+                STRING_T localTitle;
+                STRING_T shortTitle;
+                STRING_T longSummary;
+                STRING_T shortSummary;
+                STRING_T sortTitle;
+                VECTOR_T<Image> images;
                 EpgInfo epgInfo;
                 Link self;
 
@@ -191,15 +191,15 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mId;
-            Maybe<std::string> mOriginalTitle;
-            Maybe<std::string> mDescription;
-            Maybe<std::string> mLocalTitle;
-            Maybe<std::string> mShortTitle;
-            Maybe<std::string> mLongSummary;
-            Maybe<std::string> mShortSummary;
-            Maybe<std::string> mSortTitle;
-            Maybe<std::vector<Image> > mImages;
+            Maybe<STRING_T> mId;
+            Maybe<STRING_T> mOriginalTitle;
+            Maybe<STRING_T> mDescription;
+            Maybe<STRING_T> mLocalTitle;
+            Maybe<STRING_T> mShortTitle;
+            Maybe<STRING_T> mLongSummary;
+            Maybe<STRING_T> mShortSummary;
+            Maybe<STRING_T> mSortTitle;
+            Maybe<VECTOR_T<Image> > mImages;
             Maybe<EpgInfo> mEpgInfo;
             Maybe<Link> mSelf;
         };

@@ -2,6 +2,7 @@
 #define READY4AIR_MAYBE_H
 
 #include <iostream>
+#include "Predefine.h"
 
 namespace ready4air
 {
@@ -28,7 +29,7 @@ namespace ready4air
             return mJust;
         }
 
-        inline operator bool() const
+        inline operator BOOL_T() const
         {
             return !mNothing;
         }
@@ -40,33 +41,33 @@ namespace ready4air
             return *this;
         }
 
-        inline friend bool operator==(const Maybe &lhs, const Maybe &rhs)
+        inline friend BOOL_T operator==(const Maybe &lhs, const Maybe &rhs)
         {
             return (lhs.mNothing && rhs.mNothing)
                 || (!lhs.mNothing && !rhs.mNothing && lhs.mJust == rhs.mJust);
         }
 
-        inline friend bool operator==(const Maybe<T> &lhs, const T &rhs)
+        inline friend BOOL_T operator==(const Maybe<T> &lhs, const T &rhs)
         {
             return (!lhs.mNothing && lhs.mJust == rhs);
         }
 
-        inline friend bool operator==(const T &lhs, const Maybe<T> &rhs)
+        inline friend BOOL_T operator==(const T &lhs, const Maybe<T> &rhs)
         {
             return rhs == lhs;
         }
 
-        inline friend bool operator!=(const Maybe &lhs, const Maybe &rhs)
+        inline friend BOOL_T operator!=(const Maybe &lhs, const Maybe &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const Maybe<T> &lhs, const T &rhs)
+        inline friend BOOL_T operator!=(const Maybe<T> &lhs, const T &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const T &lhs, const Maybe<T> &rhs)
+        inline friend BOOL_T operator!=(const T &lhs, const Maybe<T> &rhs)
         {
             return !(lhs == rhs);
         }
@@ -80,7 +81,7 @@ namespace ready4air
         }
 
     private:
-        bool mNothing;
+        BOOL_T mNothing;
         T mJust;
     };
 }

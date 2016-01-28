@@ -20,32 +20,32 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetType() const
+            const Maybe <STRING_T> &GetType() const
             {
                 return mType;
             }
 
-            void SetType(const std::string &type)
+            void SetType(const STRING_T &type)
             {
                 mType = type;
             }
 
-            const Maybe <std::string> &GetEncoding() const
+            const Maybe <STRING_T> &GetEncoding() const
             {
                 return mEncoding;
             }
 
-            void SetEncoding(const std::string &encoding)
+            void SetEncoding(const STRING_T &encoding)
             {
                 mEncoding = encoding;
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
@@ -60,11 +60,11 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string type;
-                std::string encoding;
-                std::string language;
+                STRING_T type;
+                STRING_T encoding;
+                STRING_T language;
                 Link link;
 
                 if (ParseString(value, "Type", true, type, parseErrors))
@@ -83,9 +83,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mType;
-            Maybe <std::string> mEncoding;
-            Maybe <std::string> mLanguage;
+            Maybe <STRING_T> mType;
+            Maybe <STRING_T> mEncoding;
+            Maybe <STRING_T> mLanguage;
             Maybe <Link> mLink;
         };
     }

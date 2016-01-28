@@ -16,8 +16,8 @@ namespace ready4air
         public:
             typedef struct
             {
-                int Code;
-                std::string Message;
+                INT32_T Code;
+                STRING_T Message;
             } ParseErrorItem;
 
         public:
@@ -29,12 +29,12 @@ namespace ready4air
             {
             }
 
-            const std::vector<ParseErrorItem> &GetParseErrors() const
+            const VECTOR_T<ParseErrorItem> &GetParseErrors() const
             {
                 return mItems;
             }
 
-            void Error(int code, const std::string &message)
+            void Error(int code, const STRING_T &message)
             {
                 ParseErrorItem item;
                 item.Code = code;
@@ -43,28 +43,28 @@ namespace ready4air
                 mItems.push_back(item);
             }
 
-            inline operator bool() const
+            inline operator BOOL_T() const
             {
                 return mItems.size() > 0;
             }
 
         private:
-            std::vector<ParseErrorItem> mItems;
+            VECTOR_T<ParseErrorItem> mItems;
         };
 
         class IJsonDeserializable
         {
         public:
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors) = 0;
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors) = 0;
         };
 
-        static const std::string kTypeNames[] = {"Null", "Bool", "Bool", "Object", "Array", "String", "Number"};
+        static const STRING_T kTypeNames[] = {"Null", "Bool", "Bool", "Object", "Array", "String", "Number"};
 
         class JsonDeserializable : public IJsonDeserializable
         {
 
         public:
-            bool InitFromJsonString(const std::string &json, ParseErrors &parseErrors)
+            BOOL_T InitFromJsonString(const STRING_T &json, ParseErrors &parseErrors)
             {
                 rapidjson::Document d;
 
@@ -78,10 +78,10 @@ namespace ready4air
                     return false;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors) = 0;
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors) = 0;
 
-            bool ParseInt(const rapidjson::Value &value, const std::string &key, bool mandatory, int &result,
-                          ParseErrors &parseErrors)
+            BOOL_T ParseInt(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory, INT32_T &result,
+                            ParseErrors &parseErrors)
             {
                 if (value.HasMember(key.c_str()))
                 {
@@ -105,8 +105,8 @@ namespace ready4air
                 return false;
             }
 
-            bool ParseString(const rapidjson::Value &value, const std::string &key, bool mandatory, std::string &result,
-                             ParseErrors &parseErrors)
+            BOOL_T ParseString(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory, STRING_T &result,
+                               ParseErrors &parseErrors)
             {
                 if (key.size() == 0)
                 {
@@ -145,8 +145,8 @@ namespace ready4air
                 return false;
             }
 
-            bool ParseBool(const rapidjson::Value &value, const std::string &key, bool mandatory, bool &result,
-                           ParseErrors &parseErrors)
+            BOOL_T ParseBool(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory, BOOL_T &result,
+                             ParseErrors &parseErrors)
             {
                 if (value.HasMember(key.c_str()))
                 {
@@ -170,8 +170,8 @@ namespace ready4air
                 return false;
             }
 
-            bool ParseDouble(const rapidjson::Value &value, const std::string &key, bool mandatory, double &result,
-                             ParseErrors &parseErrors)
+            BOOL_T ParseDouble(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory, DOUBLE_T &result,
+                               ParseErrors &parseErrors)
             {
                 if (value.HasMember(key.c_str()))
                 {
@@ -195,8 +195,8 @@ namespace ready4air
                 return false;
             }
 
-            bool ParseObject(const rapidjson::Value &value, const std::string &key, bool mandatory,
-                             JsonDeserializable &result, ParseErrors &parseErrors)
+            BOOL_T ParseObject(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory,
+                               JsonDeserializable &result, ParseErrors &parseErrors)
             {
                 if (key.size() == 0)
                 {
@@ -234,8 +234,8 @@ namespace ready4air
                 return false;
             }
 
-            bool VerifyArray(const rapidjson::Value &value, const std::string &key, bool mandatory,
-                             ParseErrors &parseErrors)
+            BOOL_T VerifyArray(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory,
+                               ParseErrors &parseErrors)
             {
                 if (value.HasMember(key.c_str()))
                 {
@@ -259,8 +259,8 @@ namespace ready4air
                 return false;
             }
 
-            bool VerifyObject(const rapidjson::Value &value, const std::string &key, bool mandatory,
-                              ParseErrors &parseErrors)
+            BOOL_T VerifyObject(const rapidjson::Value &value, const STRING_T &key, BOOL_T mandatory,
+                                ParseErrors &parseErrors)
             {
                 if (value.HasMember(key.c_str()))
                 {

@@ -50,9 +50,9 @@ namespace ready4air
                 mFeatures = features;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int productId;
+                INT32_T productId;
                 Manifests trailers;
                 Manifests features;
 

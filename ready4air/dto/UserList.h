@@ -22,42 +22,42 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetId() const
+            const Maybe<STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe<std::string> &GetName() const
+            const Maybe<STRING_T> &GetName() const
             {
                 return mName;
             }
 
-            void SetName(const std::string &name)
+            void SetName(const STRING_T &name)
             {
                 mName = name;
             }
 
-            const Maybe<bool> &IsPublic() const
+            const Maybe<BOOL_T> &IsPublic() const
             {
                 return mPublic;
             }
 
-            void SetPublic(bool aPublic)
+            void SetPublic(BOOL_T aPublic)
             {
                 mPublic = aPublic;
             }
 
-            const Maybe<std::string> &GetOwner() const
+            const Maybe<STRING_T> &GetOwner() const
             {
                 return mOwner;
             }
 
-            void SetOwner(const std::string &owner)
+            void SetOwner(const STRING_T &owner)
             {
                 mOwner = owner;
             }
@@ -72,12 +72,12 @@ namespace ready4air
                 mType = type;
             }
 
-            const Maybe<std::string> &GetListType() const
+            const Maybe<STRING_T> &GetListType() const
             {
                 return mListType;
             }
 
-            void SetListType(const std::string &listType)
+            void SetListType(const STRING_T &listType)
             {
                 mListType = listType;
             }
@@ -122,51 +122,51 @@ namespace ready4air
                 mItems = items;
             }
 
-            const Maybe<std::vector<UserListItem> > &GetExposedItems() const
+            const Maybe<VECTOR_T<UserListItem> > &GetExposedItems() const
             {
                 return mExposedItems;
             }
 
-            void SetExposedItems(const std::vector<UserListItem> &exposedItems)
+            void SetExposedItems(const VECTOR_T<UserListItem> &exposedItems)
             {
                 mExposedItems = exposedItems;
             }
 
-            const Maybe<std::string> &GetUserId() const
+            const Maybe<STRING_T> &GetUserId() const
             {
                 return mUserId;
             }
 
-            void SetUserId(const std::string &userId)
+            void SetUserId(const STRING_T &userId)
             {
                 mUserId = userId;
             }
 
-            const Maybe<std::string> &GetDeviceId() const
+            const Maybe<STRING_T> &GetDeviceId() const
             {
                 return mDeviceId;
             }
 
-            void SetDeviceId(const std::string &deviceId)
+            void SetDeviceId(const STRING_T &deviceId)
             {
                 mDeviceId = deviceId;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string name;
-                bool aPublic;
-                std::string owner;
-                int type;
-                std::string listType;
+                STRING_T id;
+                STRING_T name;
+                BOOL_T aPublic;
+                STRING_T owner;
+                INT32_T type;
+                STRING_T listType;
                 Form addItems;
                 Form itemPosition;
                 Form removeItems;
                 Link items;
-                std::vector<UserListItem> exposedItems;
-                std::string userId;
-                std::string deviceId;
+                VECTOR_T<UserListItem> exposedItems;
+                STRING_T userId;
+                STRING_T deviceId;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
                     SetId(id);
@@ -219,19 +219,19 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mId;
-            Maybe<std::string> mName;
-            Maybe<bool> mPublic;
-            Maybe<std::string> mOwner;
+            Maybe<STRING_T> mId;
+            Maybe<STRING_T> mName;
+            Maybe<BOOL_T> mPublic;
+            Maybe<STRING_T> mOwner;
             Maybe<int> mType;
-            Maybe<std::string> mListType;
+            Maybe<STRING_T> mListType;
             Maybe<Form> mAddItems;
             Maybe<Form> mItemPosition;
             Maybe<Form> mRemoveItems;
             Maybe<Link> mItems;
-            Maybe<std::vector<UserListItem> > mExposedItems;
-            Maybe<std::string> mUserId;
-            Maybe<std::string> mDeviceId;
+            Maybe<VECTOR_T<UserListItem> > mExposedItems;
+            Maybe<STRING_T> mUserId;
+            Maybe<STRING_T> mDeviceId;
         };
     }
 }

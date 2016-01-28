@@ -40,32 +40,32 @@ namespace ready4air
                 mMmsLink = mmsLink;
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
 
-            const Maybe<short> &GetBandwidth() const
+            const Maybe<INT16_T> &GetBandwidth() const
             {
                 return mBandwidth;
             }
 
-            void SetBandwidth(short bandwidth)
+            void SetBandwidth(INT16_T bandwidth)
             {
                 mBandwidth = bandwidth;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int location;
+                INT32_T location;
                 Link mmsLink;
-                std::string language;
-                int bandwidth;
+                STRING_T language;
+                INT32_T bandwidth;
 
                 // Initialize parent properties
                 FileBase::InitFromJsonValue(value, parseErrors);
@@ -80,7 +80,7 @@ namespace ready4air
                     SetLanguage(language);
 
                 if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
-                    SetBandwidth((short) bandwidth);
+                    SetBandwidth((INT16_T) bandwidth);
 
                 return !parseErrors;
             }
@@ -88,8 +88,8 @@ namespace ready4air
         private:
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
-            Maybe <std::string> mLanguage;
-            Maybe<short> mBandwidth;
+            Maybe <STRING_T> mLanguage;
+            Maybe<INT16_T> mBandwidth;
         };
     }
 }

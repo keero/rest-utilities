@@ -39,21 +39,21 @@ namespace ready4air
                 mValue = value;
             }
 
-            const Maybe<double> &GetAverageValue() const
+            const Maybe<DOUBLE_T> &GetAverageValue() const
             {
                 return mAverageValue;
             }
 
-            void SetAverageValue(double averageValue)
+            void SetAverageValue(DOUBLE_T averageValue)
             {
                 mAverageValue = averageValue;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int numberOfVotes;
-                int val;
-                double averageValue;
+                INT32_T numberOfVotes;
+                INT32_T val;
+                DOUBLE_T averageValue;
 
                 if (ParseInt(value, "NumberOfVotes", true, numberOfVotes, parseErrors))
                     SetNumberOfVotes(numberOfVotes);
@@ -70,7 +70,7 @@ namespace ready4air
         private:
             Maybe<int> mNumberOfVotes;
             Maybe<int> mValue;
-            Maybe<double> mAverageValue;
+            Maybe<DOUBLE_T> mAverageValue;
         };
     }
 }

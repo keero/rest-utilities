@@ -29,20 +29,20 @@ namespace ready4air
                 mPosition = position;
             }
 
-            const Maybe <std::string> &GetContentId() const
+            const Maybe <STRING_T> &GetContentId() const
             {
                 return mContentId;
             }
 
-            void SetContentId(const std::string &contentId)
+            void SetContentId(const STRING_T &contentId)
             {
                 mContentId = contentId;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int position;
-                std::string contentId;
+                INT32_T position;
+                STRING_T contentId;
 
                 if (ParseInt(value, "Position", true, position, parseErrors))
                     SetPosition(position);
@@ -55,7 +55,7 @@ namespace ready4air
 
         private:
             Maybe<int> mPosition;
-            Maybe <std::string> mContentId;
+            Maybe <STRING_T> mContentId;
         };
     }
 }

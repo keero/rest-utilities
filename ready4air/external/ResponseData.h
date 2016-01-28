@@ -38,12 +38,12 @@ namespace ready4air
             mStatusCode = statusCode;
         }
 
-        const std::string &GetBody() const
+        const STRING_T &GetBody() const
         {
             return mBody;
         }
 
-        void SetBody(const std::string &body)
+        void SetBody(const STRING_T &body)
         {
             mBody = body;
         }
@@ -55,7 +55,7 @@ namespace ready4air
 
     private:
         HTTP_STATUS_CODE mStatusCode;
-        std::string mBody;
+        STRING_T mBody;
     };
 }
 

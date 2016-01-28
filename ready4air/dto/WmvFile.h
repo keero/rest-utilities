@@ -40,9 +40,9 @@ namespace ready4air
                 mMmsLink = mmsLink;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int location;
+                INT32_T location;
                 Link mmsLink;
 
                 // Initialize parent properties

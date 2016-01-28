@@ -21,12 +21,12 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetTitle() const
+            const Maybe <STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
@@ -41,21 +41,21 @@ namespace ready4air
                 mAll = all;
             }
 
-            const Maybe <std::vector<MediaProduct> > &GetMedias() const
+            const Maybe <VECTOR_T<MediaProduct> > &GetMedias() const
             {
                 return mMedias;
             }
 
-            void SetMedias(const std::vector<MediaProduct> &medias)
+            void SetMedias(const VECTOR_T<MediaProduct> &medias)
             {
                 mMedias = medias;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string title;
+                STRING_T title;
                 Link all;
-                std::vector<MediaProduct> medias;
+                VECTOR_T<MediaProduct> medias;
 
                 if (ParseString(value, "Title", true, title, parseErrors))
                     SetTitle(title);
@@ -78,9 +78,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mTitle;
+            Maybe <STRING_T> mTitle;
             Maybe <Link> mAll;
-            Maybe <std::vector<MediaProduct> > mMedias;
+            Maybe <VECTOR_T<MediaProduct> > mMedias;
         };
     }
 }

@@ -35,7 +35,7 @@ namespace ready4air
                 return mSeries;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, dto::ParseErrors &parseErrors)
             {
                 dto::Series series;
                 if (series.InitFromJsonValue(value, parseErrors))

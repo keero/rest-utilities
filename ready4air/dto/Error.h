@@ -30,12 +30,12 @@ namespace ready4air
                 mCode = code;
             }
 
-            const Maybe<std::string> &GetMessage() const
+            const Maybe<STRING_T> &GetMessage() const
             {
                 return mMessage;
             }
 
-            void SetMessage(const std::string &message)
+            void SetMessage(const STRING_T &message)
             {
                 mMessage = message;
             }
@@ -50,10 +50,10 @@ namespace ready4air
                 mDisplay = display;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int code;
-                std::string message;
+                INT32_T code;
+                STRING_T message;
                 Display display;
 
                 if (ParseInt(value, "Code", true, code, parseErrors))
@@ -70,7 +70,7 @@ namespace ready4air
 
         private:
             Maybe<int> mCode;
-            Maybe<std::string> mMessage;
+            Maybe<STRING_T> mMessage;
             Maybe<Display> mDisplay;
         };
     }

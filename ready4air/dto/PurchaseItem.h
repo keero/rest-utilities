@@ -20,42 +20,42 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetBusinessType() const
+            const Maybe <STRING_T> &GetBusinessType() const
             {
                 return mBusinessType;
             }
 
-            void SetBusinessType(const std::string &businessType)
+            void SetBusinessType(const STRING_T &businessType)
             {
                 mBusinessType = businessType;
             }
 
-            const Maybe<double> &GetPrice() const
+            const Maybe<DOUBLE_T> &GetPrice() const
             {
                 return mPrice;
             }
 
-            void SetPrice(double price)
+            void SetPrice(DOUBLE_T price)
             {
                 mPrice = price;
             }
 
-            const Maybe <std::string> &GetCurrency() const
+            const Maybe <STRING_T> &GetCurrency() const
             {
                 return mCurrency;
             }
 
-            void SetCurrency(const std::string &currency)
+            void SetCurrency(const STRING_T &currency)
             {
                 mCurrency = currency;
             }
 
-            const Maybe <std::string> &GetStrPrice() const
+            const Maybe <STRING_T> &GetStrPrice() const
             {
                 return mStrPrice;
             }
 
-            void SetStrPrice(const std::string &strPrice)
+            void SetStrPrice(const STRING_T &strPrice)
             {
                 mStrPrice = strPrice;
             }
@@ -70,12 +70,12 @@ namespace ready4air
                 mForm = form;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string businessType;
-                double price;
-                std::string currency;
-                std::string strPrice;
+                STRING_T businessType;
+                DOUBLE_T price;
+                STRING_T currency;
+                STRING_T strPrice;
                 Form form;
 
                 if (ParseString(value, "BusinessType", true, businessType, parseErrors))
@@ -97,10 +97,10 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mBusinessType;
-            Maybe<double> mPrice;
-            Maybe <std::string> mCurrency;
-            Maybe <std::string> mStrPrice;
+            Maybe <STRING_T> mBusinessType;
+            Maybe<DOUBLE_T> mPrice;
+            Maybe <STRING_T> mCurrency;
+            Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;
         };
     }

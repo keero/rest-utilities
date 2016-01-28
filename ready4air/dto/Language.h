@@ -19,52 +19,52 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetCode() const
+            const Maybe <STRING_T> &GetCode() const
             {
                 return mCode;
             }
 
-            void SetCode(const std::string &code)
+            void SetCode(const STRING_T &code)
             {
                 mCode = code;
             }
 
-            const Maybe <std::string> &GetISO6391Code() const
+            const Maybe <STRING_T> &GetISO6391Code() const
             {
                 return mISO6391Code;
             }
 
-            void SetISO6391Code(const std::string &ISO6391Code)
+            void SetISO6391Code(const STRING_T &ISO6391Code)
             {
                 mISO6391Code = ISO6391Code;
             }
 
-            const Maybe <std::string> &GetISO6392Code() const
+            const Maybe <STRING_T> &GetISO6392Code() const
             {
                 return mISO6392Code;
             }
 
-            void SetISO6392Code(const std::string &ISO6392Code)
+            void SetISO6392Code(const STRING_T &ISO6392Code)
             {
                 mISO6392Code = ISO6392Code;
             }
 
-            const Maybe <std::string> &GetEnglishName() const
+            const Maybe <STRING_T> &GetEnglishName() const
             {
                 return mEnglishName;
             }
 
-            void SetEnglishName(const std::string &englishName)
+            void SetEnglishName(const STRING_T &englishName)
             {
                 mEnglishName = englishName;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string code;
-                std::string iso6391Code;
-                std::string iso6392Code;
-                std::string englishName;
+                STRING_T code;
+                STRING_T iso6391Code;
+                STRING_T iso6392Code;
+                STRING_T englishName;
 
                 if (ParseString(value, "Code", true, code, parseErrors))
                     SetCode(code);
@@ -82,10 +82,10 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mCode;
-            Maybe <std::string> mISO6391Code;
-            Maybe <std::string> mISO6392Code;
-            Maybe <std::string> mEnglishName;
+            Maybe <STRING_T> mCode;
+            Maybe <STRING_T> mISO6391Code;
+            Maybe <STRING_T> mISO6392Code;
+            Maybe <STRING_T> mEnglishName;
         };
     }
 }

@@ -1,6 +1,7 @@
 #ifndef READY4AIR_REGEX_H
 #define READY4AIR_REGEX_H
 
+#include "Predefine.h"
 #include <regex.h>
 #include <string>
 #include <vector>
@@ -10,12 +11,12 @@ namespace ready4air
     class Regex
     {
     public:
-        static bool Match(const std::string &regex, const std::string &subject, size_t nmatches, std::vector<std::string> &matches)
+        static BOOL_T Match(const STRING_T &regex, const STRING_T &subject, size_t nmatches, VECTOR_T<STRING_T> &matches)
         {
-            bool result = false;
+            BOOL_T result = false;
             regex_t re;
             regmatch_t regexmatches[nmatches];
-            int reti;
+            INT32_T reti;
             reti = regcomp(&re, regex.c_str(), REG_EXTENDED);
 
             if (!reti)
@@ -26,7 +27,7 @@ namespace ready4air
                 {
                     for (size_t i = 0; i < nmatches; i += 1)
                     {
-                        std::string currMatch(subject.substr((unsigned long) regexmatches[i].rm_so, (unsigned long) regexmatches[i].rm_eo - regexmatches[i].rm_so));
+                        STRING_T currMatch(subject.substr((UINT64_T) regexmatches[i].rm_so, (UINT64_T) regexmatches[i].rm_eo - regexmatches[i].rm_so));
                         matches.push_back(currMatch);
                     }
                     result = true;
@@ -36,18 +37,18 @@ namespace ready4air
             return result;
         }
 
-        static bool Match(const std::string &regex, const std::string &subject)
+        static BOOL_T Match(const STRING_T &regex, const STRING_T &subject)
         {
-            std::vector<std::string> _unused;
+            VECTOR_T<STRING_T> _unused;
             return Match(regex, subject, 2, _unused);
         }
 
-        static bool MatchSingle(const std::string &regex, const std::string &subject, std::string &match, std::string &rest)
+        static BOOL_T MatchSingle(const STRING_T &regex, const STRING_T &subject, STRING_T &match, STRING_T &rest)
         {
-            bool result = false;
+            BOOL_T result = false;
             regex_t re;
             regmatch_t regexmatches[2];
-            int reti;
+            INT32_T reti;
             reti = regcomp(&re, regex.c_str(), REG_EXTENDED);
 
             if (!reti)
@@ -56,8 +57,8 @@ namespace ready4air
 
                 if (!reti)
                 {
-                    match = subject.substr((unsigned long) regexmatches[1].rm_so, (unsigned long) regexmatches[1].rm_eo - regexmatches[1].rm_so);
-                    rest = subject.substr((unsigned long) regexmatches[1].rm_eo);
+                    match = subject.substr((UINT64_T) regexmatches[1].rm_so, (UINT64_T) regexmatches[1].rm_eo - regexmatches[1].rm_so);
+                    rest = subject.substr((UINT64_T) regexmatches[1].rm_eo);
                     result = true;
                 }
             }
@@ -65,22 +66,22 @@ namespace ready4air
             return result;
         }
 
-        static bool Split(const std::string & regex, const std::string &subject, std::vector<std::string> &matches)
+        static BOOL_T Split(const STRING_T & regex, const STRING_T &subject, VECTOR_T<STRING_T> &matches)
         {
-            bool result = true;
+            BOOL_T result = true;
             regex_t re;
             regmatch_t regexmatches[2];
-            int reti;
+            INT32_T reti;
             reti = regcomp(&re, regex.c_str(), REG_EXTENDED);
 
             if (!reti)
             {
-                std::string subj(subject);
+                STRING_T subj(subject);
 
                 while(subj.length() > 0 && !regexec(&re, subj.c_str(), 2, regexmatches, 0))
                 {
-                    matches.push_back(subj.substr(0, (unsigned long) regexmatches[1].rm_so));
-                    subj = subj.substr((unsigned long) regexmatches[1].rm_eo);
+                    matches.push_back(subj.substr(0, (UINT64_T) regexmatches[1].rm_so));
+                    subj = subj.substr((UINT64_T) regexmatches[1].rm_eo);
                 }
 
                 if (subj.length() > 0)

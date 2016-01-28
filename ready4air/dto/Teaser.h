@@ -20,19 +20,19 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::vector<MediaProduct> > &GetMedias() const
+            const Maybe <VECTOR_T<MediaProduct> > &GetMedias() const
             {
                 return mMedias;
             }
 
-            void SetMedias(const std::vector<MediaProduct> &medias)
+            void SetMedias(const VECTOR_T<MediaProduct> &medias)
             {
                 mMedias = medias;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::vector<MediaProduct> medias;
+                VECTOR_T<MediaProduct> medias;
 
                 if (VerifyArray(value, "Medias", true, parseErrors))
                 {
@@ -49,7 +49,7 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::vector<MediaProduct> > mMedias;
+            Maybe <VECTOR_T<MediaProduct> > mMedias;
         };
     }
 }

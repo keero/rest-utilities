@@ -3,14 +3,14 @@
 
 int main(void)
 {
-    std::vector<std::string> matches;
-    std::string exprRegex = "^\\{([^\\{\\}]+)\\}";
-    std::string literalRegex = "([^\\{\\}]+)";
+    VECTOR_T<STRING_T> matches;
+    STRING_T exprRegex = "^\\{([^\\{\\}]+)\\}";
+    STRING_T literalRegex = "([^\\{\\}]+)";
 
-    std::string subject = "https://pp.sfkids.com/Neonstingray.Nettv4.RestApi/api/{country}/{device}/lists{?language,take,skip}&genres=Include&listType=-1";
+    STRING_T subject = "https://pp.sfkids.com/Neonstingray.Nettv4.RestApi/api/{country}/{device}/lists{?language,take,skip}&genres=Include&listType=-1";
 
-    std::string match;
-    std::string rest;
+    STRING_T match;
+    STRING_T rest;
 
     while (subject.length() > 0)
     {
@@ -31,16 +31,16 @@ int main(void)
         subject = rest;
     }
 
-    std::vector<std::string> items;
+    VECTOR_T<STRING_T> items;
     ready4air::Regex::Split("(%[[:xdigit:]]{2})", "a,b,c,d", items);
 
     for (size_t i = 0; i < items.size(); i += 1)
     {
         std::cout << "\"" << items[i] << "\"" << std::endl;
     }
-//    bool exprMatch = ready4air::Regex::MatchSingle(exprRegex, )
+//    BOOL_T exprMatch = ready4air::Regex::MatchSingle(exprRegex, )
 //    while (ready4air::Regex::MatchSingle(exprRegex))
-//    bool result = ready4air::Regex::Match("\\{([^\\{\\}]+)\\}.*$", "https://pp.sfkids.com/Neonstingray.Nettv4.RestApi/api/se/19/lists{?language,take,skip}&genres=Include&listType=-1", 2, matches);
+//    BOOL_T result = ready4air::Regex::Match("\\{([^\\{\\}]+)\\}.*$", "https://pp.sfkids.com/Neonstingray.Nettv4.RestApi/api/se/19/lists{?language,take,skip}&genres=Include&listType=-1", 2, matches);
 //
 //    if (result)
 //    {

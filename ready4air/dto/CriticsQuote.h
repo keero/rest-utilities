@@ -21,32 +21,32 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetText() const
+            const Maybe<STRING_T> &GetText() const
             {
                 return mText;
             }
 
-            void SetText(const std::string &text)
+            void SetText(const STRING_T &text)
             {
                 mText = text;
             }
 
-            const Maybe<std::string> &GetSource() const
+            const Maybe<STRING_T> &GetSource() const
             {
                 return mSource;
             }
 
-            void SetSource(const std::string &source)
+            void SetSource(const STRING_T &source)
             {
                 mSource = source;
             }
 
-            const Maybe<std::string> &GetScore() const
+            const Maybe<STRING_T> &GetScore() const
             {
                 return mScore;
             }
 
-            void SetScore(const std::string &score)
+            void SetScore(const STRING_T &score)
             {
                 mScore = score;
             }
@@ -71,11 +71,11 @@ namespace ready4air
                 mImages = images;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string text;
-                std::string source;
-                std::string score;
+                STRING_T text;
+                STRING_T source;
+                STRING_T score;
                 Link link;
                 QuoteImages images;
 
@@ -98,9 +98,9 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mText;
-            Maybe<std::string> mSource;
-            Maybe<std::string> mScore;
+            Maybe<STRING_T> mText;
+            Maybe<STRING_T> mSource;
+            Maybe<STRING_T> mScore;
             Maybe<Link> mLink;
             Maybe<QuoteImages> mImages;
         };

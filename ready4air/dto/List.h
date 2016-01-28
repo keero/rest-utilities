@@ -43,72 +43,72 @@ namespace ready4air
                 mListType = listType;
             }
 
-            const Maybe<std::string> &GetName() const
+            const Maybe<STRING_T> &GetName() const
             {
                 return mName;
             }
 
-            void SetName(const std::string &name)
+            void SetName(const STRING_T &name)
             {
                 mName = name;
             }
 
-            const Maybe<bool> &IsGenre() const
+            const Maybe<BOOL_T> &IsGenre() const
             {
                 return mIsGenre;
             }
 
-            void SetIsGenre(bool isGenre)
+            void SetIsGenre(BOOL_T isGenre)
             {
                 mIsGenre = isGenre;
             }
 
-            const Maybe<std::string> &GetDescription() const
+            const Maybe<STRING_T> &GetDescription() const
             {
                 return mDescription;
             }
 
-            void SetDescription(const std::string &description)
+            void SetDescription(const STRING_T &description)
             {
                 mDescription = description;
             }
 
-            const Maybe<std::vector<Image> > &GetImages() const
+            const Maybe<VECTOR_T<Image> > &GetImages() const
             {
                 return mImages;
             }
 
-            void SetImages(const std::vector<Image> &images)
+            void SetImages(const VECTOR_T<Image> &images)
             {
                 mImages = images;
             }
 
-            const Maybe<std::map<std::string, std::string> > &GetCustom() const
+            const Maybe<MAP_T<STRING_T, STRING_T> > &GetCustom() const
             {
                 return mCustom;
             }
 
-            void SetCustom(const std::map<std::string, std::string> &custom)
+            void SetCustom(const MAP_T<STRING_T, STRING_T> &custom)
             {
                 mCustom = custom;
             }
 
-            const Maybe<std::vector<LanguageList> > &GetLanguageLists() const
+            const Maybe<VECTOR_T<LanguageList> > &GetLanguageLists() const
             {
                 return mLanguageLists;
             }
 
-            void SetLanguageLists(const std::vector<LanguageList> &languageLists)
+            void SetLanguageLists(const VECTOR_T<LanguageList> &languageLists)
             {
                 mLanguageLists = languageLists;
             }
 
-            const Maybe<std::vector<ListMedia> > &GetListMedias() const
+            const Maybe<VECTOR_T<ListMedia> > &GetListMedias() const
             {
                 return mListMedias;
             }
 
-            void SetListMedias(const std::vector<ListMedia> &listMedias)
+            void SetListMedias(const VECTOR_T<ListMedia> &listMedias)
             {
                 mListMedias = listMedias;
             }
@@ -123,17 +123,17 @@ namespace ready4air
                 mItems = items;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int listId;
-                int listType;
-                std::string name;
-                bool isGenre;
-                std::string description;
-                std::vector<Image> images;
-                std::map<std::string, std::string> custom;
-                std::vector<LanguageList> languageLists;
-                std::vector<ListMedia> listMedias;
+                INT32_T listId;
+                INT32_T listType;
+                STRING_T name;
+                BOOL_T isGenre;
+                STRING_T description;
+                VECTOR_T<Image> images;
+                MAP_T<STRING_T, STRING_T> custom;
+                VECTOR_T<LanguageList> languageLists;
+                VECTOR_T<ListMedia> listMedias;
                 Link items;
 
                 if (ParseInt(value, "ListId", true, listId, parseErrors))
@@ -167,7 +167,7 @@ namespace ready4air
                     for (rapidjson::Value::ConstMemberIterator itr = value["Custom"].MemberBegin();
                          itr != value["Custom"].MemberEnd(); ++itr)
                     {
-                        std::string customValue;
+                        STRING_T customValue;
                         if (ParseString(itr->value, "", false, customValue, parseErrors))
                             custom[itr->name.GetString()] = customValue;
                     }
@@ -205,13 +205,13 @@ namespace ready4air
         private:
             Maybe<int> mListId;
             Maybe<int> mListType;
-            Maybe<std::string> mName;
-            Maybe<bool> mIsGenre;
-            Maybe<std::string> mDescription;
-            Maybe<std::vector<Image> > mImages;
-            Maybe<std::map<std::string, std::string> > mCustom;
-            Maybe<std::vector<LanguageList> > mLanguageLists;
-            Maybe<std::vector<ListMedia> > mListMedias;
+            Maybe<STRING_T> mName;
+            Maybe<BOOL_T> mIsGenre;
+            Maybe<STRING_T> mDescription;
+            Maybe<VECTOR_T<Image> > mImages;
+            Maybe<MAP_T<STRING_T, STRING_T> > mCustom;
+            Maybe<VECTOR_T<LanguageList> > mLanguageLists;
+            Maybe<VECTOR_T<ListMedia> > mListMedias;
             Maybe<Link> mItems;
         };
     }

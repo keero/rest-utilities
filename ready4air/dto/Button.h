@@ -32,12 +32,12 @@ namespace ready4air
                 mAgeLimit = ageLimit;
             }
 
-            const Maybe <std::string> &GetButtonImage() const
+            const Maybe <STRING_T> &GetButtonImage() const
             {
                 return mButtonImage;
             }
 
-            void SetButtonImage(const std::string &buttonImage)
+            void SetButtonImage(const STRING_T &buttonImage)
             {
                 mButtonImage = buttonImage;
             }
@@ -52,22 +52,22 @@ namespace ready4air
                 mPosition = position;
             }
 
-            const Maybe <std::string> &GetTitle() const
+            const Maybe <STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
 
-            const Maybe <std::string> &GetType() const
+            const Maybe <STRING_T> &GetType() const
             {
                 return mType;
             }
 
-            void SetType(const std::string &type)
+            void SetType(const STRING_T &type)
             {
                 mType = type;
             }
@@ -82,13 +82,13 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int ageLimit;
-                std::string buttonImage;
-                int position;
-                std::string title;
-                std::string type;
+                INT32_T ageLimit;
+                STRING_T buttonImage;
+                INT32_T position;
+                STRING_T title;
+                STRING_T type;
                 Link link;
 
                 if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
@@ -114,10 +114,10 @@ namespace ready4air
 
         private:
             Maybe<int> mAgeLimit;
-            Maybe <std::string> mButtonImage;
+            Maybe <STRING_T> mButtonImage;
             Maybe<int> mPosition;
-            Maybe <std::string> mTitle;
-            Maybe <std::string> mType;
+            Maybe <STRING_T> mTitle;
+            Maybe <STRING_T> mType;
             Maybe <Link> mLink;
         };
     }

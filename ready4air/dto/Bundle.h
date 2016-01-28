@@ -24,102 +24,102 @@ namespace ready4air
             {
             }
 
-            Maybe<std::string> GetId() const
+            Maybe<STRING_T> GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe<std::string> &GetExternalId() const
+            const Maybe<STRING_T> &GetExternalId() const
             {
                 return mExternalId;
             }
 
-            void SetExternalId(const std::string &externalId)
+            void SetExternalId(const STRING_T &externalId)
             {
                 mExternalId = externalId;
             }
 
-            const Maybe<std::string> &GetOriginalTitle() const
+            const Maybe<STRING_T> &GetOriginalTitle() const
             {
                 return mOriginalTitle;
             }
 
-            void SetOriginalTitle(const std::string &originalTitle)
+            void SetOriginalTitle(const STRING_T &originalTitle)
             {
                 mOriginalTitle = originalTitle;
             }
 
-            const Maybe<std::string> &GetOriginalSummary() const
+            const Maybe<STRING_T> &GetOriginalSummary() const
             {
                 return mOriginalSummary;
             }
 
-            void SetOriginalSummary(const std::string &originalSummary)
+            void SetOriginalSummary(const STRING_T &originalSummary)
             {
                 mOriginalSummary = originalSummary;
             }
 
-            const Maybe<std::string> &GetLocalTitle() const
+            const Maybe<STRING_T> &GetLocalTitle() const
             {
                 return mLocalTitle;
             }
 
-            void SetLocalTitle(const std::string &localTitle)
+            void SetLocalTitle(const STRING_T &localTitle)
             {
                 mLocalTitle = localTitle;
             }
 
-            const Maybe<std::string> &GetLocalSummary() const
+            const Maybe<STRING_T> &GetLocalSummary() const
             {
                 return mLocalSummary;
             }
 
-            void SetLocalSummary(const std::string &localSummary)
+            void SetLocalSummary(const STRING_T &localSummary)
             {
                 mLocalSummary = localSummary;
             }
 
-            const Maybe<std::vector<Image> > &GetImages() const
+            const Maybe<VECTOR_T<Image> > &GetImages() const
             {
                 return mImages;
             }
 
-            void SetImages(const std::vector<Image> &images)
+            void SetImages(const VECTOR_T<Image> &images)
             {
                 mImages = images;
             }
 
-            const Maybe<std::vector<Link> > &GetMediaProductLinks() const
+            const Maybe<VECTOR_T<Link> > &GetMediaProductLinks() const
             {
                 return mMediaProductLinks;
             }
 
-            void SetMediaProductLinks(const std::vector<Link> &mediaProductLinks)
+            void SetMediaProductLinks(const VECTOR_T<Link> &mediaProductLinks)
             {
                 mMediaProductLinks = mediaProductLinks;
             }
 
-            const Maybe<std::vector<WmvFile> > &GetWmvFiles() const
+            const Maybe<VECTOR_T<WmvFile> > &GetWmvFiles() const
             {
                 return mWmvFiles;
             }
 
-            void SetWmvFiles(const std::vector<WmvFile> &wmvFiles)
+            void SetWmvFiles(const VECTOR_T<WmvFile> &wmvFiles)
             {
                 mWmvFiles = wmvFiles;
             }
 
-            const Maybe<std::vector<SmoothManifest> > &GetSmoothManifests() const
+            const Maybe<VECTOR_T<SmoothManifest> > &GetSmoothManifests() const
             {
                 return mSmoothManifests;
             }
 
-            void SetSmoothManifests(const std::vector<SmoothManifest> &smoothManifests)
+            void SetSmoothManifests(const VECTOR_T<SmoothManifest> &smoothManifests)
             {
                 mSmoothManifests = smoothManifests;
             }
@@ -134,18 +134,18 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string externalId;
-                std::string originalTitle;
-                std::string originalSummary;
-                std::string localTitle;
-                std::string localSummary;
-                std::vector<Image> images;
-                std::vector<Link> mediaProductLinks;
-                std::vector<WmvFile> wmvFiles;
-                std::vector<SmoothManifest> smoothManifests;
+                STRING_T id;
+                STRING_T externalId;
+                STRING_T originalTitle;
+                STRING_T originalSummary;
+                STRING_T localTitle;
+                STRING_T localSummary;
+                VECTOR_T<Image> images;
+                VECTOR_T<Link> mediaProductLinks;
+                VECTOR_T<WmvFile> wmvFiles;
+                VECTOR_T<SmoothManifest> smoothManifests;
                 Link self;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
@@ -218,16 +218,16 @@ namespace ready4air
 
 
         private:
-            Maybe<std::string> mId;
-            Maybe<std::string> mExternalId;
-            Maybe<std::string> mOriginalTitle;
-            Maybe<std::string> mOriginalSummary;
-            Maybe<std::string> mLocalTitle;
-            Maybe<std::string> mLocalSummary;
-            Maybe<std::vector<Image> > mImages;
-            Maybe<std::vector<Link> > mMediaProductLinks;
-            Maybe<std::vector<WmvFile> > mWmvFiles;
-            Maybe<std::vector<SmoothManifest> > mSmoothManifests;
+            Maybe<STRING_T> mId;
+            Maybe<STRING_T> mExternalId;
+            Maybe<STRING_T> mOriginalTitle;
+            Maybe<STRING_T> mOriginalSummary;
+            Maybe<STRING_T> mLocalTitle;
+            Maybe<STRING_T> mLocalSummary;
+            Maybe<VECTOR_T<Image> > mImages;
+            Maybe<VECTOR_T<Link> > mMediaProductLinks;
+            Maybe<VECTOR_T<WmvFile> > mWmvFiles;
+            Maybe<VECTOR_T<SmoothManifest> > mSmoothManifests;
             Maybe<Link> mSelf;
         };
     }

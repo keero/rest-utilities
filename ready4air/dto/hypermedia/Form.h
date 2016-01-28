@@ -30,12 +30,12 @@ namespace ready4air
                 mAction = action;
             }
 
-            const Maybe <std::string> &GetMethod() const
+            const Maybe <STRING_T> &GetMethod() const
             {
                 return mMethod;
             }
 
-            void SetMethod(const std::string &method)
+            void SetMethod(const STRING_T &method)
             {
                 mMethod = method;
             }
@@ -50,10 +50,10 @@ namespace ready4air
                 mBody = body;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link actionLink;
-                std::string method;
+                STRING_T method;
                 Link bodyLink;
 
                 if (ParseObject(value, "Action", true, actionLink, parseErrors))
@@ -70,7 +70,7 @@ namespace ready4air
 
         private:
             Maybe <Link> mAction;
-            Maybe <std::string> mMethod;
+            Maybe <STRING_T> mMethod;
             Maybe <Link> mBody;
         };
     }

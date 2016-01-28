@@ -60,12 +60,12 @@ namespace ready4air
                 mProductType = productType;
             }
 
-            const Maybe<std::string> &GetTitleId() const
+            const Maybe<STRING_T> &GetTitleId() const
             {
                 return mTitleId;
             }
 
-            void SetTitleId(const std::string &titleId)
+            void SetTitleId(const STRING_T &titleId)
             {
                 mTitleId = titleId;
             }
@@ -100,32 +100,32 @@ namespace ready4air
                 mMediaId = mediaId;
             }
 
-            const Maybe<std::string> &GetExternalId() const
+            const Maybe<STRING_T> &GetExternalId() const
             {
                 return mExternalId;
             }
 
-            void SetExternalId(const std::string &externalId)
+            void SetExternalId(const STRING_T &externalId)
             {
                 mExternalId = externalId;
             }
 
-            const Maybe<std::string> &GetOriginalTitle() const
+            const Maybe<STRING_T> &GetOriginalTitle() const
             {
                 return mOriginalTitle;
             }
 
-            void SetOriginalTitle(const std::string &originalTitle)
+            void SetOriginalTitle(const STRING_T &originalTitle)
             {
                 mOriginalTitle = originalTitle;
             }
 
-            const Maybe<bool> &IsAdult() const
+            const Maybe<BOOL_T> &IsAdult() const
             {
                 return mAdult;
             }
 
-            void SetAdult(bool adult)
+            void SetAdult(BOOL_T adult)
             {
                 mAdult = adult;
             }
@@ -140,12 +140,12 @@ namespace ready4air
                 mYear = year;
             }
 
-            const Maybe<std::string> &GetProductionCountry() const
+            const Maybe<STRING_T> &GetProductionCountry() const
             {
                 return mProductionCountry;
             }
 
-            void SetProductionCountry(const std::string &productionCountry)
+            void SetProductionCountry(const STRING_T &productionCountry)
             {
                 mProductionCountry = productionCountry;
             }
@@ -160,62 +160,62 @@ namespace ready4air
                 mLength = length;
             }
 
-            const Maybe<std::string> &GetLocalTitle() const
+            const Maybe<STRING_T> &GetLocalTitle() const
             {
                 return mLocalTitle;
             }
 
-            void SetLocalTitle(const std::string &localTitle)
+            void SetLocalTitle(const STRING_T &localTitle)
             {
                 mLocalTitle = localTitle;
             }
 
-            const Maybe<std::string> &GetShortTitle() const
+            const Maybe<STRING_T> &GetShortTitle() const
             {
                 return mShortTitle;
             }
 
-            void SetShortTitle(const std::string &shortTitle)
+            void SetShortTitle(const STRING_T &shortTitle)
             {
                 mShortTitle = shortTitle;
             }
 
-            const Maybe<std::string> &GetLongSummary() const
+            const Maybe<STRING_T> &GetLongSummary() const
             {
                 return mLongSummary;
             }
 
-            void SetLongSummary(const std::string &longSummary)
+            void SetLongSummary(const STRING_T &longSummary)
             {
                 mLongSummary = longSummary;
             }
 
-            const Maybe<std::string> &GetShortSummary() const
+            const Maybe<STRING_T> &GetShortSummary() const
             {
                 return mShortSummary;
             }
 
-            void SetShortSummary(const std::string &shortSummary)
+            void SetShortSummary(const STRING_T &shortSummary)
             {
                 mShortSummary = shortSummary;
             }
 
-            const Maybe<std::string> &GetSortTitle() const
+            const Maybe<STRING_T> &GetSortTitle() const
             {
                 return mSortTitle;
             }
 
-            void SetSortTitle(const std::string &sortTitle)
+            void SetSortTitle(const STRING_T &sortTitle)
             {
                 mSortTitle = sortTitle;
             }
 
-            const Maybe<std::string> &GetMainGenre() const
+            const Maybe<STRING_T> &GetMainGenre() const
             {
                 return mMainGenre;
             }
 
-            void SetMainGenre(const std::string &mainGenre)
+            void SetMainGenre(const STRING_T &mainGenre)
             {
                 mMainGenre = mainGenre;
             }
@@ -230,142 +230,142 @@ namespace ready4air
                 mAgeLimit = ageLimit;
             }
 
-            const Maybe<bool> &IsHD() const
+            const Maybe<BOOL_T> &IsHD() const
             {
                 return mHD;
             }
 
-            void SetHD(bool HD)
+            void SetHD(BOOL_T HD)
             {
                 mHD = HD;
             }
 
-            const Maybe<bool> &IsDubbed() const
+            const Maybe<BOOL_T> &IsDubbed() const
             {
                 return mDubbed;
             }
 
-            void SetDubbed(bool dubbed)
+            void SetDubbed(BOOL_T dubbed)
             {
                 mDubbed = dubbed;
             }
 
-            const Maybe<std::string> &GetPublishDate() const
+            const Maybe<STRING_T> &GetPublishDate() const
             {
                 return mPublishDate;
             }
 
-            void SetPublishDate(const std::string &publishDate)
+            void SetPublishDate(const STRING_T &publishDate)
             {
                 mPublishDate = publishDate;
             }
 
-            const Maybe<std::string> &GetUnPublishDate() const
+            const Maybe<STRING_T> &GetUnPublishDate() const
             {
                 return mUnPublishDate;
             }
 
-            void SetUnPublishDate(const std::string &unPublishDate)
+            void SetUnPublishDate(const STRING_T &unPublishDate)
             {
                 mUnPublishDate = unPublishDate;
             }
 
-            const Maybe<std::string> &GetModified() const
+            const Maybe<STRING_T> &GetModified() const
             {
                 return mModified;
             }
 
-            void SetModified(const std::string &modified)
+            void SetModified(const STRING_T &modified)
             {
                 mModified = modified;
             }
 
-            const Maybe<std::vector<std::string> > &GetAgeGroups() const
+            const Maybe<VECTOR_T<STRING_T> > &GetAgeGroups() const
             {
                 return mAgeGroups;
             }
 
-            void SetAgeGroups(const std::vector<std::string> &ageGroups)
+            void SetAgeGroups(const VECTOR_T<STRING_T> &ageGroups)
             {
                 mAgeGroups = ageGroups;
             }
 
-            const Maybe<std::vector<Entitlement> > &GetEntitlements() const
+            const Maybe<VECTOR_T<Entitlement> > &GetEntitlements() const
             {
                 return mEntitlements;
             }
 
-            void SetEntitlements(const std::vector<Entitlement> &entitlements)
+            void SetEntitlements(const VECTOR_T<Entitlement> &entitlements)
             {
                 mEntitlements = entitlements;
             }
 
-            const Maybe<std::vector<Cast> > &GetCasts() const
+            const Maybe<VECTOR_T<Cast> > &GetCasts() const
             {
                 return mCasts;
             }
 
-            void SetCasts(const std::vector<Cast> &casts)
+            void SetCasts(const VECTOR_T<Cast> &casts)
             {
                 mCasts = casts;
             }
 
-            const Maybe<std::vector<Image> > &GetImages() const
+            const Maybe<VECTOR_T<Image> > &GetImages() const
             {
                 return mImages;
             }
 
-            void SetImages(const std::vector<Image> &images)
+            void SetImages(const VECTOR_T<Image> &images)
             {
                 mImages = images;
             }
 
-            const Maybe<std::vector<WmvFile> > &GetWmvFiles() const
+            const Maybe<VECTOR_T<WmvFile> > &GetWmvFiles() const
             {
                 return mWmvFiles;
             }
 
-            void SetWmvFiles(const std::vector<WmvFile> &wmvFiles)
+            void SetWmvFiles(const VECTOR_T<WmvFile> &wmvFiles)
             {
                 mWmvFiles = wmvFiles;
             }
 
-            const Maybe<std::vector<SmoothManifest> > &GetSmoothManifests() const
+            const Maybe<VECTOR_T<SmoothManifest> > &GetSmoothManifests() const
             {
                 return mSmoothManifests;
             }
 
-            void SetSmoothManifests(const std::vector<SmoothManifest> &smoothManifests)
+            void SetSmoothManifests(const VECTOR_T<SmoothManifest> &smoothManifests)
             {
                 mSmoothManifests = smoothManifests;
             }
 
-            const Maybe<std::vector<Mp4File> > &GetMp4Files() const
+            const Maybe<VECTOR_T<Mp4File> > &GetMp4Files() const
             {
                 return mMp4Files;
             }
 
-            void SetMp4Files(const std::vector<Mp4File> &mp4Files)
+            void SetMp4Files(const VECTOR_T<Mp4File> &mp4Files)
             {
                 mMp4Files = mp4Files;
             }
 
-            const Maybe<std::vector<HlsManifest> > &GetHlsManifests() const
+            const Maybe<VECTOR_T<HlsManifest> > &GetHlsManifests() const
             {
                 return mHlsManifests;
             }
 
-            void SetHlsManifests(const std::vector<HlsManifest> &hlsManifests)
+            void SetHlsManifests(const VECTOR_T<HlsManifest> &hlsManifests)
             {
                 mHlsManifests = hlsManifests;
             }
 
-            const Maybe<std::vector<Subtitle> > &GetSubtitles() const
+            const Maybe<VECTOR_T<Subtitle> > &GetSubtitles() const
             {
                 return mSubtitles;
             }
 
-            void SetSubtitles(const std::vector<Subtitle> &subtitles)
+            void SetSubtitles(const VECTOR_T<Subtitle> &subtitles)
             {
                 mSubtitles = subtitles;
             }
@@ -400,12 +400,12 @@ namespace ready4air
                 mFullPlay = fullPlay;
             }
 
-            const Maybe<std::vector<PurchaseItem> > &GetPurchaseItems() const
+            const Maybe<VECTOR_T<PurchaseItem> > &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
 
-            void SetPurchaseItems(const std::vector<PurchaseItem> &purchaseItems)
+            void SetPurchaseItems(const VECTOR_T<PurchaseItem> &purchaseItems)
             {
                 mPurchaseItems = purchaseItems;
             }
@@ -420,67 +420,67 @@ namespace ready4air
                 mReviews = reviews;
             }
 
-            const Maybe<std::vector<Genre> > &GetGenres() const
+            const Maybe<VECTOR_T<Genre> > &GetGenres() const
             {
                 return mGenres;
             }
 
-            void SetGenres(const std::vector<Genre> &genres)
+            void SetGenres(const VECTOR_T<Genre> &genres)
             {
                 mGenres = genres;
             }
 
-            const Maybe<std::vector<Product> > &GetProducts() const
+            const Maybe<VECTOR_T<Product> > &GetProducts() const
             {
                 return mProducts;
             }
 
-            void SetProducts(const std::vector<Product> &products)
+            void SetProducts(const VECTOR_T<Product> &products)
             {
                 mProducts = products;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int productId;
-                std::string titleId;
+                INT32_T productId;
+                STRING_T titleId;
                 Link titleLink;
                 Link similar;
-                int mediaId;
-                std::string externalId;
-                std::string originalTitle;
-                bool adult;
-                int year;
-                std::string productionCountry;
-                int length;
-                std::string localTitle;
-                std::string shortTitle;
-                std::string longSummary;
-                std::string shortSummary;
-                std::string sortTitle;
-                std::string mainGenre;
-                int ageLimit;
-                bool hd;
-                bool dubbed;
-                std::string publishDate;
-                std::string unPublishDate;
-                std::string modified;
-                std::vector<std::string> ageGroups;
-                std::vector<Entitlement> entitlements;
-                std::vector<Cast> casts;
-                std::vector<Image> images;
-                std::vector<WmvFile> wmvFiles;
-                std::vector<SmoothManifest> smoothManifests;
-                std::vector<Mp4File> mp4Files;
-                std::vector<HlsManifest> hlsManifests;
-                std::vector<Subtitle> subtitles;
+                INT32_T mediaId;
+                STRING_T externalId;
+                STRING_T originalTitle;
+                BOOL_T adult;
+                INT32_T year;
+                STRING_T productionCountry;
+                INT32_T length;
+                STRING_T localTitle;
+                STRING_T shortTitle;
+                STRING_T longSummary;
+                STRING_T shortSummary;
+                STRING_T sortTitle;
+                STRING_T mainGenre;
+                INT32_T ageLimit;
+                BOOL_T hd;
+                BOOL_T dubbed;
+                STRING_T publishDate;
+                STRING_T unPublishDate;
+                STRING_T modified;
+                VECTOR_T<STRING_T> ageGroups;
+                VECTOR_T<Entitlement> entitlements;
+                VECTOR_T<Cast> casts;
+                VECTOR_T<Image> images;
+                VECTOR_T<WmvFile> wmvFiles;
+                VECTOR_T<SmoothManifest> smoothManifests;
+                VECTOR_T<Mp4File> mp4Files;
+                VECTOR_T<HlsManifest> hlsManifests;
+                VECTOR_T<Subtitle> subtitles;
                 Link self;
                 Play play;
                 Link fullPlay;
-                std::vector<PurchaseItem> purchaseItems;
+                VECTOR_T<PurchaseItem> purchaseItems;
                 Reviews reviews;
-                std::vector<Genre> genres;
-                std::vector<Product> products;
+                VECTOR_T<Genre> genres;
+                VECTOR_T<Product> products;
 
                 if (ParseInt(value, "ProductId", true, productId, parseErrors))
                     SetProductId(productId);
@@ -555,7 +555,7 @@ namespace ready4air
                 {
                     for (rapidjson::SizeType i = 0; i < value["AgeGroups"].Size(); i += 1)
                     {
-                        std::string ageGroup;
+                        STRING_T ageGroup;
                         if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors))
                             ageGroups.push_back(ageGroup);
                     }
@@ -700,44 +700,44 @@ namespace ready4air
 
         private:
             Maybe<int> mProductId;
-            Maybe<std::string> mTitleId;
+            Maybe<STRING_T> mTitleId;
             Maybe<Link> mTitleLink;
             Maybe<Link> mSimilar;
             Maybe<int> mMediaId;
-            Maybe<std::string> mExternalId;
-            Maybe<std::string> mOriginalTitle;
-            Maybe<bool> mAdult;
+            Maybe<STRING_T> mExternalId;
+            Maybe<STRING_T> mOriginalTitle;
+            Maybe<BOOL_T> mAdult;
             Maybe<int> mYear;
-            Maybe<std::string> mProductionCountry;
+            Maybe<STRING_T> mProductionCountry;
             Maybe<int> mLength;
-            Maybe<std::string> mLocalTitle;
-            Maybe<std::string> mShortTitle;
-            Maybe<std::string> mLongSummary;
-            Maybe<std::string> mShortSummary;
-            Maybe<std::string> mSortTitle;
-            Maybe<std::string> mMainGenre;
+            Maybe<STRING_T> mLocalTitle;
+            Maybe<STRING_T> mShortTitle;
+            Maybe<STRING_T> mLongSummary;
+            Maybe<STRING_T> mShortSummary;
+            Maybe<STRING_T> mSortTitle;
+            Maybe<STRING_T> mMainGenre;
             Maybe<int> mAgeLimit;
-            Maybe<bool> mHD;
-            Maybe<bool> mDubbed;
-            Maybe<std::string> mPublishDate;
-            Maybe<std::string> mUnPublishDate;
-            Maybe<std::string> mModified;
-            Maybe<std::vector<std::string> > mAgeGroups;
-            Maybe<std::vector<Entitlement> > mEntitlements;
-            Maybe<std::vector<Cast> > mCasts;
-            Maybe<std::vector<Image> > mImages;
-            Maybe<std::vector<WmvFile> > mWmvFiles;
-            Maybe<std::vector<SmoothManifest> > mSmoothManifests;
-            Maybe<std::vector<Mp4File> > mMp4Files;
-            Maybe<std::vector<HlsManifest> > mHlsManifests;
-            Maybe<std::vector<Subtitle> > mSubtitles;
+            Maybe<BOOL_T> mHD;
+            Maybe<BOOL_T> mDubbed;
+            Maybe<STRING_T> mPublishDate;
+            Maybe<STRING_T> mUnPublishDate;
+            Maybe<STRING_T> mModified;
+            Maybe<VECTOR_T<STRING_T> > mAgeGroups;
+            Maybe<VECTOR_T<Entitlement> > mEntitlements;
+            Maybe<VECTOR_T<Cast> > mCasts;
+            Maybe<VECTOR_T<Image> > mImages;
+            Maybe<VECTOR_T<WmvFile> > mWmvFiles;
+            Maybe<VECTOR_T<SmoothManifest> > mSmoothManifests;
+            Maybe<VECTOR_T<Mp4File> > mMp4Files;
+            Maybe<VECTOR_T<HlsManifest> > mHlsManifests;
+            Maybe<VECTOR_T<Subtitle> > mSubtitles;
             Maybe<Link> mSelf;
             Maybe<Play> mPlay;
             Maybe<Link> mFullPlay;
-            Maybe<std::vector<PurchaseItem> > mPurchaseItems;
+            Maybe<VECTOR_T<PurchaseItem> > mPurchaseItems;
             Maybe<Reviews> mReviews;
-            Maybe<std::vector<Genre> > mGenres;
-            Maybe<std::vector<Product> > mProducts;
+            Maybe<VECTOR_T<Genre> > mGenres;
+            Maybe<VECTOR_T<Product> > mProducts;
 
         protected:
             Maybe<ProductType> mProductType;

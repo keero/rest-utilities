@@ -3,7 +3,7 @@
 
 int main()
 {
-    ready4air::Maybe<std::string> maybeString, maybeString2, maybeString3, maybeString4;
+    ready4air::Maybe<STRING_T> maybeString, maybeString2, maybeString3, maybeString4;
     ready4air::Maybe<int> maybeInt;
     std::cout << "maybeString = " << (!maybeString ? "Nothing" : maybeString.Just()) << std::endl;
     maybeString = "Apa";

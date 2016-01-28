@@ -33,7 +33,7 @@ namespace ready4air
             {
             }
 
-            bool Next(void) const
+            BOOL_T Next(void) const
             {
                 if (GetPaginated() && GetPaginated().Just().GetNext())
                 {
@@ -51,7 +51,7 @@ namespace ready4air
                     return false;
             }
 
-            bool Prev(void) const
+            BOOL_T Prev(void) const
             {
                 if (GetPaginated() && GetPaginated().Just().GetPrev())
                 {
@@ -69,7 +69,7 @@ namespace ready4air
                     return false;
             }
 
-            const Maybe <std::vector <SERVICE_TYPE> > &GetItems() const
+            const Maybe <VECTOR_T <SERVICE_TYPE> > &GetItems() const
             {
                 return GetPaginated().Just().GetItems();
             }

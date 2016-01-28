@@ -19,52 +19,52 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetId() const
+            const Maybe <STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe <std::string> &GetName() const
+            const Maybe <STRING_T> &GetName() const
             {
                 return mName;
             }
 
-            void SetName(const std::string &name)
+            void SetName(const STRING_T &name)
             {
                 mName = name;
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
 
-            const Maybe <std::string> &GetContent() const
+            const Maybe <STRING_T> &GetContent() const
             {
                 return mContent;
             }
 
-            void SetContent(const std::string &content)
+            void SetContent(const STRING_T &content)
             {
                 mContent = content;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string name;
-                std::string language;
-                std::string content;
+                STRING_T id;
+                STRING_T name;
+                STRING_T language;
+                STRING_T content;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
                     SetId(id);
@@ -82,10 +82,10 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mId;
-            Maybe <std::string> mName;
-            Maybe <std::string> mLanguage;
-            Maybe <std::string> mContent; // @NOTE: Type of content is client specific, change appropriately.
+            Maybe <STRING_T> mId;
+            Maybe <STRING_T> mName;
+            Maybe <STRING_T> mLanguage;
+            Maybe <STRING_T> mContent; // @NOTE: Type of content is client specific, change appropriately.
         };
     }
 }

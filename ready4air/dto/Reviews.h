@@ -31,31 +31,31 @@ namespace ready4air
                 mUserRating = userRating;
             }
 
-            const Maybe<std::string> &GetFormattedAverageCriticsScore() const
+            const Maybe<STRING_T> &GetFormattedAverageCriticsScore() const
             {
                 return mFormattedAverageCriticsScore;
             }
 
-            void SetFormattedAverageCriticsScore(const std::string &formattedAverageCriticsScore)
+            void SetFormattedAverageCriticsScore(const STRING_T &formattedAverageCriticsScore)
             {
                 mFormattedAverageCriticsScore = formattedAverageCriticsScore;
             }
 
-            const Maybe<std::vector<CriticsQuote> > &GetCriticsQuotes() const
+            const Maybe<VECTOR_T<CriticsQuote> > &GetCriticsQuotes() const
             {
                 return mCriticsQuotes;
             }
 
-            void SetCriticsQuotes(const std::vector<CriticsQuote> &criticsQuotes)
+            void SetCriticsQuotes(const VECTOR_T<CriticsQuote> &criticsQuotes)
             {
                 mCriticsQuotes = criticsQuotes;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 UserRating userRating;
-                std::string formattedAverageCriticsScore;
-                std::vector<CriticsQuote> criticsQuotes;
+                STRING_T formattedAverageCriticsScore;
+                VECTOR_T<CriticsQuote> criticsQuotes;
 
                 if (ParseObject(value, "UserRating", false, userRating, parseErrors))
                     SetUserRating(userRating);
@@ -80,8 +80,8 @@ namespace ready4air
 
         private:
             Maybe<UserRating> mUserRating;
-            Maybe<std::string> mFormattedAverageCriticsScore;
-            Maybe<std::vector<CriticsQuote> > mCriticsQuotes;
+            Maybe<STRING_T> mFormattedAverageCriticsScore;
+            Maybe<VECTOR_T<CriticsQuote> > mCriticsQuotes;
         };
     }
 }

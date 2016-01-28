@@ -25,122 +25,122 @@ namespace ready4air
             {
             }
 
-            const Maybe<std::string> &GetID() const
+            const Maybe<STRING_T> &GetID() const
             {
                 return mID;
             }
 
-            void SetID(const std::string &ID)
+            void SetID(const STRING_T &ID)
             {
                 mID = ID;
             }
 
-            const Maybe<std::string> &GetAddress() const
+            const Maybe<STRING_T> &GetAddress() const
             {
                 return mAddress;
             }
 
-            void SetAddress(const std::string &address)
+            void SetAddress(const STRING_T &address)
             {
                 mAddress = address;
             }
 
-            const Maybe<std::string> &GetCClastfour() const
+            const Maybe<STRING_T> &GetCClastfour() const
             {
                 return mCClastfour;
             }
 
-            void SetCClastfour(const std::string &CClastfour)
+            void SetCClastfour(const STRING_T &CClastfour)
             {
                 mCClastfour = CClastfour;
             }
 
-            const Maybe<std::string> &GetCCreference() const
+            const Maybe<STRING_T> &GetCCreference() const
             {
                 return mCCreference;
             }
 
-            void SetCCreference(const std::string &CCreference)
+            void SetCCreference(const STRING_T &CCreference)
             {
                 mCCreference = CCreference;
             }
 
-            const Maybe<bool> &IsCCvalid() const
+            const Maybe<BOOL_T> &IsCCvalid() const
             {
                 return mCCvalid;
             }
 
-            void SetCCvalid(bool CCvalid)
+            void SetCCvalid(BOOL_T CCvalid)
             {
                 mCCvalid = CCvalid;
             }
 
-            const Maybe<std::string> &GetCity() const
+            const Maybe<STRING_T> &GetCity() const
             {
                 return mCity;
             }
 
-            void SetCity(const std::string &city)
+            void SetCity(const STRING_T &city)
             {
                 mCity = city;
             }
 
-            const Maybe<std::string> &GetCountry() const
+            const Maybe<STRING_T> &GetCountry() const
             {
                 return mCountry;
             }
 
-            void SetCountry(const std::string &country)
+            void SetCountry(const STRING_T &country)
             {
                 mCountry = country;
             }
 
-            const Maybe<std::string> &GetEmail() const
+            const Maybe<STRING_T> &GetEmail() const
             {
                 return mEmail;
             }
 
-            void SetEmail(const std::string &email)
+            void SetEmail(const STRING_T &email)
             {
                 mEmail = email;
             }
 
-            const Maybe<std::string> &GetFirstName() const
+            const Maybe<STRING_T> &GetFirstName() const
             {
                 return mFirstName;
             }
 
-            void SetFirstName(const std::string &firstName)
+            void SetFirstName(const STRING_T &firstName)
             {
                 mFirstName = firstName;
             }
 
-            const Maybe<std::string> &GetLastName() const
+            const Maybe<STRING_T> &GetLastName() const
             {
                 return mLastName;
             }
 
-            void SetLastName(const std::string &lastName)
+            void SetLastName(const STRING_T &lastName)
             {
                 mLastName = lastName;
             }
 
-            const Maybe<std::string> &GetLastUsedDeviceId() const
+            const Maybe<STRING_T> &GetLastUsedDeviceId() const
             {
                 return mLastUsedDeviceId;
             }
 
-            void SetLastUsedDeviceId(const std::string &lastUsedDeviceId)
+            void SetLastUsedDeviceId(const STRING_T &lastUsedDeviceId)
             {
                 mLastUsedDeviceId = lastUsedDeviceId;
             }
 
-            const Maybe<std::string> &GetMobile() const
+            const Maybe<STRING_T> &GetMobile() const
             {
                 return mMobile;
             }
 
-            void SetMobile(const std::string &mobile)
+            void SetMobile(const STRING_T &mobile)
             {
                 mMobile = mobile;
             }
@@ -155,42 +155,42 @@ namespace ready4air
                 mNumberOfLogins = numberOfLogins;
             }
 
-            const Maybe<std::string> &GetPostalCode() const
+            const Maybe<STRING_T> &GetPostalCode() const
             {
                 return mPostalCode;
             }
 
-            void SetPostalCode(const std::string &postalCode)
+            void SetPostalCode(const STRING_T &postalCode)
             {
                 mPostalCode = postalCode;
             }
 
-            const Maybe<std::string> &GetRegistrationDate() const
+            const Maybe<STRING_T> &GetRegistrationDate() const
             {
                 return mRegistrationDate;
             }
 
-            void SetRegistrationDate(const std::string &registrationDate)
+            void SetRegistrationDate(const STRING_T &registrationDate)
             {
                 mRegistrationDate = registrationDate;
             }
 
-            const Maybe<std::string> &GetUserName() const
+            const Maybe<STRING_T> &GetUserName() const
             {
                 return mUserName;
             }
 
-            void SetUserName(const std::string &userName)
+            void SetUserName(const STRING_T &userName)
             {
                 mUserName = userName;
             }
 
-            const Maybe<std::string> &GetMppToken() const
+            const Maybe<STRING_T> &GetMppToken() const
             {
                 return mMppToken;
             }
 
-            void SetMppToken(const std::string &mppToken)
+            void SetMppToken(const STRING_T &mppToken)
             {
                 mMppToken = mppToken;
             }
@@ -215,12 +215,12 @@ namespace ready4air
                 mMyWishList = myWishList;
             }
 
-            const Maybe<std::vector<std::string> > &GetAvailablePaymentMethods() const
+            const Maybe<VECTOR_T<STRING_T> > &GetAvailablePaymentMethods() const
             {
                 return mAvailablePaymentMethods;
             }
 
-            void SetAvailablePaymentMethods(const std::vector<std::string> &availablePaymentMethods)
+            void SetAvailablePaymentMethods(const VECTOR_T<STRING_T> &availablePaymentMethods)
             {
                 mAvailablePaymentMethods = availablePaymentMethods;
             }
@@ -255,22 +255,22 @@ namespace ready4air
                 mUpdate = update;
             }
 
-            const Maybe<bool> &IsShowAdult() const
+            const Maybe<BOOL_T> &IsShowAdult() const
             {
                 return mShowAdult;
             }
 
-            void SetShowAdult(bool showAdult)
+            void SetShowAdult(BOOL_T showAdult)
             {
                 mShowAdult = showAdult;
             }
 
-            const Maybe<std::vector<Bookmark> > &GetBookmarks() const
+            const Maybe<VECTOR_T<Bookmark> > &GetBookmarks() const
             {
                 return mBookmarks;
             }
 
-            void SetBookmarks(const std::vector<Bookmark> &bookmarks)
+            void SetBookmarks(const VECTOR_T<Bookmark> &bookmarks)
             {
                 mBookmarks = bookmarks;
             }
@@ -355,33 +355,33 @@ namespace ready4air
                 mAddVoucherToSubscription = addVoucherToSubscription;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string address;
-                std::string cclastfour;
-                std::string ccreference;
-                bool ccvalid;
-                std::string city;
-                std::string country;
-                std::string email;
-                std::string firstName;
-                std::string lastName;
-                std::string lastUsedDeviceId;
-                std::string mobile;
-                int numberOfLogins;
-                std::string postalCode;
-                std::string registrationDate;
-                std::string userName;
-                std::string mppToken;
+                STRING_T id;
+                STRING_T address;
+                STRING_T cclastfour;
+                STRING_T ccreference;
+                BOOL_T ccvalid;
+                STRING_T city;
+                STRING_T country;
+                STRING_T email;
+                STRING_T firstName;
+                STRING_T lastName;
+                STRING_T lastUsedDeviceId;
+                STRING_T mobile;
+                INT32_T numberOfLogins;
+                STRING_T postalCode;
+                STRING_T registrationDate;
+                STRING_T userName;
+                STRING_T mppToken;
                 UserList myMoviesList;
                 UserList myWishList;
-                std::vector<std::string> availablePaymentMethods;
+                VECTOR_T<STRING_T> availablePaymentMethods;
                 Link self;
                 Form updatePassword;
                 Form update;
-                bool showAdult;
-                std::vector<Bookmark> bookmarks;
+                BOOL_T showAdult;
+                VECTOR_T<Bookmark> bookmarks;
                 Link inactiveBookmarks;
                 Crud manageBookmarks;
                 Crud manageLists;
@@ -452,7 +452,7 @@ namespace ready4air
                 {
                     for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
                     {
-                        std::string availablePaymentMethod;
+                        STRING_T availablePaymentMethod;
                         if (ParseString(value["AvailablePaymentMethods"][i], "", false, availablePaymentMethod,
                                         parseErrors))
                             availablePaymentMethods.push_back(availablePaymentMethod);
@@ -511,31 +511,31 @@ namespace ready4air
             }
 
         private:
-            Maybe<std::string> mID;
-            Maybe<std::string> mAddress;
-            Maybe<std::string> mCClastfour;
-            Maybe<std::string> mCCreference;
-            Maybe<bool> mCCvalid;
-            Maybe<std::string> mCity;
-            Maybe<std::string> mCountry;
-            Maybe<std::string> mEmail;
-            Maybe<std::string> mFirstName;
-            Maybe<std::string> mLastName;
-            Maybe<std::string> mLastUsedDeviceId;
-            Maybe<std::string> mMobile;
+            Maybe<STRING_T> mID;
+            Maybe<STRING_T> mAddress;
+            Maybe<STRING_T> mCClastfour;
+            Maybe<STRING_T> mCCreference;
+            Maybe<BOOL_T> mCCvalid;
+            Maybe<STRING_T> mCity;
+            Maybe<STRING_T> mCountry;
+            Maybe<STRING_T> mEmail;
+            Maybe<STRING_T> mFirstName;
+            Maybe<STRING_T> mLastName;
+            Maybe<STRING_T> mLastUsedDeviceId;
+            Maybe<STRING_T> mMobile;
             Maybe<int> mNumberOfLogins;
-            Maybe<std::string> mPostalCode;
-            Maybe<std::string> mRegistrationDate;
-            Maybe<std::string> mUserName;
-            Maybe<std::string> mMppToken;
+            Maybe<STRING_T> mPostalCode;
+            Maybe<STRING_T> mRegistrationDate;
+            Maybe<STRING_T> mUserName;
+            Maybe<STRING_T> mMppToken;
             Maybe<UserList> mMyMoviesList;
             Maybe<UserList> mMyWishList;
-            Maybe<std::vector<std::string> > mAvailablePaymentMethods;
+            Maybe<VECTOR_T<STRING_T> > mAvailablePaymentMethods;
             Maybe<Link> mSelf;
             Maybe<Form> mUpdatePassword;
             Maybe<Form> mUpdate;
-            Maybe<bool> mShowAdult;
-            Maybe<std::vector<Bookmark> > mBookmarks;
+            Maybe<BOOL_T> mShowAdult;
+            Maybe<VECTOR_T<Bookmark> > mBookmarks;
             Maybe<Link> mInactiveBookmarks;
             Maybe<Crud> mManageBookmarks;
             Maybe<Crud> mManageLists;

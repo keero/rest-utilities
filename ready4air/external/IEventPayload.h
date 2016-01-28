@@ -9,7 +9,7 @@ namespace ready4air
     {
     public:
         virtual void SetHttpStatusCode(ResponseData::HTTP_STATUS_CODE httpStatusCode) = 0;
-        virtual void SetMessage(const std::string &message) = 0;
+        virtual void SetMessage(const STRING_T &message) = 0;
     };
 }
 

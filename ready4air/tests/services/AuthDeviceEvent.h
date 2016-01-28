@@ -3,17 +3,15 @@
 
 #include "../../external/IEvent.h"
 #include "../../services/DevicesService.h"
+#include "EventPayload.h"
 
 namespace ready4air
 {
-    class AuthDeviceEvent : public IEvent <services::AuthDeviceResponse>
+    class AuthDeviceEvent : public IEvent <EventPayload>
     {
-        void Emit(const services::AuthDeviceResponse &payload)
+        void Emit(const EventPayload &payload)
         {
-            if (payload)
-            {
-                std::cout << payload.Just().GetMessage() << std::endl;
-            }
+            std::cout << payload.GetMessage() << std::endl;
         }
     };
 }

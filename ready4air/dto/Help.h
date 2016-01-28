@@ -20,32 +20,32 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetId() const
+            const Maybe <STRING_T> &GetId() const
             {
                 return mId;
             }
 
-            void SetId(const std::string &id)
+            void SetId(const STRING_T &id)
             {
                 mId = id;
             }
 
-            const Maybe <std::string> &GetTitle() const
+            const Maybe <STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
 
-            void SetTitle(const std::string &title)
+            void SetTitle(const STRING_T &title)
             {
                 mTitle = title;
             }
 
-            const Maybe <std::string> &GetBody() const
+            const Maybe <STRING_T> &GetBody() const
             {
                 return mBody;
             }
 
-            void SetBody(const std::string &body)
+            void SetBody(const STRING_T &body)
             {
                 mBody = body;
             }
@@ -60,11 +60,11 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string id;
-                std::string title;
-                std::string body;
+                STRING_T id;
+                STRING_T title;
+                STRING_T body;
                 Link self;
 
                 if (ParseString(value, "Id", true, id, parseErrors))
@@ -83,9 +83,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mId;
-            Maybe <std::string> mTitle;
-            Maybe <std::string> mBody;
+            Maybe <STRING_T> mId;
+            Maybe <STRING_T> mTitle;
+            Maybe <STRING_T> mBody;
             Maybe <Link> mSelf;
         };
     }

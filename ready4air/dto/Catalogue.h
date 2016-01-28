@@ -51,7 +51,7 @@ namespace ready4air
                 mAllBundles = allBundles;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link allMovies;
                 Link allSeries;

@@ -61,23 +61,23 @@ namespace ready4air
                 mLists = lists;
             }
 
-            const Maybe <std::vector<std::string> > &GetExposedItems() const
+            const Maybe <VECTOR_T<STRING_T> > &GetExposedItems() const
             {
                 return mExposedItems;
             }
 
-            void SetExposedItems(const std::vector<std::string> &exposedItems)
+            void SetExposedItems(const VECTOR_T<STRING_T> &exposedItems)
             {
                 mExposedItems = exposedItems;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Form addLists;
                 Form listPosition;
                 Form removeLists;
                 Link lists;
-                std::vector<std::string> exposedItems;
+                VECTOR_T<STRING_T> exposedItems;
 
                 if (ParseObject(value, "AddLists", true, addLists, parseErrors))
                     SetAddLists(addLists);
@@ -95,7 +95,7 @@ namespace ready4air
                 {
                     for (rapidjson::SizeType i = 0; i < value["ExposedItems"].Size(); i += 1)
                     {
-                        std::string exposedItem;
+                        STRING_T exposedItem;
                         if (ParseString(value["ExposedItems"][i], "", false, exposedItem, parseErrors))
                             exposedItems.push_back(exposedItem);
                     }
@@ -110,7 +110,7 @@ namespace ready4air
             Maybe <Form> mListPosition;
             Maybe <Form> mRemoveLists;
             Maybe <Link> mLists;
-            Maybe <std::vector<std::string> > mExposedItems;
+            Maybe <VECTOR_T<STRING_T> > mExposedItems;
         };
     }
 }

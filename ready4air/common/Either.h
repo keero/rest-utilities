@@ -28,7 +28,7 @@ namespace ready4air
             return mRight;
         }
 
-        inline operator bool() const
+        inline operator BOOL_T() const
         {
             return (mLeft || mRight);
         }
@@ -47,52 +47,52 @@ namespace ready4air
             return *this;
         }
 
-        inline friend bool operator==(const Either &lhs, const Either &rhs)
+        inline friend BOOL_T operator==(const Either &lhs, const Either &rhs)
         {
             return (lhs.Left() == rhs.Left() && lhs.Right() == rhs.Right());
         }
 
-        inline friend bool operator==(const Either <LEFT, RIGHT> &lhs, const LEFT &rhs)
+        inline friend BOOL_T operator==(const Either <LEFT, RIGHT> &lhs, const LEFT &rhs)
         {
             return (lhs.Left().Just() == rhs);
         }
 
-        inline friend bool operator==(const Either <LEFT, RIGHT> &lhs, const RIGHT &rhs)
+        inline friend BOOL_T operator==(const Either <LEFT, RIGHT> &lhs, const RIGHT &rhs)
         {
             return (lhs.Right().Just() == rhs);
         }
 
-        inline friend bool operator==(const LEFT &lhs, const Either <LEFT, RIGHT> &rhs)
+        inline friend BOOL_T operator==(const LEFT &lhs, const Either <LEFT, RIGHT> &rhs)
         {
             return rhs == lhs;
         }
 
-        inline friend bool operator==(const RIGHT &lhs, const Either <LEFT, RIGHT> &rhs)
+        inline friend BOOL_T operator==(const RIGHT &lhs, const Either <LEFT, RIGHT> &rhs)
         {
             return rhs == lhs;
         }
 
-        inline friend bool operator!=(const Either &lhs, const Either &rhs)
+        inline friend BOOL_T operator!=(const Either &lhs, const Either &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const Either <LEFT, RIGHT> &lhs, const LEFT &rhs)
+        inline friend BOOL_T operator!=(const Either <LEFT, RIGHT> &lhs, const LEFT &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const Either <LEFT, RIGHT> &lhs, const RIGHT &rhs)
+        inline friend BOOL_T operator!=(const Either <LEFT, RIGHT> &lhs, const RIGHT &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const LEFT &lhs, const Either <LEFT, RIGHT> &rhs)
+        inline friend BOOL_T operator!=(const LEFT &lhs, const Either <LEFT, RIGHT> &rhs)
         {
             return !(lhs == rhs);
         }
 
-        inline friend bool operator!=(const RIGHT &lhs, const Either <LEFT, RIGHT> &rhs)
+        inline friend BOOL_T operator!=(const RIGHT &lhs, const Either <LEFT, RIGHT> &rhs)
         {
             return !(lhs == rhs);
         }

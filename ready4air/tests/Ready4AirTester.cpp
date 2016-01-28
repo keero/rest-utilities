@@ -22,7 +22,7 @@ using namespace std;
 using namespace ready4air;
 using namespace dto;
 
-bool TestGenericPage()
+BOOL_T TestGenericPage()
 {
     ostringstream ss;
     ifstream fs("../input/GenericPage.json");

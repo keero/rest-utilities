@@ -31,12 +31,12 @@ namespace ready4air
                 mPurchase = purchase;
             }
 
-            const Maybe<std::string> &GetPurchaseType() const
+            const Maybe<STRING_T> &GetPurchaseType() const
             {
                 return mPurchaseType;
             }
 
-            void SetPurchaseType(const std::string &purchaseType)
+            void SetPurchaseType(const STRING_T &purchaseType)
             {
                 mPurchaseType = purchaseType;
             }
@@ -51,10 +51,10 @@ namespace ready4air
                 mPaymentData = paymentData;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Purchase purchase;
-                std::string purchaseType;
+                STRING_T purchaseType;
                 PaymentData paymentData;
 
                 if (ParseObject(value, "Purchase", true, purchase, parseErrors))
@@ -71,7 +71,7 @@ namespace ready4air
 
         private:
             Maybe<Purchase> mPurchase;
-            Maybe<std::string> mPurchaseType;
+            Maybe<STRING_T> mPurchaseType;
             Maybe<PaymentData> mPaymentData;
         };
     }

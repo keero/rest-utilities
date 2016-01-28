@@ -16,7 +16,7 @@ namespace ready4air
 {
     namespace services
     {
-        typedef std::map <std::string, dto::Literal> Literals;
+        typedef MAP_T <STRING_T, dto::Literal> Literals;
 
         template <typename HTTP_CLIENT_TYPE, typename EVENT_TYPE, typename EVENT_PAYLOAD_TYPE>
         class LiteralsService : public HTTP_CLIENT_TYPE
@@ -33,7 +33,7 @@ namespace ready4air
             {
             }
 
-            const Maybe<dto::Literal> GetLiteral(const std::string &key) const
+            const Maybe<dto::Literal> GetLiteral(const STRING_T &key) const
             {
                 Maybe <dto::Literal> result;
 
@@ -45,14 +45,14 @@ namespace ready4air
             }
 
         protected:
-            void SetLiteral(const std::string &key, const dto::Literal &value)
+            void SetLiteral(const STRING_T &key, const dto::Literal &value)
             {
                 mLiterals[key] = value;
             }
 
             virtual void OnReceivedResponse(const RequestData &requestData, const ResponseData &responseData)
             {
-                READY4AIR_UNUSED(requestData);
+                UNUSED(requestData);
                 dto::ParseErrors parseErrors;
                 EVENT_PAYLOAD_TYPE payload;
                 IEventPayload *pPayload = &payload;

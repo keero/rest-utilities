@@ -43,62 +43,62 @@ namespace ready4air
                 mProductType = productType;
             }
 
-            const Maybe<double> &GetPrice() const
+            const Maybe<DOUBLE_T> &GetPrice() const
             {
                 return mPrice;
             }
 
-            void SetPrice(double price)
+            void SetPrice(DOUBLE_T price)
             {
                 mPrice = price;
             }
 
-            const Maybe <std::string> &GetCurrency() const
+            const Maybe <STRING_T> &GetCurrency() const
             {
                 return mCurrency;
             }
 
-            void SetCurrency(const std::string &currency)
+            void SetCurrency(const STRING_T &currency)
             {
                 mCurrency = currency;
             }
 
-            const Maybe <std::string> &GetStrPrice() const
+            const Maybe <STRING_T> &GetStrPrice() const
             {
                 return mStrPrice;
             }
 
-            void SetStrPrice(const std::string &strPrice)
+            void SetStrPrice(const STRING_T &strPrice)
             {
                 mStrPrice = strPrice;
             }
 
-            const Maybe<bool> &IsHD() const
+            const Maybe<BOOL_T> &IsHD() const
             {
                 return mHD;
             }
 
-            void SetHD(bool HD)
+            void SetHD(BOOL_T HD)
             {
                 mHD = HD;
             }
 
-            const Maybe<bool> &IsDubbed() const
+            const Maybe<BOOL_T> &IsDubbed() const
             {
                 return mDubbed;
             }
 
-            void SetDubbed(bool dubbed)
+            void SetDubbed(BOOL_T dubbed)
             {
                 mDubbed = dubbed;
             }
 
-            const Maybe <std::vector<Entitlement> > &GetEntitlements() const
+            const Maybe <VECTOR_T<Entitlement> > &GetEntitlements() const
             {
                 return mEntitlements;
             }
 
-            void SetEntitlements(const std::vector<Entitlement> &entitlements)
+            void SetEntitlements(const VECTOR_T<Entitlement> &entitlements)
             {
                 mEntitlements = entitlements;
             }
@@ -113,27 +113,27 @@ namespace ready4air
                 mPurchase = purchase;
             }
 
-            const Maybe <std::vector<PurchaseItem> > &GetPurchaseItems() const
+            const Maybe <VECTOR_T<PurchaseItem> > &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
 
-            void SetPurchaseItems(const std::vector<PurchaseItem> &purchaseItems)
+            void SetPurchaseItems(const VECTOR_T<PurchaseItem> &purchaseItems)
             {
                 mPurchaseItems = purchaseItems;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int productId;
-                double price;
-                std::string currency;
-                std::string strPrice;
-                bool hd;
-                bool dubbed;
-                std::vector<Entitlement> entitlements;
+                INT32_T productId;
+                DOUBLE_T price;
+                STRING_T currency;
+                STRING_T strPrice;
+                BOOL_T hd;
+                BOOL_T dubbed;
+                VECTOR_T<Entitlement> entitlements;
                 Form purchase;
-                std::vector<PurchaseItem> purchaseItems;
+                VECTOR_T<PurchaseItem> purchaseItems;
 
                 if (ParseInt(value, "ProductId", false, productId, parseErrors))
                     SetProductId(productId);
@@ -184,14 +184,14 @@ namespace ready4air
         private:
             Maybe<int> mProductId;
             Maybe <ProductType> mProductType;
-            Maybe<double> mPrice;
-            Maybe <std::string> mCurrency;
-            Maybe <std::string> mStrPrice;
-            Maybe<bool> mHD;
-            Maybe<bool> mDubbed;
-            Maybe <std::vector<Entitlement> > mEntitlements;
+            Maybe<DOUBLE_T> mPrice;
+            Maybe <STRING_T> mCurrency;
+            Maybe <STRING_T> mStrPrice;
+            Maybe<BOOL_T> mHD;
+            Maybe<BOOL_T> mDubbed;
+            Maybe <VECTOR_T<Entitlement> > mEntitlements;
             Maybe <Form> mPurchase;
-            Maybe <std::vector<PurchaseItem> > mPurchaseItems;
+            Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
         };
     }
 }

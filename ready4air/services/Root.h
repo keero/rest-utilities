@@ -33,14 +33,14 @@ namespace ready4air
             {
             }
 
-            void Init(const std::string &serviceRootURL)
+            void Init(const STRING_T &serviceRootURL)
             {
                 mServiceRoot.SetHref(serviceRootURL);
                 mServiceRoot.SetTemplated(true);
                 mServiceRoot.SetWithCredentials(true);
             }
 
-            bool AuthDevice(IHttpClient *pClient, const std::string &apiKey, const std::string &manufacturer, const std::string &model, const std::string &udid)
+            BOOL_T AuthDevice(IHttpClient *pClient, const STRING_T &apiKey, const STRING_T &manufacturer, const STRING_T &model, const STRING_T &udid)
             {
                 RequestData requestData;
 

@@ -7,7 +7,7 @@ namespace ready4air
 {
     class BadHttpClientType : public std::exception
     {
-        virtual const char *what() const throw()
+        virtual const INT8_T *what() const throw()
         {
             return "Template class HTTP_CLIENT_TYPE must implement ready4air::IHttpClient";
         }

@@ -16,22 +16,22 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
 
-            const Maybe<short> &GetBandwidth() const
+            const Maybe<INT16_T> &GetBandwidth() const
             {
                 return mBandwidth;
             }
 
-            void SetBandwidth(short bandwidth)
+            void SetBandwidth(INT16_T bandwidth)
             {
                 mBandwidth = bandwidth;
             }
@@ -46,12 +46,12 @@ namespace ready4air
                 mManifestTypeId = manifestTypeId;
             }
 
-            const Maybe <std::string> &GetManifestTypeName() const
+            const Maybe <STRING_T> &GetManifestTypeName() const
             {
                 return mManifestTypeName;
             }
 
-            void SetManifestTypeName(const std::string &manifestTypeName)
+            void SetManifestTypeName(const STRING_T &manifestTypeName)
             {
                 mManifestTypeName = manifestTypeName;
             }
@@ -76,13 +76,13 @@ namespace ready4air
                 mMmsLink = mmsLink;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string language;
-                int bandwidth;
-                int manifestTypeId;
-                std::string manifestTypeName;
-                int location;
+                STRING_T language;
+                INT32_T bandwidth;
+                INT32_T manifestTypeId;
+                STRING_T manifestTypeName;
+                INT32_T location;
                 Link mmsLink;
 
                 // Initialize parent properties
@@ -92,7 +92,7 @@ namespace ready4air
                     SetLanguage(language);
 
                 if (ParseInt(value, "Bandwidth", true, bandwidth, parseErrors))
-                    SetBandwidth((short) bandwidth);
+                    SetBandwidth((INT16_T) bandwidth);
 
                 if (ParseInt(value, "ManifestTypeId", false, manifestTypeId, parseErrors))
                     SetManifestTypeId(manifestTypeId);
@@ -110,10 +110,10 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mLanguage;
-            Maybe<short> mBandwidth;
+            Maybe <STRING_T> mLanguage;
+            Maybe<INT16_T> mBandwidth;
             Maybe<int> mManifestTypeId;
-            Maybe <std::string> mManifestTypeName;
+            Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
         };

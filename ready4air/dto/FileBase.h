@@ -30,12 +30,12 @@ namespace ready4air
                 mTypeId = typeId;
             }
 
-            const Maybe<std::string> &GetTypeName() const
+            const Maybe<STRING_T> &GetTypeName() const
             {
                 return mTypeName;
             }
 
-            void SetTypeName(const std::string &typeName)
+            void SetTypeName(const STRING_T &typeName)
             {
                 mTypeName = typeName;
             }
@@ -50,10 +50,10 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int typeId;
-                std::string typeName;
+                INT32_T typeId;
+                STRING_T typeName;
                 Link link;
 
                 if (ParseInt(value, "TypeId", true, typeId, parseErrors))
@@ -70,7 +70,7 @@ namespace ready4air
 
         private:
             Maybe<int> mTypeId;
-            Maybe<std::string> mTypeName;
+            Maybe<STRING_T> mTypeName;
             Maybe<Link> mLink;
         };
     }

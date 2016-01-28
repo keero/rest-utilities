@@ -20,32 +20,32 @@ namespace ready4air
             {
             }
 
-            const Maybe <std::string> &GetKey() const
+            const Maybe <STRING_T> &GetKey() const
             {
                 return mKey;
             }
 
-            void SetKey(const std::string &key)
+            void SetKey(const STRING_T &key)
             {
                 mKey = key;
             }
 
-            const Maybe <std::string> &GetValue() const
+            const Maybe <STRING_T> &GetValue() const
             {
                 return mValue;
             }
 
-            void SetValue(const std::string &value)
+            void SetValue(const STRING_T &value)
             {
                 mValue = value;
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
@@ -60,11 +60,11 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                std::string key;
-                std::string val;
-                std::string language;
+                STRING_T key;
+                STRING_T val;
+                STRING_T language;
                 Link self;
 
                 if (ParseString(value, "Key", true, key, parseErrors))
@@ -83,9 +83,9 @@ namespace ready4air
             }
 
         private:
-            Maybe <std::string> mKey;
-            Maybe <std::string> mValue;
-            Maybe <std::string> mLanguage;
+            Maybe <STRING_T> mKey;
+            Maybe <STRING_T> mValue;
+            Maybe <STRING_T> mLanguage;
             Maybe <Link> mSelf;
         };
     }

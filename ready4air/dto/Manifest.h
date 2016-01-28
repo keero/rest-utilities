@@ -41,7 +41,7 @@ namespace ready4air
                 mProtectionData = protectionData;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
                 Link link;
                 ProtectionData protectionData;

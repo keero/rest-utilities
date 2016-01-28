@@ -29,75 +29,75 @@ namespace ready4air
                 mDeviceVersion = deviceVersion;
             }
 
-            const Maybe <std::string> &GetCountry() const
+            const Maybe <STRING_T> &GetCountry() const
             {
                 return mCountry;
             }
 
-            void SetCountry(const std::string &country)
+            void SetCountry(const STRING_T &country)
             {
                 mCountry = country;
             }
 
-            const Maybe <std::string> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
 
-            void SetLanguage(const std::string &language)
+            void SetLanguage(const STRING_T &language)
             {
                 mLanguage = language;
             }
 
-            const Maybe <std::string> &GetDeviceId() const
+            const Maybe <STRING_T> &GetDeviceId() const
             {
                 return mDeviceId;
             }
 
-            void SetDeviceId(const std::string &deviceId)
+            void SetDeviceId(const STRING_T &deviceId)
             {
                 mDeviceId = deviceId;
             }
 
-            const Maybe <std::string> &GetToken() const
+            const Maybe <STRING_T> &GetToken() const
             {
                 return mToken;
             }
 
-            void SetToken(const std::string &token)
+            void SetToken(const STRING_T &token)
             {
                 mToken = token;
             }
 
-            const Maybe <std::string> &GetExpirationDateTime() const
+            const Maybe <STRING_T> &GetExpirationDateTime() const
             {
                 return mExpirationDateTime;
             }
 
-            void SetExpirationDateTime(const std::string &expirationDateTime)
+            void SetExpirationDateTime(const STRING_T &expirationDateTime)
             {
                 mExpirationDateTime = expirationDateTime;
             }
 
-            const Maybe <std::string> &GetIpAddress() const
+            const Maybe <STRING_T> &GetIpAddress() const
             {
                 return mIpAddress;
             }
 
-            void SetIpAddress(const std::string &ipAddress)
+            void SetIpAddress(const STRING_T &ipAddress)
             {
                 mIpAddress = ipAddress;
             }
 
-            virtual bool InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
             {
-                int deviceVersion;
-                std::string country;
-                std::string language;
-                std::string deviceId;
-                std::string token;
-                std::string expirationDateTime;
-                std::string ipAddress;
+                INT32_T deviceVersion;
+                STRING_T country;
+                STRING_T language;
+                STRING_T deviceId;
+                STRING_T token;
+                STRING_T expirationDateTime;
+                STRING_T ipAddress;
 
                 if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
                     SetDeviceVersion(deviceVersion);
@@ -125,12 +125,12 @@ namespace ready4air
 
         private:
             Maybe<int> mDeviceVersion;
-            Maybe <std::string> mCountry;
-            Maybe <std::string> mLanguage;
-            Maybe <std::string> mDeviceId;
-            Maybe <std::string> mToken;
-            Maybe <std::string> mExpirationDateTime;
-            Maybe <std::string> mIpAddress;
+            Maybe <STRING_T> mCountry;
+            Maybe <STRING_T> mLanguage;
+            Maybe <STRING_T> mDeviceId;
+            Maybe <STRING_T> mToken;
+            Maybe <STRING_T> mExpirationDateTime;
+            Maybe <STRING_T> mIpAddress;
         };
     }
 }
