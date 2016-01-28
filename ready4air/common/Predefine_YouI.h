@@ -1,6 +1,8 @@
 #ifndef READY4AIR_PREDEFINEYOUI_H
 #define READY4AIR_PREDEFINEYOUI_H
 
+#include <framework/YiPredef.h>
+
 #ifndef UNUSED
 #define UNUSED(arg) YI_UNUSED(arg)
 #endif
@@ -22,7 +24,7 @@
 #endif
 
 #ifndef INT8_T
-#define INT8_T YI_INT8
+#define INT8_T YI_CHAR
 #endif
 
 #ifndef UINT64_T
@@ -50,7 +52,7 @@
 #endif
 
 #ifndef STRING_T
-#define STRING_T CYIString
+#define STRING_T std::string
 #endif
 
 #ifndef VECTOR_T
