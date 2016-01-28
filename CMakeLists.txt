@@ -6,6 +6,14 @@ include_directories("include/")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib/")
 
+set(READY4AIR_PREDEFS_HEADER include/ready4air/predefs.h)
+
+# Ready4Air default predefs source files
+set(READY4AIR_PREDEFS_DEFAULT_SOURCE_FILE ready4air/common/Predefine.h)
+
+# Ready4Air You.I predefs source files
+set(READY4AIR_PREDEFS_YOUI_SOURCE_FILE ready4air/common/Predefine_YouI.h)
+
 set(READY4AIR_COMMON_SOURCE_FILES
         ready4air/common/Regex.h
         ready4air/common/Maybe.h
@@ -16,7 +24,8 @@ set(READY4AIR_COMMON_HEADER include/ready4air/common.h)
 
 add_custom_command(
         OUTPUT ${READY4AIR_COMMON_HEADER}
-        COMMAND ready4air/tools/concat.sh ${READY4AIR_COMMON_SOURCE_FILES} > ${READY4AIR_COMMON_HEADER}
+        COMMAND ready4air/tools/depends.sh ${READY4AIR_PREDEFS_HEADER} > ${READY4AIR_COMMON_HEADER}
+        COMMAND ready4air/tools/concat.sh ${READY4AIR_COMMON_SOURCE_FILES} >> ${READY4AIR_COMMON_HEADER}
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 
@@ -219,6 +228,7 @@ set(READY4AIR_SERVICES_TESTS_SOURCE_FILES
         ready4air/tests/services/Root.cpp
         ready4air/tests/services/HttpClient.h
         ready4air/tests/services/AuthDeviceEvent.h
+        ready4air/tests/services/EventPayload.h
         ${READY4AIR_SERVICES_SOURCE_FILES}
         ${READY4AIR_EXTERNAL_SOURCE_FILES}
         ${READY4AIR_DTO_SOURCE_FILES}
@@ -246,13 +256,16 @@ add_executable(Ready4AirTester ${READY4AIR_TESTS_SOURCE_FILES})
 #        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 #)
 
-add_custom_target(READY4AIR_HEADERS
+add_custom_target(READY4AIR_DEFAULT_HEADERS
+        COMMAND cp ${READY4AIR_PREDEFS_DEFAULT_SOURCE_FILE} ${READY4AIR_PREDEFS_HEADER}
         DEPENDS
-#            ${READY4AIR_COMMON_HEADER}
-#            ${READY4AIR_URLTEMPLATE_HEADER}
-#            ${READY4AIR_HYPERMEDIA_HEADER}
-#            ${READY4AIR_DTO_HEADER}
-#            ${READY4AIR_EXTERNAL_HEADER}
             ${READY4AIR_SERVICES_HEADER}
-#            ${READY4AIR_ROOT_HEADER}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        )
+
+add_custom_target(READY4AIR_YOUI_HEADERS
+        COMMAND cp ${READY4AIR_PREDEFS_YOUI_SOURCE_FILE} ${READY4AIR_PREDEFS_HEADER}
+        DEPENDS
+            ${READY4AIR_SERVICES_HEADER}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         )
