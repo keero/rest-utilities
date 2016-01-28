@@ -19,7 +19,7 @@ namespace ready4air
         {
 
         public:
-            Content()
+            Content() : TAG("ready4air::dto::Content")
             {
             }
 
@@ -187,6 +187,7 @@ namespace ready4air
             Maybe<VECTOR_T<Promotion> > mPromotions;
             Maybe<VECTOR_T<LiveSection> > mLiveSections;
             Maybe<Catalogue> mCatalogue;
+            const STRING_T TAG;
         };
     }
 }

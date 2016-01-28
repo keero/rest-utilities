@@ -20,7 +20,7 @@ namespace ready4air
         class PagesService : public HTTP_CLIENT_TYPE
         {
         public:
-            PagesService()
+            PagesService() : TAG("ready4air::services::PagesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -81,6 +81,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            const STRING_T TAG;
         };
     }
 }

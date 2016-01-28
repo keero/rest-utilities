@@ -14,7 +14,7 @@ namespace ready4air
         class UserList : public JsonDeserializable
         {
         public:
-            UserList()
+            UserList() : TAG("ready4air::dto::UserList")
             {
             }
 
@@ -232,6 +232,7 @@ namespace ready4air
             Maybe<VECTOR_T<UserListItem> > mExposedItems;
             Maybe<STRING_T> mUserId;
             Maybe<STRING_T> mDeviceId;
+            const STRING_T TAG;
         };
     }
 }

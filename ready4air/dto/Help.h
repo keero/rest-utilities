@@ -12,7 +12,7 @@ namespace ready4air
         class Help : public JsonDeserializable
         {
         public:
-            Help()
+            Help() : TAG("ready4air::dto::Help")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mBody;
             Maybe <Link> mSelf;
+            const STRING_T TAG;
         };
     }
 }

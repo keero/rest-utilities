@@ -12,7 +12,7 @@ namespace ready4air
         class QuoteImage : public JsonDeserializable
         {
         public:
-            QuoteImage()
+            QuoteImage() : TAG("ready4air::dto::QuoteImage")
             {
             }
 
@@ -72,6 +72,7 @@ namespace ready4air
             Maybe<int> mWidth;
             Maybe<int> mHeight;
             Maybe <Link> mLink;
+            const STRING_T TAG;
         };
     }
 }

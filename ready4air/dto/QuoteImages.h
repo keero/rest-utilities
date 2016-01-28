@@ -13,7 +13,7 @@ namespace ready4air
         class QuoteImages : public JsonDeserializable
         {
         public:
-            QuoteImages()
+            QuoteImages() : TAG("ready4air::dto::QuoteImages")
             {
             }
 
@@ -73,6 +73,7 @@ namespace ready4air
             Maybe<QuoteImage> mSmallLogo;
             Maybe<QuoteImage> mLargeLogo;
             Maybe<QuoteImage> mScore;
+            const STRING_T TAG;
         };
     }
 }

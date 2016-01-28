@@ -14,7 +14,7 @@ namespace ready4air
         class Purchase : public JsonDeserializable
         {
         public:
-            Purchase()
+            Purchase() : TAG("ready4air::dto::Purchase")
             {
             }
 
@@ -352,6 +352,7 @@ namespace ready4air
             Maybe <Form> mUpdate;
             Maybe <DRM> mDRM;
             Maybe <STRING_T> mSignature;
+            const STRING_T TAG;
         };
     }
 }

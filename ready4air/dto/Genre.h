@@ -12,7 +12,7 @@ namespace ready4air
         class Genre : public JsonDeserializable
         {
         public:
-            Genre()
+            Genre() : TAG("ready4air::dto::Genre")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe <Link> mLink;
             Maybe<BOOL_T> mIsMain;
             Maybe<int> mListId;
+            const STRING_T TAG;
         };
     }
 }

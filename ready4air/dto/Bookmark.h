@@ -11,7 +11,7 @@ namespace ready4air
         class Bookmark : public JsonDeserializable
         {
         public:
-            Bookmark()
+            Bookmark() : TAG("ready4air::dto::Bookmark")
             {
             }
 
@@ -131,6 +131,7 @@ namespace ready4air
             Maybe <STRING_T> mDeviceId;
             Maybe <STRING_T> mUserId;
             Maybe <STRING_T> mModified;
+            const STRING_T TAG;
         };
     }
 }

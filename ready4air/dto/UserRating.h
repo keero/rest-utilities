@@ -11,7 +11,7 @@ namespace ready4air
         class UserRating : public JsonDeserializable
         {
         public:
-            UserRating()
+            UserRating() : TAG("ready4air::dto::UserRating")
             {
             }
 
@@ -71,6 +71,7 @@ namespace ready4air
             Maybe<int> mNumberOfVotes;
             Maybe<int> mValue;
             Maybe<DOUBLE_T> mAverageValue;
+            const STRING_T TAG;
         };
     }
 }

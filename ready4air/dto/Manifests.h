@@ -15,7 +15,7 @@ namespace ready4air
         class Manifests : public JsonDeserializable
         {
         public:
-            Manifests()
+            Manifests() : TAG("ready4air::dto::Manifests")
             {
             }
 
@@ -160,6 +160,7 @@ namespace ready4air
             Maybe<VECTOR_T<PlaySubtitle> > mSubtitles;
             Maybe<VECTOR_T<File> > mProgressive;
             Maybe<Link> mThumbnails;
+            const STRING_T TAG;
         };
     }
 }

@@ -11,7 +11,7 @@ namespace ready4air
         class SmoothManifest : public FileBase
         {
         public:
-            SmoothManifest()
+            SmoothManifest() : TAG("ready4air::dto::SmoothManifest")
             {
             }
 
@@ -74,6 +74,7 @@ namespace ready4air
             Maybe<int> mManifestTypeId;
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
+            const STRING_T TAG;
         };
     }
 }

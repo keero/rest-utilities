@@ -12,7 +12,7 @@ namespace ready4air
         class Mp4File : public FileBase
         {
         public:
-            Mp4File()
+            Mp4File() : TAG("ready4air::dto::Mp4File")
             {
             }
 
@@ -90,6 +90,7 @@ namespace ready4air
             Maybe <Link> mMmsLink;
             Maybe <STRING_T> mLanguage;
             Maybe<INT16_T> mBandwidth;
+            const STRING_T TAG;
         };
     }
 }

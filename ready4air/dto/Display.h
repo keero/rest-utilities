@@ -11,7 +11,7 @@ namespace ready4air
         class Display : public JsonDeserializable
         {
         public:
-            Display()
+            Display() : TAG("ready4air::dto::Display")
             {
             }
 
@@ -56,6 +56,7 @@ namespace ready4air
         private:
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mMessage;
+            const STRING_T TAG;
         };
     }
 }

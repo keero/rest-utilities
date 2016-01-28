@@ -20,7 +20,7 @@ namespace ready4air
 
         } HTTP_STATUS_CODE;
 
-        ResponseData()
+        ResponseData() : TAG("ready4air::ResponseData")
         {
         }
 
@@ -56,6 +56,7 @@ namespace ready4air
     private:
         HTTP_STATUS_CODE mStatusCode;
         STRING_T mBody;
+        const STRING_T TAG;
     };
 }
 

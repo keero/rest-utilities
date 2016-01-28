@@ -12,7 +12,7 @@ namespace ready4air
         class HlsManifest : public FileBase
         {
         public:
-            HlsManifest()
+            HlsManifest() : TAG("ready4air::dto::HlsManifest")
             {
             }
 
@@ -116,6 +116,7 @@ namespace ready4air
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
+            const STRING_T TAG;
         };
     }
 }

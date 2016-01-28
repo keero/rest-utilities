@@ -14,7 +14,7 @@ namespace ready4air
         class Channel : public JsonDeserializable
         {
         public:
-            Channel()
+            Channel() : TAG("ready4air::dto::Channel")
             {
             }
 
@@ -202,6 +202,7 @@ namespace ready4air
             Maybe<VECTOR_T<Image> > mImages;
             Maybe<EpgInfo> mEpgInfo;
             Maybe<Link> mSelf;
+            const STRING_T TAG;
         };
     }
 }

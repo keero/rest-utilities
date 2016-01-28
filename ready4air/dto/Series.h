@@ -16,7 +16,7 @@ namespace ready4air
         class Series : public JsonDeserializable
         {
         public:
-            Series()
+            Series() : TAG("ready4air::dto::Series")
             {
             }
 
@@ -393,6 +393,7 @@ namespace ready4air
             Maybe <STRING_T> mModified;
             Maybe <Link> mSeasons;
             Maybe <Link> mSelf;
+            const STRING_T TAG;
         };
     }
 }

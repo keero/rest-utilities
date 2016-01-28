@@ -12,7 +12,7 @@ namespace ready4air
         class ErrorForm : public JsonDeserializable
         {
         public:
-            ErrorForm()
+            ErrorForm() : TAG("ready4air::dto::ErrorForm")
             {
             }
 
@@ -58,6 +58,7 @@ namespace ready4air
         private:
             Maybe<Form> mForm;
             Maybe<STRING_T> mMessage;
+            const STRING_T TAG;
         };
     }
 }

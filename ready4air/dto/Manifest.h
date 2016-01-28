@@ -13,7 +13,7 @@ namespace ready4air
         class Manifest : public JsonDeserializable
         {
         public:
-            Manifest()
+            Manifest() : TAG("ready4air::dto::Manifest")
             {
             }
 
@@ -58,6 +58,7 @@ namespace ready4air
         private:
             Maybe<Link> mLink;
             Maybe<ProtectionData> mProtectionData;
+            const STRING_T TAG;
         };
     }
 }

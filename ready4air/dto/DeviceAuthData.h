@@ -11,7 +11,7 @@ namespace ready4air
         class DeviceAuthData : public JsonDeserializable
         {
         public:
-            DeviceAuthData()
+            DeviceAuthData() : TAG("ready4air::dto::DeviceAuthData")
             {
             }
 
@@ -131,6 +131,7 @@ namespace ready4air
             Maybe <STRING_T> mToken;
             Maybe <STRING_T> mExpirationDateTime;
             Maybe <STRING_T> mIpAddress;
+            const STRING_T TAG;
         };
     }
 }

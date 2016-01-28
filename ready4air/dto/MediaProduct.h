@@ -32,7 +32,7 @@ namespace ready4air
         class MediaProduct : public JsonDeserializable
         {
         public:
-            MediaProduct()
+            MediaProduct() : TAG("ready4air::dto::MediaProduct")
             {
             }
 
@@ -738,6 +738,7 @@ namespace ready4air
             Maybe<Reviews> mReviews;
             Maybe<VECTOR_T<Genre> > mGenres;
             Maybe<VECTOR_T<Product> > mProducts;
+            const STRING_T TAG;
 
         protected:
             Maybe<ProductType> mProductType;

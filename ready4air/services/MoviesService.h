@@ -20,7 +20,7 @@ namespace ready4air
         class MoviesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            MoviesService()
+            MoviesService() : TAG("ready4air::services::MoviesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -102,6 +102,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            const STRING_T TAG;
         };
     }
 }

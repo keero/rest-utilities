@@ -12,7 +12,7 @@ namespace ready4air
         class Subtitle : public JsonDeserializable
         {
         public:
-            Subtitle()
+            Subtitle() : TAG("ready4air::dto::Subtitle")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe <STRING_T> mEncoding;
             Maybe <STRING_T> mLanguage;
             Maybe <Link> mLink;
+            const STRING_T TAG;
         };
     }
 }

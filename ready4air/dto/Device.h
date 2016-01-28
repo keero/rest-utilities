@@ -15,7 +15,7 @@ namespace ready4air
         class Device : public JsonDeserializable
         {
         public:
-            Device()
+            Device() : TAG("ready4air::dto::Device")
             {
             }
 
@@ -519,6 +519,7 @@ namespace ready4air
             Maybe<Link> mCreateMppSession;
             Maybe<Link> mMppUserExists;
             Maybe<Link> mAllLists;
+            const STRING_T TAG;
         };
     }
 }

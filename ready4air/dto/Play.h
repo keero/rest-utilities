@@ -12,7 +12,7 @@ namespace ready4air
         class Play : public JsonDeserializable
         {
         public:
-            Play()
+            Play() : TAG("ready4air::dto::Play")
             {
             }
 
@@ -72,6 +72,7 @@ namespace ready4air
             Maybe<int> mProductId;
             Maybe<Manifests> mTrailers;
             Maybe<Manifests> mFeatures;
+            const STRING_T TAG;
         };
     }
 }

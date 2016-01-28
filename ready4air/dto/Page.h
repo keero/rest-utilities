@@ -13,7 +13,7 @@ namespace ready4air
         class Page : public JsonDeserializable
         {
         public:
-            Page()
+            Page() : TAG("ready4air::dto::Page")
             {
             }
 
@@ -133,6 +133,7 @@ namespace ready4air
             Maybe<STRING_T> mType;
             Maybe<Content> mContent;
             Maybe<Link> mSelf;
+            const STRING_T TAG;
         };
     }
 }

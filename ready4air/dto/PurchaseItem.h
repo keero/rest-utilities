@@ -12,7 +12,7 @@ namespace ready4air
         class PurchaseItem : public JsonDeserializable
         {
         public:
-            PurchaseItem()
+            PurchaseItem() : TAG("ready4air::dto::PurchaseItem")
             {
             }
 
@@ -102,6 +102,7 @@ namespace ready4air
             Maybe <STRING_T> mCurrency;
             Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;
+            const STRING_T TAG;
         };
     }
 }

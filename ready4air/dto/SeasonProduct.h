@@ -14,7 +14,7 @@ namespace ready4air
         class SeasonProduct : public JsonDeserializable
         {
         public:
-            SeasonProduct()
+            SeasonProduct() : TAG("ready4air::dto::SeasonProduct")
             {
                 mProductType = SeasonProductType;
             }
@@ -192,6 +192,7 @@ namespace ready4air
             Maybe <VECTOR_T<Entitlement> > mEntitlements;
             Maybe <Form> mPurchase;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            const STRING_T TAG;
         };
     }
 }

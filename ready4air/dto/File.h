@@ -13,7 +13,7 @@ namespace ready4air
         class File : public JsonDeserializable
         {
         public:
-            File()
+            File() : TAG("ready4air::dto::File")
             {
             }
 
@@ -118,6 +118,7 @@ namespace ready4air
             Maybe<Link> mLink;
             Maybe<int> mBitrate;
             Maybe<ProtectionData> mProtectionData;
+            const STRING_T TAG;
         };
     }
 }

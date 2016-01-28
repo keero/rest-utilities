@@ -18,7 +18,7 @@ namespace ready4air
         class Product : public JsonDeserializable
         {
         public:
-            Product()
+            Product() : TAG("ready4air::dto::Product")
             {
             }
 
@@ -132,6 +132,7 @@ namespace ready4air
             Maybe <Link> mFullPLay;
             Maybe <Entitlement> mEntitlements;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            const STRING_T TAG;
         };
     }
 }

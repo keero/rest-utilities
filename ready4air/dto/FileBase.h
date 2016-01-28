@@ -12,7 +12,7 @@ namespace ready4air
         class FileBase : public JsonDeserializable
         {
         public:
-            FileBase()
+            FileBase() : TAG("ready4air::dto::FileBase")
             {
             }
 
@@ -72,6 +72,7 @@ namespace ready4air
             Maybe<int> mTypeId;
             Maybe<STRING_T> mTypeName;
             Maybe<Link> mLink;
+            const STRING_T TAG;
         };
     }
 }

@@ -13,7 +13,7 @@ namespace ready4air
         class CriticsQuote : public JsonDeserializable
         {
         public:
-            CriticsQuote()
+            CriticsQuote() : TAG("ready4air::dto::CriticsQuote")
             {
             }
 
@@ -103,6 +103,7 @@ namespace ready4air
             Maybe<STRING_T> mScore;
             Maybe<Link> mLink;
             Maybe<QuoteImages> mImages;
+            const STRING_T TAG;
         };
     }
 }

@@ -12,7 +12,7 @@ namespace ready4air
         class Entitlement : public JsonDeserializable
         {
         public:
-            Entitlement()
+            Entitlement() : TAG("ready4air::dto::Entitlement")
             {
             }
 
@@ -117,6 +117,7 @@ namespace ready4air
             Maybe<STRING_T> mEndTime;
             Maybe<DRM> mDRM;
             Maybe<STRING_T> mIdentifier;
+            const STRING_T TAG;
         };
     }
 }

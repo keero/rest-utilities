@@ -12,7 +12,7 @@ namespace ready4air
         class MenuItem : public JsonDeserializable
         {
         public:
-            MenuItem()
+            MenuItem() : TAG("ready4air::dto::MenuItem")
             {
             }
 
@@ -80,6 +80,7 @@ namespace ready4air
             Maybe <STRING_T> mText;
             Maybe <Link> mLink;
             Maybe <VECTOR_T<MenuItem> > mMenuItems;
+            const STRING_T TAG;
         };
     }
 }

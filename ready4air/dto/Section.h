@@ -13,7 +13,7 @@ namespace ready4air
         class Section : public JsonDeserializable
         {
         public:
-            Section()
+            Section() : TAG("ready4air::dto::Section")
             {
             }
 
@@ -81,6 +81,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <Link> mAll;
             Maybe <VECTOR_T<MediaProduct> > mMedias;
+            const STRING_T TAG;
         };
     }
 }

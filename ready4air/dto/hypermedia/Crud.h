@@ -13,7 +13,7 @@ namespace ready4air
         class Crud : public JsonDeserializable
         {
         public:
-            Crud()
+            Crud() : TAG("ready4air::dto::Crud")
             {
             }
 
@@ -73,6 +73,7 @@ namespace ready4air
             Maybe <Form> mCreateOrUpdate;
             Maybe <Link> mRead;
             Maybe <Form> mDelete;
+            const STRING_T TAG;
         };
     }
 }

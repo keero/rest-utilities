@@ -10,7 +10,7 @@ namespace ready4air
     class Either
     {
     public:
-        Either()
+        Either() : TAG("ready4air::Either")
         {
         }
 
@@ -105,6 +105,7 @@ namespace ready4air
     private:
         Maybe <LEFT> mLeft;
         Maybe <RIGHT> mRight;
+        const STRING_T TAG;
     };
 }
 

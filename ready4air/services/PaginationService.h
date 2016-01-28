@@ -21,7 +21,7 @@ namespace ready4air
         class PaginationService : public HTTP_CLIENT_TYPE
         {
         public:
-            PaginationService()
+            PaginationService() : TAG("ready4air::services::PaginationService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -132,6 +132,7 @@ namespace ready4air
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
             BadPaginatedType mBadPaginatedType;
+            const STRING_T TAG;
         };
     }
 }

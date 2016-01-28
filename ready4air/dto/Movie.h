@@ -10,7 +10,7 @@ namespace ready4air
         class Movie : public MediaProduct
         {
         public:
-            Movie()
+            Movie() : TAG("ready4air::dto::Movie")
             {
                 mProductType = MovieProductType;
             }
@@ -18,6 +18,9 @@ namespace ready4air
             virtual ~Movie()
             {
             }
+
+        private:
+            const STRING_T TAG;
         };
     }
 }

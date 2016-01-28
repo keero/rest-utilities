@@ -11,7 +11,8 @@ namespace ready4air
     {
     public:
         Maybe() :
-                mNothing(true)
+                mNothing(true),
+                TAG("ready4air::Maybe")
         {
         }
 
@@ -83,6 +84,7 @@ namespace ready4air
     private:
         BOOL_T mNothing;
         T mJust;
+        const STRING_T TAG;
     };
 }
 

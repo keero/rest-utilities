@@ -17,7 +17,7 @@ namespace ready4air
         class User : public JsonDeserializable
         {
         public:
-            User()
+            User() : TAG("ready4air::dto::User")
             {
             }
 
@@ -544,6 +544,7 @@ namespace ready4air
             Maybe<Link> mMoviesCurrentlyWatching;
             Maybe<Form> mCancelSubscription;
             Maybe<Form> mAddVoucherToSubscription;
+            const STRING_T TAG;
         };
     }
 }

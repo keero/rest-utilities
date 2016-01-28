@@ -12,7 +12,7 @@ namespace ready4air
         class Image : public FileBase
         {
         public:
-            Image()
+            Image() : TAG("ready4air::dto::Image")
             {
             }
 
@@ -45,6 +45,7 @@ namespace ready4air
 
         private:
             Maybe<Link> mSecureLink;
+            const STRING_T TAG;
         };
     }
 }

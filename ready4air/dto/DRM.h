@@ -12,7 +12,7 @@ namespace ready4air
         class DRM : public JsonDeserializable
         {
         public:
-            DRM()
+            DRM() : TAG("ready4air::dto::DRM")
             {
             }
 
@@ -102,6 +102,7 @@ namespace ready4air
             Maybe <STRING_T> mCustomerToken;
             Maybe <STRING_T> mDeviceToken;
             Maybe <STRING_T> mContentId;
+            const STRING_T TAG;
         };
     }
 }

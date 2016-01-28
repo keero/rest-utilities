@@ -13,7 +13,7 @@ namespace ready4air
         class Reviews : public JsonDeserializable
         {
         public:
-            Reviews()
+            Reviews() : TAG("ready4air::dto::Reviews")
             {
             }
 
@@ -82,6 +82,7 @@ namespace ready4air
             Maybe<UserRating> mUserRating;
             Maybe<STRING_T> mFormattedAverageCriticsScore;
             Maybe<VECTOR_T<CriticsQuote> > mCriticsQuotes;
+            const STRING_T TAG;
         };
     }
 }

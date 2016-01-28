@@ -25,7 +25,7 @@ namespace ready4air
         private:
 
         public:
-            Root()
+            Root() : TAG("ready4air::services::Root")
             {
             }
 
@@ -57,6 +57,7 @@ namespace ready4air
 
         private:
             dto::Link mServiceRoot;
+            const STRING_T TAG;
         };
     }
 }

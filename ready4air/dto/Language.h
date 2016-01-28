@@ -11,7 +11,7 @@ namespace ready4air
         class Language : public JsonDeserializable
         {
         public:
-            Language()
+            Language() : TAG("ready4air::dto::Language")
             {
             }
 
@@ -86,6 +86,7 @@ namespace ready4air
             Maybe <STRING_T> mISO6391Code;
             Maybe <STRING_T> mISO6392Code;
             Maybe <STRING_T> mEnglishName;
+            const STRING_T TAG;
         };
     }
 }

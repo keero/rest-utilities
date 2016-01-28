@@ -12,7 +12,7 @@ namespace ready4air
         class Form : public JsonDeserializable
         {
         public:
-            Form()
+            Form() : TAG("ready4air::dto::Form")
             {
             }
 
@@ -72,6 +72,7 @@ namespace ready4air
             Maybe <Link> mAction;
             Maybe <STRING_T> mMethod;
             Maybe <Link> mBody;
+            const STRING_T TAG;
         };
     }
 }

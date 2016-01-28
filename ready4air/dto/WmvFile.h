@@ -12,7 +12,7 @@ namespace ready4air
         class WmvFile : public FileBase
         {
         public:
-            WmvFile()
+            WmvFile() : TAG("ready4air::dto::WmvFile")
             {
             }
 
@@ -60,6 +60,7 @@ namespace ready4air
         private:
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
+            const STRING_T TAG;
         };
     }
 }

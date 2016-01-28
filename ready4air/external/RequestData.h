@@ -34,7 +34,7 @@ namespace ready4air
     class RequestData
     {
     public:
-        RequestData()
+        RequestData() : TAG("ready4air::RequestData")
         {
         }
 
@@ -107,6 +107,7 @@ namespace ready4air
         BOOL_T mWithCredentials;
         Maybe <STRING_T> mBody;
         Callee mCallee;
+        const STRING_T TAG;
     };
 }
 

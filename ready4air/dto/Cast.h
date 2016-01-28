@@ -12,7 +12,7 @@ namespace ready4air
         {
 
         public:
-            Cast()
+            Cast() : TAG("ready4air::dto::Cast")
             {
             }
 
@@ -132,6 +132,7 @@ namespace ready4air
             Maybe <STRING_T> mLastName;
             Maybe <STRING_T> mMiddleName;
             Maybe <STRING_T> mFullName;
+            const STRING_T TAG;
         };
     }
 }

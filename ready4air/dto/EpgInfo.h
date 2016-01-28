@@ -13,7 +13,7 @@ namespace ready4air
         class EpgInfo : public JsonDeserializable
         {
         public:
-            EpgInfo()
+            EpgInfo() : TAG("ready4air::dto::EpgInfo")
             {
             }
 
@@ -73,7 +73,7 @@ namespace ready4air
             Maybe<Event> mNow;
             Maybe<Event> mNext;
             Maybe<Link> mAll;
-
+            const STRING_T TAG;
         };
     }
 }

@@ -13,7 +13,7 @@ namespace ready4air
         {
 
         public:
-            Catalogue()
+            Catalogue() : TAG("ready4air::dto::Catalogue")
             {
             }
 
@@ -73,6 +73,7 @@ namespace ready4air
             Maybe <Link> mAllMovies;
             Maybe <Link> mAllSeries;
             Maybe <Link> mAllBundles;
+            const STRING_T TAG;
         };
     }
 }

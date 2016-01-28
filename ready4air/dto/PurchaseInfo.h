@@ -13,7 +13,7 @@ namespace ready4air
         class PurchaseInfo : public JsonDeserializable
         {
         public:
-            PurchaseInfo()
+            PurchaseInfo() : TAG("ready4air::dto::PurchaseInfo")
             {
             }
 
@@ -73,6 +73,7 @@ namespace ready4air
             Maybe<Purchase> mPurchase;
             Maybe<STRING_T> mPurchaseType;
             Maybe<PaymentData> mPaymentData;
+            const STRING_T TAG;
         };
     }
 }

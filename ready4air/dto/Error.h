@@ -12,7 +12,7 @@ namespace ready4air
         class Error : public JsonDeserializable
         {
         public:
-            Error()
+            Error() : TAG("ready4air::dto::Error")
             {
             }
 
@@ -72,6 +72,7 @@ namespace ready4air
             Maybe<int> mCode;
             Maybe<STRING_T> mMessage;
             Maybe<Display> mDisplay;
+            const STRING_T TAG;
         };
     }
 }

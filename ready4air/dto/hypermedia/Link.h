@@ -12,7 +12,7 @@ namespace ready4air
         class Link : public JsonDeserializable
         {
         public:
-            Link()
+            Link() : TAG("ready4air::dto::Link")
             {
             }
 
@@ -97,6 +97,7 @@ namespace ready4air
             Maybe<BOOL_T> mTemplated;
             Maybe<BOOL_T> mWithCredentials;
             UrlTemplate mUrlTemplate;
+            const STRING_T TAG;
         };
     }
 }

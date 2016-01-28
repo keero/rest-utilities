@@ -19,7 +19,7 @@ namespace ready4air
         class SeriesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            SeriesService()
+            SeriesService() : TAG("ready4air::services::SeriesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -101,6 +101,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            const STRING_T TAG;
         };
     }
 }

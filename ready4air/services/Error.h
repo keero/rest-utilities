@@ -9,7 +9,7 @@ namespace ready4air
     class Error
     {
     public:
-        Error()
+        Error() : TAG("ready4air::Error")
         {
         }
 
@@ -51,6 +51,7 @@ namespace ready4air
         ResponseData::HTTP_STATUS_CODE mHttpStatusCode;
         STRING_T mMessage;
         dto::ParseErrors mParseErrors;
+        const STRING_T TAG;
     };
 }
 

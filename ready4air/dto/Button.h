@@ -13,7 +13,7 @@ namespace ready4air
         {
 
         public:
-            Button()
+            Button() : TAG("ready4air::dto::Button")
             {
             }
 
@@ -119,6 +119,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mType;
             Maybe <Link> mLink;
+            const STRING_T TAG;
         };
     }
 }

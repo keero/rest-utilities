@@ -12,7 +12,7 @@ namespace ready4air
         class Promotion : public JsonDeserializable
         {
         public:
-            Promotion()
+            Promotion() : TAG("ready4air::dto::Promotion")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe <Link> mImageLink;
             Maybe <Link> mExternalSource;
             Maybe <STRING_T> mSource;
+            const STRING_T TAG;
         };
     }
 }

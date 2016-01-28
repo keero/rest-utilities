@@ -11,7 +11,7 @@ namespace ready4air
         class ListMedia : public JsonDeserializable
         {
         public:
-            ListMedia()
+            ListMedia() : TAG("ready4air::dto::ListMedia")
             {
             }
 
@@ -131,6 +131,7 @@ namespace ready4air
             Maybe<BOOL_T> mIsMainList;
             Maybe<DOUBLE_T> mPrice;
             Maybe<int> mListOrder;
+            const STRING_T TAG;
         };
     }
 }

@@ -12,7 +12,7 @@ namespace ready4air
         class Episode : public MediaProduct
         {
         public:
-            Episode()
+            Episode() : TAG("ready4air::dto::Episode")
             {
                 mProductType = EpisodeProductType;
             }
@@ -91,6 +91,7 @@ namespace ready4air
             Maybe<Link> mSerie;
             Maybe<Link> mSeason;
             Maybe<int> mSeasonNo;
+            const STRING_T TAG;
         };
     }
 }

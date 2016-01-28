@@ -12,7 +12,7 @@ namespace ready4air
         class Teaser : public JsonDeserializable
         {
         public:
-            Teaser()
+            Teaser() : TAG("ready4air::dto::Teaser")
             {
             }
 
@@ -50,6 +50,7 @@ namespace ready4air
 
         private:
             Maybe <VECTOR_T<MediaProduct> > mMedias;
+            const STRING_T TAG;
         };
     }
 }

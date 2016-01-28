@@ -13,7 +13,7 @@ namespace ready4air
         class UserFavouriteLists : public JsonDeserializable
         {
         public:
-            UserFavouriteLists()
+            UserFavouriteLists() : TAG("ready4air::dto::UserFavouriteLists")
             {
             }
 
@@ -111,6 +111,7 @@ namespace ready4air
             Maybe <Form> mRemoveLists;
             Maybe <Link> mLists;
             Maybe <VECTOR_T<STRING_T> > mExposedItems;
+            const STRING_T TAG;
         };
     }
 }

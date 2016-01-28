@@ -23,7 +23,7 @@ namespace ready4air
             } mBadType;
 
         public:
-            GenericPage()
+            GenericPage() : TAG("ready4air::dto::GenericPage")
             {
                 if (!std::is_base_of<IJsonDeserializable, T>::value) throw mBadType;
             }
@@ -94,6 +94,7 @@ namespace ready4air
             Maybe <Link> mPrev;
             Maybe <Link> mNext;
             Maybe <VECTOR_T<T> > mItems;
+            const STRING_T TAG;
         };
     }
 }

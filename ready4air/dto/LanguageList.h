@@ -12,7 +12,7 @@ namespace ready4air
         class LanguageList : public JsonDeserializable
         {
         public:
-            LanguageList()
+            LanguageList() : TAG("ready4air::dto::LanguageList")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe<STRING_T> mName;
             Maybe<STRING_T> mDescription;
             Maybe<BOOL_T> mIsGenre;
+            const STRING_T TAG;
         };
     }
 }

@@ -15,7 +15,7 @@ namespace ready4air
         class List : public JsonDeserializable
         {
         public:
-            List()
+            List() : TAG("ready4air::dto::List")
             {
             }
 
@@ -213,6 +213,7 @@ namespace ready4air
             Maybe<VECTOR_T<LanguageList> > mLanguageLists;
             Maybe<VECTOR_T<ListMedia> > mListMedias;
             Maybe<Link> mItems;
+            const STRING_T TAG;
         };
     }
 }

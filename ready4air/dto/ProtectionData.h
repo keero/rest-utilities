@@ -12,7 +12,7 @@ namespace ready4air
         class ProtectionData : public JsonDeserializable
         {
         public:
-            ProtectionData()
+            ProtectionData() : TAG("ready4air::dto::ProtectionData")
             {
             }
 
@@ -87,6 +87,7 @@ namespace ready4air
             Maybe<Link> mPlayReadyLicenser;
             Maybe<Link> mWidevineLicenser;
             Maybe<STRING_T> mWidevinePSSH;
+            const STRING_T TAG;
         };
     }
 }
