@@ -14,7 +14,7 @@ namespace ready4air
     class UrlTemplate
     {
     public:
-        UrlTemplate()
+        UrlTemplate() : TAG("ready4air::UrlTemplate")
         {
         }
         virtual ~UrlTemplate()
@@ -209,6 +209,7 @@ namespace ready4air
     private:
         Maybe <STRING_T> mUrl;
         UrlContext mUrlContext;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_URLTEMPLATE_URLTEMPLATE_H

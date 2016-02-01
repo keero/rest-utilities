@@ -31,7 +31,7 @@ namespace ready4air
     class RequestData
     {
     public:
-        RequestData()
+        RequestData() : TAG("ready4air::RequestData")
         {
         }
         virtual ~RequestData()
@@ -90,6 +90,7 @@ namespace ready4air
         BOOL_T mWithCredentials;
         Maybe <STRING_T> mBody;
         Callee mCallee;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_REQUESTDATA_H
@@ -112,7 +113,7 @@ namespace ready4air
             HTTP_STATUS_CODE_NOT_FOUND = 404,
             HTTP_STATUS_CODE_UNDEFINED = 999
         } HTTP_STATUS_CODE;
-        ResponseData()
+        ResponseData() : TAG("ready4air::ResponseData")
         {
         }
         virtual ~ResponseData()
@@ -141,6 +142,7 @@ namespace ready4air
     private:
         HTTP_STATUS_CODE mStatusCode;
         STRING_T mBody;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_SERVICES_RESPONSEDATA_H

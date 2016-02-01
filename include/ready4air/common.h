@@ -94,7 +94,8 @@ namespace ready4air
     {
     public:
         Maybe() :
-                mNothing(true)
+                mNothing(true),
+                TAG("ready4air::Maybe")
         {
         }
         virtual ~Maybe()
@@ -153,6 +154,7 @@ namespace ready4air
     private:
         BOOL_T mNothing;
         T mJust;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_MAYBE_H
@@ -165,7 +167,7 @@ namespace ready4air
     class Either
     {
     public:
-        Either()
+        Either() : TAG("ready4air::Either")
         {
         }
         virtual ~Either()
@@ -242,6 +244,7 @@ namespace ready4air
     private:
         Maybe <LEFT> mLeft;
         Maybe <RIGHT> mRight;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_EITHER_H

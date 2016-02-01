@@ -8,7 +8,7 @@ namespace ready4air
         class Bookmark : public JsonDeserializable
         {
         public:
-            Bookmark()
+            Bookmark() : TAG("ready4air::dto::Bookmark")
             {
             }
             virtual ~Bookmark()
@@ -103,6 +103,7 @@ namespace ready4air
             Maybe <STRING_T> mDeviceId;
             Maybe <STRING_T> mUserId;
             Maybe <STRING_T> mModified;
+            STRING_T TAG;
         };
     }
 }
@@ -117,7 +118,7 @@ namespace ready4air
         class FileBase : public JsonDeserializable
         {
         public:
-            FileBase()
+            FileBase() : TAG("ready4air::dto::FileBase")
             {
             }
             virtual ~FileBase()
@@ -164,6 +165,7 @@ namespace ready4air
             Maybe<int> mTypeId;
             Maybe<STRING_T> mTypeName;
             Maybe<Link> mLink;
+            STRING_T TAG;
         };
     }
 }
@@ -178,7 +180,7 @@ namespace ready4air
         class Image : public FileBase
         {
         public:
-            Image()
+            Image() : TAG("ready4air::dto::Image")
             {
             }
             virtual ~Image()
@@ -203,6 +205,7 @@ namespace ready4air
             }
         private:
             Maybe<Link> mSecureLink;
+            STRING_T TAG;
         };
     }
 }
@@ -217,7 +220,7 @@ namespace ready4air
         class WmvFile : public FileBase
         {
         public:
-            WmvFile()
+            WmvFile() : TAG("ready4air::dto::WmvFile")
             {
             }
             virtual ~WmvFile()
@@ -254,6 +257,7 @@ namespace ready4air
         private:
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
+            STRING_T TAG;
         };
     }
 }
@@ -268,7 +272,7 @@ namespace ready4air
         class SmoothManifest : public FileBase
         {
         public:
-            SmoothManifest()
+            SmoothManifest() : TAG("ready4air::dto::SmoothManifest")
             {
             }
             virtual ~SmoothManifest()
@@ -317,6 +321,7 @@ namespace ready4air
             Maybe<int> mManifestTypeId;
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
+            STRING_T TAG;
         };
     }
 }
@@ -331,7 +336,7 @@ namespace ready4air
         class Bundle : public JsonDeserializable
         {
         public:
-            Bundle()
+            Bundle() : TAG("ready4air::dto::Bundle")
             {
             }
             virtual ~Bundle()
@@ -506,6 +511,7 @@ namespace ready4air
             Maybe<VECTOR_T<WmvFile> > mWmvFiles;
             Maybe<VECTOR_T<SmoothManifest> > mSmoothManifests;
             Maybe<Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -520,7 +526,7 @@ namespace ready4air
         class Button : public JsonDeserializable
         {
         public:
-            Button()
+            Button() : TAG("ready4air::dto::Button")
             {
             }
             virtual ~Button()
@@ -603,6 +609,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mType;
             Maybe <Link> mLink;
+            STRING_T TAG;
         };
     }
 }
@@ -617,7 +624,7 @@ namespace ready4air
         class Cast : public JsonDeserializable
         {
         public:
-            Cast()
+            Cast() : TAG("ready4air::dto::Cast")
             {
             }
             virtual ~Cast()
@@ -712,6 +719,7 @@ namespace ready4air
             Maybe <STRING_T> mLastName;
             Maybe <STRING_T> mMiddleName;
             Maybe <STRING_T> mFullName;
+            STRING_T TAG;
         };
     }
 }
@@ -726,7 +734,7 @@ namespace ready4air
         class Catalogue : public JsonDeserializable
         {
         public:
-            Catalogue()
+            Catalogue() : TAG("ready4air::dto::Catalogue")
             {
             }
             virtual ~Catalogue()
@@ -773,6 +781,7 @@ namespace ready4air
             Maybe <Link> mAllMovies;
             Maybe <Link> mAllSeries;
             Maybe <Link> mAllBundles;
+            STRING_T TAG;
         };
     }
 }
@@ -787,7 +796,7 @@ namespace ready4air
         class MenuItem : public JsonDeserializable
         {
         public:
-            MenuItem()
+            MenuItem() : TAG("ready4air::dto::MenuItem")
             {
             }
             virtual ~MenuItem()
@@ -842,6 +851,7 @@ namespace ready4air
             Maybe <STRING_T> mText;
             Maybe <Link> mLink;
             Maybe <VECTOR_T<MenuItem> > mMenuItems;
+            STRING_T TAG;
         };
     }
 }
@@ -856,7 +866,7 @@ namespace ready4air
         class DRM : public JsonDeserializable
         {
         public:
-            DRM()
+            DRM() : TAG("ready4air::dto::DRM")
             {
             }
             virtual ~DRM()
@@ -927,6 +937,7 @@ namespace ready4air
             Maybe <STRING_T> mCustomerToken;
             Maybe <STRING_T> mDeviceToken;
             Maybe <STRING_T> mContentId;
+            STRING_T TAG;
         };
     }
 }
@@ -941,7 +952,7 @@ namespace ready4air
         class Entitlement : public JsonDeserializable
         {
         public:
-            Entitlement()
+            Entitlement() : TAG("ready4air::dto::Entitlement")
             {
             }
             virtual ~Entitlement()
@@ -1024,6 +1035,7 @@ namespace ready4air
             Maybe<STRING_T> mEndTime;
             Maybe<DRM> mDRM;
             Maybe<STRING_T> mIdentifier;
+            STRING_T TAG;
         };
     }
 }
@@ -1038,7 +1050,7 @@ namespace ready4air
         class Mp4File : public FileBase
         {
         public:
-            Mp4File()
+            Mp4File() : TAG("ready4air::dto::Mp4File")
             {
             }
             virtual ~Mp4File()
@@ -1099,6 +1111,7 @@ namespace ready4air
             Maybe <Link> mMmsLink;
             Maybe <STRING_T> mLanguage;
             Maybe<INT16_T> mBandwidth;
+            STRING_T TAG;
         };
     }
 }
@@ -1113,7 +1126,7 @@ namespace ready4air
         class HlsManifest : public FileBase
         {
         public:
-            HlsManifest()
+            HlsManifest() : TAG("ready4air::dto::HlsManifest")
             {
             }
             const Maybe <STRING_T> &GetLanguage() const
@@ -1195,6 +1208,7 @@ namespace ready4air
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
+            STRING_T TAG;
         };
     }
 }
@@ -1209,7 +1223,7 @@ namespace ready4air
         class Subtitle : public JsonDeserializable
         {
         public:
-            Subtitle()
+            Subtitle() : TAG("ready4air::dto::Subtitle")
             {
             }
             virtual ~Subtitle()
@@ -1268,6 +1282,7 @@ namespace ready4air
             Maybe <STRING_T> mEncoding;
             Maybe <STRING_T> mLanguage;
             Maybe <Link> mLink;
+            STRING_T TAG;
         };
     }
 }
@@ -1282,7 +1297,7 @@ namespace ready4air
         class PurchaseItem : public JsonDeserializable
         {
         public:
-            PurchaseItem()
+            PurchaseItem() : TAG("ready4air::dto::PurchaseItem")
             {
             }
             virtual ~PurchaseItem()
@@ -1353,6 +1368,7 @@ namespace ready4air
             Maybe <STRING_T> mCurrency;
             Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;
+            STRING_T TAG;
         };
     }
 }
@@ -1367,7 +1383,7 @@ namespace ready4air
         class QuoteImage : public JsonDeserializable
         {
         public:
-            QuoteImage()
+            QuoteImage() : TAG("ready4air::dto::QuoteImage")
             {
             }
             virtual ~QuoteImage()
@@ -1414,6 +1430,7 @@ namespace ready4air
             Maybe<int> mWidth;
             Maybe<int> mHeight;
             Maybe <Link> mLink;
+            STRING_T TAG;
         };
     }
 }
@@ -1428,7 +1445,7 @@ namespace ready4air
         class QuoteImages : public JsonDeserializable
         {
         public:
-            QuoteImages()
+            QuoteImages() : TAG("ready4air::dto::QuoteImages")
             {
             }
             virtual ~QuoteImages()
@@ -1475,6 +1492,7 @@ namespace ready4air
             Maybe<QuoteImage> mSmallLogo;
             Maybe<QuoteImage> mLargeLogo;
             Maybe<QuoteImage> mScore;
+            STRING_T TAG;
         };
     }
 }
@@ -1489,7 +1507,7 @@ namespace ready4air
         class CriticsQuote : public JsonDeserializable
         {
         public:
-            CriticsQuote()
+            CriticsQuote() : TAG("ready4air::dto::CriticsQuote")
             {
             }
             virtual ~CriticsQuote()
@@ -1560,6 +1578,7 @@ namespace ready4air
             Maybe<STRING_T> mScore;
             Maybe<Link> mLink;
             Maybe<QuoteImages> mImages;
+            STRING_T TAG;
         };
     }
 }
@@ -1574,7 +1593,7 @@ namespace ready4air
         class UserRating : public JsonDeserializable
         {
         public:
-            UserRating()
+            UserRating() : TAG("ready4air::dto::UserRating")
             {
             }
             virtual ~UserRating()
@@ -1621,6 +1640,7 @@ namespace ready4air
             Maybe<int> mNumberOfVotes;
             Maybe<int> mValue;
             Maybe<DOUBLE_T> mAverageValue;
+            STRING_T TAG;
         };
     }
 }
@@ -1635,7 +1655,7 @@ namespace ready4air
         class Reviews : public JsonDeserializable
         {
         public:
-            Reviews()
+            Reviews() : TAG("ready4air::dto::Reviews")
             {
             }
             virtual ~Reviews()
@@ -1691,6 +1711,7 @@ namespace ready4air
             Maybe<UserRating> mUserRating;
             Maybe<STRING_T> mFormattedAverageCriticsScore;
             Maybe<VECTOR_T<CriticsQuote> > mCriticsQuotes;
+            STRING_T TAG;
         };
     }
 }
@@ -1705,7 +1726,7 @@ namespace ready4air
         class Genre : public JsonDeserializable
         {
         public:
-            Genre()
+            Genre() : TAG("ready4air::dto::Genre")
             {
             }
             virtual ~Genre()
@@ -1764,6 +1785,7 @@ namespace ready4air
             Maybe <Link> mLink;
             Maybe<BOOL_T> mIsMain;
             Maybe<int> mListId;
+            STRING_T TAG;
         };
     }
 }
@@ -1778,7 +1800,7 @@ namespace ready4air
         class ProtectionData : public JsonDeserializable
         {
         public:
-            ProtectionData()
+            ProtectionData() : TAG("ready4air::dto::ProtectionData")
             {
             }
             virtual ~ProtectionData()
@@ -1837,6 +1859,7 @@ namespace ready4air
             Maybe<Link> mPlayReadyLicenser;
             Maybe<Link> mWidevineLicenser;
             Maybe<STRING_T> mWidevinePSSH;
+            STRING_T TAG;
         };
     }
 }
@@ -1851,7 +1874,7 @@ namespace ready4air
         class PlaySubtitle : public JsonDeserializable
         {
         public:
-            PlaySubtitle()
+            PlaySubtitle() : TAG("ready4air::dto::PlaySubtitle")
             {
             }
             virtual ~PlaySubtitle()
@@ -1910,6 +1933,7 @@ namespace ready4air
             Maybe<STRING_T> mFormat;
             Maybe<STRING_T> mLanguage;
             Maybe<Link> mLink;
+            STRING_T TAG;
         };
     }
 }
@@ -1924,7 +1948,7 @@ namespace ready4air
         class Manifest : public JsonDeserializable
         {
         public:
-            Manifest()
+            Manifest() : TAG("ready4air::dto::Manifest")
             {
             }
             virtual ~Manifest()
@@ -1959,6 +1983,7 @@ namespace ready4air
         private:
             Maybe<Link> mLink;
             Maybe<ProtectionData> mProtectionData;
+            STRING_T TAG;
         };
     }
 }
@@ -1973,7 +1998,7 @@ namespace ready4air
         class File : public JsonDeserializable
         {
         public:
-            File()
+            File() : TAG("ready4air::dto::File")
             {
             }
             virtual ~File()
@@ -2056,6 +2081,7 @@ namespace ready4air
             Maybe<Link> mLink;
             Maybe<int> mBitrate;
             Maybe<ProtectionData> mProtectionData;
+            STRING_T TAG;
         };
     }
 }
@@ -2070,7 +2096,7 @@ namespace ready4air
         class Manifests : public JsonDeserializable
         {
         public:
-            Manifests()
+            Manifests() : TAG("ready4air::dto::Manifests")
             {
             }
             virtual ~Manifests()
@@ -2193,6 +2219,7 @@ namespace ready4air
             Maybe<VECTOR_T<PlaySubtitle> > mSubtitles;
             Maybe<VECTOR_T<File> > mProgressive;
             Maybe<Link> mThumbnails;
+            STRING_T TAG;
         };
     }
 }
@@ -2207,7 +2234,7 @@ namespace ready4air
         class Play : public JsonDeserializable
         {
         public:
-            Play()
+            Play() : TAG("ready4air::dto::Play")
             {
             }
             virtual ~Play()
@@ -2254,6 +2281,7 @@ namespace ready4air
             Maybe<int> mProductId;
             Maybe<Manifests> mTrailers;
             Maybe<Manifests> mFeatures;
+            STRING_T TAG;
         };
     }
 }
@@ -2271,7 +2299,7 @@ namespace ready4air
         class Product : public JsonDeserializable
         {
         public:
-            Product()
+            Product() : TAG("ready4air::dto::Product")
             {
             }
             virtual ~Product()
@@ -2362,6 +2390,7 @@ namespace ready4air
             Maybe <Link> mFullPLay;
             Maybe <Entitlement> mEntitlements;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            STRING_T TAG;
         };
     }
 }
@@ -2382,7 +2411,7 @@ namespace ready4air
         class MediaProduct : public JsonDeserializable
         {
         public:
-            MediaProduct()
+            MediaProduct() : TAG("ready4air::dto::MediaProduct")
             {
             }
             virtual ~MediaProduct()
@@ -2965,6 +2994,7 @@ namespace ready4air
             Maybe<Reviews> mReviews;
             Maybe<VECTOR_T<Genre> > mGenres;
             Maybe<VECTOR_T<Product> > mProducts;
+            STRING_T TAG;
         protected:
             Maybe<ProductType> mProductType;
         };
@@ -2981,7 +3011,7 @@ namespace ready4air
         class Section : public JsonDeserializable
         {
         public:
-            Section()
+            Section() : TAG("ready4air::dto::Section")
             {
             }
             virtual ~Section()
@@ -3036,6 +3066,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <Link> mAll;
             Maybe <VECTOR_T<MediaProduct> > mMedias;
+            STRING_T TAG;
         };
     }
 }
@@ -3050,7 +3081,7 @@ namespace ready4air
         class Teaser : public JsonDeserializable
         {
         public:
-            Teaser()
+            Teaser() : TAG("ready4air::dto::Teaser")
             {
             }
             virtual ~Teaser()
@@ -3081,6 +3112,7 @@ namespace ready4air
             }
         private:
             Maybe <VECTOR_T<MediaProduct> > mMedias;
+            STRING_T TAG;
         };
     }
 }
@@ -3095,7 +3127,7 @@ namespace ready4air
         class Event : public JsonDeserializable
         {
         public:
-            Event()
+            Event() : TAG("ready4air::dto::Event")
             {
             }
             virtual ~Event()
@@ -3142,6 +3174,7 @@ namespace ready4air
             Maybe <STRING_T> mStart;
             Maybe <STRING_T> mEnd;
             Maybe <MediaProduct> mMedia;
+            STRING_T TAG;
         };
     }
 }
@@ -3156,7 +3189,7 @@ namespace ready4air
         class EpgInfo : public JsonDeserializable
         {
         public:
-            EpgInfo()
+            EpgInfo() : TAG("ready4air::dto::EpgInfo")
             {
             }
             virtual ~EpgInfo()
@@ -3203,6 +3236,7 @@ namespace ready4air
             Maybe<Event> mNow;
             Maybe<Event> mNext;
             Maybe<Link> mAll;
+            STRING_T TAG;
         };
     }
 }
@@ -3217,7 +3251,7 @@ namespace ready4air
         class Channel : public JsonDeserializable
         {
         public:
-            Channel()
+            Channel() : TAG("ready4air::dto::Channel")
             {
             }
             virtual ~Channel()
@@ -3368,6 +3402,7 @@ namespace ready4air
             Maybe<VECTOR_T<Image> > mImages;
             Maybe<EpgInfo> mEpgInfo;
             Maybe<Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -3382,7 +3417,7 @@ namespace ready4air
         class LiveSection : public JsonDeserializable
         {
         public:
-            LiveSection()
+            LiveSection() : TAG("ready4air::dto::LiveSection")
             {
             }
             virtual ~LiveSection()
@@ -3437,6 +3472,7 @@ namespace ready4air
             Maybe<STRING_T> mTitle;
             Maybe<VECTOR_T<Channel> > mChannels;
             Maybe<Link> mAll;
+            STRING_T TAG;
         };
     }
 }
@@ -3451,7 +3487,7 @@ namespace ready4air
         class Promotion : public JsonDeserializable
         {
         public:
-            Promotion()
+            Promotion() : TAG("ready4air::dto::Promotion")
             {
             }
             virtual ~Promotion()
@@ -3510,6 +3546,7 @@ namespace ready4air
             Maybe <Link> mImageLink;
             Maybe <Link> mExternalSource;
             Maybe <STRING_T> mSource;
+            STRING_T TAG;
         };
     }
 }
@@ -3524,7 +3561,7 @@ namespace ready4air
         class Content : public JsonDeserializable
         {
         public:
-            Content()
+            Content() : TAG("ready4air::dto::Content")
             {
             }
             virtual ~Content()
@@ -3667,6 +3704,7 @@ namespace ready4air
             Maybe<VECTOR_T<Promotion> > mPromotions;
             Maybe<VECTOR_T<LiveSection> > mLiveSections;
             Maybe<Catalogue> mCatalogue;
+            STRING_T TAG;
         };
     }
 }
@@ -3681,7 +3719,7 @@ namespace ready4air
         class DeviceAuthData : public JsonDeserializable
         {
         public:
-            DeviceAuthData()
+            DeviceAuthData() : TAG("ready4air::dto::DeviceAuthData")
             {
             }
             virtual ~DeviceAuthData()
@@ -3776,6 +3814,7 @@ namespace ready4air
             Maybe <STRING_T> mToken;
             Maybe <STRING_T> mExpirationDateTime;
             Maybe <STRING_T> mIpAddress;
+            STRING_T TAG;
         };
     }
 }
@@ -3790,7 +3829,7 @@ namespace ready4air
         class Device : public JsonDeserializable
         {
         public:
-            Device()
+            Device() : TAG("ready4air::dto::Device")
             {
             }
             virtual ~Device()
@@ -4194,6 +4233,7 @@ namespace ready4air
             Maybe<Link> mCreateMppSession;
             Maybe<Link> mMppUserExists;
             Maybe<Link> mAllLists;
+            STRING_T TAG;
         };
     }
 }
@@ -4208,7 +4248,7 @@ namespace ready4air
         class Display : public JsonDeserializable
         {
         public:
-            Display()
+            Display() : TAG("ready4air::dto::Display")
             {
             }
             virtual ~Display()
@@ -4243,6 +4283,7 @@ namespace ready4air
         private:
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mMessage;
+            STRING_T TAG;
         };
     }
 }
@@ -4257,7 +4298,7 @@ namespace ready4air
         class Episode : public MediaProduct
         {
         public:
-            Episode()
+            Episode() : TAG("ready4air::dto::Episode")
             {
                 mProductType = EpisodeProductType;
             }
@@ -4319,6 +4360,7 @@ namespace ready4air
             Maybe<Link> mSerie;
             Maybe<Link> mSeason;
             Maybe<int> mSeasonNo;
+            STRING_T TAG;
         };
     }
 }
@@ -4333,7 +4375,7 @@ namespace ready4air
         class Error : public JsonDeserializable
         {
         public:
-            Error()
+            Error() : TAG("ready4air::dto::Error")
             {
             }
             virtual ~Error()
@@ -4380,6 +4422,7 @@ namespace ready4air
             Maybe<int> mCode;
             Maybe<STRING_T> mMessage;
             Maybe<Display> mDisplay;
+            STRING_T TAG;
         };
     }
 }
@@ -4394,7 +4437,7 @@ namespace ready4air
         class ErrorForm : public JsonDeserializable
         {
         public:
-            ErrorForm()
+            ErrorForm() : TAG("ready4air::dto::ErrorForm")
             {
             }
             virtual ~ErrorForm()
@@ -4429,6 +4472,7 @@ namespace ready4air
         private:
             Maybe<Form> mForm;
             Maybe<STRING_T> mMessage;
+            STRING_T TAG;
         };
     }
 }
@@ -4443,7 +4487,7 @@ namespace ready4air
         class FreePage : public JsonDeserializable
         {
         public:
-            FreePage()
+            FreePage() : TAG("ready4air::dto::FreePage")
             {
             }
             virtual ~FreePage()
@@ -4502,6 +4546,7 @@ namespace ready4air
             Maybe <STRING_T> mName;
             Maybe <STRING_T> mLanguage;
             Maybe <STRING_T> mContent; // @NOTE: Type of content is client specific, change appropriately.
+            STRING_T TAG;
         };
     }
 }
@@ -4526,7 +4571,7 @@ namespace ready4air
                 }
             } mBadType;
         public:
-            GenericPage()
+            GenericPage() : TAG("ready4air::dto::GenericPage")
             {
                 if (!std::is_base_of<IJsonDeserializable, T>::value) throw mBadType;
             }
@@ -4584,6 +4629,7 @@ namespace ready4air
             Maybe <Link> mPrev;
             Maybe <Link> mNext;
             Maybe <VECTOR_T<T> > mItems;
+            STRING_T TAG;
         };
     }
 }
@@ -4598,7 +4644,7 @@ namespace ready4air
         class Help : public JsonDeserializable
         {
         public:
-            Help()
+            Help() : TAG("ready4air::dto::Help")
             {
             }
             virtual ~Help()
@@ -4657,6 +4703,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mBody;
             Maybe <Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -4671,7 +4718,7 @@ namespace ready4air
         class Language : public JsonDeserializable
         {
         public:
-            Language()
+            Language() : TAG("ready4air::dto::Language")
             {
             }
             virtual ~Language()
@@ -4730,6 +4777,7 @@ namespace ready4air
             Maybe <STRING_T> mISO6391Code;
             Maybe <STRING_T> mISO6392Code;
             Maybe <STRING_T> mEnglishName;
+            STRING_T TAG;
         };
     }
 }
@@ -4744,7 +4792,7 @@ namespace ready4air
         class LanguageList : public JsonDeserializable
         {
         public:
-            LanguageList()
+            LanguageList() : TAG("ready4air::dto::LanguageList")
             {
             }
             virtual ~LanguageList()
@@ -4803,6 +4851,7 @@ namespace ready4air
             Maybe<STRING_T> mName;
             Maybe<STRING_T> mDescription;
             Maybe<BOOL_T> mIsGenre;
+            STRING_T TAG;
         };
     }
 }
@@ -4817,7 +4866,7 @@ namespace ready4air
         class ListMedia : public JsonDeserializable
         {
         public:
-            ListMedia()
+            ListMedia() : TAG("ready4air::dto::ListMedia")
             {
             }
             virtual ~ListMedia()
@@ -4912,6 +4961,7 @@ namespace ready4air
             Maybe<BOOL_T> mIsMainList;
             Maybe<DOUBLE_T> mPrice;
             Maybe<int> mListOrder;
+            STRING_T TAG;
         };
     }
 }
@@ -4926,7 +4976,7 @@ namespace ready4air
         class List : public JsonDeserializable
         {
         public:
-            List()
+            List() : TAG("ready4air::dto::List")
             {
             }
             virtual ~List()
@@ -5090,6 +5140,7 @@ namespace ready4air
             Maybe<VECTOR_T<LanguageList> > mLanguageLists;
             Maybe<VECTOR_T<ListMedia> > mListMedias;
             Maybe<Link> mItems;
+            STRING_T TAG;
         };
     }
 }
@@ -5104,7 +5155,7 @@ namespace ready4air
         class Literal : public JsonDeserializable
         {
         public:
-            Literal()
+            Literal() : TAG("ready4air::dto::Literal")
             {
             }
             virtual ~Literal()
@@ -5163,6 +5214,7 @@ namespace ready4air
             Maybe <STRING_T> mValue;
             Maybe <STRING_T> mLanguage;
             Maybe <Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -5177,13 +5229,15 @@ namespace ready4air
         class Movie : public MediaProduct
         {
         public:
-            Movie()
+            Movie() : TAG("ready4air::dto::Movie")
             {
                 mProductType = MovieProductType;
             }
             virtual ~Movie()
             {
             }
+        private:
+            STRING_T TAG;
         };
     }
 }
@@ -5198,7 +5252,7 @@ namespace ready4air
         class Page : public JsonDeserializable
         {
         public:
-            Page()
+            Page() : TAG("ready4air::dto::Page")
             {
             }
             virtual ~Page()
@@ -5293,6 +5347,7 @@ namespace ready4air
             Maybe<STRING_T> mType;
             Maybe<Content> mContent;
             Maybe<Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -5307,7 +5362,7 @@ namespace ready4air
         class SeasonProduct : public JsonDeserializable
         {
         public:
-            SeasonProduct()
+            SeasonProduct() : TAG("ready4air::dto::SeasonProduct")
             {
                 mProductType = SeasonProductType;
             }
@@ -5452,6 +5507,7 @@ namespace ready4air
             Maybe <VECTOR_T<Entitlement> > mEntitlements;
             Maybe <Form> mPurchase;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            STRING_T TAG;
         };
     }
 }
@@ -5466,7 +5522,7 @@ namespace ready4air
         class Season : public JsonDeserializable
         {
         public:
-            Season()
+            Season() : TAG("ready4air::dto::Season")
             {
             }
             virtual ~Season()
@@ -5829,6 +5885,7 @@ namespace ready4air
             Maybe<Link> mSelf;
             Maybe<Link> mWatchedEpisodes;
             Maybe<Link> mAllEpisodes;
+            STRING_T TAG;
         };
     }
 }
@@ -5843,7 +5900,7 @@ namespace ready4air
         class Series : public JsonDeserializable
         {
         public:
-            Series()
+            Series() : TAG("ready4air::dto::Series")
             {
             }
             virtual ~Series()
@@ -6150,6 +6207,7 @@ namespace ready4air
             Maybe <STRING_T> mModified;
             Maybe <Link> mSeasons;
             Maybe <Link> mSelf;
+            STRING_T TAG;
         };
     }
 }
@@ -6164,7 +6222,7 @@ namespace ready4air
         class UserListItem : public JsonDeserializable
         {
         public:
-            UserListItem()
+            UserListItem() : TAG("ready4air::dto::UserListItem")
             {
             }
             virtual ~UserListItem()
@@ -6199,6 +6257,7 @@ namespace ready4air
         private:
             Maybe<int> mPosition;
             Maybe <STRING_T> mContentId;
+            STRING_T TAG;
         };
     }
 }
@@ -6213,7 +6272,7 @@ namespace ready4air
         class UserList : public JsonDeserializable
         {
         public:
-            UserList()
+            UserList() : TAG("ready4air::dto::UserList")
             {
             }
             virtual ~UserList()
@@ -6388,6 +6447,7 @@ namespace ready4air
             Maybe<VECTOR_T<UserListItem> > mExposedItems;
             Maybe<STRING_T> mUserId;
             Maybe<STRING_T> mDeviceId;
+            STRING_T TAG;
         };
     }
 }
@@ -6402,7 +6462,7 @@ namespace ready4air
         class UserFavouriteLists : public JsonDeserializable
         {
         public:
-            UserFavouriteLists()
+            UserFavouriteLists() : TAG("ready4air::dto::UserFavouriteLists")
             {
             }
             virtual ~UserFavouriteLists()
@@ -6481,6 +6541,7 @@ namespace ready4air
             Maybe <Form> mRemoveLists;
             Maybe <Link> mLists;
             Maybe <VECTOR_T<STRING_T> > mExposedItems;
+            STRING_T TAG;
         };
     }
 }
@@ -6495,7 +6556,7 @@ namespace ready4air
         class User : public JsonDeserializable
         {
         public:
-            User()
+            User() : TAG("ready4air::dto::User")
             {
             }
             virtual ~User()
@@ -6919,6 +6980,7 @@ namespace ready4air
             Maybe<Link> mMoviesCurrentlyWatching;
             Maybe<Form> mCancelSubscription;
             Maybe<Form> mAddVoucherToSubscription;
+            STRING_T TAG;
         };
     }
 }
@@ -6933,7 +6995,7 @@ namespace ready4air
         class Purchase : public JsonDeserializable
         {
         public:
-            Purchase()
+            Purchase() : TAG("ready4air::dto::Purchase")
             {
             }
             virtual ~Purchase()
@@ -7204,6 +7266,7 @@ namespace ready4air
             Maybe <Form> mUpdate;
             Maybe <DRM> mDRM;
             Maybe <STRING_T> mSignature;
+            STRING_T TAG;
         };
     }
 }
@@ -7218,7 +7281,7 @@ namespace ready4air
         class PaymentData : public JsonDeserializable
         {
         public:
-            PaymentData()
+            PaymentData() : TAG("ready4air::dto::PaymentData")
             {
             }
             virtual ~PaymentData()
@@ -7265,6 +7328,7 @@ namespace ready4air
             Maybe <STRING_T> mPhoneNumber;
             Maybe <STRING_T> mReservationNumber;
             Maybe<int> mPin;
+            STRING_T TAG;
         };
     }
 }
@@ -7279,7 +7343,7 @@ namespace ready4air
         class PurchaseInfo : public JsonDeserializable
         {
         public:
-            PurchaseInfo()
+            PurchaseInfo() : TAG("ready4air::dto::PurchaseInfo")
             {
             }
             virtual ~PurchaseInfo()
@@ -7326,6 +7390,7 @@ namespace ready4air
             Maybe<Purchase> mPurchase;
             Maybe<STRING_T> mPurchaseType;
             Maybe<PaymentData> mPaymentData;
+            STRING_T TAG;
         };
     }
 }

@@ -271,7 +271,7 @@ namespace ready4air
         class Link : public JsonDeserializable
         {
         public:
-            Link()
+            Link() : TAG("ready4air::dto::Link")
             {
             }
             virtual ~Link()
@@ -338,6 +338,7 @@ namespace ready4air
             Maybe<BOOL_T> mTemplated;
             Maybe<BOOL_T> mWithCredentials;
             UrlTemplate mUrlTemplate;
+            STRING_T TAG;
         };
     }
 }
@@ -352,7 +353,7 @@ namespace ready4air
         class Form : public JsonDeserializable
         {
         public:
-            Form()
+            Form() : TAG("ready4air::dto::Form")
             {
             }
             virtual ~Form()
@@ -399,6 +400,7 @@ namespace ready4air
             Maybe <Link> mAction;
             Maybe <STRING_T> mMethod;
             Maybe <Link> mBody;
+            STRING_T TAG;
         };
     }
 }
@@ -413,7 +415,7 @@ namespace ready4air
         class Crud : public JsonDeserializable
         {
         public:
-            Crud()
+            Crud() : TAG("ready4air::dto::Crud")
             {
             }
             virtual ~Crud()
@@ -460,6 +462,7 @@ namespace ready4air
             Maybe <Form> mCreateOrUpdate;
             Maybe <Link> mRead;
             Maybe <Form> mDelete;
+            STRING_T TAG;
         };
     }
 }

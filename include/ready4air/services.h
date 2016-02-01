@@ -44,7 +44,7 @@ namespace ready4air
     class Error
     {
     public:
-        Error()
+        Error() : TAG("ready4air::Error")
         {
         }
         virtual ~Error()
@@ -78,6 +78,7 @@ namespace ready4air
         ResponseData::HTTP_STATUS_CODE mHttpStatusCode;
         STRING_T mMessage;
         dto::ParseErrors mParseErrors;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_ERROR_H
@@ -152,7 +153,7 @@ namespace ready4air
         class PagesService : public HTTP_CLIENT_TYPE
         {
         public:
-            PagesService()
+            PagesService() : TAG("ready4air::services::PagesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -204,6 +205,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -219,7 +221,7 @@ namespace ready4air
         class HelpsService : public HTTP_CLIENT_TYPE
         {
         public:
-            HelpsService()
+            HelpsService() : TAG("ready4air::services::HelpsService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -271,6 +273,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -287,7 +290,7 @@ namespace ready4air
         class LiteralsService : public HTTP_CLIENT_TYPE
         {
         public:
-            LiteralsService()
+            LiteralsService() : TAG("ready4air::services::LiteralsService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -351,6 +354,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -366,7 +370,7 @@ namespace ready4air
         class UsersService : public HTTP_CLIENT_TYPE
         {
         public:
-            UsersService()
+            UsersService() : TAG("ready4air::services::UsersService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -466,6 +470,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -481,7 +486,7 @@ namespace ready4air
         class PaginationService : public HTTP_CLIENT_TYPE
         {
         public:
-            PaginationService()
+            PaginationService() : TAG("ready4air::services::PaginationService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -573,6 +578,7 @@ namespace ready4air
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
             BadPaginatedType mBadPaginatedType;
+            STRING_T TAG;
         };
     }
 }
@@ -588,7 +594,7 @@ namespace ready4air
         class MediasService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            MediasService()
+            MediasService() : TAG("ready4air::services::MediasService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -659,6 +665,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -674,7 +681,7 @@ namespace ready4air
         class MoviesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            MoviesService()
+            MoviesService() : TAG("ready4air::services::MoviesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -745,6 +752,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -760,7 +768,7 @@ namespace ready4air
         class SeriesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            SeriesService()
+            SeriesService() : TAG("ready4air::services::SeriesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -831,6 +839,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -846,7 +855,7 @@ namespace ready4air
         class BundlesService : public HTTP_CLIENT_TYPE, public dto::IJsonDeserializable
         {
         public:
-            BundlesService()
+            BundlesService() : TAG("ready4air::services::BundlesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -917,6 +926,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -932,7 +942,7 @@ namespace ready4air
         class DevicesService : public HTTP_CLIENT_TYPE
         {
         public:
-            DevicesService()
+            DevicesService() : TAG("ready4air::services::DevicesService")
             {
                 if (!std::is_base_of<IHttpClient, HTTP_CLIENT_TYPE>::value) throw mBadHttpClientType;
                 if (!std::is_base_of<IEventPayload, EVENT_PAYLOAD_TYPE>::value) throw mBadEventPayloadType;
@@ -1188,6 +1198,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
+            STRING_T TAG;
         };
     }
 }
@@ -1203,7 +1214,7 @@ namespace ready4air
         {
         private:
         public:
-            Root()
+            Root() : TAG("ready4air::services::Root")
             {
             }
             virtual ~Root()
@@ -1228,6 +1239,7 @@ namespace ready4air
             }
         private:
             dto::Link mServiceRoot;
+            STRING_T TAG;
         };
     }
 }
