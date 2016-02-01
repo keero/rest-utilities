@@ -98,7 +98,7 @@ namespace ready4air
 
         private:
             Maybe <STRING_T> mBusinessType;
-            Maybe<DOUBLE_T> mPrice;
+            Maybe <DOUBLE_T> mPrice;
             Maybe <STRING_T> mCurrency;
             Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;
