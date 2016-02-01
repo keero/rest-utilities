@@ -107,7 +107,7 @@ namespace ready4air
         BOOL_T mWithCredentials;
         Maybe <STRING_T> mBody;
         Callee mCallee;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 

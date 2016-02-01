@@ -86,7 +86,7 @@ namespace ready4air
             Maybe <STRING_T> mName;
             Maybe <STRING_T> mLanguage;
             Maybe <STRING_T> mContent; // @NOTE: Type of content is client specific, change appropriately.
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

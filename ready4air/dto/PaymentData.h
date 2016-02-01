@@ -71,7 +71,7 @@ namespace ready4air
             Maybe <STRING_T> mPhoneNumber;
             Maybe <STRING_T> mReservationNumber;
             Maybe<int> mPin;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

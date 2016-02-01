@@ -87,7 +87,7 @@ namespace ready4air
             Maybe <Link> mImageLink;
             Maybe <Link> mExternalSource;
             Maybe <STRING_T> mSource;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -73,7 +73,7 @@ namespace ready4air
             Maybe<QuoteImage> mSmallLogo;
             Maybe<QuoteImage> mLargeLogo;
             Maybe<QuoteImage> mScore;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

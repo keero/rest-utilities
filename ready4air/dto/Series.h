@@ -393,7 +393,7 @@ namespace ready4air
             Maybe <STRING_T> mModified;
             Maybe <Link> mSeasons;
             Maybe <Link> mSelf;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

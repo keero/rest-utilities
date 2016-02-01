@@ -56,7 +56,7 @@ namespace ready4air
     private:
         HTTP_STATUS_CODE mStatusCode;
         STRING_T mBody;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 

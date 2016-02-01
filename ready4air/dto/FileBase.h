@@ -72,7 +72,7 @@ namespace ready4air
             Maybe<int> mTypeId;
             Maybe<STRING_T> mTypeName;
             Maybe<Link> mLink;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

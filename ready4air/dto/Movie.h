@@ -20,7 +20,7 @@ namespace ready4air
             }
 
         private:
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

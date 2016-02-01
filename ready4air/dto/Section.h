@@ -81,7 +81,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <Link> mAll;
             Maybe <VECTOR_T<MediaProduct> > mMedias;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

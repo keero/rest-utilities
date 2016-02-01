@@ -133,7 +133,7 @@ namespace ready4air
             Maybe<STRING_T> mType;
             Maybe<Content> mContent;
             Maybe<Link> mSelf;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

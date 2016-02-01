@@ -45,7 +45,7 @@ namespace ready4air
 
         private:
             Maybe<Link> mSecureLink;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

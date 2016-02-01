@@ -73,7 +73,7 @@ namespace ready4air
             Maybe<Purchase> mPurchase;
             Maybe<STRING_T> mPurchaseType;
             Maybe<PaymentData> mPaymentData;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

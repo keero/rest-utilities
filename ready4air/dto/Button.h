@@ -119,7 +119,7 @@ namespace ready4air
             Maybe <STRING_T> mTitle;
             Maybe <STRING_T> mType;
             Maybe <Link> mLink;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

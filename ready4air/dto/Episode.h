@@ -91,7 +91,7 @@ namespace ready4air
             Maybe<Link> mSerie;
             Maybe<Link> mSeason;
             Maybe<int> mSeasonNo;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

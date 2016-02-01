@@ -86,7 +86,7 @@ namespace ready4air
             Maybe <STRING_T> mISO6391Code;
             Maybe <STRING_T> mISO6392Code;
             Maybe <STRING_T> mEnglishName;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

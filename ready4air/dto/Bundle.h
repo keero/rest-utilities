@@ -229,7 +229,7 @@ namespace ready4air
             Maybe<VECTOR_T<WmvFile> > mWmvFiles;
             Maybe<VECTOR_T<SmoothManifest> > mSmoothManifests;
             Maybe<Link> mSelf;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

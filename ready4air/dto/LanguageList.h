@@ -87,7 +87,7 @@ namespace ready4air
             Maybe<STRING_T> mName;
             Maybe<STRING_T> mDescription;
             Maybe<BOOL_T> mIsGenre;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

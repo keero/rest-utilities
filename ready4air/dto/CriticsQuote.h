@@ -103,7 +103,7 @@ namespace ready4air
             Maybe<STRING_T> mScore;
             Maybe<Link> mLink;
             Maybe<QuoteImages> mImages;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -87,7 +87,7 @@ namespace ready4air
             Maybe <STRING_T> mValue;
             Maybe <STRING_T> mLanguage;
             Maybe <Link> mSelf;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

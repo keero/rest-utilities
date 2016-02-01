@@ -131,7 +131,7 @@ namespace ready4air
             Maybe <STRING_T> mToken;
             Maybe <STRING_T> mExpirationDateTime;
             Maybe <STRING_T> mIpAddress;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

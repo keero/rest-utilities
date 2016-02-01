@@ -132,7 +132,7 @@ namespace ready4air
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
             BadPaginatedType mBadPaginatedType;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

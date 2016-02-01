@@ -213,7 +213,7 @@ namespace ready4air
             Maybe<VECTOR_T<LanguageList> > mLanguageLists;
             Maybe<VECTOR_T<ListMedia> > mListMedias;
             Maybe<Link> mItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

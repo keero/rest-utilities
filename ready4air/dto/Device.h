@@ -519,7 +519,7 @@ namespace ready4air
             Maybe<Link> mCreateMppSession;
             Maybe<Link> mMppUserExists;
             Maybe<Link> mAllLists;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -116,7 +116,7 @@ namespace ready4air
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

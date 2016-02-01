@@ -51,7 +51,7 @@ namespace ready4air
         ResponseData::HTTP_STATUS_CODE mHttpStatusCode;
         STRING_T mMessage;
         dto::ParseErrors mParseErrors;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 

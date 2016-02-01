@@ -74,7 +74,7 @@ namespace ready4air
             Maybe<int> mManifestTypeId;
             Maybe <STRING_T> mManifestTypeName;
             Maybe<int> mLocation;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

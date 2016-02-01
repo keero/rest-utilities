@@ -84,7 +84,7 @@ namespace ready4air
     private:
         BOOL_T mNothing;
         T mJust;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 

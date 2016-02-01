@@ -105,7 +105,7 @@ namespace ready4air
     private:
         Maybe <LEFT> mLeft;
         Maybe <RIGHT> mRight;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 

@@ -56,7 +56,7 @@ namespace ready4air
         private:
             Maybe<int> mPosition;
             Maybe <STRING_T> mContentId;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

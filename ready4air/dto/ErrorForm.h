@@ -58,7 +58,7 @@ namespace ready4air
         private:
             Maybe<Form> mForm;
             Maybe<STRING_T> mMessage;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

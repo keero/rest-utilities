@@ -131,7 +131,7 @@ namespace ready4air
             Maybe <STRING_T> mDeviceId;
             Maybe <STRING_T> mUserId;
             Maybe <STRING_T> mModified;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

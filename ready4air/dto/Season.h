@@ -463,7 +463,7 @@ namespace ready4air
             Maybe<Link> mSelf;
             Maybe<Link> mWatchedEpisodes;
             Maybe<Link> mAllEpisodes;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

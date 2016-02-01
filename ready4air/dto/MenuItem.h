@@ -80,7 +80,7 @@ namespace ready4air
             Maybe <STRING_T> mText;
             Maybe <Link> mLink;
             Maybe <VECTOR_T<MenuItem> > mMenuItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -102,7 +102,7 @@ namespace ready4air
             Maybe <STRING_T> mCurrency;
             Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

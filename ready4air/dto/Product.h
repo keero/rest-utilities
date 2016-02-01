@@ -132,7 +132,7 @@ namespace ready4air
             Maybe <Link> mFullPLay;
             Maybe <Entitlement> mEntitlements;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

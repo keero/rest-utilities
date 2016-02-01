@@ -73,7 +73,7 @@ namespace ready4air
             Maybe <Form> mCreateOrUpdate;
             Maybe <Link> mRead;
             Maybe <Form> mDelete;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

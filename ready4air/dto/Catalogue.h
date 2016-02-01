@@ -73,7 +73,7 @@ namespace ready4air
             Maybe <Link> mAllMovies;
             Maybe <Link> mAllSeries;
             Maybe <Link> mAllBundles;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

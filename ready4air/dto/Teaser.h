@@ -50,7 +50,7 @@ namespace ready4air
 
         private:
             Maybe <VECTOR_T<MediaProduct> > mMedias;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

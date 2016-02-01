@@ -544,7 +544,7 @@ namespace ready4air
             Maybe<Link> mMoviesCurrentlyWatching;
             Maybe<Form> mCancelSubscription;
             Maybe<Form> mAddVoucherToSubscription;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

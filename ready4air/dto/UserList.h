@@ -232,7 +232,7 @@ namespace ready4air
             Maybe<VECTOR_T<UserListItem> > mExposedItems;
             Maybe<STRING_T> mUserId;
             Maybe<STRING_T> mDeviceId;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

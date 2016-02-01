@@ -57,7 +57,7 @@ namespace ready4air
 
         private:
             dto::Link mServiceRoot;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

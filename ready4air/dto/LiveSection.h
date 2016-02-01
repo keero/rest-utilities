@@ -81,7 +81,7 @@ namespace ready4air
             Maybe<STRING_T> mTitle;
             Maybe<VECTOR_T<Channel> > mChannels;
             Maybe<Link> mAll;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

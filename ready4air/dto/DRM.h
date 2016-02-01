@@ -102,7 +102,7 @@ namespace ready4air
             Maybe <STRING_T> mCustomerToken;
             Maybe <STRING_T> mDeviceToken;
             Maybe <STRING_T> mContentId;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -72,7 +72,7 @@ namespace ready4air
             Maybe<int> mCode;
             Maybe<STRING_T> mMessage;
             Maybe<Display> mDisplay;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

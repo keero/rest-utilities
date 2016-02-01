@@ -192,7 +192,7 @@ namespace ready4air
             Maybe <VECTOR_T<Entitlement> > mEntitlements;
             Maybe <Form> mPurchase;
             Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

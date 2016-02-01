@@ -118,7 +118,7 @@ namespace ready4air
             Maybe<Link> mLink;
             Maybe<int> mBitrate;
             Maybe<ProtectionData> mProtectionData;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

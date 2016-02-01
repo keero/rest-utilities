@@ -71,7 +71,7 @@ namespace ready4air
             Maybe<int> mNumberOfVotes;
             Maybe<int> mValue;
             Maybe<DOUBLE_T> mAverageValue;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

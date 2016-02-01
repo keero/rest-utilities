@@ -72,7 +72,7 @@ namespace ready4air
             Maybe <Link> mAction;
             Maybe <STRING_T> mMethod;
             Maybe <Link> mBody;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

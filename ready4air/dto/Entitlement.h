@@ -117,7 +117,7 @@ namespace ready4air
             Maybe<STRING_T> mEndTime;
             Maybe<DRM> mDRM;
             Maybe<STRING_T> mIdentifier;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

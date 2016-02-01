@@ -87,7 +87,7 @@ namespace ready4air
             Maybe<Link> mPlayReadyLicenser;
             Maybe<Link> mWidevineLicenser;
             Maybe<STRING_T> mWidevinePSSH;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

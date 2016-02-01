@@ -97,7 +97,7 @@ namespace ready4air
             Maybe<BOOL_T> mTemplated;
             Maybe<BOOL_T> mWithCredentials;
             UrlTemplate mUrlTemplate;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

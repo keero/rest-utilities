@@ -72,7 +72,7 @@ namespace ready4air
             Maybe <STRING_T> mStart;
             Maybe <STRING_T> mEnd;
             Maybe <MediaProduct> mMedia;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

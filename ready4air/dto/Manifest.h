@@ -58,7 +58,7 @@ namespace ready4air
         private:
             Maybe<Link> mLink;
             Maybe<ProtectionData> mProtectionData;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

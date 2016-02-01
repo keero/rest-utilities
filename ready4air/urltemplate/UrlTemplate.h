@@ -248,7 +248,7 @@ namespace ready4air
     private:
         Maybe <STRING_T> mUrl;
         UrlContext mUrlContext;
-        const STRING_T TAG;
+        STRING_T TAG;
     };
 }
 #endif //READY4AIR_URLTEMPLATE_URLTEMPLATE_H

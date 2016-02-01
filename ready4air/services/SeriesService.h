@@ -101,7 +101,7 @@ namespace ready4air
             BadHttpClientType mBadHttpClientType;
             BadEventType mBadEventType;
             BadEventPayloadType mBadEventPayloadType;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

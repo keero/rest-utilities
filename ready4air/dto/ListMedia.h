@@ -131,7 +131,7 @@ namespace ready4air
             Maybe<BOOL_T> mIsMainList;
             Maybe<DOUBLE_T> mPrice;
             Maybe<int> mListOrder;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

@@ -73,7 +73,7 @@ namespace ready4air
             Maybe<Event> mNow;
             Maybe<Event> mNext;
             Maybe<Link> mAll;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

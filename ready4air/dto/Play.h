@@ -72,7 +72,7 @@ namespace ready4air
             Maybe<int> mProductId;
             Maybe<Manifests> mTrailers;
             Maybe<Manifests> mFeatures;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

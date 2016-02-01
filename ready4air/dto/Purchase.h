@@ -352,7 +352,7 @@ namespace ready4air
             Maybe <Form> mUpdate;
             Maybe <DRM> mDRM;
             Maybe <STRING_T> mSignature;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

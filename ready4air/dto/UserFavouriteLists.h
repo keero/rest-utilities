@@ -111,7 +111,7 @@ namespace ready4air
             Maybe <Form> mRemoveLists;
             Maybe <Link> mLists;
             Maybe <VECTOR_T<STRING_T> > mExposedItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

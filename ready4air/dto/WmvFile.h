@@ -60,7 +60,7 @@ namespace ready4air
         private:
             Maybe<int> mLocation;
             Maybe <Link> mMmsLink;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

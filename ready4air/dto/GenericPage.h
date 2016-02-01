@@ -94,7 +94,7 @@ namespace ready4air
             Maybe <Link> mPrev;
             Maybe <Link> mNext;
             Maybe <VECTOR_T<T> > mItems;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

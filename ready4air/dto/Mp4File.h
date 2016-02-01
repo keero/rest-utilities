@@ -90,7 +90,7 @@ namespace ready4air
             Maybe <Link> mMmsLink;
             Maybe <STRING_T> mLanguage;
             Maybe<INT16_T> mBandwidth;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

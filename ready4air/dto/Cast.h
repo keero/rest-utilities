@@ -132,7 +132,7 @@ namespace ready4air
             Maybe <STRING_T> mLastName;
             Maybe <STRING_T> mMiddleName;
             Maybe <STRING_T> mFullName;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }

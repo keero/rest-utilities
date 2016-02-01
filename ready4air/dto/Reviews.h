@@ -82,7 +82,7 @@ namespace ready4air
             Maybe<UserRating> mUserRating;
             Maybe<STRING_T> mFormattedAverageCriticsScore;
             Maybe<VECTOR_T<CriticsQuote> > mCriticsQuotes;
-            const STRING_T TAG;
+            STRING_T TAG;
         };
     }
 }
