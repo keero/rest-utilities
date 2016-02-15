@@ -10,25 +10,19 @@ namespace ready4air
     {
     public:
         Either() :
-                TAG("ready4air::Either"),
-                Left(mLeft),
-                Right(mRight)
+                TAG("ready4air::Either")
         {
         }
 
         Either(LEFT left) :
                 TAG("ready4air::Either"),
-                mLeft(left),
-                Left(mLeft),
-                Right(mRight)
+                Left(left)
         {
         }
 
         Either(RIGHT right) :
                 TAG("ready4air::Either"),
-                mRight(right),
-                Left(mLeft),
-                Right(mRight)
+                Right(right)
         {
         }
 
@@ -43,15 +37,15 @@ namespace ready4air
 
         inline Either <LEFT, RIGHT> &operator=(const LEFT &rhs)
         {
-            mLeft = rhs;
-            mRight.Unset();
+            Left = rhs;
+            Right.Unset();
             return *this;
         }
 
         inline Either <LEFT, RIGHT> &operator=(const RIGHT &rhs)
         {
-            mRight = rhs;
-            mLeft.Unset();
+            Right = rhs;
+            Left.Unset();
             return *this;
         }
 
@@ -111,12 +105,10 @@ namespace ready4air
         }
 
     public:
-        const Maybe <LEFT> &Left;
-        const Maybe <RIGHT> &Right;
+        Maybe <LEFT> Left;
+        Maybe <RIGHT> Right;
 
     private:
-        Maybe <LEFT> mLeft;
-        Maybe <RIGHT> mRight;
         STRING_T TAG;
     };
 }

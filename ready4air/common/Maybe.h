@@ -11,15 +11,13 @@ namespace ready4air
     {
     public:
         Maybe() :
-                Just(mJust),
                 mNothing(true),
                 TAG("ready4air::Maybe")
         {
         }
 
         Maybe(T item) :
-                mJust(item),
-                Just(mJust),
+                Just(item),
                 mNothing(false),
                 TAG("ready4air::Maybe")
         {
@@ -41,7 +39,7 @@ namespace ready4air
 
         inline Maybe <T> &operator=(const T &rhs)
         {
-            mJust = rhs;
+            Just = rhs;
             mNothing = false;
             return *this;
         }
@@ -86,10 +84,9 @@ namespace ready4air
         }
 
     public:
-        const T &Just;
+        T Just;
 
     private:
-        T mJust;
         BOOL_T mNothing;
         STRING_T TAG;
     };
