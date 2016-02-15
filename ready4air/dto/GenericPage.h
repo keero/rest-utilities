@@ -52,7 +52,7 @@ namespace ready4air
                 mNext = next;
             }
 
-            const Maybe <VECTOR_T<T> > &GetItems() const
+            const Maybe <VECTOR_T<T>> &GetItems() const
             {
                 return mItems;
             }
@@ -62,38 +62,42 @@ namespace ready4air
                 mItems = items;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link prev;
                 Link next;
                 VECTOR_T<T> items;
 
-                if (ParseObject(value, "Prev", false, prev, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Prev", false, prev, parseErrors, context))
                     SetPrev(prev);
 
-                if (ParseObject(value, "Next", false, next, parseErrors))
+                if (ParseObject(value, "Next", false, next, parseErrors, context))
                     SetNext(next);
 
-                if (VerifyArray(value, "Items", true, parseErrors))
+                if (VerifyArray(value, "Items", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Items"].Size(); i += 1)
                     {
                         T item;
                         IJsonDeserializable *abstractItem = &item;
-                        if (abstractItem->InitFromJsonValue(value["Items"][i], parseErrors))
+                        if (abstractItem->InitFromJsonValue(value["Items"][i], parseErrors, context))
 //                        if (ParseObject(value["Items"][i], "", false, item, parseErrors))
                             items.push_back(item);
                     }
                     SetItems(items);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
             Maybe <Link> mPrev;
             Maybe <Link> mNext;
-            Maybe <VECTOR_T<T> > mItems;
+            Maybe <VECTOR_T<T>> mItems;
             STRING_T TAG;
         };
     }

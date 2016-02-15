@@ -51,29 +51,33 @@ namespace ready4air
                 mAll = all;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T title;
                 VECTOR_T<Channel> channels;
                 Link all;
 
-                if (ParseString(value, "Title", true, title, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Title", true, title, parseErrors, context))
                     SetTitle(title);
 
-                if (VerifyArray(value, "Channels", true, parseErrors))
+                if (VerifyArray(value, "Channels", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Channels"].Size(); i += 1)
                     {
                         Channel channel;
-                        if (ParseObject(value["Channels"][i], "", false, channel, parseErrors))
+                        if (ParseObject(value["Channels"][i], "", false, channel, parseErrors, context))
                             channels.push_back(channel);
                     }
                     SetChannels(channels);
                 }
 
-                if (ParseObject(value, "All", false, all, parseErrors))
+                if (ParseObject(value, "All", false, all, parseErrors, context))
                     SetAll(all);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

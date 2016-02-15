@@ -50,21 +50,25 @@ namespace ready4air
                 mMedia = media;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T start;
                 STRING_T end;
                 MediaProduct media;
 
-                if (ParseString(value, "Start", true, start, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Start", true, start, parseErrors, context))
                     SetStart(start);
 
-                if (ParseString(value, "End", true, end, parseErrors))
+                if (ParseString(value, "End", true, end, parseErrors, context))
                     SetEnd(end);
 
-                if (ParseObject(value, "Media", true, media, parseErrors))
+                if (ParseObject(value, "Media", true, media, parseErrors, context))
                     SetMedia(media);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

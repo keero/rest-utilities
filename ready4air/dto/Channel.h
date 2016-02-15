@@ -132,7 +132,8 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T originalTitle;
@@ -146,47 +147,50 @@ namespace ready4air
                 EpgInfo epgInfo;
                 Link self;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors, context))
                     SetOriginalTitle(originalTitle);
 
-                if (ParseString(value, "Description", false, description, parseErrors))
+                if (ParseString(value, "Description", false, description, parseErrors, context))
                     SetDescription(description);
 
-                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors, context))
                     SetLocalTitle(localTitle);
 
-                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors, context))
                     SetShortTitle(shortTitle);
 
-                if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                if (ParseString(value, "LongSummary", false, longSummary, parseErrors, context))
                     SetLongSummary(longSummary);
 
-                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors, context))
                     SetShortSummary(shortSummary);
 
-                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors, context))
                     SetSortTitle(sortTitle);
 
-                if (VerifyArray(value, "Images", false, parseErrors))
+                if (VerifyArray(value, "Images", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        if (ParseObject(value["Images"][i], "", false, image, parseErrors, context))
                             images.push_back(image);
                     }
                     SetImages(images);
                 }
 
-                if (ParseObject(value, "EpgInfo", true, epgInfo, parseErrors))
+                if (ParseObject(value, "EpgInfo", true, epgInfo, parseErrors, context))
                     SetEpgInfo(epgInfo);
 
-                if (ParseObject(value, "Self", false, self, parseErrors))
+                if (ParseObject(value, "Self", false, self, parseErrors, context))
                     SetSelf(self);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

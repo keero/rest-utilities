@@ -30,7 +30,7 @@ namespace ready4air
                 mTypeId = typeId;
             }
 
-            const Maybe<STRING_T> &GetTypeName() const
+            const Maybe <STRING_T> &GetTypeName() const
             {
                 return mTypeName;
             }
@@ -40,7 +40,7 @@ namespace ready4air
                 mTypeName = typeName;
             }
 
-            const Maybe<Link> &GetLink() const
+            const Maybe <Link> &GetLink() const
             {
                 return mLink;
             }
@@ -50,28 +50,32 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T typeId;
                 STRING_T typeName;
                 Link link;
 
-                if (ParseInt(value, "TypeId", true, typeId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "TypeId", true, typeId, parseErrors, context))
                     SetTypeId(typeId);
 
-                if (ParseString(value, "TypeName", true, typeName, parseErrors))
+                if (ParseString(value, "TypeName", true, typeName, parseErrors, context))
                     SetTypeName(typeName);
 
-                if (ParseObject(value, "Link", true, link, parseErrors))
+                if (ParseObject(value, "Link", true, link, parseErrors, context))
                     SetLink(link);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
             Maybe<int> mTypeId;
-            Maybe<STRING_T> mTypeName;
-            Maybe<Link> mLink;
+            Maybe <STRING_T> mTypeName;
+            Maybe <Link> mLink;
             STRING_T TAG;
         };
     }

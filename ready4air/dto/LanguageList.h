@@ -60,25 +60,29 @@ namespace ready4air
                 mIsGenre = isGenre;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Language language;
                 STRING_T name;
                 STRING_T description;
                 BOOL_T isGenre;
 
-                if (ParseObject(value, "Language", true, language, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Language", true, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseString(value, "Name", true, name, parseErrors))
+                if (ParseString(value, "Name", true, name, parseErrors, context))
                     SetName(name);
 
-                if (ParseString(value, "Description", true, description, parseErrors))
+                if (ParseString(value, "Description", true, description, parseErrors, context))
                     SetDescription(description);
 
-                if (ParseBool(value, "IsGenre", true, isGenre, parseErrors))
+                if (ParseBool(value, "IsGenre", true, isGenre, parseErrors, context))
                     SetIsGenre(isGenre);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

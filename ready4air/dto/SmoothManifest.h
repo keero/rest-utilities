@@ -49,24 +49,28 @@ namespace ready4air
                 mLocation = location;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T manifestTypeId;
                 STRING_T manifestTypeName;
                 INT32_T location;
 
-                // Initialize parent properties
-                FileBase::InitFromJsonValue(value, parseErrors);
+                context.push_back(TAG);
 
-                if (ParseInt(value, "ManifestTypeId", true, manifestTypeId, parseErrors))
+                // Initialize parent properties
+                FileBase::InitFromJsonValue(value, parseErrors, context);
+
+                if (ParseInt(value, "ManifestTypeId", true, manifestTypeId, parseErrors, context))
                     SetManifestTypeId(manifestTypeId);
 
-                if (ParseString(value, "ManifestTypeName", true, manifestTypeName, parseErrors))
+                if (ParseString(value, "ManifestTypeName", true, manifestTypeName, parseErrors, context))
                     SetManifestTypeName(manifestTypeName);
 
-                if (ParseInt(value, "Location", true, location, parseErrors))
+                if (ParseInt(value, "Location", true, location, parseErrors, context))
                     SetLocation(location);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

@@ -60,25 +60,29 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T type;
                 STRING_T encoding;
                 STRING_T language;
                 Link link;
 
-                if (ParseString(value, "Type", true, type, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Type", true, type, parseErrors, context))
                     SetType(type);
 
-                if (ParseString(value, "Encoding", true, encoding, parseErrors))
+                if (ParseString(value, "Encoding", true, encoding, parseErrors, context))
                     SetEncoding(encoding);
 
-                if (ParseString(value, "Language", true, language, parseErrors))
+                if (ParseString(value, "Language", true, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseObject(value, "Link", false, link, parseErrors))
+                if (ParseObject(value, "Link", false, link, parseErrors, context))
                     SetLink(link);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

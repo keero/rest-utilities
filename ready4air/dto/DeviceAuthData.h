@@ -89,7 +89,8 @@ namespace ready4air
                 mIpAddress = ipAddress;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T deviceVersion;
                 STRING_T country;
@@ -99,27 +100,30 @@ namespace ready4air
                 STRING_T expirationDateTime;
                 STRING_T ipAddress;
 
-                if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors, context))
                     SetDeviceVersion(deviceVersion);
 
-                if (ParseString(value, "Country", true, country, parseErrors))
+                if (ParseString(value, "Country", true, country, parseErrors, context))
                     SetCountry(country);
 
-                if (ParseString(value, "Language", false, language, parseErrors))
+                if (ParseString(value, "Language", false, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                if (ParseString(value, "DeviceId", false, deviceId, parseErrors, context))
                     SetDeviceId(deviceId);
 
-                if (ParseString(value, "Token", false, token, parseErrors))
+                if (ParseString(value, "Token", false, token, parseErrors, context))
                     SetToken(token);
 
-                if (ParseString(value, "ExpirationDateTime", false, expirationDateTime, parseErrors))
+                if (ParseString(value, "ExpirationDateTime", false, expirationDateTime, parseErrors, context))
                     SetExpirationDateTime(expirationDateTime);
 
-                if (ParseString(value, "IpAddress", false, ipAddress, parseErrors))
+                if (ParseString(value, "IpAddress", false, ipAddress, parseErrors, context))
                     SetIpAddress(ipAddress);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

@@ -60,25 +60,29 @@ namespace ready4air
                 mListId = listId;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T name;
                 Link link;
                 BOOL_T isMain;
                 INT32_T listId;
 
-                if (ParseString(value, "Name", false, name, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Name", false, name, parseErrors, context))
                     SetName(name);
 
-                if (ParseObject(value, "Link", false, link, parseErrors))
+                if (ParseObject(value, "Link", false, link, parseErrors, context))
                     SetLink(link);
 
-                if (ParseBool(value, "IsMain", true, isMain, parseErrors))
+                if (ParseBool(value, "IsMain", true, isMain, parseErrors, context))
                     SetIsMain(isMain);
 
-                if (ParseInt(value, "ListId", true, listId, parseErrors))
+                if (ParseInt(value, "ListId", true, listId, parseErrors, context))
                     SetListId(listId);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

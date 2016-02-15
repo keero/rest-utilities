@@ -93,7 +93,7 @@ namespace ready4air
                 mDubbed = dubbed;
             }
 
-            const Maybe <VECTOR_T<Entitlement> > &GetEntitlements() const
+            const Maybe <VECTOR_T<Entitlement>> &GetEntitlements() const
             {
                 return mEntitlements;
             }
@@ -113,7 +113,7 @@ namespace ready4air
                 mPurchase = purchase;
             }
 
-            const Maybe <VECTOR_T<PurchaseItem> > &GetPurchaseItems() const
+            const Maybe <VECTOR_T<PurchaseItem>> &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
@@ -123,7 +123,8 @@ namespace ready4air
                 mPurchaseItems = purchaseItems;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T productId;
                 DOUBLE_T price;
@@ -135,49 +136,53 @@ namespace ready4air
                 Form purchase;
                 VECTOR_T<PurchaseItem> purchaseItems;
 
-                if (ParseInt(value, "ProductId", false, productId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "ProductId", false, productId, parseErrors, context))
                     SetProductId(productId);
 
-                if (ParseDouble(value, "Price", false, price, parseErrors))
+                if (ParseDouble(value, "Price", false, price, parseErrors, context))
                     SetPrice(price);
 
-                if (ParseString(value, "Currency", false, currency, parseErrors))
+                if (ParseString(value, "Currency", false, currency, parseErrors, context))
                     SetCurrency(currency);
 
-                if (ParseString(value, "StrPrice", false, strPrice, parseErrors))
+                if (ParseString(value, "StrPrice", false, strPrice, parseErrors, context))
                     SetStrPrice(strPrice);
 
-                if (ParseBool(value, "HD", false, hd, parseErrors))
+                if (ParseBool(value, "HD", false, hd, parseErrors, context))
                     SetHD(hd);
 
-                if (ParseBool(value, "Dubbed", false, dubbed, parseErrors))
+                if (ParseBool(value, "Dubbed", false, dubbed, parseErrors, context))
                     SetDubbed(dubbed);
 
-                if (VerifyArray(value, "Entitlements", false, parseErrors))
+                if (VerifyArray(value, "Entitlements", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Entitlements"].Size(); i += 1)
                     {
                         Entitlement entitlement;
-                        if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors))
+                        if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors, context))
                             entitlements.push_back(entitlement);
                     }
                     SetEntitlements(entitlements);
                 }
 
-                if (ParseObject(value, "Purchase", false, purchase, parseErrors))
+                if (ParseObject(value, "Purchase", false, purchase, parseErrors, context))
                     SetPurchase(purchase);
 
-                if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+                if (VerifyArray(value, "PurchaseItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
                     {
                         PurchaseItem purchaseItem;
-                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors,
+                                        context))
                             purchaseItems.push_back(purchaseItem);
                     }
                     SetPurchaseItems(purchaseItems);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
@@ -189,9 +194,9 @@ namespace ready4air
             Maybe <STRING_T> mStrPrice;
             Maybe<BOOL_T> mHD;
             Maybe<BOOL_T> mDubbed;
-            Maybe <VECTOR_T<Entitlement> > mEntitlements;
+            Maybe <VECTOR_T<Entitlement>> mEntitlements;
             Maybe <Form> mPurchase;
-            Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            Maybe <VECTOR_T<PurchaseItem>> mPurchaseItems;
             STRING_T TAG;
         };
     }

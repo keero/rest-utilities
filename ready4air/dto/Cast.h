@@ -90,7 +90,8 @@ namespace ready4air
                 mFullName = fullName;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 INT32_T categoryId;
@@ -100,27 +101,30 @@ namespace ready4air
                 STRING_T middleName;
                 STRING_T fullName;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseInt(value, "CategoryId", true, categoryId, parseErrors))
+                if (ParseInt(value, "CategoryId", true, categoryId, parseErrors, context))
                     SetCategoryId((INT16_T) categoryId);
 
-                if (ParseString(value, "CategoryName", true, categoryName, parseErrors))
+                if (ParseString(value, "CategoryName", true, categoryName, parseErrors, context))
                     SetCategoryName(categoryName);
 
-                if (ParseString(value, "FirstName", false, firstName, parseErrors))
+                if (ParseString(value, "FirstName", false, firstName, parseErrors, context))
                     SetFirstName(firstName);
 
-                if (ParseString(value, "LastName", false, lastName, parseErrors))
+                if (ParseString(value, "LastName", false, lastName, parseErrors, context))
                     SetLastName(lastName);
 
-                if (ParseString(value, "MiddleName", false, middleName, parseErrors))
+                if (ParseString(value, "MiddleName", false, middleName, parseErrors, context))
                     SetMiddleName(middleName);
 
-                if (ParseString(value, "FullName", true, fullName, parseErrors))
+                if (ParseString(value, "FullName", true, fullName, parseErrors, context))
                     SetFullName(fullName);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

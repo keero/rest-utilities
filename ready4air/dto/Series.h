@@ -164,7 +164,7 @@ namespace ready4air
                 mProductionCountry = productionCountry;
             }
 
-            const Maybe <VECTOR_T<STRING_T> > &GetAgeGroups() const
+            const Maybe <VECTOR_T<STRING_T>> &GetAgeGroups() const
             {
                 return mAgeGroups;
             }
@@ -174,7 +174,7 @@ namespace ready4air
                 mAgeGroups = ageGroups;
             }
 
-            const Maybe <VECTOR_T<Image> > &GetImages() const
+            const Maybe <VECTOR_T<Image>> &GetImages() const
             {
                 return mImages;
             }
@@ -184,7 +184,7 @@ namespace ready4air
                 mImages = images;
             }
 
-            const Maybe <VECTOR_T<Cast> > &GetCasts() const
+            const Maybe <VECTOR_T<Cast>> &GetCasts() const
             {
                 return mCasts;
             }
@@ -194,7 +194,7 @@ namespace ready4air
                 mCasts = casts;
             }
 
-            const Maybe <VECTOR_T<Genre> > &GetGenres() const
+            const Maybe <VECTOR_T<Genre>> &GetGenres() const
             {
                 return mGenres;
             }
@@ -244,7 +244,8 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T externalId;
@@ -269,104 +270,108 @@ namespace ready4air
                 Link seasons;
                 Link self;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "ExternalId", true, externalId, parseErrors))
+                if (ParseString(value, "ExternalId", true, externalId, parseErrors, context))
                     SetExternalId(externalId);
 
-                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors, context))
                     SetOriginalTitle(originalTitle);
 
-                if (ParseBool(value, "Adult", true, adult, parseErrors))
+                if (ParseBool(value, "Adult", true, adult, parseErrors, context))
                     SetAdult(adult);
 
-                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors, context))
                     SetLocalTitle(localTitle);
 
-                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors, context))
                     SetShortTitle(shortTitle);
 
-                if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                if (ParseString(value, "LongSummary", false, longSummary, parseErrors, context))
                     SetLongSummary(longSummary);
 
-                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors, context))
                     SetShortSummary(shortSummary);
 
-                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors, context))
                     SetSortTitle(sortTitle);
 
-                if (ParseInt(value, "MinYear", true, minYear, parseErrors))
+                if (ParseInt(value, "MinYear", true, minYear, parseErrors, context))
                     SetMinYear((INT16_T) minYear);
 
-                if (ParseInt(value, "MaxYear", true, maxYear, parseErrors))
+                if (ParseInt(value, "MaxYear", true, maxYear, parseErrors, context))
                     SetMaxYear((INT16_T) maxYear);
 
-                if (ParseInt(value, "EpisodeLength", false, episodeLength, parseErrors))
+                if (ParseInt(value, "EpisodeLength", false, episodeLength, parseErrors, context))
                     SetEpisodeLength(episodeLength);
 
-                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors, context))
                     SetAgeLimit(ageLimit);
 
-                if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors))
+                if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors, context))
                     SetProductionCountry(productionCountry);
 
-                if (VerifyArray(value, "AgeGroups", false, parseErrors))
+                if (VerifyArray(value, "AgeGroups", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["AgeGroups"].Size(); i += 1)
                     {
                         STRING_T ageGroup;
-                        if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors))
+                        if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors, context))
                             ageGroups.push_back(ageGroup);
                     }
                     SetAgeGroups(ageGroups);
                 }
 
-                if (VerifyArray(value, "Images", false, parseErrors))
+                if (VerifyArray(value, "Images", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        if (ParseObject(value["Images"][i], "", false, image, parseErrors, context))
                             images.push_back(image);
                     }
                     SetImages(images);
                 }
 
-                if (VerifyArray(value, "Casts", false, parseErrors))
+                if (VerifyArray(value, "Casts", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Casts"].Size(); i += 1)
                     {
                         Cast cast;
-                        if (ParseObject(value["Casts"][i], "", false, cast, parseErrors))
+                        if (ParseObject(value["Casts"][i], "", false, cast, parseErrors, context))
                             casts.push_back(cast);
                     }
                     SetCasts(casts);
                 }
 
-                if (VerifyArray(value, "Genres", false, parseErrors))
+                if (VerifyArray(value, "Genres", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Genres"].Size(); i += 1)
                     {
                         Genre genre;
-                        if (ParseObject(value["Genres"][i], "", false, genre, parseErrors))
+                        if (ParseObject(value["Genres"][i], "", false, genre, parseErrors, context))
                             genres.push_back(genre);
                     }
                     SetGenres(genres);
                 }
 
-                if (ParseObject(value, "PurchaseFirstEpisode", false, purchaseFirstEpisode, parseErrors))
+                if (ParseObject(value, "PurchaseFirstEpisode", false, purchaseFirstEpisode, parseErrors,
+                                context))
                     SetPurchaseFirstEpisode(purchaseFirstEpisode);
 
-                if (ParseString(value, "Modified", false, modified, parseErrors))
+                if (ParseString(value, "Modified", false, modified, parseErrors, context))
                     SetModified(modified);
 
-                if (ParseObject(value, "Seasons", false, seasons, parseErrors))
+                if (ParseObject(value, "Seasons", false, seasons, parseErrors, context))
                     SetSeasons(seasons);
 
-                if (ParseObject(value, "Self", false, self, parseErrors))
+                if (ParseObject(value, "Self", false, self, parseErrors, context))
                     SetSelf(self);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
@@ -385,10 +390,10 @@ namespace ready4air
             Maybe<int> mEpisodeLength;
             Maybe<int> mAgeLimit;
             Maybe <STRING_T> mProductionCountry;
-            Maybe <VECTOR_T<STRING_T> > mAgeGroups;
-            Maybe <VECTOR_T<Image> > mImages;
-            Maybe <VECTOR_T<Cast> > mCasts;
-            Maybe <VECTOR_T<Genre> > mGenres;
+            Maybe <VECTOR_T<STRING_T>> mAgeGroups;
+            Maybe <VECTOR_T<Image>> mImages;
+            Maybe <VECTOR_T<Cast>> mCasts;
+            Maybe <VECTOR_T<Genre>> mGenres;
             Maybe <Form> mPurchaseFirstEpisode;
             Maybe <STRING_T> mModified;
             Maybe <Link> mSeasons;

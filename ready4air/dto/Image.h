@@ -30,16 +30,20 @@ namespace ready4air
                 mSecureLink = secureLink;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link secureLink;
 
-                // Initialize parent properties
-                FileBase::InitFromJsonValue(value, parseErrors);
+                context.push_back(TAG);
 
-                if (ParseObject(value, "SecureLink", false, secureLink, parseErrors))
+                // Initialize parent properties
+                FileBase::InitFromJsonValue(value, parseErrors, context);
+
+                if (ParseObject(value, "SecureLink", false, secureLink, parseErrors, context))
                     SetSecureLink(secureLink);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

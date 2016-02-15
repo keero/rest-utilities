@@ -70,7 +70,8 @@ namespace ready4air
                 mForm = form;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T businessType;
                 DOUBLE_T price;
@@ -78,27 +79,30 @@ namespace ready4air
                 STRING_T strPrice;
                 Form form;
 
-                if (ParseString(value, "BusinessType", true, businessType, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "BusinessType", true, businessType, parseErrors, context))
                     SetBusinessType(businessType);
 
-                if (ParseDouble(value, "Price", false, price, parseErrors))
+                if (ParseDouble(value, "Price", false, price, parseErrors, context))
                     SetPrice(price);
 
-                if (ParseString(value, "Currency", false, currency, parseErrors))
+                if (ParseString(value, "Currency", false, currency, parseErrors, context))
                     SetCurrency(currency);
 
-                if (ParseString(value, "StrPrice", false, strPrice, parseErrors))
+                if (ParseString(value, "StrPrice", false, strPrice, parseErrors, context))
                     SetStrPrice(strPrice);
 
-                if (ParseObject(value, "Form", false, form, parseErrors))
+                if (ParseObject(value, "Form", false, form, parseErrors, context))
                     SetForm(form);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
             Maybe <STRING_T> mBusinessType;
-            Maybe <DOUBLE_T> mPrice;
+            Maybe<DOUBLE_T> mPrice;
             Maybe <STRING_T> mCurrency;
             Maybe <STRING_T> mStrPrice;
             Maybe <Form> mForm;

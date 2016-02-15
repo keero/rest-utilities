@@ -41,17 +41,21 @@ namespace ready4air
                 mProtectionData = protectionData;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link link;
                 ProtectionData protectionData;
 
-                if (ParseObject(value, "Link", true, link, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Link", true, link, parseErrors, context))
                     SetLink(link);
 
-                if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors))
+                if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors, context))
                     SetProtectionData(protectionData);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

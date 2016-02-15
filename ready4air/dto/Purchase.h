@@ -6,12 +6,13 @@
 #include "hypermedia/Link.h"
 #include "hypermedia/Form.h"
 #include "DRM.h"
+#include "abstract/JsonSerializable.h"
 
 namespace ready4air
 {
     namespace dto
     {
-        class Purchase : public JsonDeserializable
+        class Purchase : public JsonDeserializable, public IJsonSerializable
         {
         public:
             Purchase() : TAG("ready4air::dto::Purchase")
@@ -22,7 +23,7 @@ namespace ready4air
             {
             }
 
-            const Maybe <STRING_T> &GetId() const
+            const Maybe<STRING_T> &GetId() const
             {
                 return mId;
             }
@@ -32,7 +33,7 @@ namespace ready4air
                 mId = id;
             }
 
-            const Maybe <STRING_T> &GetCpurchaseId() const
+            const Maybe<STRING_T> &GetCpurchaseId() const
             {
                 return mCpurchaseId;
             }
@@ -42,7 +43,7 @@ namespace ready4air
                 mCpurchaseId = cpurchaseId;
             }
 
-            const Maybe <STRING_T> &GetCrentalId() const
+            const Maybe<STRING_T> &GetCrentalId() const
             {
                 return mCrentalId;
             }
@@ -52,7 +53,7 @@ namespace ready4air
                 mCrentalId = crentalId;
             }
 
-            const Maybe <VECTOR_T<STRING_T> > &GetCValueCodes() const
+            const Maybe<VECTOR_T<STRING_T> > &GetCValueCodes() const
             {
                 return mCValueCodes;
             }
@@ -62,7 +63,7 @@ namespace ready4air
                 mCValueCodes = CValueCodes;
             }
 
-            const Maybe <STRING_T> &GetCurrency() const
+            const Maybe<STRING_T> &GetCurrency() const
             {
                 return mCurrency;
             }
@@ -72,7 +73,7 @@ namespace ready4air
                 mCurrency = currency;
             }
 
-            const Maybe <STRING_T> &GetIPAddress() const
+            const Maybe<STRING_T> &GetIPAddress() const
             {
                 return mIPAddress;
             }
@@ -82,7 +83,7 @@ namespace ready4air
                 mIPAddress = IPAddress;
             }
 
-            const Maybe <STRING_T> &GetIPCountry() const
+            const Maybe<STRING_T> &GetIPCountry() const
             {
                 return mIPCountry;
             }
@@ -92,7 +93,7 @@ namespace ready4air
                 mIPCountry = IPCountry;
             }
 
-            const Maybe <STRING_T> &GetProductId() const
+            const Maybe<STRING_T> &GetProductId() const
             {
                 return mProductId;
             }
@@ -112,7 +113,7 @@ namespace ready4air
                 mOriginalPrice = originalPrice;
             }
 
-            const Maybe <STRING_T> &GetPaymentMethod() const
+            const Maybe<STRING_T> &GetPaymentMethod() const
             {
                 return mPaymentMethod;
             }
@@ -122,7 +123,7 @@ namespace ready4air
                 mPaymentMethod = paymentMethod;
             }
 
-            const Maybe <STRING_T> &GetPaymentReference() const
+            const Maybe<STRING_T> &GetPaymentReference() const
             {
                 return mPaymentReference;
             }
@@ -152,7 +153,7 @@ namespace ready4air
                 mRemainingAmount = remainingAmount;
             }
 
-            const Maybe <STRING_T> &GetTitle() const
+            const Maybe<STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
@@ -162,7 +163,7 @@ namespace ready4air
                 mTitle = title;
             }
 
-            const Maybe <STRING_T> &GetTransactionTime() const
+            const Maybe<STRING_T> &GetTransactionTime() const
             {
                 return mTransactionTime;
             }
@@ -172,7 +173,7 @@ namespace ready4air
                 mTransactionTime = transactionTime;
             }
 
-            const Maybe <Link> &GetSelf() const
+            const Maybe<Link> &GetSelf() const
             {
                 return mSelf;
             }
@@ -182,7 +183,7 @@ namespace ready4air
                 mSelf = self;
             }
 
-            const Maybe <Form> &GetCommit() const
+            const Maybe<Form> &GetCommit() const
             {
                 return mCommit;
             }
@@ -192,7 +193,7 @@ namespace ready4air
                 mCommit = commit;
             }
 
-            const Maybe <Form> &GetCancel() const
+            const Maybe<Form> &GetCancel() const
             {
                 return mCancel;
             }
@@ -202,7 +203,7 @@ namespace ready4air
                 mCancel = cancel;
             }
 
-            const Maybe <Form> &GetUpdate() const
+            const Maybe<Form> &GetUpdate() const
             {
                 return mUpdate;
             }
@@ -212,7 +213,7 @@ namespace ready4air
                 mUpdate = update;
             }
 
-            const Maybe <DRM> &GetDRM() const
+            const Maybe<DRM> &GetDRM() const
             {
                 return mDRM;
             }
@@ -222,7 +223,7 @@ namespace ready4air
                 mDRM = DRM;
             }
 
-            const Maybe <STRING_T> &GetSignature() const
+            const Maybe<STRING_T> &GetSignature() const
             {
                 return mSignature;
             }
@@ -232,7 +233,8 @@ namespace ready4air
                 mSignature = signature;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T cpurchaseId;
@@ -256,102 +258,113 @@ namespace ready4air
                 DRM drm;
                 STRING_T signature;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "CpurchaseId", false, cpurchaseId, parseErrors))
+                if (ParseString(value, "CpurchaseId", false, cpurchaseId, parseErrors, context))
                     SetCpurchaseId(cpurchaseId);
 
-                if (ParseString(value, "CrentalId", false, crentalId, parseErrors))
+                if (ParseString(value, "CrentalId", false, crentalId, parseErrors, context))
                     SetCrentalId(crentalId);
 
-                if (VerifyArray(value, "CValueCodes", false, parseErrors))
+                if (VerifyArray(value, "CValueCodes", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["CValueCodes"].Size(); i += 1)
                     {
                         STRING_T cValueCode;
-                        if (ParseString(value["CValueCodes"][i], "", false, cValueCode, parseErrors))
+                        if (ParseString(value["CValueCodes"][i], "", false, cValueCode, parseErrors, context))
                             cValueCodes.push_back(cValueCode);
                     }
                     SetCValueCodes(cValueCodes);
                 }
 
-                if (ParseString(value, "Currency", true, currency, parseErrors))
+                if (ParseString(value, "Currency", true, currency, parseErrors, context))
                     SetCurrency(currency);
 
-                if (ParseString(value, "IPAddress", true, ipAddress, parseErrors))
+                if (ParseString(value, "IPAddress", true, ipAddress, parseErrors, context))
                     SetIPAddress(ipAddress);
 
-                if (ParseString(value, "IPCountry", true, ipCountry, parseErrors))
+                if (ParseString(value, "IPCountry", true, ipCountry, parseErrors, context))
                     SetIPCountry(ipCountry);
 
-                if (ParseString(value, "ProductId", true, productId, parseErrors))
+                if (ParseString(value, "ProductId", true, productId, parseErrors, context))
                     SetProductId(productId);
 
-                if (ParseDouble(value, "OriginalPrice", true, originalPrice, parseErrors))
+                if (ParseDouble(value, "OriginalPrice", true, originalPrice, parseErrors, context))
                     SetOriginalPrice(originalPrice);
 
-                if (ParseString(value, "PaymentMethod", false, paymentMethod, parseErrors))
+                if (ParseString(value, "PaymentMethod", false, paymentMethod, parseErrors, context))
                     SetPaymentMethod(paymentMethod);
 
-                if (ParseString(value, "PaymentReference", false, paymentReference, parseErrors))
+                if (ParseString(value, "PaymentReference", false, paymentReference, parseErrors, context))
                     SetPaymentReference(paymentReference);
 
-                if (ParseDouble(value, "PaidPrice", true, paidPrice, parseErrors))
+                if (ParseDouble(value, "PaidPrice", true, paidPrice, parseErrors, context))
                     SetPaidPrice(paidPrice);
 
-                if (ParseDouble(value, "RemainingAmount", true, remainingAmount, parseErrors))
+                if (ParseDouble(value, "RemainingAmount", true, remainingAmount, parseErrors, context))
                     SetRemainingAmount(remainingAmount);
 
-                if (ParseString(value, "Title", false, title, parseErrors))
+                if (ParseString(value, "Title", false, title, parseErrors, context))
                     SetTitle(title);
 
-                if (ParseString(value, "TransactionTime", false, transactionTime, parseErrors))
+                if (ParseString(value, "TransactionTime", false, transactionTime, parseErrors, context))
                     SetTransactionTime(transactionTime);
 
-                if (ParseObject(value, "Self", true, self, parseErrors))
+                if (ParseObject(value, "Self", true, self, parseErrors, context))
                     SetSelf(self);
 
-                if (ParseObject(value, "Commit", false, commit, parseErrors))
+                if (ParseObject(value, "Commit", false, commit, parseErrors, context))
                     SetCommit(commit);
 
-                if (ParseObject(value, "Cancel", false, cancel, parseErrors))
+                if (ParseObject(value, "Cancel", false, cancel, parseErrors, context))
                     SetCancel(cancel);
 
-                if (ParseObject(value, "Update", false, update, parseErrors))
+                if (ParseObject(value, "Update", false, update, parseErrors, context))
                     SetUpdate(update);
 
-                if (ParseObject(value, "DRM", false, drm, parseErrors))
+                if (ParseObject(value, "DRM", false, drm, parseErrors, context))
                     SetDRM(drm);
 
-                if (ParseString(value, "Signature", true, signature, parseErrors))
+                if (ParseString(value, "Signature", true, signature, parseErrors, context))
                     SetSignature(signature);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
+            virtual const STRING_T ToJsonString(void) const
+            {
+                if (OriginalJsonString)
+                    return OriginalJsonString.Just;
+                else
+                    return "";
+            }
+
         private:
-            Maybe <STRING_T> mId;
-            Maybe <STRING_T> mCpurchaseId;
-            Maybe <STRING_T> mCrentalId;
-            Maybe <VECTOR_T<STRING_T> > mCValueCodes;
-            Maybe <STRING_T> mCurrency;
-            Maybe <STRING_T> mIPAddress;
-            Maybe <STRING_T> mIPCountry;
-            Maybe <STRING_T> mProductId;
+            Maybe<STRING_T> mId;
+            Maybe<STRING_T> mCpurchaseId;
+            Maybe<STRING_T> mCrentalId;
+            Maybe<VECTOR_T<STRING_T> > mCValueCodes;
+            Maybe<STRING_T> mCurrency;
+            Maybe<STRING_T> mIPAddress;
+            Maybe<STRING_T> mIPCountry;
+            Maybe<STRING_T> mProductId;
             Maybe<DOUBLE_T> mOriginalPrice;
-            Maybe <STRING_T> mPaymentMethod;
-            Maybe <STRING_T> mPaymentReference;
+            Maybe<STRING_T> mPaymentMethod;
+            Maybe<STRING_T> mPaymentReference;
             Maybe<DOUBLE_T> mPaidPrice;
             Maybe<DOUBLE_T> mRemainingAmount;
-            Maybe <STRING_T> mTitle;
-            Maybe <STRING_T> mTransactionTime;
-            Maybe <Link> mSelf;
-            Maybe <Form> mCommit;
-            Maybe <Form> mCancel;
-            Maybe <Form> mUpdate;
-            Maybe <DRM> mDRM;
-            Maybe <STRING_T> mSignature;
+            Maybe<STRING_T> mTitle;
+            Maybe<STRING_T> mTransactionTime;
+            Maybe<Link> mSelf;
+            Maybe<Form> mCommit;
+            Maybe<Form> mCancel;
+            Maybe<Form> mUpdate;
+            Maybe<DRM> mDRM;
+            Maybe<STRING_T> mSignature;
             STRING_T TAG;
         };
     }

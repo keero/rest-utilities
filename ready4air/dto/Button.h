@@ -82,7 +82,8 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T ageLimit;
                 STRING_T buttonImage;
@@ -91,24 +92,27 @@ namespace ready4air
                 STRING_T type;
                 Link link;
 
-                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors, context))
                     SetAgeLimit(ageLimit);
 
-                if (ParseString(value, "ButtonImage", false, buttonImage, parseErrors))
+                if (ParseString(value, "ButtonImage", false, buttonImage, parseErrors, context))
                     SetButtonImage(buttonImage);
 
-                if (ParseInt(value, "Position", true, position, parseErrors))
+                if (ParseInt(value, "Position", true, position, parseErrors, context))
                     SetPosition(position);
 
-                if (ParseString(value, "Title", true, title, parseErrors))
+                if (ParseString(value, "Title", true, title, parseErrors, context))
                     SetTitle(title);
 
-                if (ParseString(value, "Type", true, type, parseErrors))
+                if (ParseString(value, "Type", true, type, parseErrors, context))
                     SetType(type);
 
-                if (ParseObject(value, "Link", true, link, parseErrors))
+                if (ParseObject(value, "Link", true, link, parseErrors, context))
                     SetLink(link);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

@@ -24,7 +24,7 @@ namespace ready4air
             {
             }
 
-            Maybe<STRING_T> GetId() const
+            Maybe <STRING_T> GetId() const
             {
                 return mId;
             }
@@ -34,7 +34,7 @@ namespace ready4air
                 mId = id;
             }
 
-            const Maybe<STRING_T> &GetExternalId() const
+            const Maybe <STRING_T> &GetExternalId() const
             {
                 return mExternalId;
             }
@@ -44,7 +44,7 @@ namespace ready4air
                 mExternalId = externalId;
             }
 
-            const Maybe<STRING_T> &GetOriginalTitle() const
+            const Maybe <STRING_T> &GetOriginalTitle() const
             {
                 return mOriginalTitle;
             }
@@ -54,7 +54,7 @@ namespace ready4air
                 mOriginalTitle = originalTitle;
             }
 
-            const Maybe<STRING_T> &GetOriginalSummary() const
+            const Maybe <STRING_T> &GetOriginalSummary() const
             {
                 return mOriginalSummary;
             }
@@ -64,7 +64,7 @@ namespace ready4air
                 mOriginalSummary = originalSummary;
             }
 
-            const Maybe<STRING_T> &GetLocalTitle() const
+            const Maybe <STRING_T> &GetLocalTitle() const
             {
                 return mLocalTitle;
             }
@@ -74,7 +74,7 @@ namespace ready4air
                 mLocalTitle = localTitle;
             }
 
-            const Maybe<STRING_T> &GetLocalSummary() const
+            const Maybe <STRING_T> &GetLocalSummary() const
             {
                 return mLocalSummary;
             }
@@ -84,7 +84,7 @@ namespace ready4air
                 mLocalSummary = localSummary;
             }
 
-            const Maybe<VECTOR_T<Image> > &GetImages() const
+            const Maybe <VECTOR_T<Image>> &GetImages() const
             {
                 return mImages;
             }
@@ -94,7 +94,7 @@ namespace ready4air
                 mImages = images;
             }
 
-            const Maybe<VECTOR_T<Link> > &GetMediaProductLinks() const
+            const Maybe <VECTOR_T<Link>> &GetMediaProductLinks() const
             {
                 return mMediaProductLinks;
             }
@@ -104,7 +104,7 @@ namespace ready4air
                 mMediaProductLinks = mediaProductLinks;
             }
 
-            const Maybe<VECTOR_T<WmvFile> > &GetWmvFiles() const
+            const Maybe <VECTOR_T<WmvFile>> &GetWmvFiles() const
             {
                 return mWmvFiles;
             }
@@ -114,7 +114,7 @@ namespace ready4air
                 mWmvFiles = wmvFiles;
             }
 
-            const Maybe<VECTOR_T<SmoothManifest> > &GetSmoothManifests() const
+            const Maybe <VECTOR_T<SmoothManifest>> &GetSmoothManifests() const
             {
                 return mSmoothManifests;
             }
@@ -124,7 +124,7 @@ namespace ready4air
                 mSmoothManifests = smoothManifests;
             }
 
-            const Maybe<Link> &GetSelf() const
+            const Maybe <Link> &GetSelf() const
             {
                 return mSelf;
             }
@@ -134,7 +134,8 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T externalId;
@@ -148,87 +149,92 @@ namespace ready4air
                 VECTOR_T<SmoothManifest> smoothManifests;
                 Link self;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "ExternalId", true, externalId, parseErrors))
+                if (ParseString(value, "ExternalId", true, externalId, parseErrors, context))
                     SetExternalId(externalId);
 
-                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors, context))
                     SetOriginalTitle(originalTitle);
 
-                if (ParseString(value, "OriginalSummary", false, originalSummary, parseErrors))
+                if (ParseString(value, "OriginalSummary", false, originalSummary, parseErrors, context))
                     SetOriginalSummary(originalSummary);
 
-                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors, context))
                     SetLocalTitle(localTitle);
 
-                if (ParseString(value, "LocalSummary", false, localSummary, parseErrors))
+                if (ParseString(value, "LocalSummary", false, localSummary, parseErrors, context))
                     SetLocalSummary(localSummary);
 
-                if (VerifyArray(value, "Images", false, parseErrors))
+                if (VerifyArray(value, "Images", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        if (ParseObject(value["Images"][i], "", false, image, parseErrors, context))
                             images.push_back(image);
                     }
                     SetImages(images);
                 }
 
-                if (VerifyArray(value, "MediaProductLinks", false, parseErrors))
+                if (VerifyArray(value, "MediaProductLinks", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["MediaProductLinks"].Size(); i += 1)
                     {
                         Link mediaProductLink;
-                        if (ParseObject(value["MediaProductLinks"][i], "", false, mediaProductLink, parseErrors))
+                        if (ParseObject(value["MediaProductLinks"][i], "", false, mediaProductLink, parseErrors,
+                                        context))
                             mediaProductLinks.push_back(mediaProductLink);
                     }
                     SetMediaProductLinks(mediaProductLinks);
                 }
 
-                if (VerifyArray(value, "WmvFiles", false, parseErrors))
+                if (VerifyArray(value, "WmvFiles", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
                     {
                         WmvFile wmvFile;
-                        if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors))
+                        if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors, context))
                             wmvFiles.push_back(wmvFile);
                     }
                     SetWmvFiles(wmvFiles);
                 }
 
-                if (VerifyArray(value, "SmoothManifests", false, parseErrors))
+                if (VerifyArray(value, "SmoothManifests", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
                     {
                         SmoothManifest smoothManifest;
-                        if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors))
+                        if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors,
+                                        context))
                             smoothManifests.push_back(smoothManifest);
                     }
                     SetSmoothManifests(smoothManifests);
                 }
 
-                if (ParseObject(value, "Self", false, self, parseErrors))
+                if (ParseObject(value, "Self", false, self, parseErrors, context))
                     SetSelf(self);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
 
         private:
-            Maybe<STRING_T> mId;
-            Maybe<STRING_T> mExternalId;
-            Maybe<STRING_T> mOriginalTitle;
-            Maybe<STRING_T> mOriginalSummary;
-            Maybe<STRING_T> mLocalTitle;
-            Maybe<STRING_T> mLocalSummary;
-            Maybe<VECTOR_T<Image> > mImages;
-            Maybe<VECTOR_T<Link> > mMediaProductLinks;
-            Maybe<VECTOR_T<WmvFile> > mWmvFiles;
-            Maybe<VECTOR_T<SmoothManifest> > mSmoothManifests;
-            Maybe<Link> mSelf;
+            Maybe <STRING_T> mId;
+            Maybe <STRING_T> mExternalId;
+            Maybe <STRING_T> mOriginalTitle;
+            Maybe <STRING_T> mOriginalSummary;
+            Maybe <STRING_T> mLocalTitle;
+            Maybe <STRING_T> mLocalSummary;
+            Maybe <VECTOR_T<Image>> mImages;
+            Maybe <VECTOR_T<Link>> mMediaProductLinks;
+            Maybe <VECTOR_T<WmvFile>> mWmvFiles;
+            Maybe <VECTOR_T<SmoothManifest>> mSmoothManifests;
+            Maybe <Link> mSelf;
             STRING_T TAG;
         };
     }

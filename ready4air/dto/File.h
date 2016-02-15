@@ -31,7 +31,7 @@ namespace ready4air
                 mFileTypeId = fileTypeId;
             }
 
-            const Maybe<STRING_T> &GetFileTypeName() const
+            const Maybe <STRING_T> &GetFileTypeName() const
             {
                 return mFileTypeName;
             }
@@ -41,7 +41,7 @@ namespace ready4air
                 mFileTypeName = fileTypeName;
             }
 
-            const Maybe<STRING_T> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
@@ -51,7 +51,7 @@ namespace ready4air
                 mLanguage = language;
             }
 
-            const Maybe<Link> &GetLink() const
+            const Maybe <Link> &GetLink() const
             {
                 return mLink;
             }
@@ -71,7 +71,7 @@ namespace ready4air
                 mBitrate = bitrate;
             }
 
-            const Maybe<ProtectionData> &GetProtectionData() const
+            const Maybe <ProtectionData> &GetProtectionData() const
             {
                 return mProtectionData;
             }
@@ -81,7 +81,8 @@ namespace ready4air
                 mProtectionData = protectionData;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T fileTypeId;
                 STRING_T fileTypeName;
@@ -90,34 +91,37 @@ namespace ready4air
                 INT32_T bitrate;
                 ProtectionData protectionData;
 
-                if (ParseInt(value, "FileTypeId", true, fileTypeId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "FileTypeId", true, fileTypeId, parseErrors, context))
                     SetFileTypeId(fileTypeId);
 
-                if (ParseString(value, "FileTypeName", true, fileTypeName, parseErrors))
+                if (ParseString(value, "FileTypeName", true, fileTypeName, parseErrors, context))
                     SetFileTypeName(fileTypeName);
 
-                if (ParseString(value, "Language", true, language, parseErrors))
+                if (ParseString(value, "Language", true, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseObject(value, "Link", true, link, parseErrors))
+                if (ParseObject(value, "Link", true, link, parseErrors, context))
                     SetLink(link);
 
-                if (ParseInt(value, "Bitrate", true, bitrate, parseErrors))
+                if (ParseInt(value, "Bitrate", true, bitrate, parseErrors, context))
                     SetBitrate(bitrate);
 
-                if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors))
+                if (ParseObject(value, "ProtectionData", false, protectionData, parseErrors, context))
                     SetProtectionData(protectionData);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
             Maybe<int> mFileTypeId;
-            Maybe<STRING_T> mFileTypeName;
-            Maybe<STRING_T> mLanguage;
-            Maybe<Link> mLink;
+            Maybe <STRING_T> mFileTypeName;
+            Maybe <STRING_T> mLanguage;
+            Maybe <Link> mLink;
             Maybe<int> mBitrate;
-            Maybe<ProtectionData> mProtectionData;
+            Maybe <ProtectionData> mProtectionData;
             STRING_T TAG;
         };
     }

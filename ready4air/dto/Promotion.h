@@ -60,25 +60,29 @@ namespace ready4air
                 mSource = source;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link image;
                 Link imageLink;
                 Link externalSource;
                 STRING_T source;
 
-                if (ParseObject(value, "Image", false, image, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Image", false, image, parseErrors, context))
                     SetImage(image);
 
-                if (ParseObject(value, "ImageLink", false, imageLink, parseErrors))
+                if (ParseObject(value, "ImageLink", false, imageLink, parseErrors, context))
                     SetImageLink(imageLink);
 
-                if (ParseObject(value, "ExternalSource", false, externalSource, parseErrors))
+                if (ParseObject(value, "ExternalSource", false, externalSource, parseErrors, context))
                     SetExternalSource(externalSource);
 
-                if (ParseString(value, "Source", false, source, parseErrors))
+                if (ParseString(value, "Source", false, source, parseErrors, context))
                     SetSource(source);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

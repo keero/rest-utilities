@@ -49,21 +49,25 @@ namespace ready4air
                 mAverageValue = averageValue;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T numberOfVotes;
                 INT32_T val;
                 DOUBLE_T averageValue;
 
-                if (ParseInt(value, "NumberOfVotes", true, numberOfVotes, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "NumberOfVotes", true, numberOfVotes, parseErrors, context))
                     SetNumberOfVotes(numberOfVotes);
 
-                if (ParseInt(value, "Value", true, val, parseErrors))
+                if (ParseInt(value, "Value", true, val, parseErrors, context))
                     SetValue(val);
 
-                if (ParseDouble(value, "AverageValue", true, averageValue, parseErrors))
+                if (ParseDouble(value, "AverageValue", true, averageValue, parseErrors, context))
                     SetAverageValue(averageValue);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

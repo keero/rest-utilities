@@ -50,21 +50,25 @@ namespace ready4air
                 mFeatures = features;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T productId;
                 Manifests trailers;
                 Manifests features;
 
-                if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "ProductId", true, productId, parseErrors, context))
                     SetProductId(productId);
 
-                if (ParseObject(value, "Trailers", false, trailers, parseErrors))
+                if (ParseObject(value, "Trailers", false, trailers, parseErrors, context))
                     SetTrailers(trailers);
 
-                if (ParseObject(value, "Features", false, features, parseErrors))
+                if (ParseObject(value, "Features", false, features, parseErrors, context))
                     SetFeatures(features);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

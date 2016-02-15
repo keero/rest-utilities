@@ -61,7 +61,7 @@ namespace ready4air
                 mLists = lists;
             }
 
-            const Maybe <VECTOR_T<STRING_T> > &GetExposedItems() const
+            const Maybe <VECTOR_T<STRING_T>> &GetExposedItems() const
             {
                 return mExposedItems;
             }
@@ -71,7 +71,8 @@ namespace ready4air
                 mExposedItems = exposedItems;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Form addLists;
                 Form listPosition;
@@ -79,29 +80,32 @@ namespace ready4air
                 Link lists;
                 VECTOR_T<STRING_T> exposedItems;
 
-                if (ParseObject(value, "AddLists", true, addLists, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "AddLists", true, addLists, parseErrors, context))
                     SetAddLists(addLists);
 
-                if (ParseObject(value, "ListPosition", true, listPosition, parseErrors))
+                if (ParseObject(value, "ListPosition", true, listPosition, parseErrors, context))
                     SetListPosition(listPosition);
 
-                if (ParseObject(value, "RemoveLists", true, removeLists, parseErrors))
+                if (ParseObject(value, "RemoveLists", true, removeLists, parseErrors, context))
                     SetRemoveLists(removeLists);
 
-                if (ParseObject(value, "Lists", false, lists, parseErrors))
+                if (ParseObject(value, "Lists", false, lists, parseErrors, context))
                     SetLists(lists);
 
-                if (VerifyArray(value, "ExposedItems", false, parseErrors))
+                if (VerifyArray(value, "ExposedItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["ExposedItems"].Size(); i += 1)
                     {
                         STRING_T exposedItem;
-                        if (ParseString(value["ExposedItems"][i], "", false, exposedItem, parseErrors))
+                        if (ParseString(value["ExposedItems"][i], "", false, exposedItem, parseErrors, context))
                             exposedItems.push_back(exposedItem);
                     }
                     SetExposedItems(exposedItems);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
@@ -110,7 +114,7 @@ namespace ready4air
             Maybe <Form> mListPosition;
             Maybe <Form> mRemoveLists;
             Maybe <Link> mLists;
-            Maybe <VECTOR_T<STRING_T> > mExposedItems;
+            Maybe <VECTOR_T<STRING_T>> mExposedItems;
             STRING_T TAG;
         };
     }

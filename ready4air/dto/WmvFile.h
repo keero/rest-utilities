@@ -40,20 +40,25 @@ namespace ready4air
                 mMmsLink = mmsLink;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T location;
                 Link mmsLink;
 
-                // Initialize parent properties
-                FileBase::InitFromJsonValue(value, parseErrors);
+                context.push_back(TAG);
 
-                if (ParseInt(value, "Location", true, location, parseErrors))
+                // Initialize parent properties
+                FileBase::InitFromJsonValue(value, parseErrors, context);
+
+                if (ParseInt(value, "Location", true, location, parseErrors, context))
                     SetLocation(location);
 
-                if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors))
+                if (ParseObject(value, "MmsLink", false, mmsLink, parseErrors, context))
                     SetMmsLink(mmsLink);
 
+                context.pop_back();
+                context.pop_back();
                 return !parseErrors;
             }
 

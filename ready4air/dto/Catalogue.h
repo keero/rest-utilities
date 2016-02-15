@@ -51,21 +51,25 @@ namespace ready4air
                 mAllBundles = allBundles;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link allMovies;
                 Link allSeries;
                 Link allBundles;
 
-                if (ParseObject(value, "AllMovies", true, allMovies, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "AllMovies", true, allMovies, parseErrors, context))
                     SetAllMovies(allMovies);
 
-                if (ParseObject(value, "AllSeries", true, allSeries, parseErrors))
+                if (ParseObject(value, "AllSeries", true, allSeries, parseErrors, context))
                     SetAllSeries(allSeries);
 
-                if (ParseObject(value, "AllBundles", true, allBundles, parseErrors))
+                if (ParseObject(value, "AllBundles", true, allBundles, parseErrors, context))
                     SetAllBundles(allBundles);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

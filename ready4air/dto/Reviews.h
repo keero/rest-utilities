@@ -51,30 +51,35 @@ namespace ready4air
                 mCriticsQuotes = criticsQuotes;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 UserRating userRating;
                 STRING_T formattedAverageCriticsScore;
                 VECTOR_T<CriticsQuote> criticsQuotes;
 
-                if (ParseObject(value, "UserRating", false, userRating, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "UserRating", false, userRating, parseErrors, context))
                     SetUserRating(userRating);
 
-                if (ParseString(value, "FormattedAverageCriticsScore", false, formattedAverageCriticsScore,
-                                parseErrors))
+                if (ParseString(value, "FormattedAverageCriticsScore", false, formattedAverageCriticsScore, parseErrors,
+                                context))
                     SetFormattedAverageCriticsScore(formattedAverageCriticsScore);
 
-                if (VerifyArray(value, "CriticsQuotes", false, parseErrors))
+                if (VerifyArray(value, "CriticsQuotes", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["CriticsQuotes"].Size(); i += 1)
                     {
                         CriticsQuote criticsQuote;
-                        if (ParseObject(value["CriticsQuotes"][i], "", false, criticsQuote, parseErrors))
+                        if (ParseObject(value["CriticsQuotes"][i], "", false, criticsQuote, parseErrors,
+                                        context))
                             criticsQuotes.push_back(criticsQuote);
                     }
                     SetCriticsQuotes(criticsQuotes);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 

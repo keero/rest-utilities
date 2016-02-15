@@ -70,7 +70,8 @@ namespace ready4air
                 mContentId = contentId;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Link cookie;
                 STRING_T customData;
@@ -78,21 +79,24 @@ namespace ready4air
                 STRING_T deviceToken;
                 STRING_T contentId;
 
-                if (ParseObject(value, "Cookie", true, cookie, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Cookie", true, cookie, parseErrors, context))
                     SetCookie(cookie);
 
-                if (ParseString(value, "CustomData", true, customData, parseErrors))
+                if (ParseString(value, "CustomData", true, customData, parseErrors, context))
                     SetCustomData(customData);
 
-                if (ParseString(value, "CustomerToken", true, customerToken, parseErrors))
+                if (ParseString(value, "CustomerToken", true, customerToken, parseErrors, context))
                     SetCustomerToken(customerToken);
 
-                if (ParseString(value, "DeviceToken", true, deviceToken, parseErrors))
+                if (ParseString(value, "DeviceToken", true, deviceToken, parseErrors, context))
                     SetDeviceToken(deviceToken);
 
-                if (ParseString(value, "ContentId", true, contentId, parseErrors))
+                if (ParseString(value, "ContentId", true, contentId, parseErrors, context))
                     SetContentId(contentId);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

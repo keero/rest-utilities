@@ -21,7 +21,7 @@ namespace ready4air
             {
             }
 
-            const Maybe <STRING_T> &GetTitle() const
+            const Maybe<STRING_T> &GetTitle() const
             {
                 return mTitle;
             }
@@ -31,7 +31,7 @@ namespace ready4air
                 mTitle = title;
             }
 
-            const Maybe <Link> &GetAll() const
+            const Maybe<Link> &GetAll() const
             {
                 return mAll;
             }
@@ -41,7 +41,7 @@ namespace ready4air
                 mAll = all;
             }
 
-            const Maybe <VECTOR_T<MediaProduct> > &GetMedias() const
+            const Maybe<VECTOR_T<MediaProduct> > &GetMedias() const
             {
                 return mMedias;
             }
@@ -51,36 +51,40 @@ namespace ready4air
                 mMedias = medias;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T title;
                 Link all;
                 VECTOR_T<MediaProduct> medias;
 
-                if (ParseString(value, "Title", true, title, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Title", true, title, parseErrors, context))
                     SetTitle(title);
 
-                if (ParseObject(value, "All", false, all, parseErrors))
+                if (ParseObject(value, "All", false, all, parseErrors, context))
                     SetAll(all);
 
-                if (VerifyArray(value, "Medias", true, parseErrors))
+                if (VerifyArray(value, "Medias", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Medias"].Size(); i += 1)
                     {
                         MediaProduct mediaProduct;
-                        if (ParseObject(value["Medias"][i], "", false, mediaProduct, parseErrors))
+                        if (ParseObject(value["Medias"][i], "", false, mediaProduct, parseErrors, context))
                             medias.push_back(mediaProduct);
                     }
                     SetMedias(medias);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
-            Maybe <STRING_T> mTitle;
-            Maybe <Link> mAll;
-            Maybe <VECTOR_T<MediaProduct> > mMedias;
+            Maybe<STRING_T> mTitle;
+            Maybe<Link> mAll;
+            Maybe<VECTOR_T<MediaProduct> > mMedias;
             STRING_T TAG;
         };
     }

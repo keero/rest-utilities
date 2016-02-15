@@ -51,21 +51,25 @@ namespace ready4air
                 mAll = all;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Event now;
                 Event next;
                 Link all;
 
-                if (ParseObject(value, "Now", false, now, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Now", false, now, parseErrors, context))
                     SetNow(now);
 
-                if (ParseObject(value, "Next", true, next, parseErrors))
+                if (ParseObject(value, "Next", true, next, parseErrors, context))
                     SetNext(next);
 
-                if (ParseObject(value, "All", true, all, parseErrors))
+                if (ParseObject(value, "All", true, all, parseErrors, context))
                     SetAll(all);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

@@ -71,7 +71,8 @@ namespace ready4air
                 mImages = images;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T text;
                 STRING_T source;
@@ -79,21 +80,24 @@ namespace ready4air
                 Link link;
                 QuoteImages images;
 
-                if (ParseString(value, "Text", false, text, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Text", false, text, parseErrors, context))
                     SetText(text);
 
-                if (ParseString(value, "Source", false, source, parseErrors))
+                if (ParseString(value, "Source", false, source, parseErrors, context))
                     SetSource(source);
 
-                if (ParseString(value, "Score", false, score, parseErrors))
+                if (ParseString(value, "Score", false, score, parseErrors, context))
                     SetScore(score);
 
-                if (ParseObject(value, "Link", false, link, parseErrors))
+                if (ParseObject(value, "Link", false, link, parseErrors, context))
                     SetLink(link);
 
-                if (ParseObject(value, "Images", false, images, parseErrors))
+                if (ParseObject(value, "Images", false, images, parseErrors, context))
                     SetImages(images);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

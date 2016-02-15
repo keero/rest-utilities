@@ -75,27 +75,31 @@ namespace ready4air
                 return mUrlTemplate.Expand();
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T href;
                 BOOL_T templated;
                 BOOL_T withCredentials;
 
-                if (ParseString(value, "Href", true, href, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Href", true, href, parseErrors, context))
                     SetHref(href);
 
-                if (ParseBool(value, "Templated", false, templated, parseErrors))
+                if (ParseBool(value, "Templated", false, templated, parseErrors, context))
                     SetTemplated(templated);
 
-                if (ParseBool(value, "WithCredentials", false, withCredentials, parseErrors))
+                if (ParseBool(value, "WithCredentials", false, withCredentials, parseErrors, context))
                     SetWithCredentials(withCredentials);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
-            Maybe<BOOL_T> mTemplated;
-            Maybe<BOOL_T> mWithCredentials;
+            Maybe <BOOL_T> mTemplated;
+            Maybe <BOOL_T> mWithCredentials;
             UrlTemplate mUrlTemplate;
             STRING_T TAG;
         };

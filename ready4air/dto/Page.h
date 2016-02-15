@@ -91,7 +91,8 @@ namespace ready4air
                 mSelf = self;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T title;
@@ -101,27 +102,30 @@ namespace ready4air
                 Content content;
                 Link self;
 
-                if (ParseString(value, "ID", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "ID", true, id, parseErrors, context))
                     SetID(id);
 
-                if (ParseString(value, "Title", false, title, parseErrors))
+                if (ParseString(value, "Title", false, title, parseErrors, context))
                     SetTitle(title);
 
-                if (ParseString(value, "Description", false, description, parseErrors))
+                if (ParseString(value, "Description", false, description, parseErrors, context))
                     SetDescription(description);
 
-                if (ParseString(value, "VmaMessage", false, vmaMessage, parseErrors))
+                if (ParseString(value, "VmaMessage", false, vmaMessage, parseErrors, context))
                     SetVmaMessage(vmaMessage);
 
-                if (ParseString(value, "Type", false, type, parseErrors))
+                if (ParseString(value, "Type", false, type, parseErrors, context))
                     SetType(type);
 
-                if (ParseObject(value, "Content", true, content, parseErrors))
+                if (ParseObject(value, "Content", true, content, parseErrors, context))
                     SetContent(content);
 
-                if (ParseObject(value, "Self", true, self, parseErrors))
+                if (ParseObject(value, "Self", true, self, parseErrors, context))
                     SetSelf(self);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

@@ -440,7 +440,8 @@ namespace ready4air
                 mProducts = products;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T productId;
                 STRING_T titleId;
@@ -482,219 +483,224 @@ namespace ready4air
                 VECTOR_T<Genre> genres;
                 VECTOR_T<Product> products;
 
-                if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "ProductId", true, productId, parseErrors, context))
                     SetProductId(productId);
 
-                if (ParseString(value, "TitleId", false, titleId, parseErrors))
+                if (ParseString(value, "TitleId", false, titleId, parseErrors, context))
                     SetTitleId(titleId);
 
-                if (ParseObject(value, "TitleLink", false, titleLink, parseErrors))
+                if (ParseObject(value, "TitleLink", false, titleLink, parseErrors, context))
                     SetTitleLink(titleLink);
 
-                if (ParseObject(value, "Similar", false, similar, parseErrors))
+                if (ParseObject(value, "Similar", false, similar, parseErrors, context))
                     SetSimilar(similar);
 
-                if (ParseInt(value, "MediaId", true, mediaId, parseErrors))
+                if (ParseInt(value, "MediaId", true, mediaId, parseErrors, context))
                     SetMediaId(mediaId);
 
-                if (ParseString(value, "ExternalId", false, externalId, parseErrors))
+                if (ParseString(value, "ExternalId", false, externalId, parseErrors, context))
                     SetExternalId(externalId);
 
-                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors))
+                if (ParseString(value, "OriginalTitle", false, originalTitle, parseErrors, context))
                     SetOriginalTitle(originalTitle);
 
-                if (ParseBool(value, "Adult", true, adult, parseErrors))
+                if (ParseBool(value, "Adult", true, adult, parseErrors, context))
                     SetAdult(adult);
 
-                if (ParseInt(value, "Year", true, year, parseErrors))
+                if (ParseInt(value, "Year", true, year, parseErrors, context))
                     SetYear(year);
 
-                if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors))
+                if (ParseString(value, "ProductionCountry", false, productionCountry, parseErrors, context))
                     SetProductionCountry(productionCountry);
 
-                if (ParseInt(value, "Length", false, length, parseErrors))
+                if (ParseInt(value, "Length", false, length, parseErrors, context))
                     SetLength(length);
 
-                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors))
+                if (ParseString(value, "LocalTitle", false, localTitle, parseErrors, context))
                     SetLocalTitle(localTitle);
 
-                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors))
+                if (ParseString(value, "ShortTitle", false, shortTitle, parseErrors, context))
                     SetShortTitle(shortTitle);
 
-                if (ParseString(value, "LongSummary", false, longSummary, parseErrors))
+                if (ParseString(value, "LongSummary", false, longSummary, parseErrors, context))
                     SetLongSummary(longSummary);
 
-                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors))
+                if (ParseString(value, "ShortSummary", false, shortSummary, parseErrors, context))
                     SetShortSummary(shortSummary);
 
-                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors))
+                if (ParseString(value, "SortTitle", false, sortTitle, parseErrors, context))
                     SetSortTitle(sortTitle);
 
-                if (ParseString(value, "MainGenre", false, mainGenre, parseErrors))
+                if (ParseString(value, "MainGenre", false, mainGenre, parseErrors, context))
                     SetMainGenre(mainGenre);
 
-                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors))
+                if (ParseInt(value, "AgeLimit", false, ageLimit, parseErrors, context))
                     SetAgeLimit(ageLimit);
 
-                if (ParseBool(value, "HD", false, hd, parseErrors))
+                if (ParseBool(value, "HD", false, hd, parseErrors, context))
                     SetHD(hd);
 
-                if (ParseBool(value, "Dubbed", false, dubbed, parseErrors))
+                if (ParseBool(value, "Dubbed", false, dubbed, parseErrors, context))
                     SetDubbed(dubbed);
 
-                if (ParseString(value, "PublishDate", false, publishDate, parseErrors))
+                if (ParseString(value, "PublishDate", false, publishDate, parseErrors, context))
                     SetPublishDate(publishDate);
 
-                if (ParseString(value, "UnPublishDate", false, unPublishDate, parseErrors))
+                if (ParseString(value, "UnPublishDate", false, unPublishDate, parseErrors, context))
                     SetUnPublishDate(unPublishDate);
 
-                if (ParseString(value, "Modified", false, modified, parseErrors))
+                if (ParseString(value, "Modified", false, modified, parseErrors, context))
                     SetModified(modified);
 
-                if (VerifyArray(value, "AgeGroups", false, parseErrors))
+                if (VerifyArray(value, "AgeGroups", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["AgeGroups"].Size(); i += 1)
                     {
                         STRING_T ageGroup;
-                        if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors))
+                        if (ParseString(value["AgeGroups"][i], "", false, ageGroup, parseErrors, context))
                             ageGroups.push_back(ageGroup);
                     }
                     SetAgeGroups(ageGroups);
                 }
 
-                if (VerifyArray(value, "Entitlements", false, parseErrors))
+                if (VerifyArray(value, "Entitlements", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Entitlements"].Size(); i += 1)
                     {
                         Entitlement entitlement;
-                        if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors))
+                        if (ParseObject(value["Entitlements"][i], "", false, entitlement, parseErrors, context))
                             entitlements.push_back(entitlement);
                     }
                     SetEntitlements(entitlements);
                 }
 
-                if (VerifyArray(value, "Casts", false, parseErrors))
+                if (VerifyArray(value, "Casts", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Casts"].Size(); i += 1)
                     {
                         Cast cast;
-                        if (ParseObject(value["Casts"][i], "", false, cast, parseErrors))
+                        if (ParseObject(value["Casts"][i], "", false, cast, parseErrors, context))
                             casts.push_back(cast);
                     }
                     SetCasts(casts);
                 }
 
-                if (VerifyArray(value, "Images", false, parseErrors))
+                if (VerifyArray(value, "Images", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        if (ParseObject(value["Images"][i], "", false, image, parseErrors, context))
                             images.push_back(image);
                     }
                     SetImages(images);
                 }
 
-                if (VerifyArray(value, "WmvFiles", false, parseErrors))
+                if (VerifyArray(value, "WmvFiles", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["WmvFiles"].Size(); i += 1)
                     {
                         WmvFile wmvFile;
-                        if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors))
+                        if (ParseObject(value["WmvFiles"][i], "", false, wmvFile, parseErrors, context))
                             wmvFiles.push_back(wmvFile);
                     }
                     SetWmvFiles(wmvFiles);
                 }
 
-                if (VerifyArray(value, "SmoothManifests", false, parseErrors))
+                if (VerifyArray(value, "SmoothManifests", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["SmoothManifests"].Size(); i += 1)
                     {
                         SmoothManifest smoothManifest;
-                        if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors))
+                        if (ParseObject(value["SmoothManifests"][i], "", false, smoothManifest, parseErrors,
+                                        context))
                             smoothManifests.push_back(smoothManifest);
                     }
                     SetSmoothManifests(smoothManifests);
                 }
 
-                if (VerifyArray(value, "Mp4Files", false, parseErrors))
+                if (VerifyArray(value, "Mp4Files", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Mp4Files"].Size(); i += 1)
                     {
                         Mp4File mp4File;
-                        if (ParseObject(value["Mp4Files"][i], "", false, mp4File, parseErrors))
+                        if (ParseObject(value["Mp4Files"][i], "", false, mp4File, parseErrors, context))
                             mp4Files.push_back(mp4File);
                     }
                     SetMp4Files(mp4Files);
                 }
 
-                if (VerifyArray(value, "HlsManifests", false, parseErrors))
+                if (VerifyArray(value, "HlsManifests", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["HlsManifests"].Size(); i += 1)
                     {
                         HlsManifest hlsManifest;
-                        if (ParseObject(value["HlsManifests"][i], "", false, hlsManifest, parseErrors))
+                        if (ParseObject(value["HlsManifests"][i], "", false, hlsManifest, parseErrors, context))
                             hlsManifests.push_back(hlsManifest);
                     }
                     SetHlsManifests(hlsManifests);
                 }
 
-                if (VerifyArray(value, "Subtitles", false, parseErrors))
+                if (VerifyArray(value, "Subtitles", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Subtitles"].Size(); i += 1)
                     {
                         Subtitle subtitle;
-                        if (ParseObject(value["Subtitles"][i], "", false, subtitle, parseErrors))
+                        if (ParseObject(value["Subtitles"][i], "", false, subtitle, parseErrors, context))
                             subtitles.push_back(subtitle);
                     }
                     SetSubtitles(subtitles);
                 }
 
-                if (ParseObject(value, "Self", false, self, parseErrors))
+                if (ParseObject(value, "Self", false, self, parseErrors, context))
                     SetSelf(self);
 
-                if (ParseObject(value, "Play", false, play, parseErrors))
+                if (ParseObject(value, "Play", false, play, parseErrors, context))
                     SetPlay(play);
 
-                if (ParseObject(value, "FullPlay", false, fullPlay, parseErrors))
+                if (ParseObject(value, "FullPlay", false, fullPlay, parseErrors, context))
                     SetFullPlay(fullPlay);
 
-                if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+                if (VerifyArray(value, "PurchaseItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
                     {
                         PurchaseItem purchaseItem;
-                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors,
+                                        context))
                             purchaseItems.push_back(purchaseItem);
                     }
                     SetPurchaseItems(purchaseItems);
                 }
 
-                if (ParseObject(value, "Reviews", false, reviews, parseErrors))
+                if (ParseObject(value, "Reviews", false, reviews, parseErrors, context))
                     SetReviews(reviews);
 
-                if (VerifyArray(value, "Genres", false, parseErrors))
+                if (VerifyArray(value, "Genres", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Genres"].Size(); i += 1)
                     {
                         Genre genre;
-                        if (ParseObject(value["Genres"][i], "", false, genre, parseErrors))
+                        if (ParseObject(value["Genres"][i], "", false, genre, parseErrors, context))
                             genres.push_back(genre);
                     }
                     SetGenres(genres);
                 }
 
-                if (VerifyArray(value, "Products", false, parseErrors))
+                if (VerifyArray(value, "Products", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Products"].Size(); i += 1)
                     {
                         Product product;
-                        if (ParseObject(value["Products"][i], "", false, product, parseErrors))
+                        if (ParseObject(value["Products"][i], "", false, product, parseErrors, context))
                             products.push_back(product);
                     }
                     SetProducts(products);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 

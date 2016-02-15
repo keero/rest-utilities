@@ -59,25 +59,29 @@ namespace ready4air
                 mEnglishName = englishName;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T code;
                 STRING_T iso6391Code;
                 STRING_T iso6392Code;
                 STRING_T englishName;
 
-                if (ParseString(value, "Code", true, code, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Code", true, code, parseErrors, context))
                     SetCode(code);
 
-                if (ParseString(value, "ISO6391Code", true, iso6391Code, parseErrors))
+                if (ParseString(value, "ISO6391Code", true, iso6391Code, parseErrors, context))
                     SetISO6391Code(iso6391Code);
 
-                if (ParseString(value, "ISO6392Code", true, iso6392Code, parseErrors))
+                if (ParseString(value, "ISO6392Code", true, iso6392Code, parseErrors, context))
                     SetISO6392Code(iso6392Code);
 
-                if (ParseString(value, "EnglishName", true, englishName, parseErrors))
+                if (ParseString(value, "EnglishName", true, englishName, parseErrors, context))
                     SetEnglishName(englishName);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

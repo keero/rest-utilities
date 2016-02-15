@@ -76,7 +76,7 @@ namespace ready4air
                 mEntitlements = entitlements;
             }
 
-            const Maybe <VECTOR_T<PurchaseItem> > &GetPurchaseItems() const
+            const Maybe <VECTOR_T<PurchaseItem>> &GetPurchaseItems() const
             {
                 return mPurchaseItems;
             }
@@ -86,7 +86,8 @@ namespace ready4air
                 mPurchaseItems = purchaseItems;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T productId;
                 BOOL_T hd;
@@ -95,32 +96,36 @@ namespace ready4air
                 Entitlement entitlements;
                 VECTOR_T<PurchaseItem> purchaseItems;
 
-                if (ParseInt(value, "ProductId", true, productId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "ProductId", true, productId, parseErrors, context))
                     SetProductId(productId);
 
-                if (ParseBool(value, "HD", true, hd, parseErrors))
+                if (ParseBool(value, "HD", true, hd, parseErrors, context))
                     SetHD(hd);
 
-                if (ParseBool(value, "Dubbed", true, dubbed, parseErrors))
+                if (ParseBool(value, "Dubbed", true, dubbed, parseErrors, context))
                     SetDubbed(dubbed);
 
-                if (ParseObject(value, "FullPLay", false, fullPLay, parseErrors))
+                if (ParseObject(value, "FullPLay", false, fullPLay, parseErrors, context))
                     SetFullPLay(fullPLay);
 
-                if (ParseObject(value, "Entitlements", true, entitlements, parseErrors))
+                if (ParseObject(value, "Entitlements", true, entitlements, parseErrors, context))
                     SetEntitlements(entitlements);
 
-                if (VerifyArray(value, "PurchaseItems", false, parseErrors))
+                if (VerifyArray(value, "PurchaseItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["PurchaseItems"].Size(); i += 1)
                     {
                         PurchaseItem purchaseItem;
-                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors))
+                        if (ParseObject(value["PurchaseItems"][i], "", false, purchaseItem, parseErrors,
+                                        context))
                             purchaseItems.push_back(purchaseItem);
                     }
                     SetPurchaseItems(purchaseItems);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
@@ -131,7 +136,7 @@ namespace ready4air
             Maybe<BOOL_T> mDubbed;
             Maybe <Link> mFullPLay;
             Maybe <Entitlement> mEntitlements;
-            Maybe <VECTOR_T<PurchaseItem> > mPurchaseItems;
+            Maybe <VECTOR_T<PurchaseItem>> mPurchaseItems;
             STRING_T TAG;
         };
     }

@@ -343,7 +343,8 @@ namespace ready4air
                 mAllLists = allLists;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T manufacturer;
@@ -378,111 +379,117 @@ namespace ready4air
                 Link mppUserExists;
                 Link allLists;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "Manufacturer", false, manufacturer, parseErrors))
+                if (ParseString(value, "Manufacturer", false, manufacturer, parseErrors, context))
                     SetManufacturer(manufacturer);
 
-                if (ParseString(value, "Model", false, model, parseErrors))
+                if (ParseString(value, "Model", false, model, parseErrors, context))
                     SetModel(model);
 
-                if (ParseString(value, "UdId", true, udId, parseErrors))
+                if (ParseString(value, "UdId", true, udId, parseErrors, context))
                     SetUdId(udId);
 
-                if (ParseString(value, "DeviceInfo", false, deviceInfo, parseErrors))
+                if (ParseString(value, "DeviceInfo", false, deviceInfo, parseErrors, context))
                     SetDeviceInfo(deviceInfo);
 
-                if (ParseString(value, "LastUsedDate", false, lastUsedDate, parseErrors))
+                if (ParseString(value, "LastUsedDate", false, lastUsedDate, parseErrors, context))
                     SetLastUsedDate(lastUsedDate);
 
-                if (ParseString(value, "LastUsedIP", false, lastUsedIP, parseErrors))
+                if (ParseString(value, "LastUsedIP", false, lastUsedIP, parseErrors, context))
                     SetLastUsedIP(lastUsedIP);
 
-                if (ParseString(value, "RegistrationDate", true, registrationDate, parseErrors))
+                if (ParseString(value, "RegistrationDate", true, registrationDate, parseErrors, context))
                     SetRegistrationDate(registrationDate);
 
-                if (ParseObject(value, "Home", true, home, parseErrors))
+                if (ParseObject(value, "Home", true, home, parseErrors, context))
                     SetHome(home);
 
-                if (ParseObject(value, "Helps", true, helps, parseErrors))
+                if (ParseObject(value, "Helps", true, helps, parseErrors, context))
                     SetHelps(helps);
 
-                if (ParseObject(value, "Literals", true, literals, parseErrors))
+                if (ParseObject(value, "Literals", true, literals, parseErrors, context))
                     SetLiterals(literals);
 
-                if (ParseObject(value, "Login", true, login, parseErrors))
+                if (ParseObject(value, "Login", true, login, parseErrors, context))
                     SetLogin(login);
 
-                if (ParseObject(value, "Register", false, aRegister, parseErrors))
+                if (ParseObject(value, "Register", false, aRegister, parseErrors, context))
                     SetRegister(aRegister);
 
-                if (ParseObject(value, "ForgotPassword", false, forgotPassword, parseErrors))
+                if (ParseObject(value, "ForgotPassword", false, forgotPassword, parseErrors, context))
                     SetForgotPassword(forgotPassword);
 
-                if (VerifyArray(value, "AvailablePaymentMethods", true, parseErrors))
+                if (VerifyArray(value, "AvailablePaymentMethods", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
                     {
                         STRING_T availablePaymentMethod;
                         if (ParseString(value["AvailablePaymentMethods"][i], "", false, availablePaymentMethod,
-                                        parseErrors))
+                                        parseErrors, context))
                             availablePaymentMethods.push_back(availablePaymentMethod);
                     }
                     SetAvailablePaymentMethods(availablePaymentMethods);
                 }
 
-                if (ParseObject(value, "Self", false, self, parseErrors))
+                if (ParseObject(value, "Self", false, self, parseErrors, context))
                     SetSelf(self);
 
-                if (ParseObject(value, "Search", true, search, parseErrors))
+                if (ParseObject(value, "Search", true, search, parseErrors, context))
                     SetSearch(search);
 
-                if (ParseObject(value, "SearchAsYouType", true, searchAsYouType, parseErrors))
+                if (ParseObject(value, "SearchAsYouType", true, searchAsYouType, parseErrors, context))
                     SetSearchAsYouType(searchAsYouType);
 
-                if (ParseObject(value, "SearchMovies", true, searchMovies, parseErrors))
+                if (ParseObject(value, "SearchMovies", true, searchMovies, parseErrors, context))
                     SetSearchMovies(searchMovies);
 
-                if (ParseObject(value, "FilterMoviesByAgeGroups", false, filterMoviesByAgeGroups, parseErrors))
+                if (ParseObject(value, "FilterMoviesByAgeGroups", false, filterMoviesByAgeGroups, parseErrors,
+                                context))
                     SetFilterMoviesByAgeGroups(filterMoviesByAgeGroups);
 
-                if (ParseObject(value, "SearchSeries", true, searchSeries, parseErrors))
+                if (ParseObject(value, "SearchSeries", true, searchSeries, parseErrors, context))
                     SetSearchSeries(searchSeries);
 
-                if (ParseObject(value, "FilterSeriesByAgeGroups", false, filterSeriesByAgeGroups, parseErrors))
+                if (ParseObject(value, "FilterSeriesByAgeGroups", false, filterSeriesByAgeGroups, parseErrors,
+                                context))
                     SetFilterSeriesByAgeGroups(filterSeriesByAgeGroups);
 
-                if (ParseObject(value, "SearchBundles", true, searchBundles, parseErrors))
+                if (ParseObject(value, "SearchBundles", true, searchBundles, parseErrors, context))
                     SetSearchBundles(searchBundles);
 
-                if (ParseObject(value, "AllPublicUserLists", false, allPublicUserLists, parseErrors))
+                if (ParseObject(value, "AllPublicUserLists", false, allPublicUserLists, parseErrors, context))
                     SetAllPublicUserLists(allPublicUserLists);
 
-                if (ParseObject(value, "DeviceAuthData", true, deviceAuthData, parseErrors))
+                if (ParseObject(value, "DeviceAuthData", true, deviceAuthData, parseErrors, context))
                     SetDeviceAuthData(deviceAuthData);
 
-                if (ParseString(value, "ApiVersion", false, apiVersion, parseErrors))
+                if (ParseString(value, "ApiVersion", false, apiVersion, parseErrors, context))
                     SetApiVersion(apiVersion);
 
-                if (ParseString(value, "ApiDocumentationLink", false, apiDocumentationLink, parseErrors))
+                if (ParseString(value, "ApiDocumentationLink", false, apiDocumentationLink, parseErrors,
+                                context))
                     SetApiDocumentationLink(apiDocumentationLink);
 
-                if (ParseObject(value, "ManageFreePages", false, manageFreePages, parseErrors))
+                if (ParseObject(value, "ManageFreePages", false, manageFreePages, parseErrors, context))
                     SetManageFreePages(manageFreePages);
 
-                if (ParseObject(value, "SearchMoviesByPerson", true, searchMoviesByPerson, parseErrors))
+                if (ParseObject(value, "SearchMoviesByPerson", true, searchMoviesByPerson, parseErrors, context))
                     SetSearchMoviesByPerson(searchMoviesByPerson);
 
-                if (ParseObject(value, "CreateMppSession", false, createMppSession, parseErrors))
+                if (ParseObject(value, "CreateMppSession", false, createMppSession, parseErrors, context))
                     SetCreateMppSession(createMppSession);
 
-                if (ParseObject(value, "MppUserExists", false, mppUserExists, parseErrors))
+                if (ParseObject(value, "MppUserExists", false, mppUserExists, parseErrors, context))
                     SetMppUserExists(mppUserExists);
 
-                if (ParseObject(value, "AllLists", false, allLists, parseErrors))
+                if (ParseObject(value, "AllLists", false, allLists, parseErrors, context))
                     SetAllLists(allLists);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

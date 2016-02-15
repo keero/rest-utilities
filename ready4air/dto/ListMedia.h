@@ -89,7 +89,8 @@ namespace ready4air
                 mListOrder = listOrder;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T deviceVersion;
                 STRING_T countryCode;
@@ -99,27 +100,30 @@ namespace ready4air
                 DOUBLE_T price;
                 INT32_T listOrder;
 
-                if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "DeviceVersion", true, deviceVersion, parseErrors, context))
                     SetDeviceVersion(deviceVersion);
 
-                if (ParseString(value, "CountryCode", true, countryCode, parseErrors))
+                if (ParseString(value, "CountryCode", true, countryCode, parseErrors, context))
                     SetCountryCode(countryCode);
 
-                if (ParseInt(value, "MediaId", true, mediaId, parseErrors))
+                if (ParseInt(value, "MediaId", true, mediaId, parseErrors, context))
                     SetDeviceVersion(mediaId);
 
-                if (ParseString(value, "CurrencyCode", true, currencyCode, parseErrors))
+                if (ParseString(value, "CurrencyCode", true, currencyCode, parseErrors, context))
                     SetCurrencyCode(currencyCode);
 
-                if (ParseBool(value, "IsMainList", true, isMainList, parseErrors))
+                if (ParseBool(value, "IsMainList", true, isMainList, parseErrors, context))
                     SetIsMainList(isMainList);
 
-                if (ParseDouble(value, "Price", true, price, parseErrors))
+                if (ParseDouble(value, "Price", true, price, parseErrors, context))
                     SetPrice(price);
 
-                if (ParseInt(value, "ListOrder", true, listOrder, parseErrors))
+                if (ParseInt(value, "ListOrder", true, listOrder, parseErrors, context))
                     SetListOrder(listOrder);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

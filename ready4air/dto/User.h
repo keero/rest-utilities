@@ -355,7 +355,8 @@ namespace ready4air
                 mAddVoucherToSubscription = addVoucherToSubscription;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T address;
@@ -391,122 +392,128 @@ namespace ready4air
                 Form cancelSubscription;
                 Form addVoucherToSubscription;
 
-                if (ParseString(value, "ID", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "ID", true, id, parseErrors, context))
                     SetID(id);
 
-                if (ParseString(value, "Address", false, address, parseErrors))
+                if (ParseString(value, "Address", false, address, parseErrors, context))
                     SetAddress(address);
 
-                if (ParseString(value, "CClastfour", false, cclastfour, parseErrors))
+                if (ParseString(value, "CClastfour", false, cclastfour, parseErrors, context))
                     SetCClastfour(cclastfour);
 
-                if (ParseString(value, "CCreference", false, ccreference, parseErrors))
+                if (ParseString(value, "CCreference", false, ccreference, parseErrors, context))
                     SetCCreference(ccreference);
 
-                if (ParseBool(value, "CCvalid", true, ccvalid, parseErrors))
+                if (ParseBool(value, "CCvalid", true, ccvalid, parseErrors, context))
                     SetCCvalid(ccvalid);
 
-                if (ParseString(value, "City", false, city, parseErrors))
+                if (ParseString(value, "City", false, city, parseErrors, context))
                     SetCity(city);
 
-                if (ParseString(value, "Country", false, country, parseErrors))
+                if (ParseString(value, "Country", false, country, parseErrors, context))
                     SetCountry(country);
 
-                if (ParseString(value, "Email", false, email, parseErrors))
+                if (ParseString(value, "Email", false, email, parseErrors, context))
                     SetEmail(email);
 
-                if (ParseString(value, "FirstName", false, firstName, parseErrors))
+                if (ParseString(value, "FirstName", false, firstName, parseErrors, context))
                     SetFirstName(firstName);
 
-                if (ParseString(value, "LastName", false, lastName, parseErrors))
+                if (ParseString(value, "LastName", false, lastName, parseErrors, context))
                     SetLastName(lastName);
 
-                if (ParseString(value, "LastUsedDeviceId", true, lastUsedDeviceId, parseErrors))
+                if (ParseString(value, "LastUsedDeviceId", true, lastUsedDeviceId, parseErrors, context))
                     SetLastUsedDeviceId(lastUsedDeviceId);
 
-                if (ParseString(value, "Mobile", false, mobile, parseErrors))
+                if (ParseString(value, "Mobile", false, mobile, parseErrors, context))
                     SetMobile(mobile);
 
-                if (ParseInt(value, "NumberOfLogins", true, numberOfLogins, parseErrors))
+                if (ParseInt(value, "NumberOfLogins", true, numberOfLogins, parseErrors, context))
                     SetNumberOfLogins(numberOfLogins);
 
-                if (ParseString(value, "PostalCode", false, postalCode, parseErrors))
+                if (ParseString(value, "PostalCode", false, postalCode, parseErrors, context))
                     SetPostalCode(postalCode);
 
-                if (ParseString(value, "RegistrationDate", true, registrationDate, parseErrors))
+                if (ParseString(value, "RegistrationDate", true, registrationDate, parseErrors, context))
                     SetRegistrationDate(registrationDate);
 
-                if (ParseString(value, "UserName", true, userName, parseErrors))
+                if (ParseString(value, "UserName", true, userName, parseErrors, context))
                     SetUserName(userName);
 
-                if (ParseString(value, "MppToken", false, mppToken, parseErrors))
+                if (ParseString(value, "MppToken", false, mppToken, parseErrors, context))
                     SetMppToken(mppToken);
 
-                if (ParseObject(value, "MyMoviesList", false, myMoviesList, parseErrors))
+                if (ParseObject(value, "MyMoviesList", false, myMoviesList, parseErrors, context))
                     SetMyMoviesList(myMoviesList);
 
-                if (ParseObject(value, "MyWishList", false, myWishList, parseErrors))
+                if (ParseObject(value, "MyWishList", false, myWishList, parseErrors, context))
                     SetMyWishList(myWishList);
 
-                if (VerifyArray(value, "AvailablePaymentMethods", true, parseErrors))
+                if (VerifyArray(value, "AvailablePaymentMethods", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["AvailablePaymentMethods"].Size(); i += 1)
                     {
                         STRING_T availablePaymentMethod;
                         if (ParseString(value["AvailablePaymentMethods"][i], "", false, availablePaymentMethod,
-                                        parseErrors))
+                                        parseErrors, context))
                             availablePaymentMethods.push_back(availablePaymentMethod);
                     }
                     SetAvailablePaymentMethods(availablePaymentMethods);
                 }
 
-                if (ParseObject(value, "Self", true, self, parseErrors))
+                if (ParseObject(value, "Self", true, self, parseErrors, context))
                     SetSelf(self);
 
-                if (ParseObject(value, "UpdatePassword", true, updatePassword, parseErrors))
+                if (ParseObject(value, "UpdatePassword", true, updatePassword, parseErrors, context))
                     SetUpdatePassword(updatePassword);
 
-                if (ParseObject(value, "Update", true, update, parseErrors))
+                if (ParseObject(value, "Update", true, update, parseErrors, context))
                     SetUpdate(update);
 
-                if (ParseBool(value, "ShowAdult", true, showAdult, parseErrors))
+                if (ParseBool(value, "ShowAdult", true, showAdult, parseErrors, context))
                     SetShowAdult(showAdult);
 
-                if (VerifyArray(value, "Bookmarks", false, parseErrors))
+                if (VerifyArray(value, "Bookmarks", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Bookmarks"].Size(); i += 1)
                     {
                         Bookmark bookmark;
-                        if (ParseObject(value["Bookmarks"][i], "", false, bookmark, parseErrors))
+                        if (ParseObject(value["Bookmarks"][i], "", false, bookmark, parseErrors, context))
                             bookmarks.push_back(bookmark);
                     }
                     SetBookmarks(bookmarks);
                 }
 
-                if (ParseObject(value, "InactiveBookmarks", false, inactiveBookmarks, parseErrors))
+                if (ParseObject(value, "InactiveBookmarks", false, inactiveBookmarks, parseErrors, context))
                     SetInactiveBookmarks(inactiveBookmarks);
 
-                if (ParseObject(value, "ManageBookmarks", true, manageBookmarks, parseErrors))
+                if (ParseObject(value, "ManageBookmarks", true, manageBookmarks, parseErrors, context))
                     SetManageBookmarks(manageBookmarks);
 
-                if (ParseObject(value, "ManageLists", true, manageLists, parseErrors))
+                if (ParseObject(value, "ManageLists", true, manageLists, parseErrors, context))
                     SetManageLists(manageLists);
 
-                if (ParseObject(value, "UserFavouriteLists", false, userFavouriteLists, parseErrors))
+                if (ParseObject(value, "UserFavouriteLists", false, userFavouriteLists, parseErrors, context))
                     SetUserFavouriteLists(userFavouriteLists);
 
-                if (ParseObject(value, "MoviesFinishedWatching", false, moviesFinishedWatching, parseErrors))
+                if (ParseObject(value, "MoviesFinishedWatching", false, moviesFinishedWatching, parseErrors,
+                                context))
                     SetMoviesFinishedWatching(moviesFinishedWatching);
 
-                if (ParseObject(value, "MoviesCurrentlyWatching", false, moviesCurrentlyWatching, parseErrors))
+                if (ParseObject(value, "MoviesCurrentlyWatching", false, moviesCurrentlyWatching, parseErrors,
+                                context))
                     SetMoviesCurrentlyWatching(moviesCurrentlyWatching);
 
-                if (ParseObject(value, "CancelSubscription", true, cancelSubscription, parseErrors))
+                if (ParseObject(value, "CancelSubscription", true, cancelSubscription, parseErrors, context))
                     SetCancelSubscription(cancelSubscription);
 
-                if (ParseObject(value, "AddVoucherToSubscription", true, addVoucherToSubscription, parseErrors))
+                if (ParseObject(value, "AddVoucherToSubscription", true, addVoucherToSubscription, parseErrors,
+                                context))
                     SetAddVoucherToSubscription(addVoucherToSubscription);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

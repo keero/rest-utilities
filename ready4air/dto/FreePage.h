@@ -59,25 +59,29 @@ namespace ready4air
                 mContent = content;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T name;
                 STRING_T language;
                 STRING_T content;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "Name", true, name, parseErrors))
+                if (ParseString(value, "Name", true, name, parseErrors, context))
                     SetName(name);
 
-                if (ParseString(value, "Language", true, language, parseErrors))
+                if (ParseString(value, "Language", true, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseString(value, "Content", true, content, parseErrors))
+                if (ParseString(value, "Content", true, content, parseErrors, context))
                     SetContent(content);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

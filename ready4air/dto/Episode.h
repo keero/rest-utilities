@@ -61,28 +61,32 @@ namespace ready4air
                 mSeasonNo = seasonNo;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T episodeNo;
                 Link serie;
                 Link season;
                 INT32_T seasonNo;
 
-                // Initialize parent properties
-                MediaProduct::InitFromJsonValue(value, parseErrors);
+                context.push_back(TAG);
 
-                if (ParseInt(value, "EpisodeNo", true, episodeNo, parseErrors))
+                // Initialize parent properties
+                MediaProduct::InitFromJsonValue(value, parseErrors, context);
+
+                if (ParseInt(value, "EpisodeNo", true, episodeNo, parseErrors, context))
                     SetEpisodeNo(episodeNo);
 
-                if (ParseObject(value, "Serie", true, serie, parseErrors))
+                if (ParseObject(value, "Serie", true, serie, parseErrors, context))
                     SetSerie(serie);
 
-                if (ParseObject(value, "Season", true, season, parseErrors))
+                if (ParseObject(value, "Season", true, season, parseErrors, context))
                     SetSeason(season);
 
-                if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors))
+                if (ParseInt(value, "SeasonNo", true, seasonNo, parseErrors, context))
                     SetSeasonNo(seasonNo);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

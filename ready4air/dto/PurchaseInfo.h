@@ -51,21 +51,25 @@ namespace ready4air
                 mPaymentData = paymentData;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Purchase purchase;
                 STRING_T purchaseType;
                 PaymentData paymentData;
 
-                if (ParseObject(value, "Purchase", true, purchase, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Purchase", true, purchase, parseErrors, context))
                     SetPurchase(purchase);
 
-                if (ParseString(value, "PurchaseType", true, purchaseType, parseErrors))
+                if (ParseString(value, "PurchaseType", true, purchaseType, parseErrors, context))
                     SetPurchaseType(purchaseType);
 
-                if (ParseObject(value, "PaymentData", false, paymentData, parseErrors))
+                if (ParseObject(value, "PaymentData", false, paymentData, parseErrors, context))
                     SetPaymentData(paymentData);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

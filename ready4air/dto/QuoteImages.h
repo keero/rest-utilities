@@ -51,21 +51,25 @@ namespace ready4air
                 mScore = score;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 QuoteImage smallLogo;
                 QuoteImage largeLogo;
                 QuoteImage score;
 
-                if (ParseObject(value, "SmallLogo", false, smallLogo, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "SmallLogo", false, smallLogo, parseErrors, context))
                     SetSmallLogo(smallLogo);
 
-                if (ParseObject(value, "LargeLogo", false, largeLogo, parseErrors))
+                if (ParseObject(value, "LargeLogo", false, largeLogo, parseErrors, context))
                     SetLargeLogo(largeLogo);
 
-                if (ParseObject(value, "Score", false, score, parseErrors))
+                if (ParseObject(value, "Score", false, score, parseErrors, context))
                     SetScore(score);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

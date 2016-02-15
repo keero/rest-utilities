@@ -20,7 +20,7 @@ namespace ready4air
             {
             }
 
-            const Maybe<STRING_T> &GetEncoding() const
+            const Maybe <STRING_T> &GetEncoding() const
             {
                 return mEncoding;
             }
@@ -30,7 +30,7 @@ namespace ready4air
                 mEncoding = encoding;
             }
 
-            const Maybe<STRING_T> &GetFormat() const
+            const Maybe <STRING_T> &GetFormat() const
             {
                 return mFormat;
             }
@@ -40,7 +40,7 @@ namespace ready4air
                 mFormat = format;
             }
 
-            const Maybe<STRING_T> &GetLanguage() const
+            const Maybe <STRING_T> &GetLanguage() const
             {
                 return mLanguage;
             }
@@ -50,7 +50,7 @@ namespace ready4air
                 mLanguage = language;
             }
 
-            const Maybe<Link> &GetLink() const
+            const Maybe <Link> &GetLink() const
             {
                 return mLink;
             }
@@ -60,33 +60,37 @@ namespace ready4air
                 mLink = link;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T encoding;
                 STRING_T format;
                 STRING_T language;
                 Link link;
 
-                if (ParseString(value, "Encoding", true, encoding, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Encoding", true, encoding, parseErrors, context))
                     SetEncoding(encoding);
 
-                if (ParseString(value, "Format", true, format, parseErrors))
+                if (ParseString(value, "Format", true, format, parseErrors, context))
                     SetFormat(format);
 
-                if (ParseString(value, "Language", true, language, parseErrors))
+                if (ParseString(value, "Language", true, language, parseErrors, context))
                     SetLanguage(language);
 
-                if (ParseObject(value, "Link", true, link, parseErrors))
+                if (ParseObject(value, "Link", true, link, parseErrors, context))
                     SetLink(link);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
-            Maybe<STRING_T> mEncoding;
-            Maybe<STRING_T> mFormat;
-            Maybe<STRING_T> mLanguage;
-            Maybe<Link> mLink;
+            Maybe <STRING_T> mEncoding;
+            Maybe <STRING_T> mFormat;
+            Maybe <STRING_T> mLanguage;
+            Maybe <Link> mLink;
             STRING_T TAG;
         };
     }

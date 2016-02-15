@@ -40,17 +40,21 @@ namespace ready4air
                 mMessage = message;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Form form;
                 STRING_T message;
 
-                if (ParseObject(value, "Form", true, form, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "Form", true, form, parseErrors, context))
                     SetForm(form);
 
-                if (ParseString(value, "Message", false, message, parseErrors))
+                if (ParseString(value, "Message", false, message, parseErrors, context))
                     SetMessage(message);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

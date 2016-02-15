@@ -97,7 +97,8 @@ namespace ready4air
                 mCatalogue = catalogue;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 VECTOR_T<Button> buttons;
                 VECTOR_T<MenuItem> menuItems;
@@ -107,75 +108,78 @@ namespace ready4air
                 VECTOR_T<LiveSection> liveSections;
                 Catalogue catalogue;
 
-                if (VerifyArray(value, "Buttons", false, parseErrors))
+                context.push_back(TAG);
+
+                if (VerifyArray(value, "Buttons", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Buttons"].Size(); i += 1)
                     {
                         Button button;
-                        if (ParseObject(value["Buttons"][i], "", false, button, parseErrors))
+                        if (ParseObject(value["Buttons"][i], "", false, button, parseErrors, context))
                             buttons.push_back(button);
                     }
                     SetButtons(buttons);
                 }
 
-                if (VerifyArray(value, "MenuItems", true, parseErrors))
+                if (VerifyArray(value, "MenuItems", true, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["MenuItems"].Size(); i += 1)
                     {
                         MenuItem menuItem;
-                        if (ParseObject(value["MenuItems"][i], "", false, menuItem, parseErrors))
+                        if (ParseObject(value["MenuItems"][i], "", false, menuItem, parseErrors, context))
                             menuItems.push_back(menuItem);
                     }
                     SetMenuItems(menuItems);
                 }
 
-                if (VerifyArray(value, "Sections", false, parseErrors))
+                if (VerifyArray(value, "Sections", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Sections"].Size(); i += 1)
                     {
                         Section section;
-                        if (ParseObject(value["Sections"][i], "", false, section, parseErrors))
+                        if (ParseObject(value["Sections"][i], "", false, section, parseErrors, context))
                             sections.push_back(section);
                     }
                     SetSections(sections);
                 }
 
-                if (VerifyArray(value, "Teasers", false, parseErrors))
+                if (VerifyArray(value, "Teasers", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Teasers"].Size(); i += 1)
                     {
                         Teaser teaser;
-                        if (ParseObject(value["Teasers"][i], "", false, teaser, parseErrors))
+                        if (ParseObject(value["Teasers"][i], "", false, teaser, parseErrors, context))
                             teasers.push_back(teaser);
                     }
                     SetTeasers(teasers);
                 }
 
-                if (VerifyArray(value, "Promotions", false, parseErrors))
+                if (VerifyArray(value, "Promotions", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Promotions"].Size(); i += 1)
                     {
                         Promotion promotion;
-                        if (ParseObject(value["Promotions"][i], "", false, promotion, parseErrors))
+                        if (ParseObject(value["Promotions"][i], "", false, promotion, parseErrors, context))
                             promotions.push_back(promotion);
                     }
                     SetPromotions(promotions);
                 }
 
-                if (VerifyArray(value, "LiveSections", false, parseErrors))
+                if (VerifyArray(value, "LiveSections", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["LiveSections"].Size(); i += 1)
                     {
                         LiveSection liveSection;
-                        if (ParseObject(value["LiveSections"][i], "", false, liveSection, parseErrors))
+                        if (ParseObject(value["LiveSections"][i], "", false, liveSection, parseErrors, context))
                             liveSections.push_back(liveSection);
                     }
                     SetLiveSections(liveSections);
                 }
 
-                if (ParseObject(value, "Catalogue", true, catalogue, parseErrors))
+                if (ParseObject(value, "Catalogue", true, catalogue, parseErrors, context))
                     SetCatalogue(catalogue);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

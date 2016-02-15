@@ -152,7 +152,8 @@ namespace ready4air
                 mDeviceId = deviceId;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T name;
@@ -168,53 +169,56 @@ namespace ready4air
                 STRING_T userId;
                 STRING_T deviceId;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "Name", true, name, parseErrors))
+                if (ParseString(value, "Name", true, name, parseErrors, context))
                     SetName(name);
 
-                if (ParseBool(value, "Public", true, aPublic, parseErrors))
+                if (ParseBool(value, "Public", true, aPublic, parseErrors, context))
                     SetPublic(aPublic);
 
-                if (ParseString(value, "Owner", true, owner, parseErrors))
+                if (ParseString(value, "Owner", true, owner, parseErrors, context))
                     SetOwner(owner);
 
-                if (ParseInt(value, "Type", true, type, parseErrors))
+                if (ParseInt(value, "Type", true, type, parseErrors, context))
                     SetType(type);
 
-                if (ParseString(value, "ListType", true, listType, parseErrors))
+                if (ParseString(value, "ListType", true, listType, parseErrors, context))
                     SetListType(listType);
 
-                if (ParseObject(value, "AddItems", false, addItems, parseErrors))
+                if (ParseObject(value, "AddItems", false, addItems, parseErrors, context))
                     SetAddItems(addItems);
 
-                if (ParseObject(value, "ItemPosition", false, itemPosition, parseErrors))
+                if (ParseObject(value, "ItemPosition", false, itemPosition, parseErrors, context))
                     SetItemPosition(itemPosition);
 
-                if (ParseObject(value, "RemoveItems", false, removeItems, parseErrors))
+                if (ParseObject(value, "RemoveItems", false, removeItems, parseErrors, context))
                     SetRemoveItems(removeItems);
 
-                if (ParseObject(value, "Items", false, items, parseErrors))
+                if (ParseObject(value, "Items", false, items, parseErrors, context))
                     SetItems(items);
 
-                if (VerifyArray(value, "ExposedItems", false, parseErrors))
+                if (VerifyArray(value, "ExposedItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["ExposedItems"].Size(); i += 1)
                     {
                         UserListItem userListItem;
-                        if (ParseObject(value["ExposedItems"][i], "", false, userListItem, parseErrors))
+                        if (ParseObject(value["ExposedItems"][i], "", false, userListItem, parseErrors, context))
                             exposedItems.push_back(userListItem);
                     }
                     SetExposedItems(exposedItems);
                 }
 
-                if (ParseString(value, "UserId", false, userId, parseErrors))
+                if (ParseString(value, "UserId", false, userId, parseErrors, context))
                     SetUserId(userId);
 
-                if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                if (ParseString(value, "DeviceId", false, deviceId, parseErrors, context))
                     SetDeviceId(deviceId);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

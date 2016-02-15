@@ -123,7 +123,8 @@ namespace ready4air
                 mItems = items;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T listId;
                 INT32_T listType;
@@ -136,69 +137,73 @@ namespace ready4air
                 VECTOR_T<ListMedia> listMedias;
                 Link items;
 
-                if (ParseInt(value, "ListId", true, listId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "ListId", true, listId, parseErrors, context))
                     SetListId(listId);
 
-                if (ParseInt(value, "ListType", true, listType, parseErrors))
+                if (ParseInt(value, "ListType", true, listType, parseErrors, context))
                     SetListType(listType);
 
-                if (ParseString(value, "Name", true, name, parseErrors))
+                if (ParseString(value, "Name", true, name, parseErrors, context))
                     SetName(name);
 
-                if (ParseBool(value, "IsGenre", true, isGenre, parseErrors))
+                if (ParseBool(value, "IsGenre", true, isGenre, parseErrors, context))
                     SetIsGenre(isGenre);
 
-                if (ParseString(value, "Description", false, description, parseErrors))
+                if (ParseString(value, "Description", false, description, parseErrors, context))
                     SetDescription(description);
 
-                if (VerifyArray(value, "Images", false, parseErrors))
+                if (VerifyArray(value, "Images", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Images"].Size(); i += 1)
                     {
                         Image image;
-                        if (ParseObject(value["Images"][i], "", false, image, parseErrors))
+                        if (ParseObject(value["Images"][i], "", false, image, parseErrors, context))
                             images.push_back(image);
                     }
                     SetImages(images);
                 }
 
-                if (VerifyObject(value, "Custom", false, parseErrors))
+                if (VerifyObject(value, "Custom", false, parseErrors, context))
                 {
                     for (rapidjson::Value::ConstMemberIterator itr = value["Custom"].MemberBegin();
                          itr != value["Custom"].MemberEnd(); ++itr)
                     {
                         STRING_T customValue;
-                        if (ParseString(itr->value, "", false, customValue, parseErrors))
+                        if (ParseString(itr->value, "", false, customValue, parseErrors, context))
                             custom[itr->name.GetString()] = customValue;
                     }
                     SetCustom(custom);
                 }
 
-                if (VerifyArray(value, "LanguageLists", false, parseErrors))
+                if (VerifyArray(value, "LanguageLists", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["LanguageLists"].Size(); i += 1)
                     {
                         LanguageList languageList;
-                        if (ParseObject(value["LanguageLists"][i], "", false, languageList, parseErrors))
+                        if (ParseObject(value["LanguageLists"][i], "", false, languageList, parseErrors,
+                                        context))
                             languageLists.push_back(languageList);
                     }
                     SetLanguageLists(languageLists);
                 }
 
-                if (VerifyArray(value, "ListMedias", false, parseErrors))
+                if (VerifyArray(value, "ListMedias", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["ListMedias"].Size(); i += 1)
                     {
                         ListMedia listMedia;
-                        if (ParseObject(value["ListMedias"][i], "", false, listMedia, parseErrors))
+                        if (ParseObject(value["ListMedias"][i], "", false, listMedia, parseErrors, context))
                             listMedias.push_back(listMedia);
                     }
                     SetListMedias(listMedias);
                 }
 
-                if (ParseObject(value, "Items", true, items, parseErrors))
+                if (ParseObject(value, "Items", true, items, parseErrors, context))
                     SetItems(items);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

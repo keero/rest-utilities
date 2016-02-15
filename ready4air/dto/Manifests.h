@@ -83,7 +83,8 @@ namespace ready4air
                 mThumbnails = thumbnails;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 VECTOR_T<Manifest> smooth;
                 VECTOR_T<Manifest> dash;
@@ -92,64 +93,67 @@ namespace ready4air
                 VECTOR_T<File> progressive;
                 Link thumbnails;
 
-                if (VerifyArray(value, "Smooth", false, parseErrors))
+                context.push_back(TAG);
+
+                if (VerifyArray(value, "Smooth", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Smooth"].Size(); i += 1)
                     {
                         Manifest manifest;
-                        if (ParseObject(value["Smooth"][i], "", false, manifest, parseErrors))
+                        if (ParseObject(value["Smooth"][i], "", false, manifest, parseErrors, context))
                             smooth.push_back(manifest);
                     }
                     SetSmooth(smooth);
                 }
 
-                if (VerifyArray(value, "Dash", false, parseErrors))
+                if (VerifyArray(value, "Dash", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Dash"].Size(); i += 1)
                     {
                         Manifest manifest;
-                        if (ParseObject(value["Dash"][i], "", false, manifest, parseErrors))
+                        if (ParseObject(value["Dash"][i], "", false, manifest, parseErrors, context))
                             dash.push_back(manifest);
                     }
                     SetDash(dash);
                 }
 
-                if (VerifyArray(value, "Hls", false, parseErrors))
+                if (VerifyArray(value, "Hls", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Hls"].Size(); i += 1)
                     {
                         Manifest manifest;
-                        if (ParseObject(value["Hls"][i], "", false, manifest, parseErrors))
+                        if (ParseObject(value["Hls"][i], "", false, manifest, parseErrors, context))
                             hls.push_back(manifest);
                     }
                     SetHls(hls);
                 }
 
-                if (VerifyArray(value, "Subtitles", false, parseErrors))
+                if (VerifyArray(value, "Subtitles", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Subtitles"].Size(); i += 1)
                     {
                         PlaySubtitle playSubtitle;
-                        if (ParseObject(value["Subtitles"][i], "", false, playSubtitle, parseErrors))
+                        if (ParseObject(value["Subtitles"][i], "", false, playSubtitle, parseErrors, context))
                             subtitles.push_back(playSubtitle);
                     }
                     SetSubtitles(subtitles);
                 }
 
-                if (VerifyArray(value, "Progressive", false, parseErrors))
+                if (VerifyArray(value, "Progressive", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["Progressive"].Size(); i += 1)
                     {
                         File file;
-                        if (ParseObject(value["Progressive"][i], "", false, file, parseErrors))
+                        if (ParseObject(value["Progressive"][i], "", false, file, parseErrors, context))
                             progressive.push_back(file);
                     }
                     SetProgressive(progressive);
                 }
 
-                if (ParseObject(value, "Thumbnails", false, thumbnails, parseErrors))
+                if (ParseObject(value, "Thumbnails", false, thumbnails, parseErrors, context))
                     SetThumbnails(thumbnails);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

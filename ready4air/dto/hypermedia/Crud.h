@@ -51,21 +51,25 @@ namespace ready4air
                 mDelete = aDelete;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 Form createOrUpdateForm;
                 Link readLink;
                 Form deleteForm;
 
-                if (ParseObject(value, "CreateOrUpdate", false, createOrUpdateForm, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseObject(value, "CreateOrUpdate", false, createOrUpdateForm, parseErrors, context))
                     SetCreateOrUpdate(createOrUpdateForm);
 
-                if (ParseObject(value, "Read", false, readLink, parseErrors))
+                if (ParseObject(value, "Read", false, readLink, parseErrors, context))
                     SetRead(readLink);
 
-                if (ParseObject(value, "Delete", false, deleteForm, parseErrors))
+                if (ParseObject(value, "Delete", false, deleteForm, parseErrors, context))
                     SetDelete(deleteForm);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

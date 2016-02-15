@@ -40,7 +40,7 @@ namespace ready4air
                 mLink = link;
             }
 
-            const Maybe <VECTOR_T<MenuItem> > &GetMenuItems() const
+            const Maybe <VECTOR_T<MenuItem>> &GetMenuItems() const
             {
                 return mMenuItems;
             }
@@ -50,36 +50,40 @@ namespace ready4air
                 mMenuItems = menuItems;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T text;
                 Link link;
                 VECTOR_T<MenuItem> menuItems;
 
-                if (ParseString(value, "Text", true, text, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Text", true, text, parseErrors, context))
                     SetText(text);
 
-                if (ParseObject(value, "Link", false, link, parseErrors))
+                if (ParseObject(value, "Link", false, link, parseErrors, context))
                     SetLink(link);
 
-                if (VerifyArray(value, "MenuItems", false, parseErrors))
+                if (VerifyArray(value, "MenuItems", false, parseErrors, context))
                 {
                     for (rapidjson::SizeType i = 0; i < value["MenuItems"].Size(); i += 1)
                     {
                         MenuItem menuItem;
-                        if (ParseObject(value["MenuItems"][i], "", false, menuItem, parseErrors))
+                        if (ParseObject(value["MenuItems"][i], "", false, menuItem, parseErrors, context))
                             menuItems.push_back(menuItem);
                     }
                     SetMenuItems(menuItems);
                 }
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
             Maybe <STRING_T> mText;
             Maybe <Link> mLink;
-            Maybe <VECTOR_T<MenuItem> > mMenuItems;
+            Maybe <VECTOR_T<MenuItem>> mMenuItems;
             STRING_T TAG;
         };
     }

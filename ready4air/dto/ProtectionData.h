@@ -20,7 +20,7 @@ namespace ready4air
             {
             }
 
-            const Maybe<STRING_T> &GetKeyId() const
+            const Maybe <STRING_T> &GetKeyId() const
             {
                 return mKeyId;
             }
@@ -30,7 +30,7 @@ namespace ready4air
                 mKeyId = keyId;
             }
 
-            const Maybe<Link> &GetPlayReadyLicenser() const
+            const Maybe <Link> &GetPlayReadyLicenser() const
             {
                 return mPlayReadyLicenser;
             }
@@ -40,7 +40,7 @@ namespace ready4air
                 mPlayReadyLicenser = playReadyLicenser;
             }
 
-            const Maybe<Link> &GetWidevineLicenser() const
+            const Maybe <Link> &GetWidevineLicenser() const
             {
                 return mWidevineLicenser;
             }
@@ -50,7 +50,7 @@ namespace ready4air
                 mWidevineLicenser = widevineLicenser;
             }
 
-            const Maybe<STRING_T> &GetWidevinePSSH() const
+            const Maybe <STRING_T> &GetWidevinePSSH() const
             {
                 return mWidevinePSSH;
             }
@@ -60,33 +60,37 @@ namespace ready4air
                 mWidevinePSSH = widevinePSSH;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T keyId;
                 Link playReadyLicenser;
                 Link widevineLicenser;
                 STRING_T widevinePSSH;
 
-                if (ParseString(value, "KeyId", true, keyId, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "KeyId", true, keyId, parseErrors, context))
                     SetKeyId(keyId);
 
-                if (ParseObject(value, "PlayReadyLicenser", true, playReadyLicenser, parseErrors))
+                if (ParseObject(value, "PlayReadyLicenser", true, playReadyLicenser, parseErrors, context))
                     SetPlayReadyLicenser(playReadyLicenser);
 
-                if (ParseObject(value, "WidevineLicenser", true, widevineLicenser, parseErrors))
+                if (ParseObject(value, "WidevineLicenser", true, widevineLicenser, parseErrors, context))
                     SetWidevineLicenser(widevineLicenser);
 
-                if (ParseString(value, "WidevinePSSH", true, widevinePSSH, parseErrors))
+                if (ParseString(value, "WidevinePSSH", true, widevinePSSH, parseErrors, context))
                     SetWidevinePSSH(widevinePSSH);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
         private:
-            Maybe<STRING_T> mKeyId;
-            Maybe<Link> mPlayReadyLicenser;
-            Maybe<Link> mWidevineLicenser;
-            Maybe<STRING_T> mWidevinePSSH;
+            Maybe <STRING_T> mKeyId;
+            Maybe <Link> mPlayReadyLicenser;
+            Maybe <Link> mWidevineLicenser;
+            Maybe <STRING_T> mWidevinePSSH;
             STRING_T TAG;
         };
     }

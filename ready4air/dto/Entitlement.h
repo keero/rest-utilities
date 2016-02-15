@@ -80,7 +80,8 @@ namespace ready4air
                 mIdentifier = identifier;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T type;
                 STRING_T entitledTo;
@@ -89,24 +90,27 @@ namespace ready4air
                 DRM drm;
                 STRING_T identifier;
 
-                if (ParseString(value, "Type", true, type, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Type", true, type, parseErrors, context))
                     SetType(type);
 
-                if (ParseString(value, "EntitledTo", true, entitledTo, parseErrors))
+                if (ParseString(value, "EntitledTo", true, entitledTo, parseErrors, context))
                     SetEntitledTo(entitledTo);
 
-                if (ParseString(value, "StartTime", false, startTime, parseErrors))
+                if (ParseString(value, "StartTime", false, startTime, parseErrors, context))
                     SetStartTime(startTime);
 
-                if (ParseString(value, "EndTime", false, endTime, parseErrors))
+                if (ParseString(value, "EndTime", false, endTime, parseErrors, context))
                     SetEndTime(endTime);
 
-                if (ParseObject(value, "DRM", false, drm, parseErrors))
+                if (ParseObject(value, "DRM", false, drm, parseErrors, context))
                     SetDRM(drm);
 
-                if (ParseString(value, "Identifier", false, identifier, parseErrors))
+                if (ParseString(value, "Identifier", false, identifier, parseErrors, context))
                     SetIdentifier(identifier);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

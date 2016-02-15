@@ -50,21 +50,25 @@ namespace ready4air
                 mDisplay = display;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 INT32_T code;
                 STRING_T message;
                 Display display;
 
-                if (ParseInt(value, "Code", true, code, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseInt(value, "Code", true, code, parseErrors, context))
                     SetCode(code);
 
-                if (ParseString(value, "Message", false, message, parseErrors))
+                if (ParseString(value, "Message", false, message, parseErrors, context))
                     SetMessage(message);
 
-                if (ParseObject(value, "Display", false, display, parseErrors))
+                if (ParseObject(value, "Display", false, display, parseErrors, context))
                     SetDisplay(display);
 
+                context.pop_back();
                 return !parseErrors;
             }
 

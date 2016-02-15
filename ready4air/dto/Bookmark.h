@@ -89,7 +89,8 @@ namespace ready4air
                 mModified = modified;
             }
 
-            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors)
+            virtual BOOL_T InitFromJsonValue(const rapidjson::Value &value, ParseErrors &parseErrors,
+                                             VECTOR_T<STRING_T> &context)
             {
                 STRING_T id;
                 STRING_T val;
@@ -99,27 +100,30 @@ namespace ready4air
                 STRING_T userId;
                 STRING_T modified;
 
-                if (ParseString(value, "Id", true, id, parseErrors))
+                context.push_back(TAG);
+
+                if (ParseString(value, "Id", true, id, parseErrors, context))
                     SetId(id);
 
-                if (ParseString(value, "Value", true, val, parseErrors))
+                if (ParseString(value, "Value", true, val, parseErrors, context))
                     SetValue(val);
 
-                if (ParseString(value, "Created", true, created, parseErrors))
+                if (ParseString(value, "Created", true, created, parseErrors, context))
                     SetCreated(created);
 
-                if (ParseString(value, "ContentId", true, contentId, parseErrors))
+                if (ParseString(value, "ContentId", true, contentId, parseErrors, context))
                     SetContentId(contentId);
 
-                if (ParseString(value, "DeviceId", false, deviceId, parseErrors))
+                if (ParseString(value, "DeviceId", false, deviceId, parseErrors, context))
                     SetDeviceId(deviceId);
 
-                if (ParseString(value, "UserId", false, userId, parseErrors))
+                if (ParseString(value, "UserId", false, userId, parseErrors, context))
                     SetUserId(userId);
 
-                if (ParseString(value, "Modified", false, modified, parseErrors))
+                if (ParseString(value, "Modified", false, modified, parseErrors, context))
                     SetModified(modified);
 
+                context.pop_back();
                 return !parseErrors;
             }
 
