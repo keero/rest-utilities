@@ -1,7 +1,6 @@
 #ifndef READY4AIR_EITHER_H
 #define READY4AIR_EITHER_H
 
-
 #include "Maybe.h"
 
 namespace ready4air
@@ -10,7 +9,26 @@ namespace ready4air
     class Either
     {
     public:
-        Either() : TAG("ready4air::Either")
+        Either() :
+                TAG("ready4air::Either"),
+                Left(mLeft),
+                Right(mRight)
+        {
+        }
+
+        Either(LEFT left) :
+                TAG("ready4air::Either"),
+                mLeft(left),
+                Left(mLeft),
+                Right(mRight)
+        {
+        }
+
+        Either(RIGHT right) :
+                TAG("ready4air::Either"),
+                mRight(right),
+                Left(mLeft),
+                Right(mRight)
         {
         }
 
@@ -18,19 +36,9 @@ namespace ready4air
         {
         }
 
-        const Maybe <LEFT> &Left() const
-        {
-            return mLeft;
-        }
-
-        const Maybe <RIGHT> &Right() const
-        {
-            return mRight;
-        }
-
         inline operator BOOL_T() const
         {
-            return (mLeft || mRight);
+            return (Left || Right);
         }
 
         inline Either <LEFT, RIGHT> &operator=(const LEFT &rhs)
@@ -49,17 +57,17 @@ namespace ready4air
 
         inline friend BOOL_T operator==(const Either &lhs, const Either &rhs)
         {
-            return (lhs.Left() == rhs.Left() && lhs.Right() == rhs.Right());
+            return (lhs.Left == rhs.Left && lhs.Right == rhs.Right);
         }
 
         inline friend BOOL_T operator==(const Either <LEFT, RIGHT> &lhs, const LEFT &rhs)
         {
-            return (lhs.Left().Just() == rhs);
+            return (lhs.Left.Just == rhs);
         }
 
         inline friend BOOL_T operator==(const Either <LEFT, RIGHT> &lhs, const RIGHT &rhs)
         {
-            return (lhs.Right().Just() == rhs);
+            return (lhs.Right.Just == rhs);
         }
 
         inline friend BOOL_T operator==(const LEFT &lhs, const Either <LEFT, RIGHT> &rhs)
@@ -99,8 +107,12 @@ namespace ready4air
 
         inline friend std::ostream &operator<<(std::ostream &str, const Either &rhs)
         {
-            return str << rhs.Left() << rhs.Right();
+            return str << rhs.Left << rhs.Right;
         }
+
+    public:
+        const Maybe <LEFT> &Left;
+        const Maybe <RIGHT> &Right;
 
     private:
         Maybe <LEFT> mLeft;

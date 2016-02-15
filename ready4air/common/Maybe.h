@@ -11,7 +11,16 @@ namespace ready4air
     {
     public:
         Maybe() :
+                Just(mJust),
                 mNothing(true),
+                TAG("ready4air::Maybe")
+        {
+        }
+
+        Maybe(T item) :
+                mJust(item),
+                Just(mJust),
+                mNothing(false),
                 TAG("ready4air::Maybe")
         {
         }
@@ -23,11 +32,6 @@ namespace ready4air
         void Unset()
         {
             mNothing = true;
-        }
-
-        const T &Just() const
-        {
-            return mJust;
         }
 
         inline operator BOOL_T() const
@@ -45,12 +49,12 @@ namespace ready4air
         inline friend BOOL_T operator==(const Maybe &lhs, const Maybe &rhs)
         {
             return (lhs.mNothing && rhs.mNothing)
-                || (!lhs.mNothing && !rhs.mNothing && lhs.mJust == rhs.mJust);
+                || (!lhs.mNothing && !rhs.mNothing && lhs.Just == rhs.Just);
         }
 
         inline friend BOOL_T operator==(const Maybe<T> &lhs, const T &rhs)
         {
-            return (!lhs.mNothing && lhs.mJust == rhs);
+            return (!lhs.mNothing && lhs.Just == rhs);
         }
 
         inline friend BOOL_T operator==(const T &lhs, const Maybe<T> &rhs)
@@ -78,12 +82,15 @@ namespace ready4air
             if (!rhs)
                 return str;
             else
-                return (str << rhs.Just());
+                return (str << rhs.Just);
         }
 
+    public:
+        const T &Just;
+
     private:
-        BOOL_T mNothing;
         T mJust;
+        BOOL_T mNothing;
         STRING_T TAG;
     };
 }
